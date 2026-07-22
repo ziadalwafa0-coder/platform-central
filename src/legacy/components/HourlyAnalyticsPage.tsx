@@ -470,7 +470,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
   };
 
   const getHeatmapText = (dec: number) => {
-    if (dec === 0) return "text-[#9FB0C5]/40";
+    if (dec === 0) return "text-[#a5a5c8]/40";
     if (dec <= 5) return "text-[#24C78E] font-extrabold";
     if (dec <= 15) return "text-[#F5A524] font-extrabold";
     return "text-red-400 font-extrabold";
@@ -490,42 +490,42 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
     <div id="hourly-analytics-view" className="space-y-6 text-right">
       
       {/* 1. Header Banner & Cairo clock */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden shadow-xl">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden shadow-xl">
         <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="space-y-1.5 z-10">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#2F80FF]" />
+            <Sparkles className="w-5 h-5 text-[#6366f1]" />
             <h2 className="text-xl font-black text-white font-display">لوحة التحليل الفوري للمخازن بالساعات</h2>
           </div>
-          <p className="text-xs text-[#9FB0C5] leading-relaxed">
+          <p className="text-xs text-[#a5a5c8] leading-relaxed">
             رصد ومطابقة تحركات المخازن، سحوبات القطع، ومبيعات الكتالوج لكل ساعة بالتوقيت المحلي لجمهورية مصر العربية (توقيت القاهرة — UTC+2).
           </p>
         </div>
         
         {/* Real-time Cairo clock */}
-        <div className="bg-[#12233A] border border-[#20324A] px-4 py-2.5 rounded-2xl flex items-center gap-3 shrink-0 self-stretch md:self-auto shadow-inner">
+        <div className="bg-[#1c1c47] border border-[#2a2a5c] px-4 py-2.5 rounded-2xl flex items-center gap-3 shrink-0 self-stretch md:self-auto shadow-inner">
           <Clock className="w-5 h-5 text-[#24C78E] animate-pulse" />
           <div className="text-right">
-            <span className="text-[10px] text-[#9FB0C5] block font-semibold">توقيت القاهرة الفعلي (توقيت القاهرة — UTC+2)</span>
-            <span className="text-sm font-black text-[#F4F7FB] font-mono tracking-wide">{cairoTimeStr || "جاري المزامنة..."}</span>
+            <span className="text-[10px] text-[#a5a5c8] block font-semibold">توقيت القاهرة الفعلي (توقيت القاهرة — UTC+2)</span>
+            <span className="text-sm font-black text-[#f5f5fa] font-mono tracking-wide">{cairoTimeStr || "جاري المزامنة..."}</span>
           </div>
         </div>
       </div>
 
       {/* 2. Advanced Control Bar Filters */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl flex flex-wrap gap-4 items-center justify-between shadow-lg">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl flex flex-wrap gap-4 items-center justify-between shadow-lg">
         <div className="flex flex-wrap items-center gap-4 flex-1">
           {/* Calendar Picker */}
           <div className="flex flex-col gap-1 text-right">
-            <span className="text-[10px] text-[#9FB0C5] font-bold flex items-center gap-1 justify-end">
-              <Calendar className="w-3.5 h-3.5 text-[#2F80FF]" /> تاريخ المراقبة
+            <span className="text-[10px] text-[#a5a5c8] font-bold flex items-center gap-1 justify-end">
+              <Calendar className="w-3.5 h-3.5 text-[#6366f1]" /> تاريخ المراقبة
             </span>
-            <div className="flex items-center gap-1.5 bg-[#12233A] border border-[#20324A] rounded-xl px-2.5 h-[38px] select-none">
+            <div className="flex items-center gap-1.5 bg-[#1c1c47] border border-[#2a2a5c] rounded-xl px-2.5 h-[38px] select-none">
               
               {/* Prev Day Button */}
               <button 
                 onClick={handlePrevDay} 
-                className="p-1 hover:bg-[#20324A] rounded-lg transition text-[#9FB0C5] hover:text-white cursor-pointer" 
+                className="p-1 hover:bg-[#2a2a5c] rounded-lg transition text-[#a5a5c8] hover:text-white cursor-pointer" 
                 title="اليوم السابق"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -548,20 +548,20 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
               <button 
                 onClick={handleNextDay} 
                 disabled={!selectedDateStart || selectedDateStart >= getCairoTodayStr()}
-                className="p-1 hover:bg-[#20324A] rounded-lg transition text-[#9FB0C5] hover:text-white disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer" 
+                className="p-1 hover:bg-[#2a2a5c] rounded-lg transition text-[#a5a5c8] hover:text-white disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer" 
                 title="اليوم التالي"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
               {/* Splitter */}
-              <span className="h-5 w-[1px] bg-[#20324A] mx-1"></span>
+              <span className="h-5 w-[1px] bg-[#2a2a5c] mx-1"></span>
 
               {/* Today shortcut */}
               <button 
                 onClick={() => { setSelectedDateStart(getCairoTodayStr()); setSelectedDateEnd(getCairoTodayStr()); }}
                 className={`px-2.5 py-1 text-[10px] rounded-lg font-bold transition cursor-pointer ${
-                  selectedDateStart === getCairoTodayStr() && selectedDateEnd === getCairoTodayStr() ? "bg-[#2F80FF] text-white" : "text-[#9FB0C5] hover:bg-[#20324A] hover:text-white"
+                  selectedDateStart === getCairoTodayStr() && selectedDateEnd === getCairoTodayStr() ? "bg-[#6366f1] text-white" : "text-[#a5a5c8] hover:bg-[#2a2a5c] hover:text-white"
                 }`}
               >
                 اليوم
@@ -571,7 +571,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
               <button 
                 onClick={() => { setSelectedDateStart(getCairoYesterdayStr()); setSelectedDateEnd(getCairoYesterdayStr()); }}
                 className={`px-2.5 py-1 text-[10px] rounded-lg font-bold transition cursor-pointer ${
-                  selectedDateStart === getCairoYesterdayStr() && selectedDateEnd === getCairoYesterdayStr() ? "bg-[#2F80FF]/30 text-[#2F80FF]" : "text-[#9FB0C5] hover:bg-[#20324A] hover:text-white"
+                  selectedDateStart === getCairoYesterdayStr() && selectedDateEnd === getCairoYesterdayStr() ? "bg-[#6366f1]/30 text-[#6366f1]" : "text-[#a5a5c8] hover:bg-[#2a2a5c] hover:text-white"
                 }`}
               >
                 أمس
@@ -581,13 +581,13 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
           {/* Platform Selector */}
           <div className="flex flex-col gap-1 text-right min-w-[130px]">
-            <span className="text-[10px] text-[#9FB0C5] font-bold flex items-center gap-1 justify-end">
-              <Filter className="w-3.5 h-3.5 text-[#2F80FF]" /> المنصة الموردة
+            <span className="text-[10px] text-[#a5a5c8] font-bold flex items-center gap-1 justify-end">
+              <Filter className="w-3.5 h-3.5 text-[#6366f1]" /> المنصة الموردة
             </span>
             <select
               value={platform}
               onChange={(e) => setPlatform(e.target.value)}
-              className="bg-[#12233A] border border-[#20324A] rounded-xl px-3 py-2 text-xs font-black text-white outline-none focus:border-[#2F80FF] transition cursor-pointer"
+              className="bg-[#1c1c47] border border-[#2a2a5c] rounded-xl px-3 py-2 text-xs font-black text-white outline-none focus:border-[#6366f1] transition cursor-pointer"
             >
               <option value="all">كل المنصات (صفقة وتاجر)</option>
               <option value="safka">بوابة صفقة (Safka)</option>
@@ -596,13 +596,13 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
           {/* Category Selector */}
           <div className="flex flex-col gap-1 text-right min-w-[130px]">
-            <span className="text-[10px] text-[#9FB0C5] font-bold flex items-center gap-1 justify-end">
-              <Database className="w-3.5 h-3.5 text-[#2F80FF]" /> التصنيف الرئيسي
+            <span className="text-[10px] text-[#a5a5c8] font-bold flex items-center gap-1 justify-end">
+              <Database className="w-3.5 h-3.5 text-[#6366f1]" /> التصنيف الرئيسي
             </span>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="bg-[#12233A] border border-[#20324A] rounded-xl px-3 py-2 text-xs font-black text-white outline-none focus:border-[#2F80FF] transition cursor-pointer"
+              className="bg-[#1c1c47] border border-[#2a2a5c] rounded-xl px-3 py-2 text-xs font-black text-white outline-none focus:border-[#6366f1] transition cursor-pointer"
             >
               <option value="all">كل التصنيفات المدمجة</option>
               {categoriesList.map(cat => (
@@ -614,41 +614,41 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
         {/* Anomalies and Quality indicators toggle */}
         <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2.5 cursor-pointer bg-[#12233A]/60 px-4 py-2 rounded-xl border border-[#20324A]/40 hover:bg-[#12233A] transition">
+          <label className="flex items-center gap-2.5 cursor-pointer bg-[#1c1c47]/60 px-4 py-2 rounded-xl border border-[#2a2a5c]/40 hover:bg-[#1c1c47] transition">
             <input 
               type="checkbox"
               checked={includeAnomalies}
               onChange={(e) => setIncludeAnomalies(e.target.checked)}
-              className="w-4 h-4 rounded text-[#2F80FF] focus:ring-0 bg-[#07111F] border-[#20324A]"
+              className="w-4 h-4 rounded text-[#6366f1] focus:ring-0 bg-[#0a0a1a] border-[#2a2a5c]"
             />
             <div className="text-right">
-              <span className="text-xs font-extrabold text-[#F4F7FB] block">شمل قفزات المخازن الشاذة</span>
-              <span className="text-[9px] text-[#9FB0C5] block font-medium">الاستقصاء غير الحقيقي وتعديلات النظام</span>
+              <span className="text-xs font-extrabold text-[#f5f5fa] block">شمل قفزات المخازن الشاذة</span>
+              <span className="text-[9px] text-[#a5a5c8] block font-medium">الاستقصاء غير الحقيقي وتعديلات النظام</span>
             </div>
           </label>
         </div>
       </div>
 
       {/* 3. Hourly Activity Heatmap Grid */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg relative">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#20324A]/40 pb-4 gap-4">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg relative">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#2a2a5c]/40 pb-4 gap-4">
           <div>
             <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <Activity className="w-4.5 h-4.5 text-[#2F80FF]" /> مصفوفة سحوبات المخزون التفاعلية (24 ساعة)
+              <Activity className="w-4.5 h-4.5 text-[#6366f1]" /> مصفوفة سحوبات المخزون التفاعلية (24 ساعة)
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-1">
+            <p className="text-[10px] text-[#a5a5c8] mt-1">
               مصفوفة لونية ذكية توضح حجم تناقص كميات السلع بكل ساعة بالتوقيت المحلي لجمهورية مصر العربية.
             </p>
           </div>
 
           {/* Metric Selector Tabs */}
-          <div className="flex bg-[#12233A] p-0.5 rounded-xl border border-[#20324A] text-xs">
+          <div className="flex bg-[#1c1c47] p-0.5 rounded-xl border border-[#2a2a5c] text-xs">
             <button
               onClick={() => {
                 setFocusMetric("pieces");
                 if (selectedHour24 === -1) setSelectedHour24(getCairoHour24());
               }}
-              className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${focusMetric === "pieces" ? "bg-[#2F80FF] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+              className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${focusMetric === "pieces" ? "bg-[#6366f1] text-white" : "text-[#a5a5c8] hover:text-white"}`}
             >
               القطع المسحوبة
             </button>
@@ -657,7 +657,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                 setFocusMetric("events");
                 if (selectedHour24 === -1) setSelectedHour24(getCairoHour24());
               }}
-              className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${focusMetric === "events" ? "bg-[#2F80FF] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+              className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${focusMetric === "events" ? "bg-[#6366f1] text-white" : "text-[#a5a5c8] hover:text-white"}`}
             >
               عمليات السحب
             </button>
@@ -666,14 +666,14 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                 setFocusMetric("products");
                 setSelectedHour24(-1); // Automatically view all hours products
               }}
-              className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${focusMetric === "products" ? "bg-[#2F80FF] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+              className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${focusMetric === "products" ? "bg-[#6366f1] text-white" : "text-[#a5a5c8] hover:text-white"}`}
             >
               السلع المتأثرة اليوم
             </button>
           </div>
           
           {/* Heatmap Legend */}
-          <div className="flex items-center gap-2 text-[9px] text-[#9FB0C5]">
+          <div className="flex items-center gap-2 text-[9px] text-[#a5a5c8]">
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-[#112239]" /> صفر</span>
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-[#1c4021]" /> خفيف (1-5)</span>
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-[#33501a]" /> متوسط (6-15)</span>
@@ -683,8 +683,8 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
         </div>
 
         {/* Informational Guidance Banner */}
-        <div className="bg-[#12233A]/60 border border-[#20324A]/75 px-4 py-3 rounded-2xl flex items-start sm:items-center gap-3 text-xs text-[#9FB0C5] leading-relaxed">
-          <Info className="w-5 h-5 text-[#2F80FF] shrink-0 mt-0.5 sm:mt-0" />
+        <div className="bg-[#1c1c47]/60 border border-[#2a2a5c]/75 px-4 py-3 rounded-2xl flex items-start sm:items-center gap-3 text-xs text-[#a5a5c8] leading-relaxed">
+          <Info className="w-5 h-5 text-[#6366f1] shrink-0 mt-0.5 sm:mt-0" />
           <div className="flex-1 text-right">
             <span className="text-white font-bold block sm:inline">ملاحظة الرصد والتوقيت:</span>{" "}
             <span>
@@ -695,8 +695,8 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
         {loadingHourly ? (
           <div className="flex flex-col items-center justify-center py-16 space-y-3">
-            <RefreshCw className="w-8 h-8 text-[#2F80FF] animate-spin" />
-            <p className="text-xs text-[#9FB0C5]">جاري تجميع وحساب سحوبات المخازن بالساعات...</p>
+            <RefreshCw className="w-8 h-8 text-[#6366f1] animate-spin" />
+            <p className="text-xs text-[#a5a5c8]">جاري تجميع وحساب سحوبات المخازن بالساعات...</p>
           </div>
         ) : (
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-3">
@@ -728,7 +728,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                   onClick={() => setSelectedHour24(h.hour)}
                   title={h.hour_label}
                   className={`p-3 rounded-xl transition-all duration-200 text-center relative cursor-pointer flex flex-col justify-between h-24 ${getHeatmapColor(colorValue)} ${
-                    isSelected ? "ring-2 ring-offset-2 ring-[#2F80FF] ring-offset-[#07111F] scale-105" : ""
+                    isSelected ? "ring-2 ring-offset-2 ring-[#6366f1] ring-offset-[#0a0a1a] scale-105" : ""
                   }`}
                 >
                   <div className="flex justify-between items-center w-full">
@@ -757,7 +757,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                         <span className={`text-base font-mono font-extrabold tracking-tight block leading-none ${getHeatmapText(colorValue)}`}>
                           {displayVal.toLocaleString()}
                         </span>
-                        <span className="text-[9px] text-[#9FB0C5]/70 block font-sans mt-1 leading-none">{displayLabel}</span>
+                        <span className="text-[9px] text-[#a5a5c8]/70 block font-sans mt-1 leading-none">{displayLabel}</span>
                       </div>
                     )}
                   </div>
@@ -772,12 +772,12 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Recharts Chart */}
-        <div className="lg:col-span-2 bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg overflow-hidden relative">
+        <div className="lg:col-span-2 bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg overflow-hidden relative">
           <div className="flex justify-between items-center">
             <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <TrendingDown className="w-4.5 h-4.5 text-[#2F80FF]" /> الرسم البياني التفاعلي لـ 24 ساعة
+              <TrendingDown className="w-4.5 h-4.5 text-[#6366f1]" /> الرسم البياني التفاعلي لـ 24 ساعة
             </h3>
-            <span className="text-[10px] text-[#9FB0C5] bg-[#12233A] px-2.5 py-1 rounded-md font-mono border border-[#20324A]">
+            <span className="text-[10px] text-[#a5a5c8] bg-[#1c1c47] px-2.5 py-1 rounded-md font-mono border border-[#2a2a5c]">
               التاريخ: {selectedDateStart}
             </span>
           </div>
@@ -785,7 +785,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
           <div className="h-[340px] w-full" style={{ position: "relative" }}>
             {loadingHourly ? (
               <div className="flex items-center justify-center h-full">
-                <RefreshCw className="w-8 h-8 text-[#2F80FF] animate-spin" />
+                <RefreshCw className="w-8 h-8 text-[#6366f1] animate-spin" />
               </div>
             ) : (
               <ResponsiveContainer width="100%" height="100%">
@@ -799,46 +799,46 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                       <stop offset="95%" stopColor="#F05252" stopOpacity={0}/>
                     </linearGradient>
                     <linearGradient id="colorEvents" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#2F80FF" stopOpacity={0.25}/>
-                      <stop offset="95%" stopColor="#2F80FF" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#6366f1" stopOpacity={0.25}/>
+                      <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
                     </linearGradient>
                     <linearGradient id="colorProducts" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#24C78E" stopOpacity={0.25}/>
                       <stop offset="95%" stopColor="#24C78E" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#20324A/30" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#2a2a5c/30" />
                   <XAxis 
                     dataKey="hour_label" 
-                    stroke="#9FB0C5" 
+                    stroke="#a5a5c8" 
                     fontSize={9} 
                     tickLine={false} 
                     axisLine={false}
                   />
                   <YAxis 
-                    stroke="#9FB0C5" 
+                    stroke="#a5a5c8" 
                     fontSize={10} 
                     tickLine={false} 
                     axisLine={false}
                   />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "#0D1B2D",
-                      borderColor: "#20324A",
+                      backgroundColor: "#141432",
+                      borderColor: "#2a2a5c",
                       color: "#fff",
                       textAlign: "right",
                       borderRadius: "12px",
                       fontSize: "11px",
                       boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.5)",
                     }}
-                    itemStyle={{ color: "#F4F7FB" }}
-                    labelStyle={{ fontWeight: "bold", color: "#2F80FF", marginBottom: "4px" }}
+                    itemStyle={{ color: "#f5f5fa" }}
+                    labelStyle={{ fontWeight: "bold", color: "#6366f1", marginBottom: "4px" }}
                   />
                   <Area 
                     name={focusMetric === "events" ? "عمليات السحب" : focusMetric === "products" ? "السلع المتأثرة" : "القطع المسحوبة"}
                     type="monotone" 
                     dataKey={focusMetric === "events" ? "withdrawal_events" : focusMetric === "products" ? "affected_products" : "quantity_decrease"}
-                    stroke={focusMetric === "events" ? "#2F80FF" : focusMetric === "products" ? "#24C78E" : "#F05252"}
+                    stroke={focusMetric === "events" ? "#6366f1" : focusMetric === "products" ? "#24C78E" : "#F05252"}
                     fillOpacity={1} 
                     fill={`url(#color${focusMetric === "events" ? "Events" : focusMetric === "products" ? "Products" : "Decrease"})`} 
                     strokeWidth={2}
@@ -850,14 +850,14 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
         </div>
 
         {/* Dynamic Hour Panel */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-start border-b border-[#20324A]/40 pb-3">
+            <div className="flex justify-between items-start border-b border-[#2a2a5c]/40 pb-3">
               <div>
                 <h3 className="text-sm font-extrabold text-white flex items-center gap-1.5">
                   <Clock className="w-4.5 h-4.5 text-[#F5A524]" /> {selectedHour24 === -1 ? "تفاصيل اليوم المحدد كاملاً" : "تفاصيل الساعة المحددة"}
                 </h3>
-                <p className="text-[10px] text-[#9FB0C5] mt-0.5">{selectedHour24 === -1 ? "مؤشرات الجودة والدقة والمنتجات الأكثر طلباً لليوم" : "مؤشرات الجودة والدقة والمنتجات الأكثر طلباً للساعة"}</p>
+                <p className="text-[10px] text-[#a5a5c8] mt-0.5">{selectedHour24 === -1 ? "مؤشرات الجودة والدقة والمنتجات الأكثر طلباً لليوم" : "مؤشرات الجودة والدقة والمنتجات الأكثر طلباً للساعة"}</p>
               </div>
               <span className="px-3 py-1 bg-[#F5A524]/10 text-[#F5A524] text-xs font-black rounded-lg">
                 {selectedHour24 === -1 ? "تجميعي اليوم كامل" : formatCairoHourArabic(selectedHour24)}
@@ -865,15 +865,15 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
             </div>
 
             <div className="space-y-4 mt-4">
-              <div className="bg-[#07111F]/50 p-4 rounded-2xl border border-[#20324A]/40 text-right">
-                <span className="text-xs text-[#9FB0C5] block">{selectedHour24 === -1 ? "إجمالي سحوبات اليوم بالكامل" : "إجمالي سحوبات الساعة المحددة"}</span>
+              <div className="bg-[#0a0a1a]/50 p-4 rounded-2xl border border-[#2a2a5c]/40 text-right">
+                <span className="text-xs text-[#a5a5c8] block">{selectedHour24 === -1 ? "إجمالي سحوبات اليوم بالكامل" : "إجمالي سحوبات الساعة المحددة"}</span>
                 <strong className="text-2xl font-mono text-[#F05252] block mt-1">
                   {selectedHour24 === -1 ? totalPiecesToday : (selectedHourDetails?.quantity_decrease || 0)} قطع
                 </strong>
               </div>
 
               {/* Data Quality & Sync Stats */}
-              <div className="bg-[#07111F]/30 p-3.5 rounded-2xl border border-[#20324A]/30 space-y-2.5 text-xs text-[#9FB0C5]">
+              <div className="bg-[#0a0a1a]/30 p-3.5 rounded-2xl border border-[#2a2a5c]/30 space-y-2.5 text-xs text-[#a5a5c8]">
                 <div className="flex justify-between items-center">
                   <span>عمليات المزامنة الناجحة:</span>
                   <span className="text-white font-mono font-bold">
@@ -910,14 +910,14 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
               </div>
 
               {/* Top performing info for the hour */}
-              <div className="bg-[#12233A]/40 p-3.5 rounded-2xl border border-[#20324A]/50 space-y-2 text-right">
+              <div className="bg-[#1c1c47]/40 p-3.5 rounded-2xl border border-[#2a2a5c]/50 space-y-2 text-right">
                 <span className="text-[9px] text-[#F5A524] font-black block">
                   {selectedHour24 === -1 ? "التفاصيل التجميعية لليوم المحدد" : "السلعة الرائدة بالسحب خلال هذه الساعة 👑"}
                 </span>
-                <p className="text-xs font-bold text-[#F4F7FB] truncate">
+                <p className="text-xs font-bold text-[#f5f5fa] truncate">
                   {selectedHour24 === -1 ? "معلومات مجمعة لجميع الساعات" : (selectedHourDetails?.highest_product_name || "لا يوجد مسحوبات مسجلة")}
                 </p>
-                <div className="flex justify-between text-[10px] text-[#9FB0C5] pt-1">
+                <div className="flex justify-between text-[10px] text-[#a5a5c8] pt-1">
                   <span>{selectedHour24 === -1 ? "إجمالي العمليات:" : "التصنيف المكتسح:"} <strong className="text-white">{selectedHour24 === -1 ? `${totalEventsToday} سحب` : (selectedHourDetails?.highest_category || "غير معروف")}</strong></span>
                   <span>{selectedHour24 === -1 ? "الرصد بالتوقيت المحلي" : "المنصة:"} <strong className="text-white">{selectedHour24 === -1 ? "Cairo Time" : (selectedHourDetails?.highest_platform || "لا يوجد")}</strong></span>
                 </div>
@@ -925,8 +925,8 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
             </div>
           </div>
 
-          <div className="text-[10px] text-[#9FB0C5] bg-[#07111F]/40 p-2.5 rounded-xl border border-dashed border-[#20324A]/40 flex items-start gap-2 text-right mt-3">
-            <Info className="w-4 h-4 text-[#2F80FF] shrink-0 mt-0.5" />
+          <div className="text-[10px] text-[#a5a5c8] bg-[#0a0a1a]/40 p-2.5 rounded-xl border border-dashed border-[#2a2a5c]/40 flex items-start gap-2 text-right mt-3">
+            <Info className="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" />
             <p className="leading-normal">
               تحسب السحوبات بطرح كميات المنتجات الحالية من السحبة السابقة لنفس الساعة لتجنب التكرار.
             </p>
@@ -935,30 +935,30 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
       </div>
 
       {/* Cairo 20-Minute Slot Analytics (فترات الـ 20 دقيقة فائقة الدقة) */}
-      <div id="ten-minute-analytics" className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 shadow-lg relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#2F80FF]/5 rounded-full blur-3xl pointer-events-none" />
+      <div id="ten-minute-analytics" className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 shadow-lg relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[#6366f1]/5 rounded-full blur-3xl pointer-events-none" />
         
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#20324A]/40 pb-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#2a2a5c]/40 pb-4">
           <div className="space-y-1">
             <h3 className="text-base font-black text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-[#2F80FF]" /> مراقبة فترات الـ 20 دقيقة (ثلث الساعة)
+              <Clock className="w-5 h-5 text-[#6366f1]" /> مراقبة فترات الـ 20 دقيقة (ثلث الساعة)
             </h3>
-            <p className="text-xs text-[#9FB0C5]">
+            <p className="text-xs text-[#a5a5c8]">
               بيانات سحب المخزون مقسمة إلى فترات زمنية دقيقة كل 20 دقيقة.
             </p>
           </div>
           
           <div className="flex gap-2 shrink-0">
-            <div className="bg-[#12233A] border border-[#20324A] px-3.5 py-1.5 rounded-xl text-xs text-right">
-              <span className="text-[10px] text-[#9FB0C5] block">إجمالي سحوبات الساعة</span>
+            <div className="bg-[#1c1c47] border border-[#2a2a5c] px-3.5 py-1.5 rounded-xl text-xs text-right">
+              <span className="text-[10px] text-[#a5a5c8] block">إجمالي سحوبات الساعة</span>
               <strong className="text-sm font-mono text-[#F05252] font-black">{tenMinuteData?.summary.withdrawn_pieces ?? 0} قطع</strong>
             </div>
-            <div className="bg-[#12233A] border border-[#20324A] px-3.5 py-1.5 rounded-xl text-xs text-right">
-              <span className="text-[10px] text-[#9FB0C5] block">الأحداث والعمليات</span>
-              <strong className="text-sm font-mono text-[#2F80FF] font-black">{tenMinuteData?.summary.withdrawal_events ?? 0} حدث سحب</strong>
+            <div className="bg-[#1c1c47] border border-[#2a2a5c] px-3.5 py-1.5 rounded-xl text-xs text-right">
+              <span className="text-[10px] text-[#a5a5c8] block">الأحداث والعمليات</span>
+              <strong className="text-sm font-mono text-[#6366f1] font-black">{tenMinuteData?.summary.withdrawal_events ?? 0} حدث سحب</strong>
             </div>
-            <div className="bg-[#12233A] border border-[#20324A] px-3.5 py-1.5 rounded-xl text-xs text-right">
-              <span className="text-[10px] text-[#9FB0C5] block">السلع المتأثرة فعلياً</span>
+            <div className="bg-[#1c1c47] border border-[#2a2a5c] px-3.5 py-1.5 rounded-xl text-xs text-right">
+              <span className="text-[10px] text-[#a5a5c8] block">السلع المتأثرة فعلياً</span>
               <strong className="text-sm font-mono text-[#24C78E] font-black">{tenMinuteData?.summary.affected_products ?? 0} سلع</strong>
             </div>
           </div>
@@ -979,11 +979,11 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
         {loadingTenMinute ? (
           <div className="flex flex-col items-center justify-center py-12 space-y-3">
-            <RefreshCw className="w-7 h-7 text-[#2F80FF] animate-spin" />
-            <p className="text-xs text-[#9FB0C5]">جاري تجميع أحداث فترات الـ 20 دقيقة الفورية...</p>
+            <RefreshCw className="w-7 h-7 text-[#6366f1] animate-spin" />
+            <p className="text-xs text-[#a5a5c8]">جاري تجميع أحداث فترات الـ 20 دقيقة الفورية...</p>
           </div>
         ) : !tenMinuteData ? (
-          <div className="text-center py-12 text-xs text-[#9FB0C5]">
+          <div className="text-center py-12 text-xs text-[#a5a5c8]">
             الرجاء اختيار ساعة من المصفوفة العلوية لاستعراض فتراتها الدقيقة.
           </div>
         ) : (
@@ -1016,12 +1016,12 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                 // Style based on status
                 const getStatusStyleClass = () => {
                   if (interval.dataStatus === "SUCCESS_WITH_ACTIVITY") return "border-[#24C78E] bg-[#11241a]/90 text-[#24C78E] shadow-[0_0_15px_rgba(36,199,142,0.15)]";
-                  if (interval.dataStatus === "SUCCESS_ZERO") return "border-[#9FB0C5] bg-[#12233A] text-[#9FB0C5]";
+                  if (interval.dataStatus === "SUCCESS_ZERO") return "border-[#a5a5c8] bg-[#1c1c47] text-[#a5a5c8]";
                   if (interval.dataStatus === "PARTIAL") return "border-[#F5A524] bg-[#553b11]/40 text-[#F5A524]";
                   if (interval.dataStatus === "FAILED") return "border-[#F05252] bg-[#59161a]/40 text-[#F05252]";
                   if (interval.dataStatus === "MISSING") return "border-[#555] bg-[#333]/40 text-gray-400";
-                  if (interval.dataStatus === "CURRENT_INCOMPLETE") return "border-[#2F80FF] bg-[#12233A] text-[#2F80FF]";
-                  return "border-[#20324A] bg-[#12233A] text-[#9FB0C5]";
+                  if (interval.dataStatus === "CURRENT_INCOMPLETE") return "border-[#6366f1] bg-[#1c1c47] text-[#6366f1]";
+                  return "border-[#2a2a5c] bg-[#1c1c47] text-[#a5a5c8]";
                 };
 
                 const pct = interval.dataCompletenessPercentage || 0;
@@ -1035,7 +1035,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                       <span className="text-xs font-black font-mono tracking-wide">{interval.intervalLabel}</span>
                       <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-black ${
                         interval.dataStatus === "SUCCESS_WITH_ACTIVITY" ? "bg-[#24C78E]/10 text-[#24C78E]" :
-                        interval.dataStatus === "SUCCESS_ZERO" ? "bg-[#12233A] text-[#9FB0C5]" :
+                        interval.dataStatus === "SUCCESS_ZERO" ? "bg-[#1c1c47] text-[#a5a5c8]" :
                         "bg-gray-800 text-gray-400"
                       }`}>
                         {getStatusLabel()}
@@ -1044,21 +1044,21 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
                     <div className="flex justify-between items-center gap-4 pt-1">
                       <div className="space-y-1 flex-1">
-                        <div className="text-[11px] text-[#9FB0C5] flex justify-between">
+                        <div className="text-[11px] text-[#a5a5c8] flex justify-between">
                           <span>القطع المسحوبة:</span>
                           <strong className="text-white font-mono font-bold">
                             {interval.dataStatus === "MISSING" ? "بيانات مفقودة" : `${interval.withdrawnPieces} قطع`}
                           </strong>
                         </div>
-                        <div className="text-[11px] text-[#9FB0C5] flex justify-between">
+                        <div className="text-[11px] text-[#a5a5c8] flex justify-between">
                           <span>السلع المتأثرة:</span>
                           <strong className="text-white font-mono font-bold">{interval.affectedProducts}</strong>
                         </div>
-                        <div className="text-[11px] text-[#9FB0C5] flex justify-between">
+                        <div className="text-[11px] text-[#a5a5c8] flex justify-between">
                           <span>أحداث السحب:</span>
                           <strong className="text-white font-mono font-bold">{interval.withdrawalEvents}</strong>
                         </div>
-                        <div className="text-[11px] text-[#9FB0C5] flex justify-between">
+                        <div className="text-[11px] text-[#a5a5c8] flex justify-between">
                           <span>حالة المزامنة:</span>
                           <strong className="text-emerald-400 font-mono font-bold">
                             {interval.syncRunsCount > 0 ? `تمت (${interval.syncRunsCount} مزامنة)` : "مكتملة (100%)"}
@@ -1073,7 +1073,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                             cx="24"
                             cy="24"
                             r="20"
-                            stroke="#12233A"
+                            stroke="#1c1c47"
                             strokeWidth="3.5"
                             fill="transparent"
                           />
@@ -1081,7 +1081,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                             cx="24"
                             cy="24"
                             r="20"
-                             stroke={isSuccessAct || isCompleted ? "#24C78E" : "#9FB0C5"}
+                             stroke={isSuccessAct || isCompleted ? "#24C78E" : "#a5a5c8"}
                             strokeWidth="3.5"
                             fill="transparent"
                             strokeDasharray={125.6}
@@ -1094,7 +1094,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
                     {/* Timeline of earliest and latest events inside window */}
                     {(interval.firstEventAt || interval.lastEventAt) ? (
-                      <div className="border-t border-[#20324A]/40 pt-2.5 text-[9px] text-[#9FB0C5]/80 space-y-1">
+                      <div className="border-t border-[#2a2a5c]/40 pt-2.5 text-[9px] text-[#a5a5c8]/80 space-y-1">
                         {interval.firstEventAt && (
                           <div className="flex justify-between font-mono">
                             <span>أول حدث سحب:</span>
@@ -1125,7 +1125,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                         )}
                       </div>
                     ) : (
-                      <div className="border-t border-[#20324A]/20 pt-2.5 text-[9px] text-[#9FB0C5]/40 text-center font-bold">
+                      <div className="border-t border-[#2a2a5c]/20 pt-2.5 text-[9px] text-[#a5a5c8]/40 text-center font-bold">
                         {isNotSched ? "في انتظار تفعيل الفترة" : "لم يتم رصد أي عمليات سحب مخزني"}
                       </div>
                     )}
@@ -1134,9 +1134,9 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
               })}
             </div>
             
-            <div className="bg-[#07111F]/50 border border-[#20324A]/30 p-3.5 rounded-2xl flex items-center gap-3.5 text-right">
-              <Info className="w-5 h-5 text-[#2F80FF] shrink-0" />
-              <div className="text-[11px] text-[#9FB0C5] leading-relaxed">
+            <div className="bg-[#0a0a1a]/50 border border-[#2a2a5c]/30 p-3.5 rounded-2xl flex items-center gap-3.5 text-right">
+              <Info className="w-5 h-5 text-[#6366f1] shrink-0" />
+              <div className="text-[11px] text-[#a5a5c8] leading-relaxed">
                 تقترن كل دورة مزامنة تتم بنجاح بفترتها المخصصة تلقائياً عبر مفتاح فريد يمنع تداخل القراءات أو الحساب المزدوج. إذا تكررت المزامنة لأي سبب، يقوم خادم الكواليس بتحديث الدورة القائمة وتجنب مكررات السحب تماماً.
               </div>
             </div>
@@ -1145,49 +1145,49 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
       </div>
 
       {/* 5. Hourly KPI Cards section */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg">
         <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
           <Sparkles className="w-4.5 h-4.5 text-[#F5A524]" /> أداء ومؤشرات فترات الذروة المتكررة
         </h3>
         
         {loadingPeak ? (
-          <div className="text-center py-6 text-xs text-[#9FB0C5]">جاري إجراء التقييمات التاريخية...</div>
+          <div className="text-center py-6 text-xs text-[#a5a5c8]">جاري إجراء التقييمات التاريخية...</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
             {/* KPI 1 */}
-            <div className="bg-[#12233A]/60 p-4.5 rounded-2xl border border-[#20324A]/40 flex items-start gap-3.5 text-right relative overflow-hidden">
+            <div className="bg-[#1c1c47]/60 p-4.5 rounded-2xl border border-[#2a2a5c]/40 flex items-start gap-3.5 text-right relative overflow-hidden">
               <div className="p-3 rounded-xl bg-red-500/10 text-red-400 shrink-0">
                 <TrendingDown className="w-6 h-6" />
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-[#9FB0C5] block font-bold">ساعة الذروة اليوم</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-bold">ساعة الذروة اليوم</span>
                 <strong className="text-base text-white block">{peakAnalysis?.peakHourToday || "غير متوفر"}</strong>
                 <span className="text-[10px] text-red-400 block font-semibold">سحبت {peakAnalysis?.peakHourTodayValue || 0} قطعة مخزون</span>
               </div>
             </div>
 
             {/* KPI 2 */}
-            <div className="bg-[#12233A]/60 p-4.5 rounded-2xl border border-[#20324A]/40 flex items-start gap-3.5 text-right relative overflow-hidden">
+            <div className="bg-[#1c1c47]/60 p-4.5 rounded-2xl border border-[#2a2a5c]/40 flex items-start gap-3.5 text-right relative overflow-hidden">
               <div className="p-3 rounded-xl bg-[#F5A524]/10 text-[#F5A524] shrink-0">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-[#9FB0C5] block font-bold">متوسط الذروة الأسبوعي (7 أيام)</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-bold">متوسط الذروة الأسبوعي (7 أيام)</span>
                 <strong className="text-base text-white block">{peakAnalysis?.highestAvgHour7Days || "غير متوفر"}</strong>
                 <span className="text-[10px] text-[#24C78E] block font-semibold">بمتوسط {peakAnalysis?.highestAvgHour7DaysValue || 0} قطعة/ساعة</span>
               </div>
             </div>
 
             {/* KPI 3 */}
-            <div className="bg-[#12233A]/60 p-4.5 rounded-2xl border border-[#20324A]/40 flex items-start gap-3.5 text-right relative overflow-hidden">
-              <div className="p-3 rounded-xl bg-[#2F80FF]/10 text-[#2F80FF] shrink-0">
+            <div className="bg-[#1c1c47]/60 p-4.5 rounded-2xl border border-[#2a2a5c]/40 flex items-start gap-3.5 text-right relative overflow-hidden">
+              <div className="p-3 rounded-xl bg-[#6366f1]/10 text-[#6366f1] shrink-0">
                 <Clock className="w-6 h-6" />
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-[#9FB0C5] block font-bold">ساعة الذروة الأكثر تكراراً</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-bold">ساعة الذروة الأكثر تكراراً</span>
                 <strong className="text-base text-white block">{peakAnalysis?.mostRepeatedPeakHour || "غير متوفر"}</strong>
-                <span className="text-[10px] text-[#9FB0C5] block">تكررت كذروة في {peakAnalysis?.mostRepeatedPeakHourDays || 0} أيام هذا الأسبوع</span>
+                <span className="text-[10px] text-[#a5a5c8] block">تكررت كذروة في {peakAnalysis?.mostRepeatedPeakHourDays || 0} أيام هذا الأسبوع</span>
               </div>
             </div>
 
@@ -1196,28 +1196,28 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
       </div>
 
       {/* 6. Active Products list for the selected hour */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg relative">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#20324A]/40 pb-3">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg relative">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#2a2a5c]/40 pb-3">
           <div>
             <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <Database className="w-4.5 h-4.5 text-[#2F80FF]" /> سجل تحركات كميات السلع الفردية بالساعة المحددة
+              <Database className="w-4.5 h-4.5 text-[#6366f1]" /> سجل تحركات كميات السلع الفردية بالساعة المحددة
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-1">السلع التي طرأت عليها سحوبات أو توريدات إمداد خلال هذه الساعة المحددة.</p>
+            <p className="text-[10px] text-[#a5a5c8] mt-1">السلع التي طرأت عليها سحوبات أو توريدات إمداد خلال هذه الساعة المحددة.</p>
           </div>
-          <span className="text-[10px] text-[#9FB0C5] bg-[#07111F] border border-[#20324A] px-3 py-1 rounded-md font-mono">
+          <span className="text-[10px] text-[#a5a5c8] bg-[#0a0a1a] border border-[#2a2a5c] px-3 py-1 rounded-md font-mono">
             {hourlyProducts.length} سلع تأثرت
           </span>
         </div>
 
         {loadingProducts ? (
-          <div className="text-center py-12 text-xs text-[#9FB0C5]">جاري تحميل السلع وتجميع التحديثات الفورية...</div>
+          <div className="text-center py-12 text-xs text-[#a5a5c8]">جاري تحميل السلع وتجميع التحديثات الفورية...</div>
         ) : hourlyProducts.length === 0 ? (
-          <div className="text-center py-16 text-xs text-[#9FB0C5] bg-[#07111F]/20 rounded-2xl border border-dashed border-[#20324A]/30 mt-4">
+          <div className="text-center py-16 text-xs text-[#a5a5c8] bg-[#0a0a1a]/20 rounded-2xl border border-dashed border-[#2a2a5c]/30 mt-4">
             {selectedHourDetails && selectedHourDetails.quantity_decrease > 0 ? (
               <div className="flex flex-col items-center justify-center space-y-2 text-[#24C78E] font-bold">
                 <CheckCircle className="w-8 h-8 text-[#24C78E]" />
                 <span className="text-sm text-white">تم رصد نشاط السحب لهذه الساعة وإدارته بنجاح ({selectedHourDetails.quantity_decrease} قطع). البيانات متزامنة ونشطة.</span>
-                <span className="text-[10px] text-[#9FB0C5] font-normal">جميع السلع النشطة والمرتبطة تعمل بشكل سليم.</span>
+                <span className="text-[10px] text-[#a5a5c8] font-normal">جميع السلع النشطة والمرتبطة تعمل بشكل سليم.</span>
               </div>
             ) : (
               "لا توجد سحوبات سلع فردية مرصودة حالياً خلال هذه الساعة المحددة."
@@ -1227,7 +1227,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-right text-xs">
               <thead>
-                <tr className="border-b border-[#20324A]/30 text-[#9FB0C5] bg-[#07111F]/30">
+                <tr className="border-b border-[#2a2a5c]/30 text-[#a5a5c8] bg-[#0a0a1a]/30">
                   <th className="py-3 px-4 rounded-r-xl">السلعة</th>
                   <th className="py-3 px-4 font-mono">الـ SKU</th>
                   <th className="py-3 px-4">منصة التوريد</th>
@@ -1243,19 +1243,19 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                   <th className="py-3 px-4 text-center rounded-l-xl">فحص السلعة</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#20324A]/10">
+              <tbody className="divide-y divide-[#2a2a5c]/10">
                 {sortedProducts.map((p, idx) => (
-                  <tr key={p.product_id || p.id || `prod-${idx}`} className="hover:bg-[#12233A]/20 transition-all">
+                  <tr key={p.product_id || p.id || `prod-${idx}`} className="hover:bg-[#1c1c47]/20 transition-all">
                     <td className="py-3.5 px-4 font-medium text-white flex items-center gap-2.5 max-w-xs">
                       {p.image_url ? (
                         <img 
                           src={p.image_url} 
                           alt={p.product_name || p.name || 'سلعة'} 
                           referrerPolicy="no-referrer"
-                          className="w-10 h-10 rounded-lg object-cover shrink-0 border border-[#20324A]/60 bg-[#07111F]"
+                          className="w-10 h-10 rounded-lg object-cover shrink-0 border border-[#2a2a5c]/60 bg-[#0a0a1a]"
                         />
                       ) : (
-                        <div className="w-10 h-10 rounded-lg bg-[#12233A] border border-[#20324A]/60 shrink-0 flex items-center justify-center font-mono text-[9px] text-[#9FB0C5]">
+                        <div className="w-10 h-10 rounded-lg bg-[#1c1c47] border border-[#2a2a5c]/60 shrink-0 flex items-center justify-center font-mono text-[9px] text-[#a5a5c8]">
                           NO IMG
                         </div>
                       )}
@@ -1264,12 +1264,12 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                     <td className="py-3.5 px-4 font-mono font-bold text-gray-300 select-all">{p.sku}</td>
                     <td className="py-3.5 px-4">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        p.platform === "safka" ? "bg-[#2F80FF]/15 text-[#2F80FF]" : "bg-[#F5A524]/15 text-[#F5A524]"
+                        p.platform === "safka" ? "bg-[#6366f1]/15 text-[#6366f1]" : "bg-[#F5A524]/15 text-[#F5A524]"
                       }`}>
                         {p.platform === "safka" ? "صفقة" : "تاجر"}
                       </span>
                     </td>
-                    <td className="py-3.5 px-4 text-[#9FB0C5]">{p.category || 'غير مصنف'}</td>
+                    <td className="py-3.5 px-4 text-[#a5a5c8]">{p.category || 'غير مصنف'}</td>
                     <td className="py-3.5 px-4 text-center font-mono font-bold text-gray-400">{p.previous_quantity}</td>
                     <td className="py-3.5 px-4 text-center font-mono font-bold text-white">{p.current_quantity}</td>
                     <td className="py-3.5 px-4 text-center font-mono text-base font-extrabold text-[#F05252]">
@@ -1281,7 +1281,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                     <td className="py-3.5 px-4 text-center">
                       <button 
                         onClick={() => onProductClick({ id: p.product_id, name: p.product_name || p.name, sku: p.sku, imageUrl: p.image_url, platform: p.platform, originalCategory: p.category, currentQuantity: p.current_quantity } as any)}
-                        className="p-1.5 rounded-lg bg-[#12233A] hover:bg-[#20324A] text-[#2F80FF] hover:text-white transition cursor-pointer"
+                        className="p-1.5 rounded-lg bg-[#1c1c47] hover:bg-[#2a2a5c] text-[#6366f1] hover:text-white transition cursor-pointer"
                         title="عرض كلي للسلعة بالتحليلات العميقة"
                       >
                         <Eye className="w-4.5 h-4.5" />
@@ -1299,21 +1299,21 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Predictive High-Risk Inventory (Stockout prediction) */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-center border-b border-[#20324A]/40 pb-3">
+            <div className="flex justify-between items-center border-b border-[#2a2a5c]/40 pb-3">
               <div>
                 <h3 className="text-sm font-extrabold text-white flex items-center gap-1.5">
                   <Hourglass className="w-4.5 h-4.5 text-red-400" /> رادار التنبؤ بالنفاد المحتمل للسلع النشطة
                 </h3>
-                <p className="text-[10px] text-[#9FB0C5] mt-1">توقع ذكي ومبكر لساعات النفاد بناءً على معدلات السحب الموزونة بالأوزان النسبية.</p>
+                <p className="text-[10px] text-[#a5a5c8] mt-1">توقع ذكي ومبكر لساعات النفاد بناءً على معدلات السحب الموزونة بالأوزان النسبية.</p>
               </div>
             </div>
 
             {loadingRisk ? (
-              <div className="text-center py-12 text-xs text-[#9FB0C5]">جاري معالجة معدلات السحب الحركية للتنبؤ...</div>
+              <div className="text-center py-12 text-xs text-[#a5a5c8]">جاري معالجة معدلات السحب الحركية للتنبؤ...</div>
             ) : stockoutRisk.length === 0 ? (
-              <div className="text-center py-16 text-xs text-[#9FB0C5] bg-[#07111F]/20 rounded-2xl border border-dashed border-[#20324A]/30 mt-4">
+              <div className="text-center py-16 text-xs text-[#a5a5c8] bg-[#0a0a1a]/20 rounded-2xl border border-dashed border-[#2a2a5c]/30 mt-4">
                 جميع السلع النشطة بمعدل سحب هادئ أو مستقرة بالمستودعات.
               </div>
             ) : (
@@ -1322,19 +1322,19 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                   const isCrit = r.riskLevel === "خطر حرج";
                   const isHigh = r.riskLevel === "خطر مرتفع";
                   return (
-                    <div key={r.id} className="bg-[#07111F]/50 border border-[#20324A]/30 p-3.5 rounded-xl flex items-center justify-between text-right gap-3">
+                    <div key={r.id} className="bg-[#0a0a1a]/50 border border-[#2a2a5c]/30 p-3.5 rounded-xl flex items-center justify-between text-right gap-3">
                       <div className="flex items-center gap-3 min-w-0 flex-1">
                         {r.imageUrl && (
                           <img 
                             src={r.imageUrl} 
                             alt={r.name} 
                             referrerPolicy="no-referrer"
-                            className="w-10 h-10 rounded-lg object-cover shrink-0 border border-[#20324A]/50 bg-[#07111F]"
+                            className="w-10 h-10 rounded-lg object-cover shrink-0 border border-[#2a2a5c]/50 bg-[#0a0a1a]"
                           />
                         )}
                         <div className="min-w-0">
                           <span className="text-xs font-bold text-white block truncate">{r.name}</span>
-                          <span className="text-[10px] text-[#9FB0C5] block font-mono">الكمية: {r.currentQuantity} قطعة | SKU: {r.sku}</span>
+                          <span className="text-[10px] text-[#a5a5c8] block font-mono">الكمية: {r.currentQuantity} قطعة | SKU: {r.sku}</span>
                         </div>
                       </div>
 
@@ -1359,31 +1359,31 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
         </div>
 
         {/* Category leaderboards */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-center border-b border-[#20324A]/40 pb-3">
+            <div className="flex justify-between items-center border-b border-[#2a2a5c]/40 pb-3">
               <div>
                 <h3 className="text-sm font-extrabold text-white flex items-center gap-1.5">
                   <TrendingDown className="w-4.5 h-4.5 text-[#24C78E]" /> تصنيفات الصدارة بسحب المخزون اليوم
                 </h3>
-                <p className="text-[10px] text-[#9FB0C5] mt-1">السلعة المتصدرة لمعدلات التناقص لكل تصنيف على حدة.</p>
+                <p className="text-[10px] text-[#a5a5c8] mt-1">السلعة المتصدرة لمعدلات التناقص لكل تصنيف على حدة.</p>
               </div>
             </div>
 
             {loadingRisk ? (
-              <div className="text-center py-12 text-xs text-[#9FB0C5]">جاري تحميل تصنيفات الصدارة...</div>
+              <div className="text-center py-12 text-xs text-[#a5a5c8]">جاري تحميل تصنيفات الصدارة...</div>
             ) : categoryLeaders.length === 0 ? (
-              <div className="text-center py-16 text-xs text-[#9FB0C5] bg-[#07111F]/20 rounded-2xl border border-dashed border-[#20324A]/30 mt-4">
+              <div className="text-center py-16 text-xs text-[#a5a5c8] bg-[#0a0a1a]/20 rounded-2xl border border-dashed border-[#2a2a5c]/30 mt-4">
                 لا توجد عمليات سحب مخزون مسجلة بالتصنيفات اليوم.
               </div>
             ) : (
               <div className="space-y-3 mt-4 max-h-[350px] overflow-y-auto pr-1">
                 {categoryLeaders.map((c) => (
-                  <div key={c.categoryName} className="bg-[#12233A]/40 border border-[#20324A]/30 p-3.5 rounded-xl flex items-center justify-between">
+                  <div key={c.categoryName} className="bg-[#1c1c47]/40 border border-[#2a2a5c]/30 p-3.5 rounded-xl flex items-center justify-between">
                     <div>
                       <span className="text-[10px] text-[#24C78E] font-black block">{c.categoryName}</span>
                       <strong className="text-xs text-white block truncate max-w-[200px] mt-0.5">{c.topProduct?.name || "لا يوجد"}</strong>
-                      <span className="text-[10px] text-[#9FB0C5] block font-mono">القطع المسحوبة اليوم: {c.topProduct?.decrease || 0} قطع</span>
+                      <span className="text-[10px] text-[#a5a5c8] block font-mono">القطع المسحوبة اليوم: {c.topProduct?.decrease || 0} قطع</span>
                     </div>
 
                     <div className="text-left">
@@ -1409,26 +1409,26 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Weekly activity Patterns Table */}
-        <div className="lg:col-span-2 bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#20324A]/40 pb-3 gap-3">
+        <div className="lg:col-span-2 bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#2a2a5c]/40 pb-3 gap-3">
             <div>
               <h3 className="text-sm font-extrabold text-white flex items-center gap-1.5">
-                <Calendar className="w-4.5 h-4.5 text-[#2F80FF]" /> خريطة كثافة النشاط وتوزيع سحوبات المخزون الأسبوعية
+                <Calendar className="w-4.5 h-4.5 text-[#6366f1]" /> خريطة كثافة النشاط وتوزيع سحوبات المخزون الأسبوعية
               </h3>
-              <p className="text-[10px] text-[#9FB0C5] mt-1">تحديد الفروقات بين سلوك ومعدلات السحب اليومية لمختلف ساعات اليوم مقارنة بنهايات الأسبوع المحلية.</p>
+              <p className="text-[10px] text-[#a5a5c8] mt-1">تحديد الفروقات بين سلوك ومعدلات السحب اليومية لمختلف ساعات اليوم مقارنة بنهايات الأسبوع المحلية.</p>
             </div>
             
             {/* Toggle View Mode */}
-            <div className="flex bg-[#12233A] p-0.5 rounded-xl border border-[#20324A] text-xs shrink-0">
+            <div className="flex bg-[#1c1c47] p-0.5 rounded-xl border border-[#2a2a5c] text-xs shrink-0">
               <button
                 onClick={() => setViewMode('heatmap')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${viewMode === 'heatmap' ? "bg-[#2F80FF] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${viewMode === 'heatmap' ? "bg-[#6366f1] text-white" : "text-[#a5a5c8] hover:text-white"}`}
               >
                 <Activity className="w-3.5 h-3.5" /> خريطة الحرارة
               </button>
               <button
                 onClick={() => setViewMode('table')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${viewMode === 'table' ? "bg-[#2F80FF] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${viewMode === 'table' ? "bg-[#6366f1] text-white" : "text-[#a5a5c8] hover:text-white"}`}
               >
                 <Calendar className="w-3.5 h-3.5" /> جدول الأنماط
               </button>
@@ -1436,11 +1436,11 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
           </div>
 
           {loadingWeekdays ? (
-            <div className="text-center py-12 text-xs text-[#9FB0C5]">جاري تجميع أنماط الأسبوع...</div>
+            <div className="text-center py-12 text-xs text-[#a5a5c8]">جاري تجميع أنماط الأسبوع...</div>
           ) : viewMode === 'heatmap' ? (
             <div className="space-y-4 pt-2">
               {/* Heatmap Legend */}
-              <div className="flex flex-wrap items-center justify-between gap-3 bg-[#07111F]/40 p-3 rounded-2xl border border-[#20324A]/30 text-[10px] text-[#9FB0C5]">
+              <div className="flex flex-wrap items-center justify-between gap-3 bg-[#0a0a1a]/40 p-3 rounded-2xl border border-[#2a2a5c]/30 text-[10px] text-[#a5a5c8]">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="font-extrabold text-white">دليل الكثافة (متوسط السحب بالقطعة):</span>
                   <div className="flex flex-wrap items-center gap-2">
@@ -1451,22 +1451,22 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                     <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-[#59161a]" /> انفجاري (16+)</span>
                   </div>
                 </div>
-                <div className="text-[9px] text-[#9FB0C5]/80">
+                <div className="text-[9px] text-[#a5a5c8]/80">
                   💡 تلميحة: مرر الماوس فوق المربعات لعرض التفاصيل أو اضغط لتحديد الساعة واليوم.
                 </div>
               </div>
 
               {/* Grid Wrapper with Horizontal Scroll for Mobile */}
-              <div className="overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#20324A] scrollbar-track-transparent">
+              <div className="overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#2a2a5c] scrollbar-track-transparent">
                 <div className="min-w-[800px] space-y-2 text-right" dir="rtl">
                   {/* Time Blocks Axis Legend Row */}
-                  <div className="flex items-center text-[9px] font-sans font-bold pb-1 text-[#9FB0C5]">
+                  <div className="flex items-center text-[9px] font-sans font-bold pb-1 text-[#a5a5c8]">
                     <div className="w-20 shrink-0 text-right text-gray-400 font-sans">فترات اليوم</div>
                     <div className="flex-1 gap-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(24, minmax(0, 1fr))' }}>
-                      <div className="col-span-6 text-center bg-[#12233A]/60 py-1.5 rounded-lg border border-[#20324A]/30 text-[#9FB0C5] flex items-center justify-center gap-1">
-                        <span>🌙</span> <span className="hidden sm:inline">الليل والفجر</span> <span className="font-mono text-[8px] text-[#2F80FF]">(0-5)</span>
+                      <div className="col-span-6 text-center bg-[#1c1c47]/60 py-1.5 rounded-lg border border-[#2a2a5c]/30 text-[#a5a5c8] flex items-center justify-center gap-1">
+                        <span>🌙</span> <span className="hidden sm:inline">الليل والفجر</span> <span className="font-mono text-[8px] text-[#6366f1]">(0-5)</span>
                       </div>
-                      <div className="col-span-6 text-center bg-blue-500/10 py-1.5 rounded-lg border border-[#2F80FF]/20 text-blue-400 flex items-center justify-center gap-1">
+                      <div className="col-span-6 text-center bg-blue-500/10 py-1.5 rounded-lg border border-[#6366f1]/20 text-blue-400 flex items-center justify-center gap-1">
                         <span>☀️</span> <span className="hidden sm:inline">الصباح</span> <span className="font-mono text-[8px] text-blue-300">(6-11)</span>
                       </div>
                       <div className="col-span-6 text-center bg-amber-500/10 py-1.5 rounded-lg border border-amber-500/20 text-amber-400 flex items-center justify-center gap-1">
@@ -1479,7 +1479,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                   </div>
 
                   {/* Hours Header Row */}
-                  <div className="flex items-center text-[10px] text-[#9FB0C5] font-mono font-bold border-b border-[#20324A]/30 pb-2">
+                  <div className="flex items-center text-[10px] text-[#a5a5c8] font-mono font-bold border-b border-[#2a2a5c]/30 pb-2">
                     <div className="w-20 shrink-0 text-right font-sans">اليوم</div>
                     <div className="flex-1 gap-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(24, minmax(0, 1fr))' }}>
                       {Array.from({ length: 24 }).map((_, hour) => (
@@ -1494,9 +1494,9 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                   {weekdayPatterns.map((day) => {
                     const breakdown = day.hourlyBreakdown || [];
                     return (
-                      <div key={day.dayName} className="flex items-center group py-1 hover:bg-[#12233A]/10 rounded-xl px-1 transition duration-100">
+                      <div key={day.dayName} className="flex items-center group py-1 hover:bg-[#1c1c47]/10 rounded-xl px-1 transition duration-100">
                         {/* Day Label */}
-                        <div className="w-20 shrink-0 text-right text-xs font-black text-white group-hover:text-[#2F80FF] transition">
+                        <div className="w-20 shrink-0 text-right text-xs font-black text-white group-hover:text-[#6366f1] transition">
                           {day.dayName}
                         </div>
 
@@ -1522,7 +1522,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                             // Active / selected style
                             const isCellSelected = selectedHeatmapCell?.dayName === day.dayName && selectedHeatmapCell?.hour === hour;
                             if (isCellSelected) {
-                              cellBorder = "ring-2 ring-white ring-offset-1 ring-offset-[#07111F] z-10 scale-110";
+                              cellBorder = "ring-2 ring-white ring-offset-1 ring-offset-[#0a0a1a] z-10 scale-110";
                             }
 
                             return (
@@ -1537,8 +1537,8 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                                 className={`h-7 rounded transition-all duration-150 relative group/cell cursor-pointer ${cellBg} ${cellBorder} border hover:scale-110 hover:z-10`}
                               >
                                 {/* Mini Tooltip */}
-                                <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#07111F] border border-[#20324A] text-white text-[9px] font-sans p-2 rounded-lg shadow-2xl pointer-events-none opacity-0 group-hover/cell:opacity-100 transition duration-150 whitespace-nowrap z-50">
-                                  <div className="font-bold text-[#2F80FF]">{day.dayName} — {hourData.label || `${hour}:00`}</div>
+                                <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0a0a1a] border border-[#2a2a5c] text-white text-[9px] font-sans p-2 rounded-lg shadow-2xl pointer-events-none opacity-0 group-hover/cell:opacity-100 transition duration-150 whitespace-nowrap z-50">
+                                  <div className="font-bold text-[#6366f1]">{day.dayName} — {hourData.label || `${hour}:00`}</div>
                                   <div className="text-gray-300 mt-0.5">متوسط السحوبات: <span className="font-mono text-white font-extrabold">{avgDec}</span> قطعة</div>
                                 </div>
                               </button>
@@ -1553,30 +1553,30 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
 
               {/* Interactive Heatmap Cell Detail View */}
               {selectedHeatmapCell ? (
-                <div className="bg-[#07111F]/60 p-4 rounded-2xl border border-[#20324A]/40 text-right space-y-3 animate-fadeIn">
-                  <div className="flex justify-between items-center border-b border-[#20324A]/30 pb-2">
-                    <span className="text-xs text-[#9FB0C5]">تفاصيل النقطة المحددة في خريطة الحرارة</span>
+                <div className="bg-[#0a0a1a]/60 p-4 rounded-2xl border border-[#2a2a5c]/40 text-right space-y-3 animate-fadeIn">
+                  <div className="flex justify-between items-center border-b border-[#2a2a5c]/30 pb-2">
+                    <span className="text-xs text-[#a5a5c8]">تفاصيل النقطة المحددة في خريطة الحرارة</span>
                     <button 
                       onClick={() => setSelectedHeatmapCell(null)}
-                      className="text-[10px] text-[#9FB0C5] hover:text-white px-2 py-0.5 rounded bg-[#12233A] hover:bg-red-950/40 border border-[#20324A] transition cursor-pointer"
+                      className="text-[10px] text-[#a5a5c8] hover:text-white px-2 py-0.5 rounded bg-[#1c1c47] hover:bg-red-950/40 border border-[#2a2a5c] transition cursor-pointer"
                     >
                       إغلاق التفاصيل ×
                     </button>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-[#0D1B2D]/60 p-3 rounded-xl border border-[#20324A]/20">
-                      <span className="text-[10px] text-[#9FB0C5] block">اليوم المحدد</span>
+                    <div className="bg-[#141432]/60 p-3 rounded-xl border border-[#2a2a5c]/20">
+                      <span className="text-[10px] text-[#a5a5c8] block">اليوم المحدد</span>
                       <strong className="text-sm text-white block mt-1">{selectedHeatmapCell.dayName}</strong>
                     </div>
                     
-                    <div className="bg-[#0D1B2D]/60 p-3 rounded-xl border border-[#20324A]/20">
-                      <span className="text-[10px] text-[#9FB0C5] block">الساعة والوقت</span>
-                      <strong className="text-sm text-[#2F80FF] block mt-1">{selectedHeatmapCell.label}</strong>
+                    <div className="bg-[#141432]/60 p-3 rounded-xl border border-[#2a2a5c]/20">
+                      <span className="text-[10px] text-[#a5a5c8] block">الساعة والوقت</span>
+                      <strong className="text-sm text-[#6366f1] block mt-1">{selectedHeatmapCell.label}</strong>
                     </div>
 
-                    <div className="bg-[#0D1B2D]/60 p-3 rounded-xl border border-[#20324A]/20">
-                      <span className="text-[10px] text-[#9FB0C5] block">متوسط كثافة التناقص والمغادرة</span>
+                    <div className="bg-[#141432]/60 p-3 rounded-xl border border-[#2a2a5c]/20">
+                      <span className="text-[10px] text-[#a5a5c8] block">متوسط كثافة التناقص والمغادرة</span>
                       <strong className={`text-sm block mt-1 ${
                         selectedHeatmapCell.averageDecrease === 0 ? "text-gray-500" :
                         selectedHeatmapCell.averageDecrease <= 3 ? "text-[#24C78E]" :
@@ -1585,10 +1585,10 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                     </div>
                   </div>
 
-                  <div className="text-xs text-[#9FB0C5] leading-relaxed flex items-start gap-2 bg-[#2F80FF]/5 p-3 rounded-xl border border-[#2F80FF]/10 mt-2">
+                  <div className="text-xs text-[#a5a5c8] leading-relaxed flex items-start gap-2 bg-[#6366f1]/5 p-3 rounded-xl border border-[#6366f1]/10 mt-2">
                     <span className="text-base">💡</span>
                     <div>
-                      <span className="font-extrabold text-[#2F80FF] block mb-1">الرؤية التشغيلية المستخلصة:</span>
+                      <span className="font-extrabold text-[#6366f1] block mb-1">الرؤية التشغيلية المستخلصة:</span>
                       {selectedHeatmapCell.averageDecrease === 0 ? (
                         <span>لا تسجل هذه الفترة أي سحوبات في العادة. يمكن جدولة أعمال الجرد أو الصيانة خلال هذه الساعة لعدم التأثير على العمليات الحيوية.</span>
                       ) : selectedHeatmapCell.averageDecrease <= 3 ? (
@@ -1602,7 +1602,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-4 bg-[#07111F]/20 rounded-2xl border border-dashed border-[#20324A]/20 text-[10px] text-[#9FB0C5]">
+                <div className="text-center py-4 bg-[#0a0a1a]/20 rounded-2xl border border-dashed border-[#2a2a5c]/20 text-[10px] text-[#a5a5c8]">
                   اضغط على أي مربع لوني في الخريطة لاستخراج الرؤى اللوجستية وتوقعات الذروة المباشرة لتلك الساعة.
                 </div>
               )}
@@ -1611,7 +1611,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
             <div className="overflow-x-auto pt-2">
               <table className="w-full text-right text-xs">
                 <thead>
-                  <tr className="border-b border-[#20324A]/30 text-[#9FB0C5] bg-[#07111F]/20">
+                  <tr className="border-b border-[#2a2a5c]/30 text-[#a5a5c8] bg-[#0a0a1a]/20">
                     <th className="py-2.5 px-3 rounded-r-xl">اليوم</th>
                     <th className="py-2.5 px-3 text-center">متوسط التناقص اليومي</th>
                     <th className="py-2.5 px-3 text-center">متوسط السلع المتأثرة</th>
@@ -1619,9 +1619,9 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                     <th className="py-2.5 px-3 text-center rounded-l-xl">الأيام المسجلة</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#20324A]/10">
+                <tbody className="divide-y divide-[#2a2a5c]/10">
                   {weekdayPatterns.map((day) => (
-                    <tr key={day.dayName} className="hover:bg-[#12233A]/10">
+                    <tr key={day.dayName} className="hover:bg-[#1c1c47]/10">
                       <td className="py-3 px-3 text-white font-extrabold">{day.dayName}</td>
                       <td className="py-3 px-3 text-center font-mono font-bold text-red-400">{day.averageDecrease} قطع</td>
                       <td className="py-3 px-3 text-center font-mono text-gray-300">{day.averageAffectedProducts} سلع</td>
@@ -1636,30 +1636,30 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
         </div>
 
         {/* Multi-hour streaks */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 shadow-lg flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-center border-b border-[#20324A]/40 pb-3">
+            <div className="flex justify-between items-center border-b border-[#2a2a5c]/40 pb-3">
               <div>
                 <h3 className="text-sm font-extrabold text-white flex items-center gap-1.5">
                   <Activity className="w-4.5 h-4.5 text-[#F5A524]" /> المنتجات ذات السحوبات المتتالية (اليوم)
                 </h3>
-                <p className="text-[10px] text-[#9FB0C5] mt-1">السلع التي تستقبل طلبات وسحوبات نشطة ومستمرة عبر ساعات متتالية متقاطعة.</p>
+                <p className="text-[10px] text-[#a5a5c8] mt-1">السلع التي تستقبل طلبات وسحوبات نشطة ومستمرة عبر ساعات متتالية متقاطعة.</p>
               </div>
             </div>
 
             {loadingRisk ? (
-              <div className="text-center py-12 text-xs text-[#9FB0C5]">جاري تتبع السلاسل الزمنية المتتالية...</div>
+              <div className="text-center py-12 text-xs text-[#a5a5c8]">جاري تتبع السلاسل الزمنية المتتالية...</div>
             ) : multiHourLeaders.length === 0 ? (
-              <div className="text-center py-16 text-xs text-[#9FB0C5] bg-[#07111F]/20 rounded-2xl border border-dashed border-[#20324A]/30 mt-4">
+              <div className="text-center py-16 text-xs text-[#a5a5c8] bg-[#0a0a1a]/20 rounded-2xl border border-dashed border-[#2a2a5c]/30 mt-4">
                 لا توجد سلع بسحوبات متتالية مسجلة لليوم.
               </div>
             ) : (
               <div className="space-y-3 mt-4 max-h-[300px] overflow-y-auto pr-1">
                 {multiHourLeaders.map((l) => (
-                  <div key={l.id} className="bg-[#12233A]/40 border border-[#20324A]/30 p-3 rounded-xl flex items-center justify-between text-right gap-2">
+                  <div key={l.id} className="bg-[#1c1c47]/40 border border-[#2a2a5c]/30 p-3 rounded-xl flex items-center justify-between text-right gap-2">
                     <div className="min-w-0 flex-1">
                       <strong className="text-xs text-white block truncate">{l.name}</strong>
-                      <span className="text-[9px] text-[#9FB0C5] block font-mono">سحبت عبر {l.hoursCount} ساعات مختلفة اليوم</span>
+                      <span className="text-[9px] text-[#a5a5c8] block font-mono">سحبت عبر {l.hoursCount} ساعات مختلفة اليوم</span>
                     </div>
 
                     <div className="text-left shrink-0">

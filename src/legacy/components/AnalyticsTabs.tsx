@@ -29,7 +29,7 @@ import {
 } from "recharts";
 
 const PIE_COLORS = [
-  "#2F80FF", // Blue
+  "#6366f1", // Blue
   "#24C78E", // Green
   "#8B5CF6", // Purple
   "#F5A524", // Orange
@@ -42,9 +42,9 @@ const CustomPieTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="bg-[#07111F] border border-[#20324A] p-3 rounded-xl shadow-xl text-right text-xs space-y-1">
+      <div className="bg-[#0a0a1a] border border-[#2a2a5c] p-3 rounded-xl shadow-xl text-right text-xs space-y-1">
         <p className="font-bold text-white">{data.name}</p>
-        <p className="text-[#2F80FF]">السلع المراقبة: <span className="font-mono font-black">{data.count}</span></p>
+        <p className="text-[#6366f1]">السلع المراقبة: <span className="font-mono font-black">{data.count}</span></p>
         <p className="text-[#24C78E]">الحصة الكلية: <span className="font-mono font-black">{data.sharePct}%</span></p>
         <p className="text-[#FBBF24]">إجمالي السحب: <span className="font-mono font-black">{data.catDecreases} قطعة</span></p>
       </div>
@@ -99,13 +99,13 @@ export default function AnalyticsTabs({
     const maxDecrease = Math.max(...products.map((p) => p.dailyQuantityDecrease || 1), 1);
 
     return (
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6">
         <div>
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
             <TrendingDown className="w-5 h-5 text-[#24C78E]" />
             المنتجات الأكثر سحباً من الكتالوج (آخر ٢٤ ساعة)
           </h3>
-          <p className="text-[11px] text-[#9FB0C5] mt-1">تراكم كمية السحب لجميع السلع ومطابقتها بالتسلسل الزمني</p>
+          <p className="text-[11px] text-[#a5a5c8] mt-1">تراكم كمية السحب لجميع السلع ومطابقتها بالتسلسل الزمني</p>
         </div>
 
         <div className="space-y-4">
@@ -114,13 +114,13 @@ export default function AnalyticsTabs({
             const pct = Math.min((val / maxDecrease) * 100, 100);
 
             return (
-              <div key={`${p.id}-${index}`} className="bg-[#07111F]/50 p-4 rounded-xl border border-[#20324A]/40 space-y-2">
+              <div key={`${p.id}-${index}`} className="bg-[#0a0a1a]/50 p-4 rounded-xl border border-[#2a2a5c]/40 space-y-2">
                 <div className="flex justify-between items-center text-xs">
                   <div className="flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-[#12233A] text-[#9FB0C5] flex items-center justify-center text-[10px] font-bold font-mono">
+                    <span className="w-5 h-5 rounded-full bg-[#1c1c47] text-[#a5a5c8] flex items-center justify-center text-[10px] font-bold font-mono">
                       #{index + 1}
                     </span>
-                    <strong className="text-white hover:text-[#2F80FF] cursor-pointer" onClick={() => onProductClick(p)}>
+                    <strong className="text-white hover:text-[#6366f1] cursor-pointer" onClick={() => onProductClick(p)}>
                       {p.name}
                     </strong>
                   </div>
@@ -128,14 +128,14 @@ export default function AnalyticsTabs({
                 </div>
 
                 {/* Progress bar */}
-                <div className="h-2 w-full bg-[#07111F] rounded-full overflow-hidden border border-[#20324A]/20">
+                <div className="h-2 w-full bg-[#0a0a1a] rounded-full overflow-hidden border border-[#2a2a5c]/20">
                   <div 
                     style={{ width: `${pct}%` }}
                     className="h-full bg-gradient-to-r from-[#24C78E]/30 to-[#24C78E] rounded-full transition-all duration-500"
                   />
                 </div>
 
-                <div className="flex justify-between items-center text-[10px] text-[#9FB0C5] font-mono">
+                <div className="flex justify-between items-center text-[10px] text-[#a5a5c8] font-mono">
                   <span>الـ SKU: {p.sku}</span>
                   <span>المخزون المتبقي: {p.currentQuantity ?? 0} قطعة</span>
                 </div>
@@ -144,7 +144,7 @@ export default function AnalyticsTabs({
           })}
 
           {siphonedProducts.length === 0 && (
-            <div className="text-center py-16 text-xs text-[#9FB0C5] bg-[#07111F]/20 rounded-xl">
+            <div className="text-center py-16 text-xs text-[#a5a5c8] bg-[#0a0a1a]/20 rounded-xl">
               لا توجد سحوبات مسجلة في الـ ٢٤ ساعة الماضية لتوليد قائمة المتصدرين.
             </div>
           )}
@@ -170,11 +170,11 @@ export default function AnalyticsTabs({
     return (
       <div className="space-y-6">
         {/* Info Box */}
-        <div className="bg-[#12233A] border border-[#20324A] p-4 rounded-2xl flex items-start gap-3">
+        <div className="bg-[#1c1c47] border border-[#2a2a5c] p-4 rounded-2xl flex items-start gap-3">
           <Zap className="w-5 h-5 text-[#24C78E] shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <h4 className="text-xs font-black text-[#F4F7FB]">شرح خوارزمية تسارع الطلب (Trend Velocity)</h4>
-            <p className="text-[11px] text-[#9FB0C5] leading-relaxed">
+            <h4 className="text-xs font-black text-[#f5f5fa]">شرح خوارزمية تسارع الطلب (Trend Velocity)</h4>
+            <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
               تحتسب خوارزمية التسارع مدى تغير كميات المخزون وتصاعد وتيرتها دورياً. التسارع المتزايد يعطي دلالة للمسوقين أن السلعة تشهد اهتماماً ترويجياً مكثفاً حالياً بالسوق المصري، مما يساعدك على اللحاق بالتريند الإعلاني.
             </p>
           </div>
@@ -185,18 +185,18 @@ export default function AnalyticsTabs({
             const dec = p.dailyQuantityDecrease || 0;
             const trend = getAccelerationStatus(dec);
             return (
-              <div key={`${p.id}-${index}`} className="bg-[#0D1B2D] border border-[#20324A] p-4 rounded-2xl space-y-3 hover:border-[#20324A] transition">
+              <div key={`${p.id}-${index}`} className="bg-[#141432] border border-[#2a2a5c] p-4 rounded-2xl space-y-3 hover:border-[#2a2a5c] transition">
                 <div className="flex items-start gap-3 justify-between">
                   <div className="flex items-center gap-3">
                     <img 
                       src={p.imageUrl} 
-                      className="w-12 h-12 rounded-xl object-cover bg-[#07111F] border border-[#20324A]/40 shrink-0" 
+                      className="w-12 h-12 rounded-xl object-cover bg-[#0a0a1a] border border-[#2a2a5c]/40 shrink-0" 
                       alt="" 
                       referrerPolicy="no-referrer"
                     />
                     <div>
-                      <h4 className="text-xs font-bold text-white hover:text-[#2F80FF] cursor-pointer line-clamp-1" onClick={() => onProductClick(p)}>{p.name}</h4>
-                      <span className="text-[9px] text-[#9FB0C5] font-mono mt-0.5 block">SKU: {p.sku}</span>
+                      <h4 className="text-xs font-bold text-white hover:text-[#6366f1] cursor-pointer line-clamp-1" onClick={() => onProductClick(p)}>{p.name}</h4>
+                      <span className="text-[9px] text-[#a5a5c8] font-mono mt-0.5 block">SKU: {p.sku}</span>
                     </div>
                   </div>
                   
@@ -205,7 +205,7 @@ export default function AnalyticsTabs({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-[10px] text-[#9FB0C5] pt-2 border-t border-[#20324A]/40">
+                <div className="grid grid-cols-2 gap-2 text-[10px] text-[#a5a5c8] pt-2 border-t border-[#2a2a5c]/40">
                   <div>المخزون الحالي: <strong className="text-white">{p.currentQuantity} قطعة</strong></div>
                   <div>معدل النقص اليومي: <strong className="text-[#24C78E] font-mono">-{dec} قطعة</strong></div>
                 </div>
@@ -214,7 +214,7 @@ export default function AnalyticsTabs({
           })}
 
           {trendingList.length === 0 && (
-            <div className="col-span-2 text-center py-16 text-xs text-[#9FB0C5] bg-[#0D1B2D] border border-[#20324A] rounded-3xl">
+            <div className="col-span-2 text-center py-16 text-xs text-[#a5a5c8] bg-[#141432] border border-[#2a2a5c] rounded-3xl">
               لا توجد منتجات مسجلة بمعدل تسارع ترويجي مرتفع حالياً.
             </div>
           )}
@@ -251,13 +251,13 @@ export default function AnalyticsTabs({
     const topSiphonedCat = sortedCatStats.length > 0 && sortedCatStats[0].catDecreases > 0 ? sortedCatStats[0] : null;
 
     return (
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
         <div>
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <Folder className="w-5 h-5 text-[#2F80FF]" />
+            <Folder className="w-5 h-5 text-[#6366f1]" />
             حجم التمثيل والسحوبات لكل تصنيف بالكتالوج
           </h3>
-          <p className="text-[11px] text-[#9FB0C5] mt-1">نسبة الحصة الكلية للسلع المسجلة تحت كل تصنيف ومجموع سحب قطع الكتالوج</p>
+          <p className="text-[11px] text-[#a5a5c8] mt-1">نسبة الحصة الكلية للسلع المسجلة تحت كل تصنيف ومجموع سحب قطع الكتالوج</p>
         </div>
 
         {/* Top Highlight Banner for most withdrawn category */}
@@ -270,24 +270,24 @@ export default function AnalyticsTabs({
               <h4 className="text-sm font-black text-white mt-1.5">
                 تصنيف <span className="text-[#24C78E] underline decoration-wavy decoration-1 font-extrabold">{topSiphonedCat.name}</span> هو الأكثر سحباً اليوم!
               </h4>
-              <p className="text-[11px] text-[#9FB0C5] leading-relaxed">
+              <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
                 سجل هذا التصنيف سحب إجمالي بمقدار <strong className="text-[#24C78E] font-mono">{topSiphonedCat.catDecreases} قطعة</strong> عبر <strong className="text-white">{topSiphonedCat.count} منتج مراقب</strong>. ننصح بالتركيز الترويجي عليه لسرعة دورانه بالسوق.
               </p>
             </div>
-            <div className="bg-[#0D1B2D]/60 border border-[#20324A]/40 px-5 py-3.5 rounded-xl text-center min-w-[160px] shrink-0">
-              <span className="text-[10px] text-[#9FB0C5] block">إجمالي السحب للتصنيف</span>
+            <div className="bg-[#141432]/60 border border-[#2a2a5c]/40 px-5 py-3.5 rounded-xl text-center min-w-[160px] shrink-0">
+              <span className="text-[10px] text-[#a5a5c8] block">إجمالي السحب للتصنيف</span>
               <strong className="text-2xl text-[#24C78E] font-mono block mt-1">{topSiphonedCat.catDecreases}</strong>
-              <span className="text-[9px] text-[#9FB0C5]/70 block mt-0.5">قطع سحبت اليوم</span>
+              <span className="text-[9px] text-[#a5a5c8]/70 block mt-0.5">قطع سحبت اليوم</span>
             </div>
           </div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Pie Chart Card for market share */}
-          <div className="lg:col-span-5 bg-[#07111F]/50 border border-[#20324A]/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+          <div className="lg:col-span-5 bg-[#0a0a1a]/50 border border-[#2a2a5c]/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
             <div>
               <h4 className="text-xs font-black text-white">توزيع الحصة السوقية للتصنيفات</h4>
-              <p className="text-[10px] text-[#9FB0C5] mt-0.5">نسبة تمثيل المنتجات المراقبة عبر الفئات المختلفة في كتالوج المستودع</p>
+              <p className="text-[10px] text-[#a5a5c8] mt-0.5">نسبة تمثيل المنتجات المراقبة عبر الفئات المختلفة في كتالوج المستودع</p>
             </div>
 
             <div className="h-56 relative flex items-center justify-center">
@@ -312,7 +312,7 @@ export default function AnalyticsTabs({
               </ResponsiveContainer>
               {/* Centered Total Stat block */}
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mt-1">
-                <span className="text-[9px] text-[#9FB0C5] font-black">إجمالي المنتجات</span>
+                <span className="text-[9px] text-[#a5a5c8] font-black">إجمالي المنتجات</span>
                 <span className="text-lg font-mono font-black text-white leading-none mt-0.5">
                   {products.length}
                 </span>
@@ -320,7 +320,7 @@ export default function AnalyticsTabs({
             </div>
 
             {/* Custom Interactive Legend */}
-            <div className="grid grid-cols-2 gap-2 text-[10px] text-[#9FB0C5] font-bold border-t border-[#20324A]/25 pt-3.5">
+            <div className="grid grid-cols-2 gap-2 text-[10px] text-[#a5a5c8] font-bold border-t border-[#2a2a5c]/25 pt-3.5">
               {catStats.map((cat, idx) => (
                 <div key={cat.name} className="flex items-center gap-1.5 justify-start">
                   <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: PIE_COLORS[idx % PIE_COLORS.length] }} />
@@ -338,10 +338,10 @@ export default function AnalyticsTabs({
               const color = PIE_COLORS[originalIndex !== -1 ? originalIndex : index % PIE_COLORS.length];
               
               return (
-                <div key={cat.name} className="bg-[#07111F]/50 border border-[#20324A]/40 p-4.5 rounded-2xl space-y-3.5 text-right flex flex-col justify-between">
+                <div key={cat.name} className="bg-[#0a0a1a]/50 border border-[#2a2a5c]/40 p-4.5 rounded-2xl space-y-3.5 text-right flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex justify-between items-center gap-2">
-                      <span className="font-extrabold text-[#F4F7FB] text-xs truncate">{cat.name}</span>
+                      <span className="font-extrabold text-[#f5f5fa] text-xs truncate">{cat.name}</span>
                       <span 
                         className="text-[9px] font-black font-mono px-2 py-0.5 rounded shrink-0"
                         style={{ color: color, backgroundColor: `${color}15`, border: `1px solid ${color}25` }}
@@ -350,7 +350,7 @@ export default function AnalyticsTabs({
                       </span>
                     </div>
 
-                    <div className="h-1.5 w-full bg-[#07111F] rounded-full overflow-hidden border border-[#20324A]/20">
+                    <div className="h-1.5 w-full bg-[#0a0a1a] rounded-full overflow-hidden border border-[#2a2a5c]/20">
                       <div 
                         className="h-full rounded-full transition-all duration-500" 
                         style={{ width: `${cat.sharePct}%`, backgroundColor: color }}
@@ -358,7 +358,7 @@ export default function AnalyticsTabs({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-[10px] text-[#9FB0C5] pt-3 border-t border-[#20324A]/20">
+                  <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-[10px] text-[#a5a5c8] pt-3 border-t border-[#2a2a5c]/20">
                     <div>السلع المراقبة: <strong className="text-white font-mono">{cat.count}</strong></div>
                     <div>إجمالي سحب اليوم: <strong className="text-[#24C78E] font-mono">{cat.catDecreases}</strong></div>
                     <div>تم شحن وتخزين: <strong className="text-[#FBBF24] font-mono">+{cat.catRestocks}</strong></div>
@@ -386,16 +386,16 @@ export default function AnalyticsTabs({
         
         {/* Metric Cards row with unique purple/teal theme */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-[#0D1B2D] border border-[#20324A] p-4 rounded-xl">
-            <span className="text-[11px] text-[#9FB0C5] block font-bold text-right">إجمالي كميات الشحن اليوم</span>
+          <div className="bg-[#141432] border border-[#2a2a5c] p-4 rounded-xl">
+            <span className="text-[11px] text-[#a5a5c8] block font-bold text-right">إجمالي كميات الشحن اليوم</span>
             <strong className="text-2xl text-[#8B5CF6] font-mono block mt-1 text-right">+{totalRestockCount} قطعة مضافة</strong>
           </div>
-          <div className="bg-[#0D1B2D] border border-[#20324A] p-4 rounded-xl">
-            <span className="text-[11px] text-[#9FB0C5] block font-bold text-right">السلع المعاد تخزينها</span>
+          <div className="bg-[#141432] border border-[#2a2a5c] p-4 rounded-xl">
+            <span className="text-[11px] text-[#a5a5c8] block font-bold text-right">السلع المعاد تخزينها</span>
             <strong className="text-2xl text-[#24C78E] font-mono block mt-1 text-right">{restockedProducts.length} سلع مختلفة</strong>
           </div>
-          <div className="bg-[#0D1B2D] border border-[#20324A] p-4 rounded-xl">
-            <span className="text-[11px] text-[#9FB0C5] block font-bold text-right">أقصى شحنة منفردة</span>
+          <div className="bg-[#141432] border border-[#2a2a5c] p-4 rounded-xl">
+            <span className="text-[11px] text-[#a5a5c8] block font-bold text-right">أقصى شحنة منفردة</span>
             <strong className="text-2xl text-white font-mono block mt-1 text-right">
               +{restockedProducts[0]?.restockAmount || 0} قطعة
             </strong>
@@ -403,7 +403,7 @@ export default function AnalyticsTabs({
         </div>
 
         {/* Detailed restocked catalog list */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-4">
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
             <RefreshCw className="w-5 h-5 text-[#8B5CF6]" />
             جدول إمدادات وشحنات المخازن المسجلة اليوم
@@ -412,7 +412,7 @@ export default function AnalyticsTabs({
           <div className="overflow-x-auto">
             <table className="w-full text-right text-xs">
               <thead>
-                <tr className="border-b border-[#20324A] text-[#9FB0C5] pb-2 font-bold">
+                <tr className="border-b border-[#2a2a5c] text-[#a5a5c8] pb-2 font-bold">
                   <th className="py-2.5">السلعة</th>
                   <th className="py-2.5 text-center">الكمية المضافة</th>
                   <th className="py-2.5 text-center">المخزون المتوفر الفعلي</th>
@@ -420,33 +420,33 @@ export default function AnalyticsTabs({
                   <th className="py-2.5 text-center">وقت رصد شحن المخزن</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#20324A]/40 text-white">
+              <tbody className="divide-y divide-[#2a2a5c]/40 text-white">
                 {restockedProducts.map((p, index) => (
-                  <tr key={`${p.id}-${index}`} className="hover:bg-[#12233A]/20 transition">
+                  <tr key={`${p.id}-${index}`} className="hover:bg-[#1c1c47]/20 transition">
                     <td className="py-3">
                       <div className="flex items-center gap-2">
                         <img 
                           src={p.imageUrl} 
-                          className="w-8 h-8 rounded-lg object-cover bg-[#07111F] border border-[#20324A]/40 shrink-0" 
+                          className="w-8 h-8 rounded-lg object-cover bg-[#0a0a1a] border border-[#2a2a5c]/40 shrink-0" 
                           alt="" 
                           referrerPolicy="no-referrer"
                         />
                         <div>
-                          <span className="font-bold block text-[11px] hover:text-[#2F80FF] transition cursor-pointer" onClick={() => onProductClick(p)}>{p.name}</span>
-                          <span className="text-[9px] text-[#9FB0C5] font-mono">{p.sku}</span>
+                          <span className="font-bold block text-[11px] hover:text-[#6366f1] transition cursor-pointer" onClick={() => onProductClick(p)}>{p.name}</span>
+                          <span className="text-[9px] text-[#a5a5c8] font-mono">{p.sku}</span>
                         </div>
                       </div>
                     </td>
                     <td className="py-3 text-center text-[#24C78E] font-mono font-black">+{p.restockAmount} قطعة</td>
                     <td className="py-3 text-center font-mono font-bold">{p.currentQuantity} قطعة متوفرة</td>
-                    <td className="py-3 text-center text-[#9FB0C5]">{p.originalCategory}</td>
-                    <td className="py-3 text-center font-mono text-[#9FB0C5]">{formatTimeArabic(p.lastCheckedAt)}</td>
+                    <td className="py-3 text-center text-[#a5a5c8]">{p.originalCategory}</td>
+                    <td className="py-3 text-center font-mono text-[#a5a5c8]">{formatTimeArabic(p.lastCheckedAt)}</td>
                   </tr>
                 ))}
 
                 {restockedProducts.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="py-12 text-center text-xs text-[#9FB0C5] bg-[#07111F]/20">
+                    <td colSpan={5} className="py-12 text-center text-xs text-[#a5a5c8] bg-[#0a0a1a]/20">
                       لم يتم رصد أي عمليات إضافة شحن جديدة بالمخازن للمنتجات المتتبعة اليوم حتى الآن.
                     </td>
                   </tr>
@@ -467,23 +467,23 @@ export default function AnalyticsTabs({
     const safkaRestocks = safkaProds.reduce((sum, p) => sum + (p.restockAmount || 0), 0);
 
     return (
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6">
         <div>
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <ArrowRightLeft className="w-5 h-5 text-[#2F80FF]" />
+            <ArrowRightLeft className="w-5 h-5 text-[#6366f1]" />
             مقارنة حجم التتبع السحابي ومطابقة المنصات
           </h3>
-          <p className="text-[11px] text-[#9FB0C5] mt-1">تحليل إحصائي لمقارنة رصد السحوبات والإمدادات بين منصة صفقة ومنصة تاجر</p>
+          <p className="text-[11px] text-[#a5a5c8] mt-1">تحليل إحصائي لمقارنة رصد السحوبات والإمدادات بين منصة صفقة ومنصة تاجر</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Safka details card */}
-          <div className="bg-[#07111F]/50 border border-[#20324A]/50 p-5 rounded-2xl text-right space-y-4 col-span-2">
-            <div className="flex justify-between items-center border-b border-[#20324A]/40 pb-3">
+          <div className="bg-[#0a0a1a]/50 border border-[#2a2a5c]/50 p-5 rounded-2xl text-right space-y-4 col-span-2">
+            <div className="flex justify-between items-center border-b border-[#2a2a5c]/40 pb-3">
               <span className="font-extrabold text-white text-sm">بوابة رصد صفقة (Safka EG)</span>
               <span className="w-2.5 h-2.5 rounded-full bg-[#24C78E]" />
             </div>
-            <div className="space-y-2.5 text-xs text-[#9FB0C5]">
+            <div className="space-y-2.5 text-xs text-[#a5a5c8]">
               <div className="flex justify-between"><span>إجمالي السلع المراقبة بالكتالوج:</span><strong className="text-white font-mono">{safkaProds.length} سلع</strong></div>
               <div className="flex justify-between"><span>إجمالي سحوبات المخزون (اليوم):</span><strong className="text-[#24C78E] font-mono">{safkaSiphons} قطع زالت</strong></div>
               <div className="flex justify-between"><span>عمليات الإمداد وإعادة الشحن:</span><strong className="text-[#FBBF24] font-mono">+{safkaRestocks} قطع</strong></div>
@@ -571,25 +571,25 @@ export default function AnalyticsTabs({
     };
 
     return (
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6">
         {/* Alerts Tab Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#20324A]/50 pb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#2a2a5c]/50 pb-4">
           <div>
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <Bell className="w-5 h-5 text-[#F05252]" />
               غرفة المراقبة والتحقق من سلامة المخزون
             </h3>
-            <p className="text-[11px] text-[#9FB0C5] mt-1">تتبع الخروقات، سحوبات المخازن المريبة دقيقة بدقيقة، والنفاد الخاطف للسلع</p>
+            <p className="text-[11px] text-[#a5a5c8] mt-1">تتبع الخروقات، سحوبات المخازن المريبة دقيقة بدقيقة، والنفاد الخاطف للسلع</p>
           </div>
 
           {/* Sub Tab Buttons */}
-          <div className="flex items-center gap-1 bg-[#07111F] p-1 rounded-xl border border-[#20324A]/60">
+          <div className="flex items-center gap-1 bg-[#0a0a1a] p-1 rounded-xl border border-[#2a2a5c]/60">
             <button
               onClick={() => setAlertSubTab("standard")}
               className={`px-3.5 py-1.5 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer ${
                 alertSubTab === "standard"
                   ? "bg-[#F05252]/20 text-[#FF5A5A] border border-[#F05252]/40"
-                  : "text-[#9FB0C5] hover:text-white"
+                  : "text-[#a5a5c8] hover:text-white"
               }`}
             >
               التنبيهات العامة ({standardAlerts.length})
@@ -599,7 +599,7 @@ export default function AnalyticsTabs({
               className={`px-3.5 py-1.5 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer relative ${
                 alertSubTab === "suspicious"
                   ? "bg-[#F5A524]/20 text-[#FFB63B] border border-[#F5A524]/40"
-                  : "text-[#9FB0C5] hover:text-white"
+                  : "text-[#a5a5c8] hover:text-white"
               }`}
             >
               سجل السحوبات المريبة ({suspiciousEvents.length})
@@ -617,7 +617,7 @@ export default function AnalyticsTabs({
             {standardAlerts.map((al) => {
               const isCrit = al.severity === "CRITICAL";
               return (
-                <div key={al.id} className="bg-[#07111F]/50 border border-[#20324A]/40 p-4 rounded-xl flex items-start gap-3 text-right">
+                <div key={al.id} className="bg-[#0a0a1a]/50 border border-[#2a2a5c]/40 p-4 rounded-xl flex items-start gap-3 text-right">
                   {isCrit ? (
                     <CircleX className="w-5 h-5 text-[#F05252] shrink-0 mt-0.5 animate-pulse" />
                   ) : (
@@ -630,12 +630,12 @@ export default function AnalyticsTabs({
                       }`}>
                         {al.title}
                       </span>
-                      <span className="font-mono text-[9px] text-[#9FB0C5]/60">{formatTimeArabic(al.time)}</span>
+                      <span className="font-mono text-[9px] text-[#a5a5c8]/60">{formatTimeArabic(al.time)}</span>
                     </div>
-                    <p className="text-xs text-[#F4F7FB] font-medium leading-relaxed mt-1">{al.desc}</p>
+                    <p className="text-xs text-[#f5f5fa] font-medium leading-relaxed mt-1">{al.desc}</p>
                     <button 
                       onClick={() => onProductClick(al.product)}
-                      className="text-[10px] text-[#2F80FF] hover:underline font-bold mt-1.5 block cursor-pointer text-right"
+                      className="text-[10px] text-[#6366f1] hover:underline font-bold mt-1.5 block cursor-pointer text-right"
                     >
                       عرض تفاصيل السلعة للتحليل 🡠
                     </button>
@@ -645,7 +645,7 @@ export default function AnalyticsTabs({
             })}
 
             {standardAlerts.length === 0 && (
-              <div className="text-center py-16 text-xs text-[#9FB0C5] bg-[#07111F]/20 rounded-xl border border-dashed border-[#20324A]/30">
+              <div className="text-center py-16 text-xs text-[#a5a5c8] bg-[#0a0a1a]/20 rounded-xl border border-dashed border-[#2a2a5c]/30">
                 لا توجد تنبيهات مستويات حرجة مسجلة حالياً بالرادار. جميع الكميات بمستويات آمنة.
               </div>
             )}
@@ -672,12 +672,12 @@ export default function AnalyticsTabs({
                 return (
                   <div 
                     key={ev.id} 
-                    className={`bg-[#07111F]/70 border rounded-2xl p-4.5 space-y-3.5 transition-all duration-300 relative ${
+                    className={`bg-[#0a0a1a]/70 border rounded-2xl p-4.5 space-y-3.5 transition-all duration-300 relative ${
                       auditDecision === "LEGIT"
                         ? "border-emerald-500/30 bg-[#24C78E]/5"
                         : auditDecision === "SUSPICIOUS"
                         ? "border-red-500/30 bg-[#F05252]/5"
-                        : "border-[#20324A]/80 hover:border-[#F5A524]/40"
+                        : "border-[#2a2a5c]/80 hover:border-[#F5A524]/40"
                     }`}
                   >
                     {/* Top row */}
@@ -685,7 +685,7 @@ export default function AnalyticsTabs({
                       <div className="flex items-center gap-2.5">
                         <Clock className="w-4 h-4 text-gray-500 shrink-0" />
                         <span className="font-mono text-[11px] font-black text-white">{ev.time} Cairo Time</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#1C2C42] text-[#9FB0C5] font-mono">
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#1C2C42] text-[#a5a5c8] font-mono">
                           {ev.product.sku}
                         </span>
                       </div>
@@ -697,9 +697,9 @@ export default function AnalyticsTabs({
                     </div>
 
                     {/* Middle section: Info & Product details */}
-                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#0A1424]/60 p-3 rounded-xl border border-[#20324A]/40">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#0A1424]/60 p-3 rounded-xl border border-[#2a2a5c]/40">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-[#12233A] border border-[#20324A] overflow-hidden flex items-center justify-center text-[10px] text-gray-500 shrink-0">
+                        <div className="w-10 h-10 rounded-lg bg-[#1c1c47] border border-[#2a2a5c] overflow-hidden flex items-center justify-center text-[10px] text-gray-500 shrink-0">
                           {ev.product.imageUrl ? (
                             <img src={ev.product.imageUrl} alt="" className="object-cover w-full h-full" referrerPolicy="no-referrer" />
                           ) : (
@@ -707,7 +707,7 @@ export default function AnalyticsTabs({
                           )}
                         </div>
                         <div>
-                          <strong className="text-white hover:text-[#2F80FF] cursor-pointer text-[11.5px] line-clamp-1 block" onClick={() => onProductClick(ev.product as Product)}>
+                          <strong className="text-white hover:text-[#6366f1] cursor-pointer text-[11.5px] line-clamp-1 block" onClick={() => onProductClick(ev.product as Product)}>
                             {ev.product.name}
                           </strong>
                           <span className="text-[10px] text-red-400 font-bold font-mono block mt-0.5">
@@ -725,11 +725,11 @@ export default function AnalyticsTabs({
                     <div className="space-y-1.5 text-xs text-right">
                       <strong className="text-white block font-black">{ev.title}:</strong>
                       <p className="text-gray-300 leading-relaxed">{ev.desc}</p>
-                      <div className="text-[10px] text-[#9FB0C5]/80 italic">💡 {ev.auditTip}</div>
+                      <div className="text-[10px] text-[#a5a5c8]/80 italic">💡 {ev.auditTip}</div>
                     </div>
 
                     {/* Interactive Decision actions */}
-                    <div className="pt-2 border-t border-[#20324A]/40 flex flex-wrap items-center justify-between gap-3">
+                    <div className="pt-2 border-t border-[#2a2a5c]/40 flex flex-wrap items-center justify-between gap-3">
                       <div>
                         {auditDecision ? (
                           <div className="flex items-center gap-2">

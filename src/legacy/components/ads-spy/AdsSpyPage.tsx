@@ -73,7 +73,7 @@ function BreakdownList({ items, emptyLabel = "لا توجد بيانات كاف�
             <span className="text-gray-200 font-bold truncate">{item.label}</span>
             <span className="font-mono text-[#A78BFA] shrink-0">{item.count} · {item.percentage}%</span>
           </div>
-          <div className="h-1.5 rounded-full overflow-hidden bg-[#12233A]">
+          <div className="h-1.5 rounded-full overflow-hidden bg-[#1c1c47]">
             <div className="h-full rounded-full bg-gradient-to-l from-[#8B5CF6] to-cyan-400" style={{ width: `${Math.max(3, item.percentage)}%` }} />
           </div>
         </div>
@@ -631,13 +631,13 @@ export default function AdsSpyPage({
   return (
     <div className="space-y-5 text-right font-sans pb-8" dir="rtl">
       {/* Top Banner and Product selector */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-gradient-to-l from-[#0D1626] to-[#0A111F] p-4.5 rounded-3xl border border-[#20324A] shadow-[0_4px_30px_rgba(0,0,0,0.2)]">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-gradient-to-l from-[#0D1626] to-[#0A111F] p-4.5 rounded-3xl border border-[#2a2a5c] shadow-[0_4px_30px_rgba(0,0,0,0.2)]">
         <div className="flex items-center gap-3 min-w-0">
           <div className="p-2.5 bg-[#8B5CF6]/10 rounded-xl border border-[#8B5CF6]/30 shadow-[0_0_15px_rgba(139,92,246,0.15)] shrink-0">
             <ScanSearch className="w-5.5 h-5.5 text-[#A78BFA]" />
           </div>
           {currentProduct?.image_url && (
-            <img src={currentProduct.image_url} alt="" className="w-11 h-11 object-cover rounded-xl border border-[#20324A] bg-[#0B1626]" referrerPolicy="no-referrer" />
+            <img src={currentProduct.image_url} alt="" className="w-11 h-11 object-cover rounded-xl border border-[#2a2a5c] bg-[#0B1626]" referrerPolicy="no-referrer" />
           )}
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
@@ -648,8 +648,8 @@ export default function AdsSpyPage({
               {fetchedState === "active" && <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] flex items-center gap-1"><CheckCircle className="w-3 h-3" /> بيانات نشطة (Active)</span>}
               {fetchedState === "empty" && <span className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-400 border border-red-500/20 text-[10px] flex items-center gap-1"><Ban className="w-3 h-3" /> فارغ/فشل (Empty)</span>}
             </div>
-            <div className="flex flex-wrap items-center gap-2 mt-1 text-[9.5px] text-[#9FB0C5]">
-              {currentProduct?.sku && <span className="font-mono bg-[#12233A] px-2 py-0.5 rounded">SKU: {currentProduct.sku}</span>}
+            <div className="flex flex-wrap items-center gap-2 mt-1 text-[9.5px] text-[#a5a5c8]">
+              {currentProduct?.sku && <span className="font-mono bg-[#1c1c47] px-2 py-0.5 rounded">SKU: {currentProduct.sku}</span>}
               {currentProduct?.category && <span>{currentProduct.category}</span>}
               <span className="text-emerald-400 flex items-center gap-1"><Activity className="w-3 h-3" /> بيانات حقيقية + تحليل موضح الثقة</span>
             </div>
@@ -660,14 +660,14 @@ export default function AdsSpyPage({
         <div className="flex flex-col gap-2 w-full md:w-auto">
           <form
             onSubmit={(event) => { event.preventDefault(); void handleSkuSearch(); }}
-            className="flex items-center gap-2 bg-[#12233A]/60 p-1 rounded-xl border border-[#8B5CF6]/35"
+            className="flex items-center gap-2 bg-[#1c1c47]/60 p-1 rounded-xl border border-[#8B5CF6]/35"
           >
             <input
               value={skuQuery}
               onChange={(event) => setSkuQuery(event.target.value)}
               placeholder="بحث مطابق بالـ SKU"
               aria-label="بحث مطابق بالـ SKU"
-              className="min-w-0 flex-1 md:w-[190px] bg-[#0B1626] border border-[#20324A]/80 text-[11px] font-mono text-[#F4F7FB] rounded-lg px-3 py-2 focus:outline-none focus:border-[#8B5CF6]"
+              className="min-w-0 flex-1 md:w-[190px] bg-[#0B1626] border border-[#2a2a5c]/80 text-[11px] font-mono text-[#f5f5fa] rounded-lg px-3 py-2 focus:outline-none focus:border-[#8B5CF6]"
             />
             <button
               type="submit"
@@ -701,7 +701,7 @@ export default function AdsSpyPage({
               }
             }}
             disabled={isStartingJob}
-            className="bg-[#2F80FF]/20 text-[#2F80FF] hover:bg-[#2F80FF] hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all border border-[#2F80FF]/30 flex items-center gap-1.5"
+            className="bg-[#6366f1]/20 text-[#6366f1] hover:bg-[#6366f1] hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all border border-[#6366f1]/30 flex items-center gap-1.5"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isStartingJob ? "animate-spin" : ""}`} />
             تحديث شامل للمنتجات
@@ -715,17 +715,17 @@ export default function AdsSpyPage({
               key={p.id}
               onClick={() => setSelectedProductId(p.id)}
               className={`snap-start shrink-0 flex flex-col gap-2 items-center justify-start p-3 rounded-2xl border transition-all min-w-[140px] max-w-[140px] h-[160px] relative overflow-hidden group
-                ${selectedProductId === p.id ? "bg-[#8B5CF6]/15 border-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.15)]" : "bg-[#0B1424]/80 border-[#20324A]/60 text-gray-400 hover:border-[#8B5CF6]/50 hover:bg-[#12233A]"}
+                ${selectedProductId === p.id ? "bg-[#8B5CF6]/15 border-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.15)]" : "bg-[#0f0f24]/80 border-[#2a2a5c]/60 text-gray-400 hover:border-[#8B5CF6]/50 hover:bg-[#1c1c47]"}
               `}
             >
-              <div className="absolute top-0 right-0 bg-[#07111F]/80 text-[#9FB0C5] text-[9px] px-2 py-0.5 rounded-bl-lg border-b border-l border-[#20324A] font-mono font-bold z-10">
+              <div className="absolute top-0 right-0 bg-[#0a0a1a]/80 text-[#a5a5c8] text-[9px] px-2 py-0.5 rounded-bl-lg border-b border-l border-[#2a2a5c] font-mono font-bold z-10">
                 #{index + 1}
               </div>
-              <div className="w-12 h-12 rounded-xl overflow-hidden bg-[#12233A] shrink-0 border border-[#20324A] group-hover:border-[#8B5CF6]/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl overflow-hidden bg-[#1c1c47] shrink-0 border border-[#2a2a5c] group-hover:border-[#8B5CF6]/30 transition-colors">
                  {p.image_url ? <img src={p.image_url} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center"><ScanSearch className="w-5 h-5 text-gray-500/50"/></div>}
               </div>
               <span className="text-[10px] text-center font-bold line-clamp-2 w-full leading-relaxed mt-auto" title={p.name}>{p.name}</span>
-              <div className="flex items-center gap-1.5 mt-auto bg-[#07111F]/50 w-full justify-center py-1.5 rounded-lg border border-[#20324A]/30">
+              <div className="flex items-center gap-1.5 mt-auto bg-[#0a0a1a]/50 w-full justify-center py-1.5 rounded-lg border border-[#2a2a5c]/30">
                  <Activity className={`w-3 h-3 ${wCount > 0 ? "text-emerald-400" : "text-gray-500"}`} />
                  <span className={`font-mono font-bold text-[9px] ${wCount > 0 ? "text-emerald-400" : "text-gray-500"}`}>{wCount} سحب</span>
               </div>
@@ -734,7 +734,7 @@ export default function AdsSpyPage({
         })}
       </div>
       {sortedProducts.length === 0 && (
-        <div className="text-center text-[11px] text-[#9FB0C5] bg-[#0B1424]/60 border border-[#20324A]/60 rounded-2xl py-6">
+        <div className="text-center text-[11px] text-[#a5a5c8] bg-[#0f0f24]/60 border border-[#2a2a5c]/60 rounded-2xl py-6">
           لا توجد منتجات عليها سحوبات فعلية خلال آخر 7 أيام
         </div>
       )}
@@ -764,7 +764,7 @@ export default function AdsSpyPage({
               setPendingMatches(null);
               setPendingSummary(null);
             }}
-            className="bg-[#2F80FF] text-white px-5 py-2.5 rounded-full shadow-xl shadow-[#2F80FF]/30 flex items-center gap-2 font-bold animate-bounce cursor-pointer border border-[#2F80FF]/50"
+            className="bg-[#6366f1] text-white px-5 py-2.5 rounded-full shadow-xl shadow-[#6366f1]/30 flex items-center gap-2 font-bold animate-bounce cursor-pointer border border-[#6366f1]/50"
           >
             <RefreshCw className="w-4 h-4" />
             يوجد {pendingMatches.length - matches.length} إعلانات جديدة، اضغط لتحديث القائمة
@@ -776,8 +776,8 @@ export default function AdsSpyPage({
         {/* LEFT COLUMN: DENSE METRICS & SCRAPER QUICK CONTROLS (lg:col-span-4) */}
         <div className="lg:col-span-4 space-y-4">
           {summary && (
-            <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-4.5 space-y-3 shadow-lg">
-              <div className="border-b border-[#20324A]/50 pb-2.5">
+            <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-4.5 space-y-3 shadow-lg">
+              <div className="border-b border-[#2a2a5c]/50 pb-2.5">
                 <h3 className="text-xs font-black text-white flex items-center gap-1.5">
                   <Compass className="w-4 h-4 text-cyan-400" />
                   أداء ومؤشرات الرادار الفورية
@@ -787,55 +787,55 @@ export default function AdsSpyPage({
               {/* Stacked list of metrics */}
               <div className="space-y-2.5 text-xs">
                 {/* Metric 1 */}
-                <div className="flex items-center justify-between p-2.5 bg-[#0B1424]/60 border border-[#20324A]/60 rounded-xl">
-                  <span className="text-[#9FB0C5] font-bold">إجمالي الإعلانات المكتشفة</span>
-                  <span className="font-mono text-white font-black text-sm bg-[#12233A] px-2 py-0.5 rounded border border-[#20324A]">{summary.discovered_ads}</span>
+                <div className="flex items-center justify-between p-2.5 bg-[#0f0f24]/60 border border-[#2a2a5c]/60 rounded-xl">
+                  <span className="text-[#a5a5c8] font-bold">إجمالي الإعلانات المكتشفة</span>
+                  <span className="font-mono text-white font-black text-sm bg-[#1c1c47] px-2 py-0.5 rounded border border-[#2a2a5c]">{summary.discovered_ads}</span>
                 </div>
 
                 {/* Metric 2 */}
-                <div className="flex items-center justify-between p-2.5 bg-[#0B1424]/60 border border-emerald-500/15 rounded-xl">
+                <div className="flex items-center justify-between p-2.5 bg-[#0f0f24]/60 border border-emerald-500/15 rounded-xl">
                   <span className="text-emerald-400 font-bold">المطابقات المؤكدة</span>
                   <span className="font-mono text-emerald-400 font-black text-sm bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">{summary.matched_ads}</span>
                 </div>
 
                 {/* Metric 3 */}
-                <div className="flex items-center justify-between p-2.5 bg-[#0B1424]/60 border border-yellow-500/15 rounded-xl">
+                <div className="flex items-center justify-between p-2.5 bg-[#0f0f24]/60 border border-yellow-500/15 rounded-xl">
                   <span className="text-[#F5A524] font-bold">قيد المراجعة والتدقيق</span>
                   <span className="font-mono text-[#F5A524] font-black text-sm bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">{summary.needs_review}</span>
                 </div>
 
                 {/* Metric 4 */}
-                <div className="flex items-center justify-between p-2.5 bg-[#0B1424]/60 border border-purple-500/15 rounded-xl">
+                <div className="flex items-center justify-between p-2.5 bg-[#0f0f24]/60 border border-purple-500/15 rounded-xl">
                   <span className="text-[#C4B5FD] font-bold">المعلنون المنافسون النشطون</span>
                   <span className="font-mono text-[#C4B5FD] font-black text-sm bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">{summary.unique_advertisers}</span>
                 </div>
 
-                <div className="p-2.5 bg-[#0B1424]/60 border border-cyan-500/15 rounded-xl space-y-2">
+                <div className="p-2.5 bg-[#0f0f24]/60 border border-cyan-500/15 rounded-xl space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-cyan-300 font-bold flex items-center gap-1.5"><BrainCircuit className="w-3.5 h-3.5" /> تغطية التحليل</span>
                     <span className="font-mono text-cyan-300 font-black">{summary.analyzed_ads}/{Math.max(0, summary.discovered_ads - (matches.filter(m => m.match_status === "REJECTED").length))} · {summary.analysis_coverage}%</span>
                   </div>
-                  <div className="h-1.5 bg-[#12233A] rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-[#1c1c47] rounded-full overflow-hidden">
                     <div className="h-full bg-cyan-400 rounded-full" style={{ width: `${summary.analysis_coverage}%` }} />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div className="p-2.5 bg-emerald-500/5 border border-emerald-500/15 rounded-xl">
-                    <span className="text-[9px] text-[#9FB0C5] block">نشط الآن</span>
+                    <span className="text-[9px] text-[#a5a5c8] block">نشط الآن</span>
                     <strong className="text-emerald-400 font-mono text-base">{summary.active_ads}</strong>
                   </div>
                   <div className="p-2.5 bg-blue-500/5 border border-blue-500/15 rounded-xl">
-                    <span className="text-[9px] text-[#9FB0C5] block">جديد خلال 7 أيام</span>
+                    <span className="text-[9px] text-[#a5a5c8] block">جديد خلال 7 أيام</span>
                     <strong className="text-blue-400 font-mono text-base">{summary.new_ads_7_days}</strong>
                   </div>
                 </div>
 
                 {/* Metric 5 */}
-                <div className="flex items-center justify-between p-2.5 bg-[#0B1424]/60 border border-[#20324A] rounded-xl">
+                <div className="flex items-center justify-between p-2.5 bg-[#0f0f24]/60 border border-[#2a2a5c] rounded-xl">
                   <div className="space-y-0.5">
                     <span className="text-gray-300 font-bold block">مؤشر تشبع الإعلان</span>
-                    <span className="text-[10px] text-[#9FB0C5]">مدى انتشار السلعة إشهارياً</span>
+                    <span className="text-[10px] text-[#a5a5c8]">مدى انتشار السلعة إشهارياً</span>
                   </div>
                   <span className={`font-mono font-black text-xs px-2 py-1 rounded ${summary.saturation_score > 60 ? "text-red-400 bg-red-500/10" : "text-emerald-400 bg-emerald-500/10"}`}>
                     {summary.saturation_score}%
@@ -843,10 +843,10 @@ export default function AdsSpyPage({
                 </div>
 
                 {/* Metric 6 */}
-                <div className="flex items-center justify-between p-2.5 bg-[#0B1424]/60 border border-[#20324A]/80 rounded-xl">
+                <div className="flex items-center justify-between p-2.5 bg-[#0f0f24]/60 border border-[#2a2a5c]/80 rounded-xl">
                   <div className="space-y-0.5">
                     <span className="text-cyan-400 font-bold block">الفرصة الإبداعية</span>
-                    <span className="text-[10px] text-[#9FB0C5]">مساحة الابتكار الحر</span>
+                    <span className="text-[10px] text-[#a5a5c8]">مساحة الابتكار الحر</span>
                   </div>
                   <span className="font-mono text-cyan-400 font-black text-xs bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20">
                     {summary.creative_opportunity_score}%
@@ -857,7 +857,7 @@ export default function AdsSpyPage({
           )}
 
           {/* Quick Launch Card */}
-          <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-4.5 space-y-3.5 shadow-lg">
+          <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-4.5 space-y-3.5 shadow-lg">
             <h4 className="text-xs font-black text-white">إجراءات المسح والرصد الفوري</h4>
             
             {jobs.some(j => j.status === "PROCESSING" || j.status === "PENDING") ? (
@@ -867,11 +867,11 @@ export default function AdsSpyPage({
                     <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
                     جاري سحب الإعلانات الآن...
                   </span>
-                  <span className="font-mono text-[#9FB0C5] font-black">
+                  <span className="font-mono text-[#a5a5c8] font-black">
                     {jobs.find(j => j.status === "PROCESSING" || j.status === "PENDING")?.progress_percentage || 0}%
                   </span>
                 </div>
-                <div className="h-1.5 bg-[#12233A] rounded-full overflow-hidden">
+                <div className="h-1.5 bg-[#1c1c47] rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-cyan-500 animate-pulse transition-all duration-300"
                     style={{ width: `${jobs.find(j => j.status === "PROCESSING" || j.status === "PENDING")?.progress_percentage || 10}%` }}
@@ -879,7 +879,7 @@ export default function AdsSpyPage({
                 </div>
               </div>
             ) : (
-              <p className="text-[10px] text-[#9FB0C5] leading-relaxed">
+              <p className="text-[10px] text-[#a5a5c8] leading-relaxed">
                 لا توجد عملية رصد نشطة حالياً. يمكنك إطلاق فحص مباشر للمكتبات العامة ثم مراجعة النتائج المرتبطة بهذا المنتج فقط.
               </p>
             )}
@@ -896,17 +896,17 @@ export default function AdsSpyPage({
         </div>
 
         {/* RIGHT COLUMN: MAIN INTERNALLY SCROLLABLE WORKSPACE (lg:col-span-8) */}
-        <div className="lg:col-span-8 bg-[#07111F]/40 border border-[#20324A] rounded-3xl p-5 flex flex-col h-[780px] overflow-hidden shadow-2xl relative">
+        <div className="lg:col-span-8 bg-[#0a0a1a]/40 border border-[#2a2a5c] rounded-3xl p-5 flex flex-col h-[780px] overflow-hidden shadow-2xl relative">
           
           {/* Tab switches header inside right panel */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-[#20324A]/60 pb-3">
-            <div className="flex items-center gap-1 bg-[#0A1424] p-1 rounded-xl border border-[#20324A]/60 w-full sm:w-auto overflow-x-auto scrollbar-none">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-[#2a2a5c]/60 pb-3">
+            <div className="flex items-center gap-1 bg-[#0A1424] p-1 rounded-xl border border-[#2a2a5c]/60 w-full sm:w-auto overflow-x-auto scrollbar-none">
               <button
                 onClick={() => setActiveTab("ads")}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer shrink-0 ${
                   activeTab === "ads"
                     ? "bg-[#8B5CF6] text-white shadow-md shadow-[#8B5CF6]/25"
-                    : "text-[#9FB0C5] hover:text-white"
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 إعلانات المنتج ({filteredMatches.length})
@@ -916,7 +916,7 @@ export default function AdsSpyPage({
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer shrink-0 ${
                   activeTab === "profile"
                     ? "bg-[#8B5CF6] text-white shadow-md shadow-[#8B5CF6]/25"
-                    : "text-[#9FB0C5] hover:text-white"
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 مصادر البحث
@@ -926,7 +926,7 @@ export default function AdsSpyPage({
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer shrink-0 ${
                   activeTab === "jobs"
                     ? "bg-[#8B5CF6] text-white shadow-md shadow-[#8B5CF6]/25"
-                    : "text-[#9FB0C5] hover:text-white"
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 سجل الفحص ({jobs.length})
@@ -936,7 +936,7 @@ export default function AdsSpyPage({
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer shrink-0 ${
                   activeTab === "summary"
                     ? "bg-[#8B5CF6] text-white shadow-md shadow-[#8B5CF6]/25"
-                    : "text-[#9FB0C5] hover:text-white"
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 لوحة التحليل
@@ -946,7 +946,7 @@ export default function AdsSpyPage({
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 ${
                   activeTab === "history"
                     ? "bg-[#8B5CF6] text-white shadow-md shadow-[#8B5CF6]/25"
-                    : "text-[#9FB0C5] hover:text-white"
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 <History className="w-3.5 h-3.5" />
@@ -954,17 +954,17 @@ export default function AdsSpyPage({
               </button>
             </div>
             
-            <div className="hidden sm:block text-[10px] text-[#9FB0C5] font-black font-mono">
+            <div className="hidden sm:block text-[10px] text-[#a5a5c8] font-black font-mono">
               كل إعلان مرتبط بالمنتج المحدد
             </div>
           </div>
 
           {/* Internally Scrollable content container */}
-          <div className="flex-1 overflow-y-auto mt-4 pr-1 scrollbar-thin scrollbar-thumb-[#20324A] scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto mt-4 pr-1 scrollbar-thin scrollbar-thumb-[#2a2a5c] scrollbar-track-transparent">
             {isLoading ? (
               <div className="py-24 text-center space-y-4">
                 <RefreshCw className="w-8 h-8 text-[#8B5CF6] animate-spin mx-auto" />
-                <p className="text-xs text-[#9FB0C5] font-black">جاري سحب وتصنيف بيانات الرادار...</p>
+                <p className="text-xs text-[#a5a5c8] font-black">جاري سحب وتصنيف بيانات الرادار...</p>
               </div>
             ) : (
               <>
@@ -972,25 +972,25 @@ export default function AdsSpyPage({
           {activeTab === "ads" && (
             <div className="space-y-4">
               {/* Filters Controls */}
-              <div className="flex flex-wrap items-center justify-between gap-3 bg-[#07111F]/60 p-4 rounded-2xl border border-[#20324A] text-xs">
+              <div className="flex flex-wrap items-center justify-between gap-3 bg-[#0a0a1a]/60 p-4 rounded-2xl border border-[#2a2a5c] text-xs">
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="relative">
-                    <Search className="absolute right-3 top-2.5 w-3.5 h-3.5 text-[#9FB0C5]" />
+                    <Search className="absolute right-3 top-2.5 w-3.5 h-3.5 text-[#a5a5c8]" />
                     <input
                       type="text"
                       placeholder="ابحث في نص الإعلان أو المعلن..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="bg-[#0B1424] border border-[#20324A] rounded-xl pr-9 pl-3 py-2 w-[220px] focus:outline-none focus:border-[#8B5CF6] text-white text-xs font-bold"
+                      className="bg-[#0f0f24] border border-[#2a2a5c] rounded-xl pr-9 pl-3 py-2 w-[220px] focus:outline-none focus:border-[#8B5CF6] text-white text-xs font-bold"
                     />
                   </div>
 
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[#9FB0C5]">المنصة:</span>
+                    <span className="text-[#a5a5c8]">المنصة:</span>
                     <select
                       value={platformFilter}
                       onChange={(e) => setPlatformFilter(e.target.value as any)}
-                      className="bg-[#0B1424] border border-[#20324A] rounded-xl px-2.5 py-1.5 font-semibold text-white focus:outline-none text-xs"
+                      className="bg-[#0f0f24] border border-[#2a2a5c] rounded-xl px-2.5 py-1.5 font-semibold text-white focus:outline-none text-xs"
                     >
                       <option value="all">كل الشبكات</option>
                       <option value="meta">فيس بوك وانستغرام (Meta)</option>
@@ -999,11 +999,11 @@ export default function AdsSpyPage({
                   </div>
 
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[#9FB0C5]">حالة المراجعة:</span>
+                    <span className="text-[#a5a5c8]">حالة المراجعة:</span>
                     <select
                       value={matchStatusFilter}
                       onChange={(e) => setMatchStatusFilter(e.target.value as any)}
-                      className="bg-[#0B1424] border border-[#20324A] rounded-xl px-2.5 py-1.5 font-semibold text-white focus:outline-none text-xs"
+                      className="bg-[#0f0f24] border border-[#2a2a5c] rounded-xl px-2.5 py-1.5 font-semibold text-white focus:outline-none text-xs"
                     >
                       <option value="all">كل الحالات</option>
                       <option value="needs_review">مراجعة مطلوبة (NEEDS_REVIEW)</option>
@@ -1013,16 +1013,16 @@ export default function AdsSpyPage({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 bg-[#0D1B2D] p-1 rounded-xl border border-[#20324A]">
+                <div className="flex items-center gap-1 bg-[#141432] p-1 rounded-xl border border-[#2a2a5c]">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-1.5 rounded-lg transition-all ${viewMode === "grid" ? "bg-[#8B5CF6] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+                    className={`p-1.5 rounded-lg transition-all ${viewMode === "grid" ? "bg-[#8B5CF6] text-white" : "text-[#a5a5c8] hover:text-white"}`}
                   >
                     <LayoutGrid className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => setViewMode("table")}
-                    className={`p-1.5 rounded-lg transition-all ${viewMode === "table" ? "bg-[#8B5CF6] text-white" : "text-[#9FB0C5] hover:text-white"}`}
+                    className={`p-1.5 rounded-lg transition-all ${viewMode === "table" ? "bg-[#8B5CF6] text-white" : "text-[#a5a5c8] hover:text-white"}`}
                   >
                     <Table className="w-3.5 h-3.5" />
                   </button>
@@ -1031,10 +1031,10 @@ export default function AdsSpyPage({
 
               {/* Grid or Table list */}
               {filteredMatches.length === 0 ? (
-                <div className="bg-[#07111F]/30 border border-[#20324A]/40 rounded-3xl p-16 text-center space-y-3">
-                  <Compass className="w-12 h-12 text-[#9FB0C5] opacity-50 mx-auto" />
+                <div className="bg-[#0a0a1a]/30 border border-[#2a2a5c]/40 rounded-3xl p-16 text-center space-y-3">
+                  <Compass className="w-12 h-12 text-[#a5a5c8] opacity-50 mx-auto" />
                   <h3 className="text-sm font-black text-white">لا توجد إعلانات مطابقة متوفرة</h3>
-                  <p className="text-[11px] text-[#9FB0C5] max-w-[360px] mx-auto leading-relaxed">
+                  <p className="text-[11px] text-[#a5a5c8] max-w-[360px] mx-auto leading-relaxed">
                     لم نكتشف إعلانات مطابقة حتى الآن لهذا المنتج. تأكد من تهيئة كلماتك المفتاحية وإطلاق فحص scraper.
                   </p>
                 </div>
@@ -1058,16 +1058,16 @@ export default function AdsSpyPage({
                     return (
                       <div 
                         key={m.id}
-                        className={`bg-[#07111F]/80 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between overflow-hidden group ${
+                        className={`bg-[#0a0a1a]/80 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between overflow-hidden group ${
                           m.match_status === "APPROVED" 
                             ? "border-emerald-500/30 hover:border-emerald-500/50" 
                             : m.match_status === "REJECTED"
                             ? "border-red-500/20 hover:border-red-500/40 opacity-70"
-                            : "border-[#20324A] hover:border-[#8B5CF6]/50"
+                            : "border-[#2a2a5c] hover:border-[#8B5CF6]/50"
                         }`}
                       >
                         {/* Ad Platform Badge Row */}
-                        <div className="p-3.5 border-b border-[#20324A]/40 flex items-center justify-between text-[11px]">
+                        <div className="p-3.5 border-b border-[#2a2a5c]/40 flex items-center justify-between text-[11px]">
                           <div className="flex items-center gap-1.5">
                             <span className={`px-2 py-0.5 rounded font-black ${
                               ad.source_platform === "meta" 
@@ -1076,7 +1076,7 @@ export default function AdsSpyPage({
                             }`}>
                               {ad.source_platform === "meta" ? "فيسبوك Meta" : "تيك توك TikTok"}
                             </span>
-                            <span className="text-[#9FB0C5] font-semibold">{ad.advertiser_name}</span>
+                            <span className="text-[#a5a5c8] font-semibold">{ad.advertiser_name}</span>
                           </div>
                           
                           <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
@@ -1099,12 +1099,12 @@ export default function AdsSpyPage({
                                 {ad.is_active ? "نشط" : "غير نشط"}
                               </span>
                             </div>
-                            <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-[#9FB0C5]">
-                              <span className="flex items-center gap-1 bg-[#12233A] px-2 py-1 rounded-lg">
+                            <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-[#a5a5c8]">
+                              <span className="flex items-center gap-1 bg-[#1c1c47] px-2 py-1 rounded-lg">
                                 {ad.video_url ? <Video className="w-3 h-3" /> : <ImageIcon className="w-3 h-3" />}{adContentType(m)}
                               </span>
-                              <span className="flex items-center gap-1 bg-[#12233A] px-2 py-1 rounded-lg"><Clock3 className="w-3 h-3" /> {formatArabicDate(ad.published_at)}</span>
-                              <span className="font-mono bg-[#12233A] px-2 py-1 rounded-lg">ID: {ad.external_ad_id}</span>
+                              <span className="flex items-center gap-1 bg-[#1c1c47] px-2 py-1 rounded-lg"><Clock3 className="w-3 h-3" /> {formatArabicDate(ad.published_at)}</span>
+                              <span className="font-mono bg-[#1c1c47] px-2 py-1 rounded-lg">ID: {ad.external_ad_id}</span>
                             </div>
                           </div>
                           <p className="text-xs text-gray-300 leading-relaxed font-medium line-clamp-4 text-right">
@@ -1119,14 +1119,14 @@ export default function AdsSpyPage({
                               </div>
                               <p className="text-[10.5px] text-gray-200 font-bold leading-relaxed">{m.analysis.objective || unavailable}</p>
                               <div className="flex flex-wrap gap-1.5 text-[9px]">
-                                {m.analysis.funnel_stage && m.analysis.funnel_stage !== unavailable && <span className="bg-[#12233A] px-2 py-0.5 rounded text-cyan-300">{m.analysis.funnel_stage}</span>}
-                                {m.analysis.marketing_angle && <span className="bg-[#12233A] px-2 py-0.5 rounded text-[#C4B5FD]">{m.analysis.marketing_angle}</span>}
+                                {m.analysis.funnel_stage && m.analysis.funnel_stage !== unavailable && <span className="bg-[#1c1c47] px-2 py-0.5 rounded text-cyan-300">{m.analysis.funnel_stage}</span>}
+                                {m.analysis.marketing_angle && <span className="bg-[#1c1c47] px-2 py-0.5 rounded text-[#C4B5FD]">{m.analysis.marketing_angle}</span>}
                               </div>
                             </div>
                           )}
 
                           {/* Ad media mock */}
-                          <div className="aspect-video bg-[#0A1424] rounded-xl border border-[#20324A]/60 flex items-center justify-center relative overflow-hidden">
+                          <div className="aspect-video bg-[#0A1424] rounded-xl border border-[#2a2a5c]/60 flex items-center justify-center relative overflow-hidden">
                             {ad.image_url ? (
                               <img src={ad.image_url} alt="" className="object-cover w-full h-full" referrerPolicy="no-referrer" />
                             ) : (
@@ -1141,12 +1141,12 @@ export default function AdsSpyPage({
                           </div>
 
                           {/* Matching Score Meter */}
-                          <div className="bg-[#0B1E36]/30 p-2 rounded-xl border border-[#20324A]/40 space-y-1">
+                          <div className="bg-[#0B1E36]/30 p-2 rounded-xl border border-[#2a2a5c]/40 space-y-1">
                             <div className="flex items-center justify-between text-[10px]">
-                              <span className="text-[#9FB0C5]">نسبة مطابقة المنتج التلقائية:</span>
+                              <span className="text-[#a5a5c8]">نسبة مطابقة المنتج التلقائية:</span>
                               <span className="font-mono text-white font-bold">{m.match_score}%</span>
                             </div>
-                            <div className="h-1.5 bg-[#12233A] rounded-full overflow-hidden">
+                            <div className="h-1.5 bg-[#1c1c47] rounded-full overflow-hidden">
                               <div 
                                 className={`h-full rounded-full ${
                                   m.match_score > 75 ? "bg-emerald-500" : m.match_score > 50 ? "bg-yellow-500" : "bg-red-500"
@@ -1158,8 +1158,8 @@ export default function AdsSpyPage({
 
                           {/* Matching Evidence Block */}
                           {evidenceObj && (
-                            <div className="bg-[#07111F] p-3 rounded-xl border border-[#20324A]/50 space-y-2 mt-2 text-[10px] text-right" dir="rtl">
-                              <div className="text-[11px] font-black text-slate-300 border-b border-[#20324A]/30 pb-1 flex items-center gap-1.5 justify-start">
+                            <div className="bg-[#0a0a1a] p-3 rounded-xl border border-[#2a2a5c]/50 space-y-2 mt-2 text-[10px] text-right" dir="rtl">
+                              <div className="text-[11px] font-black text-slate-300 border-b border-[#2a2a5c]/30 pb-1 flex items-center gap-1.5 justify-start">
                                 <BrainCircuit className="w-3.5 h-3.5 text-purple-400" />
                                 <span>شواهد مطابقة الرادار (Radar Match Evidence)</span>
                               </div>
@@ -1171,7 +1171,7 @@ export default function AdsSpyPage({
                                     <CheckCircle className="w-3 h-3 shrink-0" />
                                     <span>إشارات التوافق المؤكدة:</span>
                                   </div>
-                                  <ul className="list-disc list-inside text-[#9FB0C5] space-y-0.5 pr-1.5 text-right">
+                                  <ul className="list-disc list-inside text-[#a5a5c8] space-y-0.5 pr-1.5 text-right">
                                     {evidenceObj.matchedSignals.map((sig: string, idx: number) => (
                                       <li key={idx} className="leading-relaxed list-none relative pr-3 before:content-['•'] before:absolute before:right-0 before:text-emerald-500">{sig}</li>
                                     ))}
@@ -1196,7 +1196,7 @@ export default function AdsSpyPage({
 
                               {/* Extracted Entity Details */}
                               {(evidenceObj.extractedProductName || evidenceObj.detectedBrand || evidenceObj.detectedModel || evidenceObj.detectedSku) && (
-                                <div className="bg-[#0B1424]/40 p-2 rounded border border-[#20324A]/40 grid grid-cols-2 gap-1.5 text-[9px] text-[#9FB0C5] font-mono">
+                                <div className="bg-[#0f0f24]/40 p-2 rounded border border-[#2a2a5c]/40 grid grid-cols-2 gap-1.5 text-[9px] text-[#a5a5c8] font-mono">
                                   {evidenceObj.extractedProductName && (
                                     <div className="truncate">
                                       <span className="text-[#8B5CF6] font-bold">اسم مستنتج:</span> {evidenceObj.extractedProductName}
@@ -1222,7 +1222,7 @@ export default function AdsSpyPage({
 
                               {/* Final Reason */}
                               {evidenceObj.finalClassificationReason && (
-                                <div className="text-slate-300 leading-normal bg-[#0B1424]/60 p-2 rounded border border-[#20324A]/30 text-[10px]">
+                                <div className="text-slate-300 leading-normal bg-[#0f0f24]/60 p-2 rounded border border-[#2a2a5c]/30 text-[10px]">
                                   <strong className="text-purple-300 font-bold">مبرر التصنيف:</strong> {evidenceObj.finalClassificationReason}
                                 </div>
                               )}
@@ -1342,7 +1342,7 @@ export default function AdsSpyPage({
                         </div>
 
                         {/* Action buttons footer */}
-                        <div className="p-3 bg-[#0A1424]/80 border-t border-[#20324A]/40 flex items-center justify-between gap-2">
+                        <div className="p-3 bg-[#0A1424]/80 border-t border-[#2a2a5c]/40 flex items-center justify-between gap-2">
                           <button
                             onClick={() => setSelectedMatchForAnalysis(m)}
                             className="bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/20 text-[#C4B5FD] border border-[#8B5CF6]/30 px-3 py-1.5 rounded-lg text-[10.5px] font-bold flex items-center gap-1 transition-all"
@@ -1383,10 +1383,10 @@ export default function AdsSpyPage({
                 </div>
               ) : (
                 /* DETAILED LIST TABLE VIEW */
-                <div className="overflow-x-auto bg-[#07111F]/60 rounded-2xl border border-[#20324A]">
+                <div className="overflow-x-auto bg-[#0a0a1a]/60 rounded-2xl border border-[#2a2a5c]">
                   <table className="w-full text-right text-xs">
                     <thead>
-                      <tr className="border-b border-[#20324A] text-[#9FB0C5] font-black">
+                      <tr className="border-b border-[#2a2a5c] text-[#a5a5c8] font-black">
                         <th className="p-4 text-right">المعلن والمنصة</th>
                         <th className="p-4 text-right">نص الإعلان الإبداعي</th>
                         <th className="p-4 text-center">نوع الإجراء CTA</th>
@@ -1396,12 +1396,12 @@ export default function AdsSpyPage({
                         <th className="p-4 text-left">إجراءات</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#20324A]/40 text-white">
+                    <tbody className="divide-y divide-[#2a2a5c]/40 text-white">
                       {filteredMatches.map((m) => {
                         const ad = m.ad;
                         if (!ad) return null;
                         return (
-                          <tr key={m.id} className="hover:bg-[#12233A]/20 transition-colors">
+                          <tr key={m.id} className="hover:bg-[#1c1c47]/20 transition-colors">
                             <td className="p-4">
                               <div className="flex flex-col">
                                 <span className="font-bold">{ad.advertiser_name}</span>
@@ -1499,8 +1499,8 @@ export default function AdsSpyPage({
           {activeTab === "profile" && (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Keywords management */}
-              <div className="lg:col-span-2 bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-5 space-y-4">
-                <div className="flex items-center justify-between gap-3 border-b border-[#20324A]/60 pb-3">
+              <div className="lg:col-span-2 bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-5 space-y-4">
+                <div className="flex items-center justify-between gap-3 border-b border-[#2a2a5c]/60 pb-3">
                   <h3 className="text-sm font-black text-white">الكلمات المفتاحية لمراقبة الإعلانات</h3>
                   <button
                     onClick={handleGenerateKeywords}
@@ -1519,7 +1519,7 @@ export default function AdsSpyPage({
                     value={newKeyword}
                     onChange={(e) => setNewKeyword(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAddKeyword()}
-                    className="flex-1 bg-[#0B1424] border border-[#20324A] rounded-xl px-4 py-2 text-xs font-bold text-white focus:outline-none focus:border-[#8B5CF6]"
+                    className="flex-1 bg-[#0f0f24] border border-[#2a2a5c] rounded-xl px-4 py-2 text-xs font-bold text-white focus:outline-none focus:border-[#8B5CF6]"
                   />
                   <button
                     onClick={handleAddKeyword}
@@ -1532,12 +1532,12 @@ export default function AdsSpyPage({
 
                 <div className="flex flex-wrap gap-2 pt-2">
                   {keywords.length === 0 ? (
-                    <p className="text-[11px] text-[#9FB0C5] italic">لا توجد كلمات مفتاحية مضافة حتى الآن. أضف كلمات مفتاحية دقيقة تصف منتجك.</p>
+                    <p className="text-[11px] text-[#a5a5c8] italic">لا توجد كلمات مفتاحية مضافة حتى الآن. أضف كلمات مفتاحية دقيقة تصف منتجك.</p>
                   ) : (
                     keywords.map((kw, idx) => (
                       <span 
                         key={idx}
-                        className="bg-[#12233A] text-[#F4F7FB] border border-[#20324A] px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-2"
+                        className="bg-[#1c1c47] text-[#f5f5fa] border border-[#2a2a5c] px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-2"
                       >
                         {kw}
                         <button onClick={() => handleRemoveKeyword(idx)} className="text-red-400 hover:text-red-300">
@@ -1548,22 +1548,22 @@ export default function AdsSpyPage({
                   )}
                 </div>
 
-                <div className="bg-[#0B1E36]/30 p-3.5 rounded-xl border border-[#20324A]/40 text-[10.5px] text-[#9FB0C5] leading-relaxed">
+                <div className="bg-[#0B1E36]/30 p-3.5 rounded-xl border border-[#2a2a5c]/40 text-[10.5px] text-[#a5a5c8] leading-relaxed">
                   💡 يبدأ التخطيط بالاسم الدقيق، ثم التصحيح الإملائي والأسماء السوقية والفئة والوصف. يمكنك تعديل القائمة يدويًا قبل حفظها وتشغيل الرصد.
                 </div>
               </div>
 
               {/* Providers and Scraper configurations */}
-              <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-5 space-y-4">
-                <h3 className="text-sm font-black text-white border-b border-[#20324A]/60 pb-3">إعدادات وقنوات الفحص</h3>
+              <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-5 space-y-4">
+                <h3 className="text-sm font-black text-white border-b border-[#2a2a5c]/60 pb-3">إعدادات وقنوات الفحص</h3>
 
                 {/* Country selector */}
                 <div className="space-y-2">
-                  <label className="text-xs text-[#9FB0C5] font-black block">الدولة المستهدفة:</label>
+                  <label className="text-xs text-[#a5a5c8] font-black block">الدولة المستهدفة:</label>
                   <select
                     value={countries[0]}
                     onChange={(e) => setCountries([e.target.value])}
-                    className="w-full bg-[#0B1424] border border-[#20324A] rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none"
+                    className="w-full bg-[#0f0f24] border border-[#2a2a5c] rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none"
                   >
                     <option value="EG">جمهورية مصر العربية (EG) 🇪🇬</option>
                     <option value="SA">المملكة العربية السعودية (SA) 🇸🇦</option>
@@ -1572,8 +1572,8 @@ export default function AdsSpyPage({
 
                 {/* Providers checkboxes */}
                 <div className="space-y-2">
-                  <label className="text-xs text-[#9FB0C5] font-black block">قنوات الرصد والمراقبة إعلانيا:</label>
-                  <div className="space-y-2 bg-[#0B1424] p-3 rounded-xl border border-[#20324A]">
+                  <label className="text-xs text-[#a5a5c8] font-black block">قنوات الرصد والمراقبة إعلانيا:</label>
+                  <div className="space-y-2 bg-[#0f0f24] p-3 rounded-xl border border-[#2a2a5c]">
                     <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-white">
                       <input
                         type="checkbox"
@@ -1585,7 +1585,7 @@ export default function AdsSpyPage({
                             setProviders(providers.filter(p => p !== "meta"));
                           }
                         }}
-                        className="rounded border-[#20324A] text-[#8B5CF6] focus:ring-[#8B5CF6]"
+                        className="rounded border-[#2a2a5c] text-[#8B5CF6] focus:ring-[#8B5CF6]"
                       />
                       <span>مكتبة إعلانات فيسبوك (Meta Ad Library)</span>
                     </label>
@@ -1600,7 +1600,7 @@ export default function AdsSpyPage({
                             setProviders(providers.filter(p => p !== "tiktok"));
                           }
                         }}
-                        className="rounded border-[#20324A] text-[#8B5CF6] focus:ring-[#8B5CF6]"
+                        className="rounded border-[#2a2a5c] text-[#8B5CF6] focus:ring-[#8B5CF6]"
                       />
                       <span>مركز تيك توك الإبداعي (TikTok Ads Creative)</span>
                     </label>
@@ -1609,14 +1609,14 @@ export default function AdsSpyPage({
 
                 {/* Scrape limit */}
                 <div className="space-y-2">
-                  <label className="text-xs text-[#9FB0C5] font-black block">الحد الأقصى لنتائج الكلمات (موصى به: 30):</label>
+                  <label className="text-xs text-[#a5a5c8] font-black block">الحد الأقصى لنتائج الكلمات (موصى به: 30):</label>
                   <input
                     type="number"
                     min="10"
                     max="100"
                     value={maxResults}
                     onChange={(e) => setMaxResults(Number(e.target.value))}
-                    className="w-full bg-[#0B1424] border border-[#20324A] rounded-xl px-3 py-2 text-xs font-mono font-bold text-white focus:outline-none"
+                    className="w-full bg-[#0f0f24] border border-[#2a2a5c] rounded-xl px-3 py-2 text-xs font-mono font-bold text-white focus:outline-none"
                   />
                 </div>
 
@@ -1633,29 +1633,29 @@ export default function AdsSpyPage({
 
           {/* TAB 3: JOBS MONITOR & PIPELINE */}
           {activeTab === "jobs" && (
-            <div className="bg-[#07111F]/60 border border-[#20324A] rounded-3xl p-5 space-y-4">
-              <div className="flex items-center justify-between border-b border-[#20324A]/60 pb-3">
+            <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-3xl p-5 space-y-4">
+              <div className="flex items-center justify-between border-b border-[#2a2a5c]/60 pb-3">
                 <h3 className="text-sm font-black text-white">سجل وعمليات فحص الكلمات المباشر (Playwright)</h3>
-                <span className="text-[10px] text-[#9FB0C5]">تحديث تلقائي كل 8 ثوانٍ</span>
+                <span className="text-[10px] text-[#a5a5c8]">تحديث تلقائي كل 8 ثوانٍ</span>
               </div>
 
               {jobs.length === 0 ? (
                 <div className="p-12 text-center space-y-2">
-                  <Info className="w-8 h-8 text-[#9FB0C5] opacity-50 mx-auto" />
+                  <Info className="w-8 h-8 text-[#a5a5c8] opacity-50 mx-auto" />
                   <p className="text-xs text-white font-bold">لا توجد أي مهمة فحص مسجلة حتى الآن لهذا المنتج</p>
-                  <p className="text-[10px] text-[#9FB0C5]">أطلق أول فحص إعلاني للبدء بسحب إعلانات فيسبوك وتيك توك التلقائية.</p>
+                  <p className="text-[10px] text-[#a5a5c8]">أطلق أول فحص إعلاني للبدء بسحب إعلانات فيسبوك وتيك توك التلقائية.</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {jobs.map((job) => (
                     <div 
                       key={job.id} 
-                      className="bg-[#0B1424]/80 border border-[#20324A] rounded-2xl p-4.5 space-y-3"
+                      className="bg-[#0f0f24]/80 border border-[#2a2a5c] rounded-2xl p-4.5 space-y-3"
                     >
                       {/* Job Header */}
                       <div className="flex items-center justify-between flex-wrap gap-2 text-xs">
                         <div className="flex items-center gap-2">
-                          <span className="text-[#9FB0C5] font-mono font-bold">مُعرّف المهمة: {job.id.substring(0, 8)}</span>
+                          <span className="text-[#a5a5c8] font-mono font-bold">مُعرّف المهمة: {job.id.substring(0, 8)}</span>
                           <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-black ${
                             job.status === "COMPLETED" 
                               ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
@@ -1693,7 +1693,7 @@ export default function AdsSpyPage({
                           <span className="text-gray-400">تقدّم المهمة:</span>
                           <span className="font-mono text-white font-bold">{job.progress_percentage}%</span>
                         </div>
-                        <div className="h-2 bg-[#12233A] rounded-full overflow-hidden">
+                        <div className="h-2 bg-[#1c1c47] rounded-full overflow-hidden">
                           <div 
                             className={`h-full rounded-full transition-all duration-500 ${
                               job.status === "COMPLETED" ? "bg-emerald-500" : "bg-cyan-500 animate-pulse"
@@ -1728,7 +1728,7 @@ export default function AdsSpyPage({
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleToggleLogs(job.id)}
-                            className="bg-[#12233A] hover:bg-[#1C324F] text-[#9FB0C5] px-3 py-1 rounded-lg transition-all"
+                            className="bg-[#1c1c47] hover:bg-[#1C324F] text-[#a5a5c8] px-3 py-1 rounded-lg transition-all"
                           >
                             {expandedJobLogs === job.id ? "إخفاء التفاصيل" : "عرض التفاصيل السجل"}
                           </button>
@@ -1745,18 +1745,18 @@ export default function AdsSpyPage({
 
                       {/* Logs View */}
                       {expandedJobLogs === job.id && (
-                        <div className="mt-3 bg-[#07111F] border border-[#20324A] rounded-xl p-3 space-y-2 max-h-60 overflow-y-auto font-mono text-[9.5px]">
+                        <div className="mt-3 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl p-3 space-y-2 max-h-60 overflow-y-auto font-mono text-[9.5px]">
                           {jobLogs[job.id] ? (
                             jobLogs[job.id].length > 0 ? (
                               jobLogs[job.id].map((log, idx) => (
-                                <div key={idx} className={`flex flex-col gap-1 py-1 border-b border-[#20324A]/30 last:border-0 ${
+                                <div key={idx} className={`flex flex-col gap-1 py-1 border-b border-[#2a2a5c]/30 last:border-0 ${
                                   log.status === "ERROR" ? "text-red-400" :
                                   log.status === "WARNING" ? "text-yellow-400" :
-                                  log.status === "BLOCKED" ? "text-orange-400" : "text-[#9FB0C5]"
+                                  log.status === "BLOCKED" ? "text-orange-400" : "text-[#a5a5c8]"
                                 }`}>
                                   <div className="flex items-center gap-2">
                                     <span className="font-bold">[{new Date(log.created_at).toLocaleTimeString("ar-EG")}]</span>
-                                    <span className="uppercase px-1.5 py-0.5 rounded-full bg-[#12233A] text-[8px]">{log.provider} - {log.step}</span>
+                                    <span className="uppercase px-1.5 py-0.5 rounded-full bg-[#1c1c47] text-[8px]">{log.provider} - {log.step}</span>
                                   </div>
                                   <span className="break-words whitespace-pre-wrap">{log.message}</span>
                                 </div>
@@ -1801,28 +1801,28 @@ export default function AdsSpyPage({
                   { label: "تكرار الإبداع", value: summary?.repeated_creatives_count ?? 0, icon: Layers, color: "text-yellow-400" },
                   { label: "تغطية التحليل", value: `${summary?.analysis_coverage ?? 0}%`, icon: BrainCircuit, color: "text-[#A78BFA]" },
                 ].map((metric) => (
-                  <div key={metric.label} className="bg-[#0B1424]/70 border border-[#20324A] rounded-2xl p-4">
+                  <div key={metric.label} className="bg-[#0f0f24]/70 border border-[#2a2a5c] rounded-2xl p-4">
                     <metric.icon className={`w-4 h-4 ${metric.color} mb-3`} />
                     <strong className="text-lg text-white font-mono block">{metric.value}</strong>
-                    <span className="text-[9.5px] text-[#9FB0C5]">{metric.label}</span>
+                    <span className="text-[9.5px] text-[#a5a5c8]">{metric.label}</span>
                   </div>
                 ))}
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-5 space-y-4">
+                <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-5 space-y-4">
                   <h3 className="text-xs font-black text-white flex items-center gap-2"><Target className="w-4 h-4 text-[#A78BFA]" /> أهداف الإعلانات المستنتجة</h3>
                   <BreakdownList items={summary?.objective_breakdown} emptyLabel="شغّل التحليل لاستخراج أهداف الإعلانات" />
                 </div>
-                <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-5 space-y-4">
+                <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-5 space-y-4">
                   <h3 className="text-xs font-black text-white flex items-center gap-2"><BarChart3 className="w-4 h-4 text-cyan-400" /> صيغ المحتوى</h3>
                   <BreakdownList items={summary?.content_type_breakdown} />
                 </div>
-                <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-5 space-y-4">
+                <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-5 space-y-4">
                   <h3 className="text-xs font-black text-white flex items-center gap-2"><ExternalLink className="w-4 h-4 text-blue-400" /> أزرار الإجراء CTA</h3>
                   <BreakdownList items={summary?.cta_breakdown} />
                 </div>
-                <div className="bg-[#07111F]/60 border border-[#20324A] rounded-2xl p-5 space-y-4">
+                <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c] rounded-2xl p-5 space-y-4">
                   <h3 className="text-xs font-black text-white flex items-center gap-2"><Users className="w-4 h-4 text-emerald-400" /> أكثر المعلنين ظهوراً</h3>
                   <BreakdownList items={summary?.advertiser_breakdown} />
                 </div>
@@ -1833,19 +1833,19 @@ export default function AdsSpyPage({
                   <h3 className="text-xs font-black text-amber-300 flex items-center gap-2"><Compass className="w-4 h-4" /> فجوات وفرص مرصودة من البيانات</h3>
                   {summary?.opportunity_gaps?.length ? summary.opportunity_gaps.map((item, index) => (
                     <div key={index} className="flex gap-2 text-[10.5px] text-gray-200 leading-relaxed"><span className="text-amber-400 font-mono">{index + 1}.</span><span>{item}</span></div>
-                  )) : <p className="text-[10px] text-[#9FB0C5] py-4">لا توجد بيانات كافية لاستخراج فجوة موثوقة حتى الآن.</p>}
+                  )) : <p className="text-[10px] text-[#a5a5c8] py-4">لا توجد بيانات كافية لاستخراج فجوة موثوقة حتى الآن.</p>}
                 </div>
                 <div className="bg-[#8B5CF6]/5 border border-[#8B5CF6]/20 rounded-2xl p-5 space-y-3">
                   <h3 className="text-xs font-black text-[#C4B5FD] flex items-center gap-2"><Sparkles className="w-4 h-4" /> إجراءات مقترحة للمنتج</h3>
                   {summary?.product_recommendations?.length ? summary.product_recommendations.map((item, index) => (
                     <div key={index} className="flex gap-2 text-[10.5px] text-gray-200 leading-relaxed"><CheckCircle className="w-3.5 h-3.5 text-[#A78BFA] shrink-0 mt-0.5" /><span>{item}</span></div>
-                  )) : <p className="text-[10px] text-[#9FB0C5] py-4">تظهر التوصيات بعد تحليل إعلان واحد موثوق على الأقل.</p>}
+                  )) : <p className="text-[10px] text-[#a5a5c8] py-4">تظهر التوصيات بعد تحليل إعلان واحد موثوق على الأقل.</p>}
                 </div>
               </div>
 
               <div className="bg-cyan-500/5 border border-cyan-500/15 rounded-2xl p-4 flex items-start gap-3">
                 <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                <p className="text-[10px] text-[#9FB0C5] leading-relaxed">التوزيعات مبنية على الإعلانات الفعلية غير المستبعدة لهذا المنتج. الهدف والجمهور والزاوية استنتاجات ذكاء اصطناعي وليست حقائق مصدرية، لذلك تعرض بطاقة كل إعلان نسبة الثقة والأدلة المتاحة.</p>
+                <p className="text-[10px] text-[#a5a5c8] leading-relaxed">التوزيعات مبنية على الإعلانات الفعلية غير المستبعدة لهذا المنتج. الهدف والجمهور والزاوية استنتاجات ذكاء اصطناعي وليست حقائق مصدرية، لذلك تعرض بطاقة كل إعلان نسبة الثقة والأدلة المتاحة.</p>
               </div>
             </div>
           )}
@@ -1858,16 +1858,16 @@ export default function AdsSpyPage({
       {/* DETAILED DRAWERS FOR AI ANALYTICS (MODAL DRAWER) */}
       {selectedMatchForAnalysis && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-[#07111F] border border-[#20324A] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col justify-between text-right">
+          <div className="bg-[#0a0a1a] border border-[#2a2a5c] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col justify-between text-right">
             {/* Modal Header */}
-            <div className="p-5 border-b border-[#20324A] flex items-center justify-between bg-[#0A1424]">
+            <div className="p-5 border-b border-[#2a2a5c] flex items-center justify-between bg-[#0A1424]">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#A78BFA] animate-pulse" />
                 <h3 className="text-sm font-black text-white">التحليل الأوتوماتيكي المعمّق بالذكاء الاصطناعي (AI Analysis)</h3>
               </div>
               <button
                 onClick={() => setSelectedMatchForAnalysis(null)}
-                className="p-1 rounded-lg bg-[#12233A] text-[#9FB0C5] hover:text-white transition cursor-pointer"
+                className="p-1 rounded-lg bg-[#1c1c47] text-[#a5a5c8] hover:text-white transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1877,11 +1877,11 @@ export default function AdsSpyPage({
             <div className="p-6 space-y-5 flex-1">
               {selectedMatchForAnalysis.analysis ? (
                 <div className="space-y-4 text-xs">
-                  <div className="flex flex-wrap items-center justify-between gap-2 bg-[#0B1424] border border-[#20324A] p-3 rounded-xl">
+                  <div className="flex flex-wrap items-center justify-between gap-2 bg-[#0f0f24] border border-[#2a2a5c] p-3 rounded-xl">
                     <div className="flex flex-wrap gap-2 text-[9.5px]">
-                      <span className="bg-[#12233A] text-cyan-300 px-2 py-1 rounded">{selectedMatchForAnalysis.analysis.content_type || adContentType(selectedMatchForAnalysis)}</span>
-                      <span className="bg-[#12233A] text-[#C4B5FD] px-2 py-1 rounded">{selectedMatchForAnalysis.analysis.funnel_stage || unavailable}</span>
-                      <span className="bg-[#12233A] text-gray-300 px-2 py-1 rounded">{selectedMatchForAnalysis.analysis.persuasion_framework || unavailable}</span>
+                      <span className="bg-[#1c1c47] text-cyan-300 px-2 py-1 rounded">{selectedMatchForAnalysis.analysis.content_type || adContentType(selectedMatchForAnalysis)}</span>
+                      <span className="bg-[#1c1c47] text-[#C4B5FD] px-2 py-1 rounded">{selectedMatchForAnalysis.analysis.funnel_stage || unavailable}</span>
+                      <span className="bg-[#1c1c47] text-gray-300 px-2 py-1 rounded">{selectedMatchForAnalysis.analysis.persuasion_framework || unavailable}</span>
                     </div>
                     <span className="font-mono text-[10px] text-[#A78BFA]">ثقة التحليل: {selectedMatchForAnalysis.analysis.analysis_confidence ?? unavailable}{typeof selectedMatchForAnalysis.analysis.analysis_confidence === "number" ? "%" : ""}</span>
                   </div>
@@ -1894,33 +1894,33 @@ export default function AdsSpyPage({
                     <div className="border-t border-purple-500/15 pt-3">
                       <strong className="text-[#C4B5FD] text-[10px] font-black block mb-1">الخطاف والزاوية</strong>
                       <p className="text-gray-200 leading-relaxed">{selectedMatchForAnalysis.analysis.hook || unavailable}</p>
-                      <p className="text-[10px] text-[#9FB0C5] mt-1">{selectedMatchForAnalysis.analysis.marketing_angle || unavailable}</p>
+                      <p className="text-[10px] text-[#a5a5c8] mt-1">{selectedMatchForAnalysis.analysis.marketing_angle || unavailable}</p>
                     </div>
                   </div>
 
-                  <div className="bg-[#0B1424]/60 p-4 rounded-xl border border-[#20324A]/60 space-y-2">
+                  <div className="bg-[#0f0f24]/60 p-4 rounded-xl border border-[#2a2a5c]/60 space-y-2">
                     <strong className="text-cyan-400 block font-bold">ملخص نص الإعلان</strong>
                     <p className="text-gray-200 leading-relaxed">{selectedMatchForAnalysis.analysis.caption_summary || selectedMatchForAnalysis.ad?.body_text || unavailable}</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2 bg-[#0B1424]/60 p-4 rounded-xl border border-[#20324A]/60">
+                    <div className="space-y-2 bg-[#0f0f24]/60 p-4 rounded-xl border border-[#2a2a5c]/60">
                       <strong className="text-cyan-400 block font-bold">الجمهور المستنتج</strong>
                       <p className="text-gray-200 leading-relaxed">{selectedMatchForAnalysis.analysis.target_audience || unavailable}</p>
                     </div>
 
-                    <div className="space-y-2 bg-[#0B1424]/60 p-4 rounded-xl border border-[#20324A]/60">
+                    <div className="space-y-2 bg-[#0f0f24]/60 p-4 rounded-xl border border-[#2a2a5c]/60">
                       <strong className="text-yellow-400 block font-bold">العرض كما ظهر</strong>
                       <p className="text-gray-200 leading-relaxed">{selectedMatchForAnalysis.analysis.offer || unavailable}</p>
                     </div>
-                    <div className="space-y-2 bg-[#0B1424]/60 p-4 rounded-xl border border-[#20324A]/60">
+                    <div className="space-y-2 bg-[#0f0f24]/60 p-4 rounded-xl border border-[#2a2a5c]/60">
                       <strong className="text-emerald-400 block font-bold">النبرة والأسلوب</strong>
                       <p className="text-gray-200 leading-relaxed">{selectedMatchForAnalysis.analysis.tone || unavailable} · {selectedMatchForAnalysis.analysis.creative_style || unavailable}</p>
                     </div>
-                    <div className="space-y-2 bg-[#0B1424]/60 p-4 rounded-xl border border-[#20324A]/60">
+                    <div className="space-y-2 bg-[#0f0f24]/60 p-4 rounded-xl border border-[#2a2a5c]/60">
                       <strong className="text-blue-400 block font-bold">CTA والمنصات</strong>
                       <p className="text-gray-200 leading-relaxed">{selectedMatchForAnalysis.ad?.cta_label || selectedMatchForAnalysis.analysis.cta || unavailable}</p>
-                      <p className="text-[10px] text-[#9FB0C5]">{selectedMatchForAnalysis.analysis.platforms?.join("، ") || (selectedMatchForAnalysis.ad?.source_platform === "meta" ? "Meta" : "TikTok")}</p>
+                      <p className="text-[10px] text-[#a5a5c8]">{selectedMatchForAnalysis.analysis.platforms?.join("، ") || (selectedMatchForAnalysis.ad?.source_platform === "meta" ? "Meta" : "TikTok")}</p>
                     </div>
                   </div>
 
@@ -1931,7 +1931,7 @@ export default function AdsSpyPage({
                       { title: "الاعتراضات المعالجة", values: selectedMatchForAnalysis.analysis.objections },
                       { title: "محفزات عاطفية", values: selectedMatchForAnalysis.analysis.emotional_triggers },
                     ].map((section) => (
-                      <div key={section.title} className="space-y-2 bg-[#0B1424]/50 border border-[#20324A]/60 p-4 rounded-xl">
+                      <div key={section.title} className="space-y-2 bg-[#0f0f24]/50 border border-[#2a2a5c]/60 p-4 rounded-xl">
                         <strong className="text-white font-black block">{section.title}</strong>
                         {section.values?.length ? (
                           <ul className="list-disc list-inside space-y-1 text-gray-300">{section.values.map((value, index) => <li key={index}>{value}</li>)}</ul>
@@ -1955,18 +1955,18 @@ export default function AdsSpyPage({
               ) : (
                 /* Honest empty state when analysis isn't yet ready */
                 <div className="space-y-4 text-xs text-center p-8">
-                  <Info className="w-8 h-8 text-[#9FB0C5] opacity-50 mx-auto animate-pulse" />
+                  <Info className="w-8 h-8 text-[#a5a5c8] opacity-50 mx-auto animate-pulse" />
                   <p className="text-white font-bold text-xs mt-2">لا يتوفر تحليل ذكاء اصطناعي لهذا الإعلان حالياً</p>
-                  <p className="text-[10px] text-[#9FB0C5]">يتم توليد تحليلات الخطافات والتسويق تلقائياً فقط للإعلانات الحاصلة على توافق عالٍ أثناء الفحص.</p>
+                  <p className="text-[10px] text-[#a5a5c8]">يتم توليد تحليلات الخطافات والتسويق تلقائياً فقط للإعلانات الحاصلة على توافق عالٍ أثناء الفحص.</p>
                 </div>
               )}
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 bg-[#0A1424] border-t border-[#20324A] flex justify-end">
+            <div className="p-4 bg-[#0A1424] border-t border-[#2a2a5c] flex justify-end">
               <button
                 onClick={() => setSelectedMatchForAnalysis(null)}
-                className="bg-[#12233A] hover:bg-[#1E334E] text-[#9FB0C5] hover:text-white px-5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer"
+                className="bg-[#1c1c47] hover:bg-[#1E334E] text-[#a5a5c8] hover:text-white px-5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer"
               >
                 إغلاق النافذة
               </button>
@@ -1978,16 +1978,16 @@ export default function AdsSpyPage({
       {/* DETAILED COVERAGE AND DISCOVERY REPORT MODAL */}
       {selectedCoverageReport && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-[#07111F] border border-[#20324A] rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col justify-between text-right">
+          <div className="bg-[#0a0a1a] border border-[#2a2a5c] rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col justify-between text-right">
             {/* Modal Header */}
-            <div className="p-5 border-b border-[#20324A] flex items-center justify-between bg-[#0A1424]">
+            <div className="p-5 border-b border-[#2a2a5c] flex items-center justify-between bg-[#0A1424]">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-emerald-400" />
                 <h3 className="text-sm font-black text-white">تقرير التغطية والاستكشاف المفصل (Detailed Coverage Report)</h3>
               </div>
               <button
                 onClick={() => setSelectedCoverageReport(null)}
-                className="p-1 rounded-lg bg-[#12233A] text-[#9FB0C5] hover:text-white transition cursor-pointer"
+                className="p-1 rounded-lg bg-[#1c1c47] text-[#a5a5c8] hover:text-white transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1995,7 +1995,7 @@ export default function AdsSpyPage({
 
             {/* Modal Body */}
             <div className="p-6 space-y-4 flex-1 text-xs text-gray-300">
-              <div className="flex items-center justify-between bg-[#0B1424] border border-[#20324A] p-4 rounded-xl">
+              <div className="flex items-center justify-between bg-[#0f0f24] border border-[#2a2a5c] p-4 rounded-xl">
                 <span className="font-bold">حالة التغطية الشاملة:</span>
                 <span className={`px-2.5 py-1 rounded-full font-black text-[10px] ${
                   selectedCoverageReport.coverageStatus === "كاملة"
@@ -2007,36 +2007,36 @@ export default function AdsSpyPage({
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">الاستعلامات التي حُظرت أو فشلت</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">الاستعلامات التي حُظرت أو فشلت</span>
                   <strong className="text-red-400 font-mono text-sm">{selectedCoverageReport.blockedOrFailedQueries ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">الاستعلامات التي تم تجربتها</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">الاستعلامات التي تم تجربتها</span>
                   <strong className="text-white font-mono text-sm">{selectedCoverageReport.queriesAttempted ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">إجمالي نتائج الإعلانات الخام</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">إجمالي نتائج الإعلانات الخام</span>
                   <strong className="text-white font-mono text-sm">{selectedCoverageReport.rawAdsFound ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">الإعلانات الفريدة (غير المكررة)</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">الإعلانات الفريدة (غير المكررة)</span>
                   <strong className="text-purple-400 font-mono text-sm">{selectedCoverageReport.uniqueAdsFound ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">الإعلانات المكررة المستبعدة</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">الإعلانات المكررة المستبعدة</span>
                   <strong className="text-gray-400 font-mono text-sm">{selectedCoverageReport.duplicatesRemoved ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">المطابقات المؤكدة تلقائياً</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">المطابقات المؤكدة تلقائياً</span>
                   <strong className="text-emerald-400 font-mono text-sm">{selectedCoverageReport.approvedMatches ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">إعلانات تتطلب مراجعة بشرية</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">إعلانات تتطلب مراجعة بشرية</span>
                   <strong className="text-yellow-400 font-mono text-sm">{selectedCoverageReport.needsReviewMatches ?? 0}</strong>
                 </div>
-                <div className="bg-[#0B1424]/60 p-3 rounded-xl border border-[#20324A]/60 space-y-1">
-                  <span className="text-[10px] text-[#9FB0C5] block">إعلانات مستبعدة لعدم صلتها</span>
+                <div className="bg-[#0f0f24]/60 p-3 rounded-xl border border-[#2a2a5c]/60 space-y-1">
+                  <span className="text-[10px] text-[#a5a5c8] block">إعلانات مستبعدة لعدم صلتها</span>
                   <strong className="text-red-400 font-mono text-sm">{selectedCoverageReport.rejectedMatches ?? 0}</strong>
                 </div>
               </div>
@@ -2047,17 +2047,17 @@ export default function AdsSpyPage({
                 <p className="text-[10.5px] leading-relaxed text-gray-200">
                   يرجى العلم أن هذه البيانات تعبر عن أقصى جهد رصد تمكّن الزاحف الذكي من تحصيله. مع ذلك، <strong>لا تدعي التغطية الشاملة بنسبة 100%</strong> نظراً لأن خوارزميات منصات الإعلانات قد تقوم بإخفاء بعض النتائج أو تقييدها أو تخصيصها بناء على الجغرافيا والتفاعل الفردي.
                 </p>
-                <p className="text-[10px] text-[#9FB0C5] leading-relaxed">
+                <p className="text-[10px] text-[#a5a5c8] leading-relaxed">
                   {selectedCoverageReport.coverageLimitations}
                 </p>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 bg-[#0A1424] border-t border-[#20324A] flex justify-end">
+            <div className="p-4 bg-[#0A1424] border-t border-[#2a2a5c] flex justify-end">
               <button
                 onClick={() => setSelectedCoverageReport(null)}
-                className="bg-[#12233A] hover:bg-[#1E334E] text-[#9FB0C5] hover:text-white px-5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer"
+                className="bg-[#1c1c47] hover:bg-[#1E334E] text-[#a5a5c8] hover:text-white px-5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer"
               >
                 إغلاق النافذة
               </button>

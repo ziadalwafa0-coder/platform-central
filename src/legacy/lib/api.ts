@@ -12,19 +12,16 @@ export async function safeFetchJson<T = any>(url: string, options?: RequestInit)
   if (typeof window !== "undefined") {
     const headers = new Headers(options?.headers);
     
-    // Dynamically retrieve Firebase Auth ID Token if user is logged in
+    // Attach the current Cloud Auth access token when a user is signed in.
     try {
-      const { auth } = await import("./firebase");
-      if (auth && typeof auth.authStateReady === "function") {
-        await auth.authStateReady();
-      }
-      const user = auth.currentUser;
-      if (user) {
-        const token = await user.getIdToken();
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { data } = await supabase.auth.getSession();
+      const token = data.session?.access_token;
+      if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
     } catch (err) {
-      console.warn("Could not retrieve Firebase Auth ID token for request:", err);
+      console.warn("Could not retrieve auth token for request:", err);
     }
 
     let offset = localStorage.getItem("cairo_clock_offset");

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", "Inter", sans-serif;
+  --font-display: "Space Grotesk", "Cairo", sans-serif;
+  
+  --color-bg-pulse: #07111F;
+  --color-sidebar-pulse: #081525;
+  --color-surface-pulse: #0D1B2D;
+  --color-elevated-pulse: #12233A;
+  --color-border-pulse: #20324A;
+  --color-primary-pulse: #2F80FF;
+  --color-primary-hover-pulse: #4A92FF;
+  --color-text-primary: #F4F7FB;
+  --color-text-secondary: #9FB0C5;
+  --color-success-pulse: #24C78E;
+  --color-warning-pulse: #F5A524;
+  --color-danger-pulse: #F05252;
+  --color-restock-pulse: #8B5CF6;
+}
+
+/* Custom global scrollbar styles for minimalist feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 41, 55, 0.8);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 65, 81, 0.8);
+}
+
+/* Simulated mobile device mockup shadows and ambient glow */
+.mobile-frame-shadow {
+  box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.6), 
+              0px 0px 100px -10px rgba(37, 99, 235, 0.15);
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes gradient-pulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.8s infinite linear;
+}
+
+.animate-gradient-pulse {
+  background-size: 200% 200%;
+  animation: gradient-pulse 2.5s ease infinite;
+}
+

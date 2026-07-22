@@ -10,8 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiResetRouteImport } from './routes/api/reset'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
+import { Route as ApiSyncProgressRouteImport } from './routes/api/sync.progress'
+import { Route as ApiSyncLogsRouteImport } from './routes/api/sync.logs'
+import { Route as ApiSettingsSupabaseRouteImport } from './routes/api/settings.supabase'
+import { Route as ApiSettingsSchedulerRouteImport } from './routes/api/settings.scheduler'
+import { Route as ApiSettingsEmailRouteImport } from './routes/api/settings.email'
+import { Route as ApiProductsWithdrawalActivityRouteImport } from './routes/api/products.withdrawal-activity'
 import { Route as ApiPlatformsPlatformRouteImport } from './routes/api/platforms.$platform'
+import { Route as ApiDiagnosticsErrorRouteImport } from './routes/api/diagnostics.error'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth.login'
+import { Route as ApiAnalyticsRevisionRouteImport } from './routes/api/analytics.revision'
+import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/analytics.dashboard-overview'
+import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
+import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
+import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 
@@ -20,15 +34,88 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiResetRoute = ApiResetRouteImport.update({
+  id: '/api/reset',
+  path: '/api/reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
   id: '/api/dashboard',
   path: '/api/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSyncProgressRoute = ApiSyncProgressRouteImport.update({
+  id: '/api/sync/progress',
+  path: '/api/sync/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSyncLogsRoute = ApiSyncLogsRouteImport.update({
+  id: '/api/sync/logs',
+  path: '/api/sync/logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSettingsSupabaseRoute = ApiSettingsSupabaseRouteImport.update({
+  id: '/api/settings/supabase',
+  path: '/api/settings/supabase',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSettingsSchedulerRoute = ApiSettingsSchedulerRouteImport.update({
+  id: '/api/settings/scheduler',
+  path: '/api/settings/scheduler',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSettingsEmailRoute = ApiSettingsEmailRouteImport.update({
+  id: '/api/settings/email',
+  path: '/api/settings/email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiProductsWithdrawalActivityRoute =
+  ApiProductsWithdrawalActivityRouteImport.update({
+    id: '/api/products/withdrawal-activity',
+    path: '/api/products/withdrawal-activity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPlatformsPlatformRoute = ApiPlatformsPlatformRouteImport.update({
   id: '/api/platforms/$platform',
   path: '/api/platforms/$platform',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDiagnosticsErrorRoute = ApiDiagnosticsErrorRouteImport.update({
+  id: '/api/diagnostics/error',
+  path: '/api/diagnostics/error',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAnalyticsRevisionRoute = ApiAnalyticsRevisionRouteImport.update({
+  id: '/api/analytics/revision',
+  path: '/api/analytics/revision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAnalyticsDashboardOverviewRoute =
+  ApiAnalyticsDashboardOverviewRouteImport.update({
+    id: '/api/analytics/dashboard-overview',
+    path: '/api/analytics/dashboard-overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAnalyticsAccuracyCheckRoute =
+  ApiAnalyticsAccuracyCheckRouteImport.update({
+    id: '/api/analytics/accuracy-check',
+    path: '/api/analytics/accuracy-check',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiSettingsSupabaseTestRoute = ApiSettingsSupabaseTestRouteImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => ApiSettingsSupabaseRoute,
+} as any)
+const ApiSettingsEmailTestRoute = ApiSettingsEmailTestRouteImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => ApiSettingsEmailRoute,
 } as any)
 const ApiPlatformsPlatformTestRoute =
   ApiPlatformsPlatformTestRouteImport.update({
@@ -46,53 +133,149 @@ const ApiPlatformsPlatformSyncRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/reset': typeof ApiResetRoute
+  '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
+  '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
   '/api/platforms/$platform': typeof ApiPlatformsPlatformRouteWithChildren
+  '/api/products/withdrawal-activity': typeof ApiProductsWithdrawalActivityRoute
+  '/api/settings/email': typeof ApiSettingsEmailRouteWithChildren
+  '/api/settings/scheduler': typeof ApiSettingsSchedulerRoute
+  '/api/settings/supabase': typeof ApiSettingsSupabaseRouteWithChildren
+  '/api/sync/logs': typeof ApiSyncLogsRoute
+  '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
+  '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/reset': typeof ApiResetRoute
+  '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
+  '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
   '/api/platforms/$platform': typeof ApiPlatformsPlatformRouteWithChildren
+  '/api/products/withdrawal-activity': typeof ApiProductsWithdrawalActivityRoute
+  '/api/settings/email': typeof ApiSettingsEmailRouteWithChildren
+  '/api/settings/scheduler': typeof ApiSettingsSchedulerRoute
+  '/api/settings/supabase': typeof ApiSettingsSupabaseRouteWithChildren
+  '/api/sync/logs': typeof ApiSyncLogsRoute
+  '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
+  '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/reset': typeof ApiResetRoute
+  '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
+  '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
   '/api/platforms/$platform': typeof ApiPlatformsPlatformRouteWithChildren
+  '/api/products/withdrawal-activity': typeof ApiProductsWithdrawalActivityRoute
+  '/api/settings/email': typeof ApiSettingsEmailRouteWithChildren
+  '/api/settings/scheduler': typeof ApiSettingsSchedulerRoute
+  '/api/settings/supabase': typeof ApiSettingsSupabaseRouteWithChildren
+  '/api/sync/logs': typeof ApiSyncLogsRoute
+  '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
+  '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/api/dashboard'
+    | '/api/reset'
+    | '/api/analytics/accuracy-check'
+    | '/api/analytics/dashboard-overview'
+    | '/api/analytics/revision'
+    | '/api/auth/login'
+    | '/api/diagnostics/error'
     | '/api/platforms/$platform'
+    | '/api/products/withdrawal-activity'
+    | '/api/settings/email'
+    | '/api/settings/scheduler'
+    | '/api/settings/supabase'
+    | '/api/sync/logs'
+    | '/api/sync/progress'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/settings/email/test'
+    | '/api/settings/supabase/test'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/api/dashboard'
+    | '/api/reset'
+    | '/api/analytics/accuracy-check'
+    | '/api/analytics/dashboard-overview'
+    | '/api/analytics/revision'
+    | '/api/auth/login'
+    | '/api/diagnostics/error'
     | '/api/platforms/$platform'
+    | '/api/products/withdrawal-activity'
+    | '/api/settings/email'
+    | '/api/settings/scheduler'
+    | '/api/settings/supabase'
+    | '/api/sync/logs'
+    | '/api/sync/progress'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/settings/email/test'
+    | '/api/settings/supabase/test'
   id:
     | '__root__'
     | '/'
     | '/api/dashboard'
+    | '/api/reset'
+    | '/api/analytics/accuracy-check'
+    | '/api/analytics/dashboard-overview'
+    | '/api/analytics/revision'
+    | '/api/auth/login'
+    | '/api/diagnostics/error'
     | '/api/platforms/$platform'
+    | '/api/products/withdrawal-activity'
+    | '/api/settings/email'
+    | '/api/settings/scheduler'
+    | '/api/settings/supabase'
+    | '/api/sync/logs'
+    | '/api/sync/progress'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/settings/email/test'
+    | '/api/settings/supabase/test'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
+  ApiResetRoute: typeof ApiResetRoute
+  ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
+  ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
+  ApiAnalyticsRevisionRoute: typeof ApiAnalyticsRevisionRoute
+  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
+  ApiDiagnosticsErrorRoute: typeof ApiDiagnosticsErrorRoute
   ApiPlatformsPlatformRoute: typeof ApiPlatformsPlatformRouteWithChildren
+  ApiProductsWithdrawalActivityRoute: typeof ApiProductsWithdrawalActivityRoute
+  ApiSettingsEmailRoute: typeof ApiSettingsEmailRouteWithChildren
+  ApiSettingsSchedulerRoute: typeof ApiSettingsSchedulerRoute
+  ApiSettingsSupabaseRoute: typeof ApiSettingsSupabaseRouteWithChildren
+  ApiSyncLogsRoute: typeof ApiSyncLogsRoute
+  ApiSyncProgressRoute: typeof ApiSyncProgressRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -104,11 +287,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/reset': {
+      id: '/api/reset'
+      path: '/api/reset'
+      fullPath: '/api/reset'
+      preLoaderRoute: typeof ApiResetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/dashboard': {
       id: '/api/dashboard'
       path: '/api/dashboard'
       fullPath: '/api/dashboard'
       preLoaderRoute: typeof ApiDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sync/progress': {
+      id: '/api/sync/progress'
+      path: '/api/sync/progress'
+      fullPath: '/api/sync/progress'
+      preLoaderRoute: typeof ApiSyncProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sync/logs': {
+      id: '/api/sync/logs'
+      path: '/api/sync/logs'
+      fullPath: '/api/sync/logs'
+      preLoaderRoute: typeof ApiSyncLogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/settings/supabase': {
+      id: '/api/settings/supabase'
+      path: '/api/settings/supabase'
+      fullPath: '/api/settings/supabase'
+      preLoaderRoute: typeof ApiSettingsSupabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/settings/scheduler': {
+      id: '/api/settings/scheduler'
+      path: '/api/settings/scheduler'
+      fullPath: '/api/settings/scheduler'
+      preLoaderRoute: typeof ApiSettingsSchedulerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/settings/email': {
+      id: '/api/settings/email'
+      path: '/api/settings/email'
+      fullPath: '/api/settings/email'
+      preLoaderRoute: typeof ApiSettingsEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/products/withdrawal-activity': {
+      id: '/api/products/withdrawal-activity'
+      path: '/api/products/withdrawal-activity'
+      fullPath: '/api/products/withdrawal-activity'
+      preLoaderRoute: typeof ApiProductsWithdrawalActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/platforms/$platform': {
@@ -117,6 +349,55 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/platforms/$platform'
       preLoaderRoute: typeof ApiPlatformsPlatformRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/diagnostics/error': {
+      id: '/api/diagnostics/error'
+      path: '/api/diagnostics/error'
+      fullPath: '/api/diagnostics/error'
+      preLoaderRoute: typeof ApiDiagnosticsErrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/analytics/revision': {
+      id: '/api/analytics/revision'
+      path: '/api/analytics/revision'
+      fullPath: '/api/analytics/revision'
+      preLoaderRoute: typeof ApiAnalyticsRevisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/analytics/dashboard-overview': {
+      id: '/api/analytics/dashboard-overview'
+      path: '/api/analytics/dashboard-overview'
+      fullPath: '/api/analytics/dashboard-overview'
+      preLoaderRoute: typeof ApiAnalyticsDashboardOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/analytics/accuracy-check': {
+      id: '/api/analytics/accuracy-check'
+      path: '/api/analytics/accuracy-check'
+      fullPath: '/api/analytics/accuracy-check'
+      preLoaderRoute: typeof ApiAnalyticsAccuracyCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/settings/supabase/test': {
+      id: '/api/settings/supabase/test'
+      path: '/test'
+      fullPath: '/api/settings/supabase/test'
+      preLoaderRoute: typeof ApiSettingsSupabaseTestRouteImport
+      parentRoute: typeof ApiSettingsSupabaseRoute
+    }
+    '/api/settings/email/test': {
+      id: '/api/settings/email/test'
+      path: '/test'
+      fullPath: '/api/settings/email/test'
+      preLoaderRoute: typeof ApiSettingsEmailTestRouteImport
+      parentRoute: typeof ApiSettingsEmailRoute
     }
     '/api/platforms/$platform/test': {
       id: '/api/platforms/$platform/test'
@@ -148,10 +429,44 @@ const ApiPlatformsPlatformRouteChildren: ApiPlatformsPlatformRouteChildren = {
 const ApiPlatformsPlatformRouteWithChildren =
   ApiPlatformsPlatformRoute._addFileChildren(ApiPlatformsPlatformRouteChildren)
 
+interface ApiSettingsEmailRouteChildren {
+  ApiSettingsEmailTestRoute: typeof ApiSettingsEmailTestRoute
+}
+
+const ApiSettingsEmailRouteChildren: ApiSettingsEmailRouteChildren = {
+  ApiSettingsEmailTestRoute: ApiSettingsEmailTestRoute,
+}
+
+const ApiSettingsEmailRouteWithChildren =
+  ApiSettingsEmailRoute._addFileChildren(ApiSettingsEmailRouteChildren)
+
+interface ApiSettingsSupabaseRouteChildren {
+  ApiSettingsSupabaseTestRoute: typeof ApiSettingsSupabaseTestRoute
+}
+
+const ApiSettingsSupabaseRouteChildren: ApiSettingsSupabaseRouteChildren = {
+  ApiSettingsSupabaseTestRoute: ApiSettingsSupabaseTestRoute,
+}
+
+const ApiSettingsSupabaseRouteWithChildren =
+  ApiSettingsSupabaseRoute._addFileChildren(ApiSettingsSupabaseRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDashboardRoute: ApiDashboardRoute,
+  ApiResetRoute: ApiResetRoute,
+  ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
+  ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
+  ApiAnalyticsRevisionRoute: ApiAnalyticsRevisionRoute,
+  ApiAuthLoginRoute: ApiAuthLoginRoute,
+  ApiDiagnosticsErrorRoute: ApiDiagnosticsErrorRoute,
   ApiPlatformsPlatformRoute: ApiPlatformsPlatformRouteWithChildren,
+  ApiProductsWithdrawalActivityRoute: ApiProductsWithdrawalActivityRoute,
+  ApiSettingsEmailRoute: ApiSettingsEmailRouteWithChildren,
+  ApiSettingsSchedulerRoute: ApiSettingsSchedulerRoute,
+  ApiSettingsSupabaseRoute: ApiSettingsSupabaseRouteWithChildren,
+  ApiSyncLogsRoute: ApiSyncLogsRoute,
+  ApiSyncProgressRoute: ApiSyncProgressRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

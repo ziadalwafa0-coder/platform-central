@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { auth, googleProvider, signInWithPopup, signOut } from "../lib/firebase";
+import { lovable } from "@/integrations/lovable/index";
+import { supabase } from "@/integrations/supabase/client";
 import { AlertCircle, RefreshCw, LogIn } from "lucide-react";
 
 interface LoginProps {
@@ -16,11 +17,30 @@ export default function Login({ onLoginSuccess }: LoginProps) {
     setError(null);
 
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      if (result.user) {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+        extraParams: {
+          prompt: "select_account",
+        },
+      });
+
+      if (result.redirected) {
+        return;
+      }
+
+      if (result.error) {
+        throw result.error;
+      }
+
+      const { data, error: userError } = await supabase.auth.getUser();
+      if (userError) {
+        throw userError;
+      }
+
+      if (data.user) {
         const allowedEmail = "ziadalwafa0@gmail.com";
-        if (result.user.email?.toLowerCase() !== allowedEmail) {
-          await signOut(auth);
+        if (data.user.email?.toLowerCase() !== allowedEmail) {
+          await supabase.auth.signOut();
           setError("عذراً، هذا البريد الإلكتروني غير مصرح له بالدخول إلى لوحة التحكم.");
           return;
         }
@@ -31,22 +51,26 @@ export default function Login({ onLoginSuccess }: LoginProps) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              email: result.user.email,
-              displayName: result.user.displayName || ""
+              email: data.user.email,
+              displayName: data.user.user_metadata?.full_name || data.user.user_metadata?.name || ""
             })
           });
         } catch (authLogErr) {
           console.error("Failed to post login activity:", authLogErr);
         }
 
-        onLoginSuccess(result.user);
+        onLoginSuccess({
+          ...data.user,
+          uid: data.user.id,
+          displayName: data.user.user_metadata?.full_name || data.user.user_metadata?.name || data.user.email,
+        });
       } else {
         setError("فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.");
       }
     } catch (err: any) {
       console.error("Google login error:", err);
-      if (err?.code === "auth/popup-blocked") {
-        setError("تم حظر النافذة المنبثقة من قبل المتصفح. يرجى تفعيل النوافذ المنبثقة لموقعنا والمحاولة مجدداً.");
+      if (err?.message?.includes("popup")) {
+        setError("تم حظر نافذة تسجيل الدخول من المتصفح. يرجى السماح بالنوافذ المنبثقة والمحاولة مجدداً.");
       } else {
         setError(err?.message || "حدث خطأ أثناء محاولة تسجيل الدخول عبر Google.");
       }
@@ -108,7 +132,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
           <div className="text-center pt-4 border-t border-white/5">
             <p className="text-[10px] text-[#a5a5c8]/60 font-medium leading-relaxed">
-              تخضع لوحة التحكم لحماية أمنية مشددة مدعومة بـ Firebase Auth. يتم توثيق كافة العمليات تلقائياً.
+              تخضع لوحة التحكم لحماية أمنية مشددة عبر تسجيل Google المدعوم من Lovable Cloud.
             </p>
           </div>
         </div>

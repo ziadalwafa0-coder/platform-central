@@ -22,56 +22,7 @@ import {
   ShieldAlert
 } from "lucide-react";
 import { Product } from "../types";
-import { db, auth } from "../lib/firebase";
-import { doc, setDoc, deleteDoc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import ProductAdsSection from "./ProductAdsSection";
-
-enum OperationType {
-  CREATE = 'create',
-  UPDATE = 'update',
-  DELETE = 'delete',
-  LIST = 'list',
-  GET = 'get',
-  WRITE = 'write',
-}
-
-interface FirestoreErrorInfo {
-  error: string;
-  operationType: OperationType;
-  path: string | null;
-  authInfo: {
-    userId?: string | null;
-    email?: string | null;
-    emailVerified?: boolean | null;
-    isAnonymous?: boolean | null;
-    tenantId?: string | null;
-    providerInfo?: {
-      providerId?: string | null;
-      email?: string | null;
-    }[];
-  }
-}
-
-function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
-  const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
-    authInfo: {
-      userId: auth.currentUser?.uid,
-      email: auth.currentUser?.email,
-      emailVerified: auth.currentUser?.emailVerified,
-      isAnonymous: auth.currentUser?.isAnonymous,
-      tenantId: auth.currentUser?.tenantId,
-      providerInfo: auth.currentUser?.providerData?.map(provider => ({
-        providerId: provider.providerId,
-        email: provider.email,
-      })) || []
-    },
-    operationType,
-    path
-  };
-  console.error('Firestore Error: ', JSON.stringify(errInfo));
-  throw new Error(JSON.stringify(errInfo));
-}
 
 interface ProductDetailDrawerProps {
   activeProductDetail: Product | null;
@@ -92,6 +43,11 @@ export default function ProductDetailDrawer({
   const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
 
+  const getWatchlistKey = () => {
+    if (!userId || !activeProductDetail) return null;
+    return `stock-radaar-watchlist:${userId}:${activeProductDetail.id}`;
+  };
+
   useEffect(() => {
     if (!userId || !activeProductDetail) {
       setIsStarred(false);
@@ -100,11 +56,11 @@ export default function ProductDetailDrawer({
       return;
     }
 
-    const docPath = `users/${userId}/watchlist/${activeProductDetail.id}`;
-    const docRef = doc(db, "users", userId, "watchlist", activeProductDetail.id);
-    const unsubscribe = onSnapshot(docRef, (docSnap) => {
-      if (docSnap.exists()) {
-        const data = docSnap.data();
+    try {
+      const storageKey = getWatchlistKey();
+      const saved = storageKey ? window.localStorage.getItem(storageKey) : null;
+      if (saved) {
+        const data = JSON.parse(saved);
         setIsStarred(true);
         setAlertThreshold(data.alertThreshold !== null && data.alertThreshold !== undefined ? data.alertThreshold : "");
         setNotes(data.notes || "");
@@ -113,21 +69,18 @@ export default function ProductDetailDrawer({
         setAlertThreshold("");
         setNotes("");
       }
-    }, (error) => {
-      console.error("Error listening to watchlist item:", error);
-      handleFirestoreError(error, OperationType.GET, docPath);
-    });
-
-    return () => unsubscribe();
+    } catch (error) {
+      console.error("Error reading local watchlist item:", error);
+      setIsStarred(false);
+      setAlertThreshold("");
+      setNotes("");
+    }
   }, [userId, activeProductDetail]);
 
   const handleSaveWatchlist = async () => {
     if (!userId || !activeProductDetail) return;
     setSaving(true);
-    const docPath = `users/${userId}/watchlist/${activeProductDetail.id}`;
     try {
-      const docRef = doc(db, "users", userId, "watchlist", activeProductDetail.id);
-      
       // Ensure all potentially undefined fields are strictly sanitized to prevent Firestore errors
       const payload = {
         productId: activeProductDetail.id || "",
@@ -138,14 +91,14 @@ export default function ProductDetailDrawer({
         currentQuantity: activeProductDetail.currentQuantity !== undefined && activeProductDetail.currentQuantity !== null ? activeProductDetail.currentQuantity : null,
         alertThreshold: alertThreshold === "" ? null : Number(alertThreshold),
         notes: notes || "",
-        starredAt: serverTimestamp()
+        starredAt: new Date().toISOString()
       };
 
-      await setDoc(docRef, payload);
+      const storageKey = getWatchlistKey();
+      if (storageKey) window.localStorage.setItem(storageKey, JSON.stringify(payload));
       setIsStarred(true);
     } catch (e) {
       console.error("Error saving to watchlist:", e);
-      handleFirestoreError(e, OperationType.WRITE, docPath);
     } finally {
       setSaving(false);
     }
@@ -154,16 +107,14 @@ export default function ProductDetailDrawer({
   const handleRemoveWatchlist = async () => {
     if (!userId || !activeProductDetail) return;
     setSaving(true);
-    const docPath = `users/${userId}/watchlist/${activeProductDetail.id}`;
     try {
-      const docRef = doc(db, "users", userId, "watchlist", activeProductDetail.id);
-      await deleteDoc(docRef);
+      const storageKey = getWatchlistKey();
+      if (storageKey) window.localStorage.removeItem(storageKey);
       setIsStarred(false);
       setAlertThreshold("");
       setNotes("");
     } catch (e) {
       console.error("Error removing from watchlist:", e);
-      handleFirestoreError(e, OperationType.DELETE, docPath);
     } finally {
       setSaving(false);
     }

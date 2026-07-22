@@ -29,8 +29,7 @@ import Login from "./components/Login";
 import { DateRangePicker } from "./components/DateRangePicker";
 import AdsSpyPage from "./components/ads-spy/AdsSpyPage";
 import { AdsSpyProduct } from "./ads-spy-types";
-import { auth, firebaseInitError } from "./lib/firebase";
-import { signOut } from "firebase/auth";
+import { supabase } from "@/integrations/supabase/client";
 import { logTimeDiagnostics } from "./lib/diagnostics";
 import { getCairoTodayStr, addDaysToDateStr } from "./shared/time";
 import { safeFetchJson } from "./lib/api";
@@ -81,25 +80,48 @@ export default function App() {
   const [checkingSession, setCheckingSession] = useState(true);
 
   useEffect(() => {
-    if (!auth) {
-      setCheckingSession(false);
-      return;
-    }
-    const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      const allowedEmail = "ziadalwafa0@gmail.com";
+    let mounted = true;
+    const allowedEmail = "ziadalwafa0@gmail.com";
+    const normalizeUser = (user: any) => user ? {
+      ...user,
+      uid: user.id,
+      displayName: user.user_metadata?.full_name || user.user_metadata?.name || user.email,
+      emailVerified: Boolean(user.email_confirmed_at),
+    } : null;
+
+    const applyUser = async (user: any) => {
+      if (!mounted) return;
       if (user && user.email?.toLowerCase() !== allowedEmail) {
-        signOut(auth);
+        await supabase.auth.signOut();
         setSession(null);
       } else {
-        setSession(user);
+        setSession(normalizeUser(user));
       }
+    };
+
+    supabase.auth.getUser().then(({ data }) => {
+      applyUser(data.user).finally(() => {
+        if (mounted) setCheckingSession(false);
+      });
+    }).catch(() => {
+      if (mounted) {
+        setSession(null);
+        setCheckingSession(false);
+      }
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+      applyUser(currentSession?.user ?? null);
       setCheckingSession(false);
     });
-    return () => unsubscribe();
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   const handleLogout = async () => {
-    await signOut(auth);
+    await supabase.auth.signOut();
     setSession(null);
   };
 
@@ -550,43 +572,6 @@ export default function App() {
       showToastMessage("خطأ أثناء تصفير وحذف الكتالوج");
     }
   };
-
-  if (firebaseInitError || !auth) {
-    return (
-      <div className="min-h-screen bg-[#0a0a1a] text-[#f5f5fa] flex items-center justify-center p-4" dir="rtl">
-        <div className="max-w-md w-full bg-[#141432] border border-amber-500/30 rounded-[24px] p-8 text-center space-y-6 shadow-2xl">
-          <div className="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
-            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-          </div>
-          <h2 className="text-sm font-extrabold text-white">تم حظر الاتصال بالرادار (قيود المتصفح)</h2>
-          <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
-            تم حظر الوصول إلى قاعدة البيانات والتحقق من الهوية من قبل المتصفح. يحدث هذا غالباً بسبب قيود ملفات تعريف الارتباط للطرف الثالث (Third-party Cookies) أو حظر التخزين المحلي داخل إطار المعاينة (iFrame).
-          </p>
-          <div className="bg-[#0a0a1a] p-4 rounded-xl text-left font-mono text-[10.5px] text-amber-400 border border-amber-500/10 overflow-x-auto">
-            {firebaseInitError || "auth_service_not_initialized"}
-          </div>
-          <div className="pt-2">
-            <a 
-              href={window.location.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#6366f1] hover:bg-[#6366f1]/90 text-white font-bold text-xs rounded-xl shadow-lg shadow-[#6366f1]/15 transition cursor-pointer"
-            >
-              <span>فتح المنصة في نافذة جديدة</span>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-          <p className="text-[10px] text-[#a5a5c8]/50 leading-normal">
-            بعد فتحها في علامة تبويب جديدة، ستتمكن من تسجيل الدخول باستخدام حساب Google المعتمد ومزامنة البيانات بشكل طبيعي.
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   if (checkingSession) {
     return (

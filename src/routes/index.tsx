@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { lazy, Suspense, useEffect, useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const LegacyApp = lazy(() => import("../legacy/App"));
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Stock Radaar — Hourly Dropshipping Inventory Monitor" },
+      {
+        name: "description",
+        content:
+          "Hourly Egyptian dropshipping inventory monitoring with automatic sync, ads spy and analytics.",
+      },
+      { property: "og:title", content: "Stock Radaar" },
+      { property: "og:description", content: "Hourly dropshipping inventory monitor." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: IndexPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function IndexPage() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#07111F] text-[#F4F7FB]">
+        <div className="text-sm opacity-70">Loading Stock Radaar…</div>
+      </div>
+    );
+  }
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-[#07111F] text-[#F4F7FB]">
+          <div className="text-sm opacity-70">Loading dashboard…</div>
+        </div>
+      }
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+      <LegacyApp />
+    </Suspense>
   );
 }

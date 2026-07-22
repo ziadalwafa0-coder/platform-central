@@ -61,7 +61,7 @@ export default function Sidebar({
 
   const menuItems = [
     { id: "home", label: "نظرة عامة", icon: Grid, badge: null },
-    { id: "hourly_analytics", label: "تحليل الساعات", icon: Clock, badge: "جديد", badgeColor: "bg-[#2F80FF]/15 text-[#2F80FF]" },
+    { id: "hourly_analytics", label: "تحليل الساعات", icon: Clock, badge: "جديد", badgeColor: "bg-[#6366f1]/15 text-[#6366f1]" },
     { id: "products", label: "المنتجات", icon: Layers, badge: products.length },
     { id: "ads_spy", label: "رادار الإعلانات", icon: ScanSearch, badge: "جديد", badgeColor: "bg-[#8B5CF6]/15 text-[#A78BFA]" },
     { id: "delivery_returns_audit", label: "تدقيق المرتجعات والتسليم", icon: ShieldCheck, badge: "جديد", badgeColor: "bg-[#24C78E]/15 text-[#24C78E]" },
@@ -91,27 +91,27 @@ export default function Sidebar({
 
   return (
     <aside 
-      className={`fixed top-0 bottom-0 right-0 z-30 flex flex-col bg-[#081525] border-l border-[#20324A] transition-all duration-300 ${
+      className={`fixed top-0 bottom-0 right-0 z-30 flex flex-col bg-[#0f0f24] border-l border-[#2a2a5c] transition-all duration-300 ${
         sidebarOpen ? "w-64" : "w-20"
       }`}
     >
       {/* Brand Header */}
-      <div className="h-20 flex items-center justify-between px-5 border-b border-[#20324A] shrink-0">
+      <div className="h-20 flex items-center justify-between px-5 border-b border-[#2a2a5c] shrink-0">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2F80FF] to-[#8B5CF6] flex items-center justify-center shadow-lg shadow-[#2F80FF]/15 shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8B5CF6] flex items-center justify-center shadow-lg shadow-[#6366f1]/15 shrink-0">
             <Radio className="w-5 h-5 text-white animate-pulse" />
           </div>
           {sidebarOpen && (
             <div className="text-right leading-tight transition-all duration-300">
-              <span className="text-sm font-extrabold text-[#F4F7FB] block tracking-wide font-display">ستوك رادار</span>
-              <span className="text-[10px] text-[#9FB0C5] block font-mono">STOCK RADAAR</span>
+              <span className="text-sm font-extrabold text-[#f5f5fa] block tracking-wide font-display">ستوك رادار</span>
+              <span className="text-[10px] text-[#a5a5c8] block font-mono">STOCK RADAAR</span>
             </div>
           )}
         </div>
         
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-1.5 rounded-lg bg-[#12233A] hover:bg-[#20324A] text-[#9FB0C5] hover:text-[#F4F7FB] transition shrink-0 cursor-pointer"
+          className="p-1.5 rounded-lg bg-[#1c1c47] hover:bg-[#2a2a5c] text-[#a5a5c8] hover:text-[#f5f5fa] transition shrink-0 cursor-pointer"
         >
           {sidebarOpen ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
@@ -119,9 +119,9 @@ export default function Sidebar({
 
       {/* Workspace indicator */}
       {sidebarOpen && (
-        <div className="px-5 py-3 border-b border-[#20324A]/40 bg-[#07111F]/50 shrink-0 text-right">
-          <span className="text-[10px] text-[#9FB0C5]/70 block">الحساب النشط</span>
-          <span className="text-xs font-semibold text-[#F4F7FB] block mt-0.5">صفقة للدروبشيبينغ مصر 🇪🇬</span>
+        <div className="px-5 py-3 border-b border-[#2a2a5c]/40 bg-[#0a0a1a]/50 shrink-0 text-right">
+          <span className="text-[10px] text-[#a5a5c8]/70 block">الحساب النشط</span>
+          <span className="text-xs font-semibold text-[#f5f5fa] block mt-0.5">صفقة للدروبشيبينغ مصر 🇪🇬</span>
         </div>
       )}
 
@@ -136,12 +136,12 @@ export default function Sidebar({
               onClick={() => setActiveTab(item.id)}
               className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-right text-xs font-bold transition-all duration-200 cursor-pointer group relative ${
                 isActive 
-                  ? "bg-[#12233A] text-[#F4F7FB] border-r-4 border-[#2F80FF]" 
-                  : "text-[#9FB0C5] hover:bg-[#0D1B2D] hover:text-[#F4F7FB]"
+                  ? "bg-[#1c1c47] text-[#f5f5fa] border-r-4 border-[#6366f1]" 
+                  : "text-[#a5a5c8] hover:bg-[#141432] hover:text-[#f5f5fa]"
               }`}
               title={!sidebarOpen ? item.label : undefined}
             >
-              <Icon className={`w-4.5 h-4.5 shrink-0 ${isActive ? "text-[#2F80FF]" : "text-[#9FB0C5] group-hover:text-[#F4F7FB]"}`} />
+              <Icon className={`w-4.5 h-4.5 shrink-0 ${isActive ? "text-[#6366f1]" : "text-[#a5a5c8] group-hover:text-[#f5f5fa]"}`} />
               
               {sidebarOpen ? (
                 <span className="flex-1 text-right">{item.label}</span>
@@ -149,7 +149,7 @@ export default function Sidebar({
 
               {item.badge !== null && sidebarOpen ? (
                 <span className={`px-2 py-0.5 rounded-full text-[9px] font-mono font-bold ${
-                  item.badgeColor || "bg-[#2F80FF]/15 text-[#2F80FF]"
+                  item.badgeColor || "bg-[#6366f1]/15 text-[#6366f1]"
                 }`}>
                   {item.badge}
                 </span>
@@ -165,7 +165,7 @@ export default function Sidebar({
         {onLogout && (
           <button
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-right text-xs font-bold transition-all duration-200 cursor-pointer group text-red-400 hover:bg-red-500/10 mt-2 border-t border-[#20324A]/30 pt-3"
+            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-right text-xs font-bold transition-all duration-200 cursor-pointer group text-red-400 hover:bg-red-500/10 mt-2 border-t border-[#2a2a5c]/30 pt-3"
             title={!sidebarOpen ? "تسجيل الخروج" : undefined}
           >
             <LogOut className="w-4.5 h-4.5 shrink-0 text-red-400" />
@@ -175,28 +175,28 @@ export default function Sidebar({
       </nav>
 
       {/* Status Footer section */}
-      <div className="p-4 border-t border-[#20324A] bg-[#07111F]/30 space-y-3 shrink-0 text-right">
+      <div className="p-4 border-t border-[#2a2a5c] bg-[#0a0a1a]/30 space-y-3 shrink-0 text-right">
         {sidebarOpen ? (
           <>
             <div className="space-y-2">
-              <span className="text-[10px] text-[#9FB0C5] font-bold block">القنوات المرتبطة بالرادار</span>
+              <span className="text-[10px] text-[#a5a5c8] font-bold block">القنوات المرتبطة بالرادار</span>
               
-              <div className="flex items-center justify-between bg-[#0D1B2D]/80 px-2.5 py-1.5 rounded-lg border border-[#20324A]/60">
-                <span className="text-xs text-[#F4F7FB] font-medium">منصة صفقة</span>
+              <div className="flex items-center justify-between bg-[#141432]/80 px-2.5 py-1.5 rounded-lg border border-[#2a2a5c]/60">
+                <span className="text-xs text-[#f5f5fa] font-medium">منصة صفقة</span>
                 <span className={`text-[9px] px-2 py-0.5 rounded font-black ${safkaStatus.bg} ${safkaStatus.color}`}>
                   {safkaStatus.text}
                 </span>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#20324A]/40 text-[9px] text-[#9FB0C5]/80 space-y-1 leading-relaxed font-mono">
+            <div className="pt-2 border-t border-[#2a2a5c]/40 text-[9px] text-[#a5a5c8]/80 space-y-1 leading-relaxed font-mono">
               <div className="flex items-center justify-between">
                 <span>المزامنة القادمة:</span>
                 <span className="text-[#24C78E] font-black text-[10px]">
                   {schedulerEnabled ? `${countdownStr} (${targetCairoTimeStr})` : "معطلة"}
                 </span>
               </div>
-              <div className="text-[8px] text-[#9FB0C5]/60">
+              <div className="text-[8px] text-[#a5a5c8]/60">
                 {schedulerInterval === 1 
                   ? "تحديث فوري (دقيقة بدقيقة)" 
                   : `دورية كل ${schedulerInterval} دقيقة (${Math.round(60 / schedulerInterval)} مرات/ساعة)`}

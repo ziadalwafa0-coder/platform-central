@@ -298,48 +298,48 @@ export default function ProductsTab({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         
         {/* Total Pieces Withdrawn */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-2 relative overflow-hidden group hover:border-[#2F80FF]/30 transition-all duration-300">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-2 relative overflow-hidden group hover:border-[#6366f1]/30 transition-all duration-300">
           <div className="absolute top-0 right-0 h-[2px] w-full bg-gradient-to-l from-transparent via-[#24C78E]/50 to-transparent"></div>
-          <span className="text-[11px] text-[#9FB0C5] font-extrabold block">إجمالي القطع المسحوبة</span>
+          <span className="text-[11px] text-[#a5a5c8] font-extrabold block">إجمالي القطع المسحوبة</span>
           <div className="flex items-baseline gap-2 mt-1">
             <strong className="text-2xl text-[#24C78E] font-black font-mono">
               {loading ? "..." : (metrics?.totalWithdrawnPieces || 0)}
             </strong>
-            <span className="text-[10px] text-[#9FB0C5]">قطع</span>
+            <span className="text-[10px] text-[#a5a5c8]">قطع</span>
           </div>
-          <p className="text-[9px] text-[#9FB0C5]/50 font-medium">{displayDateRange}</p>
+          <p className="text-[9px] text-[#a5a5c8]/50 font-medium">{displayDateRange}</p>
         </div>
 
         {/* Total Withdrawal Events */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-2 relative overflow-hidden group hover:border-[#2F80FF]/30 transition-all duration-300">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-2 relative overflow-hidden group hover:border-[#6366f1]/30 transition-all duration-300">
           <div className="absolute top-0 right-0 h-[2px] w-full bg-gradient-to-l from-transparent via-[#8B5CF6]/50 to-transparent"></div>
-          <span className="text-[11px] text-[#9FB0C5] font-extrabold block">إجمالي عمليات الرصد</span>
+          <span className="text-[11px] text-[#a5a5c8] font-extrabold block">إجمالي عمليات الرصد</span>
           <div className="flex items-baseline gap-2 mt-1">
             <strong className="text-2xl text-white font-black font-mono">
               {loading ? "..." : (metrics?.totalWithdrawalEvents || 0)}
             </strong>
-            <span className="text-[10px] text-[#9FB0C5]">عملية سحب</span>
+            <span className="text-[10px] text-[#a5a5c8]">عملية سحب</span>
           </div>
-          <p className="text-[9px] text-[#9FB0C5]/50 font-medium">{displayDateRange}</p>
+          <p className="text-[9px] text-[#a5a5c8]/50 font-medium">{displayDateRange}</p>
         </div>
 
         {/* Affected Products Count */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-2 relative overflow-hidden group hover:border-[#2F80FF]/30 transition-all duration-300">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-2 relative overflow-hidden group hover:border-[#6366f1]/30 transition-all duration-300">
           <div className="absolute top-0 right-0 h-[2px] w-full bg-gradient-to-l from-transparent via-[#F5A524]/50 to-transparent"></div>
-          <span className="text-[11px] text-[#9FB0C5] font-extrabold block">المنتجات المتأثرة بالسحب</span>
+          <span className="text-[11px] text-[#a5a5c8] font-extrabold block">المنتجات المتأثرة بالسحب</span>
           <div className="flex items-baseline gap-2 mt-1">
             <strong className="text-2xl text-[#F5A524] font-black font-mono">
               {loading ? "..." : (metrics?.affectedProductsCount || 0)}
             </strong>
-            <span className="text-[10px] text-[#9FB0C5]">منتج فريد</span>
+            <span className="text-[10px] text-[#a5a5c8]">منتج فريد</span>
           </div>
-          <p className="text-[9px] text-[#9FB0C5]/50 font-medium">{displayDateRange}</p>
+          <p className="text-[9px] text-[#a5a5c8]/50 font-medium">{displayDateRange}</p>
         </div>
 
       </div>
       
       {/* Filters Area */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl">
         <div className="flex flex-col xl:flex-row gap-4 items-stretch justify-between">
           
           {/* Right Side: Search & Date Controls */}
@@ -355,9 +355,9 @@ export default function ProductsTab({
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl pr-10 pl-4 text-xs text-white placeholder-[#9FB0C5]/50 outline-none focus:border-[#2F80FF] transition-all font-medium text-right font-sans"
+                className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl pr-10 pl-4 text-xs text-white placeholder-[#a5a5c8]/50 outline-none focus:border-[#6366f1] transition-all font-medium text-right font-sans"
               />
-              <Search className="w-4 h-4 text-[#9FB0C5] absolute right-3.5 top-3.5" />
+              <Search className="w-4 h-4 text-[#a5a5c8] absolute right-3.5 top-3.5" />
             </div>
 
             {/* Date Selector Widget */}
@@ -366,7 +366,7 @@ export default function ProductsTab({
               endDate={endDate}
               onChange={handleDateRangeChange}
               align="right"
-              className="flex items-center gap-2 bg-[#07111F] hover:bg-[#12233A] text-white px-3 h-11 rounded-xl border border-[#20324A] text-xs font-semibold cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-[#2F80FF]"
+              className="flex items-center gap-2 bg-[#0a0a1a] hover:bg-[#1c1c47] text-white px-3 h-11 rounded-xl border border-[#2a2a5c] text-xs font-semibold cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-[#6366f1]"
             />
           </div>
 
@@ -381,7 +381,7 @@ export default function ProductsTab({
                   setSelectedCategory(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-[#07111F] border border-[#20324A] h-11 rounded-xl px-3 text-xs text-[#F4F7FB] outline-none focus:border-[#2F80FF] font-bold cursor-pointer"
+                className="w-full bg-[#0a0a1a] border border-[#2a2a5c] h-11 rounded-xl px-3 text-xs text-[#f5f5fa] outline-none focus:border-[#6366f1] font-bold cursor-pointer"
               >
                 <option value="all">جميع التصنيفات</option>
                 {categories.map((c, i) => (
@@ -398,7 +398,7 @@ export default function ProductsTab({
                   setSelectedStatus(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-[#07111F] border border-[#20324A] h-11 rounded-xl px-3 text-xs text-[#F4F7FB] outline-none focus:border-[#2F80FF] font-bold cursor-pointer"
+                className="w-full bg-[#0a0a1a] border border-[#2a2a5c] h-11 rounded-xl px-3 text-xs text-[#f5f5fa] outline-none focus:border-[#6366f1] font-bold cursor-pointer"
               >
                 <option value="all">جميع الحالات</option>
                 <option value="QUANTITY_DECREASE">المنخفضة بالكمية</option>
@@ -412,7 +412,7 @@ export default function ProductsTab({
             <div>
               <button 
                 onClick={handleExportCSV}
-                className="h-11 px-4 bg-[#12233A] hover:bg-[#20324A] border border-[#20324A] text-xs text-[#F4F7FB] hover:text-[#2F80FF] rounded-xl transition duration-150 font-bold flex items-center justify-center gap-2 cursor-pointer"
+                className="h-11 px-4 bg-[#1c1c47] hover:bg-[#2a2a5c] border border-[#2a2a5c] text-xs text-[#f5f5fa] hover:text-[#6366f1] rounded-xl transition duration-150 font-bold flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>تصدير CSV</span>
@@ -425,12 +425,12 @@ export default function ProductsTab({
       </div>
 
       {/* Main Table Container */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] rounded-3xl overflow-hidden shadow-2xl">
+      <div className="bg-[#141432] border border-[#2a2a5c] rounded-3xl overflow-hidden shadow-2xl">
         
         {loading ? (
           <div className="flex flex-col items-center justify-center py-24 space-y-3">
-            <div className="w-8 h-8 border-4 border-[#2F80FF] border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-xs text-[#9FB0C5] font-bold">جاري تحميل بيانات السحوبات والتحليلات...</p>
+            <div className="w-8 h-8 border-4 border-[#6366f1] border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-xs text-[#a5a5c8] font-bold">جاري تحميل بيانات السحوبات والتحليلات...</p>
           </div>
         ) : error ? (
           <div className="flex flex-col items-center justify-center py-20 text-center px-4 space-y-2">
@@ -438,13 +438,13 @@ export default function ProductsTab({
               <Info className="w-6 h-6" />
             </div>
             <h3 className="text-sm font-bold text-white">حدث خطأ في جلب البيانات</h3>
-            <p className="text-xs text-[#9FB0C5]/80 max-w-md">{error}</p>
+            <p className="text-xs text-[#a5a5c8]/80 max-w-md">{error}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-right border-collapse">
               <thead>
-                <tr className="bg-[#07111F]/60 text-[#9FB0C5] text-xs font-bold border-b border-[#20324A]">
+                <tr className="bg-[#0a0a1a]/60 text-[#a5a5c8] text-xs font-bold border-b border-[#2a2a5c]">
                   <th className="p-4 cursor-pointer hover:text-white transition" onClick={() => handleSort("name")}>
                     <div className="flex items-center gap-1.5">
                       <span>اسم السلعة والتفاصيل</span>
@@ -483,7 +483,7 @@ export default function ProductsTab({
                   <th className="p-4 text-center">التحليل التفصيلي</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#20324A]/40 text-xs text-[#F4F7FB]">
+              <tbody className="divide-y divide-[#2a2a5c]/40 text-xs text-[#f5f5fa]">
                 {paginatedProducts.map((p) => {
                   const isLow = p.currentQuantity !== null && p.currentQuantity !== undefined && p.currentQuantity <= 20 && p.currentQuantity > 0;
                   const isOut = p.currentQuantity !== null && p.currentQuantity !== undefined && p.currentQuantity === 0;
@@ -491,28 +491,28 @@ export default function ProductsTab({
                   return (
                     <tr 
                       key={p.id} 
-                      className="hover:bg-[#12233A]/25 transition duration-150"
+                      className="hover:bg-[#1c1c47]/25 transition duration-150"
                     >
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <img 
                             src={p.imageUrl} 
-                            className="w-11 h-11 rounded-lg object-cover bg-[#07111F] shrink-0 border border-[#20324A]/50" 
+                            className="w-11 h-11 rounded-lg object-cover bg-[#0a0a1a] shrink-0 border border-[#2a2a5c]/50" 
                             alt="" 
                             referrerPolicy="no-referrer"
                           />
                           <div>
                             <h4 
                               onClick={() => onProductClick(p)}
-                              className="font-black text-[#F4F7FB] text-[12.5px] hover:text-[#2F80FF] transition cursor-pointer"
+                              className="font-black text-[#f5f5fa] text-[12.5px] hover:text-[#6366f1] transition cursor-pointer"
                             >
                               {p.name}
                             </h4>
                             <div className="flex items-center gap-2 mt-0.5">
-                              <span className="text-[9px] text-[#9FB0C5] block">المنصة: {p.platform || "صفقة Safka EG"}</span>
+                              <span className="text-[9px] text-[#a5a5c8] block">المنصة: {p.platform || "صفقة Safka EG"}</span>
                               {p.currentQuantity !== undefined && (
                                 <>
-                                  <span className="text-[9px] text-[#20324A]">•</span>
+                                  <span className="text-[9px] text-[#2a2a5c]">•</span>
                                   <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded ${
                                     isOut ? "text-[#F05252] bg-[#F05252]/10" :
                                     isLow ? "text-[#F5A524] bg-[#F5A524]/10" :
@@ -527,9 +527,9 @@ export default function ProductsTab({
                         </div>
                       </td>
                       
-                      <td className="p-4 font-mono text-[#9FB0C5] font-semibold">{p.sku}</td>
+                      <td className="p-4 font-mono text-[#a5a5c8] font-semibold">{p.sku}</td>
                       
-                      <td className="p-4 text-[#9FB0C5]">{p.category}</td>
+                      <td className="p-4 text-[#a5a5c8]">{p.category}</td>
                       
                       {/* Pieces withdrawn */}
                       <td className="p-4 text-center font-mono font-bold">
@@ -546,12 +546,12 @@ export default function ProductsTab({
                         </span>
                       </td>
 
-                      <td className="p-4 text-center font-bold font-mono text-[#F4F7FB] text-[13px]">{p.price} ج.م</td>
+                      <td className="p-4 text-center font-bold font-mono text-[#f5f5fa] text-[13px]">{p.price} ج.م</td>
 
                       {/* Last checked cairo withdrawal time */}
-                      <td className="p-4 text-center text-[#9FB0C5]/80 text-[11px] font-mono">
+                      <td className="p-4 text-center text-[#a5a5c8]/80 text-[11px] font-mono">
                         <div className="flex items-center justify-center gap-1.5">
-                          <Clock className="w-3 h-3 text-[#9FB0C5]/50" />
+                          <Clock className="w-3 h-3 text-[#a5a5c8]/50" />
                           {formatTimeArabic(p.lastWithdrawalAt)}
                         </div>
                       </td>
@@ -559,7 +559,7 @@ export default function ProductsTab({
                       <td className="p-4 text-center">
                         <button 
                           onClick={() => onProductClick(p)}
-                          className="px-3 py-1.5 rounded-lg bg-[#12233A] hover:bg-[#20324A] border border-[#20324A] text-[#F4F7FB] hover:text-[#2F80FF] transition-all cursor-pointer font-bold text-[11px]"
+                          className="px-3 py-1.5 rounded-lg bg-[#1c1c47] hover:bg-[#2a2a5c] border border-[#2a2a5c] text-[#f5f5fa] hover:text-[#6366f1] transition-all cursor-pointer font-bold text-[11px]"
                         >
                           {startDate === endDate ? "تحليل اليوم" : "تحليل الفترة"}
                         </button>
@@ -570,7 +570,7 @@ export default function ProductsTab({
 
                 {sortedProducts.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="text-center py-20 text-[#9FB0C5] font-black text-xs bg-[#07111F]/20">
+                    <td colSpan={8} className="text-center py-20 text-[#a5a5c8] font-black text-xs bg-[#0a0a1a]/20">
                       لا تتوفر أي سحوبات أو عمليات مطابقة مسجلة {displayDateRange} المحدد بالمعايير المدخلة.
                     </td>
                   </tr>
@@ -582,9 +582,9 @@ export default function ProductsTab({
 
         {/* Styled Pagination footer */}
         {!loading && sortedProducts.length > 0 && (
-          <div className="bg-[#07111F]/40 px-6 py-4 border-t border-[#20324A] flex justify-between items-center text-xs select-none">
+          <div className="bg-[#0a0a1a]/40 px-6 py-4 border-t border-[#2a2a5c] flex justify-between items-center text-xs select-none">
             {/* Page info */}
-            <div className="text-[#9FB0C5] font-medium">
+            <div className="text-[#a5a5c8] font-medium">
               عرض من <strong className="text-white font-mono">{((currentPage - 1) * pageSize) + 1}</strong> إلى{" "}
               <strong className="text-white font-mono">{Math.min(currentPage * pageSize, sortedProducts.length)}</strong> من أصل{" "}
               <strong className="text-white font-mono">{sortedProducts.length}</strong> منتج نشط بالسحب
@@ -595,19 +595,19 @@ export default function ProductsTab({
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-1.5 rounded-lg bg-[#12233A] hover:bg-[#20324A] text-[#9FB0C5] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
+                className="p-1.5 rounded-lg bg-[#1c1c47] hover:bg-[#2a2a5c] text-[#a5a5c8] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
               
-              <span className="text-[#9FB0C5] font-bold">
+              <span className="text-[#a5a5c8] font-bold">
                 الصفحة <strong className="text-white font-mono">{currentPage}</strong> من أصل <strong className="text-white font-mono">{totalPages}</strong>
               </span>
 
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="p-1.5 rounded-lg bg-[#12233A] hover:bg-[#20324A] text-[#9FB0C5] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
+                className="p-1.5 rounded-lg bg-[#1c1c47] hover:bg-[#2a2a5c] text-[#a5a5c8] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -618,7 +618,7 @@ export default function ProductsTab({
                   setPageSize(Number(e.target.value));
                   setCurrentPage(1);
                 }}
-                className="bg-[#12233A] border border-[#20324A] text-xs text-white rounded-lg px-2 py-1 outline-none font-bold mr-2 cursor-pointer"
+                className="bg-[#1c1c47] border border-[#2a2a5c] text-xs text-white rounded-lg px-2 py-1 outline-none font-bold mr-2 cursor-pointer"
               >
                 <option value={10}>١٠ منتجات</option>
                 <option value={25}>٢٥ منتج</option>

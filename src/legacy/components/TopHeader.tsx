@@ -152,11 +152,11 @@ export default function TopHeader({
   };
 
   return (
-    <header className="sticky top-0 z-20 h-20 bg-[#07111F]/80 backdrop-blur-xl border-b border-[#20324A] flex items-center justify-between px-6 transition-all duration-300">
+    <header className="sticky top-0 z-20 h-20 bg-[#0a0a1a]/80 backdrop-blur-xl border-b border-[#2a2a5c] flex items-center justify-between px-6 transition-all duration-300">
       {/* Tab Title and Description */}
       <div className="text-right max-w-lg md:max-w-xl">
-        <h1 className="text-base font-extrabold text-[#F4F7FB] font-display">{title}</h1>
-        <p className="text-[11px] text-[#9FB0C5] mt-0.5 line-clamp-1">{desc}</p>
+        <h1 className="text-base font-extrabold text-[#f5f5fa] font-display">{title}</h1>
+        <p className="text-[11px] text-[#a5a5c8] mt-0.5 line-clamp-1">{desc}</p>
       </div>
 
       {/* Action Controls & Info Widgets */}
@@ -172,74 +172,74 @@ export default function TopHeader({
             window.location.reload();
           }}
           title="انقر لتعديل فرق توقيت القاهرة (تقليل ساعة إذا كانت الساعة متقدمة)"
-          className="hidden sm:flex items-center gap-2 bg-[#0D1B2D] border border-[#20324A] px-3 py-1.5 rounded-xl text-right select-none h-11 cursor-pointer hover:border-[#2F80FF] transition-colors group shrink-0"
+          className="hidden sm:flex items-center gap-2 bg-[#141432] border border-[#2a2a5c] px-3 py-1.5 rounded-xl text-right select-none h-11 cursor-pointer hover:border-[#6366f1] transition-colors group shrink-0"
         >
-          <Clock className="w-4 h-4 text-[#2F80FF] group-hover:scale-110 transition-transform" />
+          <Clock className="w-4 h-4 text-[#6366f1] group-hover:scale-110 transition-transform" />
           <div>
-            <span className="text-[10px] text-[#2F80FF] font-bold block leading-none flex items-center justify-end gap-1">
+            <span className="text-[10px] text-[#6366f1] font-bold block leading-none flex items-center justify-end gap-1">
               توقيت القاهرة 🇪🇬
               {typeof window !== "undefined" && parseInt(localStorage.getItem("cairo_clock_offset") || "0", 10) !== 0 && (
-                <span className="text-[9px] bg-[#2F80FF]/20 text-[#2F80FF] px-1 rounded">
+                <span className="text-[9px] bg-[#6366f1]/20 text-[#6366f1] px-1 rounded">
                   {localStorage.getItem("cairo_clock_offset")} س
                 </span>
               )}
             </span>
-            <span className="text-[11px] text-[#F4F7FB] font-mono font-bold mt-1 block leading-none">
+            <span className="text-[11px] text-[#f5f5fa] font-mono font-bold mt-1 block leading-none">
               {formatCairoTime(cairoTime)}
             </span>
           </div>
         </div>
 
         {/* Next Scheduled Sync Countdown Widget (Cairo Clock Relative) */}
-        <div className="hidden md:flex items-center gap-2 bg-[#0D1B2D] border border-[#20324A] px-3 py-1.5 rounded-xl text-right select-none h-11 shrink-0">
+        <div className="hidden md:flex items-center gap-2 bg-[#141432] border border-[#2a2a5c] px-3 py-1.5 rounded-xl text-right select-none h-11 shrink-0">
           <div className="relative flex items-center justify-center">
-            <Clock className={`w-4 h-4 ${syncing ? "text-[#2F80FF] animate-spin" : "text-[#24C78E]"}`} />
+            <Clock className={`w-4 h-4 ${syncing ? "text-[#6366f1] animate-spin" : "text-[#24C78E]"}`} />
             {schedulerEnabled && !syncing && (
               <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-[#24C78E] rounded-full animate-ping" />
             )}
           </div>
           <div className="flex flex-col items-end justify-center">
-            <span className="text-[9px] text-[#9FB0C5] font-bold leading-none flex items-center gap-1">
+            <span className="text-[9px] text-[#a5a5c8] font-bold leading-none flex items-center gap-1">
               <span>المزامنة القادمة</span>
               {schedulerEnabled && !syncing && (
                 <span className="text-[8px] text-[#24C78E] font-mono">({targetCairoTimeStr})</span>
               )}
             </span>
-            <span className={`text-[11px] font-mono font-black mt-1 leading-none tracking-wider ${syncing ? "text-[#2F80FF] animate-pulse" : "text-[#24C78E]"}`}>
+            <span className={`text-[11px] font-mono font-black mt-1 leading-none tracking-wider ${syncing ? "text-[#6366f1] animate-pulse" : "text-[#24C78E]"}`}>
               {syncing ? "جارٍ الرصد المباشر ⚡" : (schedulerEnabled ? countdownStr : "معطلة")}
             </span>
           </div>
         </div>
 
         {/* Global Platform Dropdown filter */}
-        <div className="flex items-center gap-2 bg-[#0D1B2D] border border-[#20324A] rounded-xl px-2.5 h-11">
-          <Filter className="w-3.5 h-3.5 text-[#9FB0C5]" />
+        <div className="flex items-center gap-2 bg-[#141432] border border-[#2a2a5c] rounded-xl px-2.5 h-11">
+          <Filter className="w-3.5 h-3.5 text-[#a5a5c8]" />
           <select
             value={selectedPlatform}
             onChange={(e) => setSelectedPlatform(e.target.value)}
-            className="bg-transparent border-none text-xs font-bold text-[#F4F7FB] outline-none pr-1 pl-4 cursor-pointer"
+            className="bg-transparent border-none text-xs font-bold text-[#f5f5fa] outline-none pr-1 pl-4 cursor-pointer"
           >
-            <option value="all" className="bg-[#0D1B2D] text-white">جميع المنصات</option>
-            <option value="safka" className="bg-[#0D1B2D] text-white">منصة صفقة Safka</option>
+            <option value="all" className="bg-[#141432] text-white">جميع المنصات</option>
+            <option value="safka" className="bg-[#141432] text-white">منصة صفقة Safka</option>
           </select>
         </div>
 
         {/* Sync Settings Toggle and Frequency */}
-        <div className="flex items-center gap-2 bg-[#0D1B2D] border border-[#20324A] rounded-xl px-2.5 h-11">
+        <div className="flex items-center gap-2 bg-[#141432] border border-[#2a2a5c] rounded-xl px-2.5 h-11">
           <label className="flex items-center gap-2 cursor-pointer">
-             <input type="checkbox" checked={schedulerEnabled} onChange={(e) => onSchedulerChange(e.target.checked, schedulerInterval)} className="form-checkbox h-4 w-4 text-[#2F80FF]" />
-             <span className="text-xs text-[#F4F7FB] font-bold">تزامن تلقائي</span>
+             <input type="checkbox" checked={schedulerEnabled} onChange={(e) => onSchedulerChange(e.target.checked, schedulerInterval)} className="form-checkbox h-4 w-4 text-[#6366f1]" />
+             <span className="text-xs text-[#f5f5fa] font-bold">تزامن تلقائي</span>
           </label>
           <select
             value={schedulerInterval}
             onChange={(e) => onSchedulerChange(schedulerEnabled, parseInt(e.target.value))}
-            className="bg-transparent border-none text-xs font-bold text-[#F4F7FB] outline-none pr-1 pl-4 cursor-pointer"
+            className="bg-transparent border-none text-xs font-bold text-[#f5f5fa] outline-none pr-1 pl-4 cursor-pointer"
           >
-            <option value="1" className="bg-[#0D1B2D] text-white">دقيقة بدقيقة (تحديث فوري)</option>
-            <option value="5" className="bg-[#0D1B2D] text-white">كل 5 دقائق</option>
-            <option value="10" className="bg-[#0D1B2D] text-white">كل 10 دقائق</option>
-            <option value="20" className="bg-[#0D1B2D] text-white">كل ثلث ساعة (3 مرات/ساعة)</option>
-            <option value="60" className="bg-[#0D1B2D] text-white">كل ساعة فقط</option>
+            <option value="1" className="bg-[#141432] text-white">دقيقة بدقيقة (تحديث فوري)</option>
+            <option value="5" className="bg-[#141432] text-white">كل 5 دقائق</option>
+            <option value="10" className="bg-[#141432] text-white">كل 10 دقائق</option>
+            <option value="20" className="bg-[#141432] text-white">كل ثلث ساعة (3 مرات/ساعة)</option>
+            <option value="60" className="bg-[#141432] text-white">كل ساعة فقط</option>
           </select>
         </div>
 
@@ -276,31 +276,31 @@ export default function TopHeader({
             )}
           </div>
         ) : (
-          <div className="hidden md:flex flex-col items-end justify-center bg-[#0D1B2D] border border-[#20324A] px-3.5 py-1.5 rounded-xl h-11 min-w-[170px] max-w-[230px] text-right">
+          <div className="hidden md:flex flex-col items-end justify-center bg-[#141432] border border-[#2a2a5c] px-3.5 py-1.5 rounded-xl h-11 min-w-[170px] max-w-[230px] text-right">
             <div className="flex items-center justify-between w-full gap-2">
               {syncing && syncProgress && syncProgress.totalProducts > 0 ? (
-                <span className="text-[8px] text-[#9FB0C5] font-mono leading-none">
+                <span className="text-[8px] text-[#a5a5c8] font-mono leading-none">
                   {syncProgress.processedCount}/{syncProgress.totalProducts} ({syncProgress.percentage}%)
                 </span>
               ) : (
-                <span className="text-[8px] text-[#9FB0C5] font-mono leading-none">
+                <span className="text-[8px] text-[#a5a5c8] font-mono leading-none">
                   {syncing ? "استرداد الكتالوج..." : "مستقر ومزامن"}
                 </span>
               )}
               <div className="flex items-center gap-1.5">
-                <span className={`text-[10px] font-black flex items-center gap-1 ${syncing ? "text-[#2F80FF]" : "text-emerald-400"}`}>
+                <span className={`text-[10px] font-black flex items-center gap-1 ${syncing ? "text-[#6366f1]" : "text-emerald-400"}`}>
                   {syncing ? (syncProgress?.percentage !== undefined ? `معالجة ${syncProgress.percentage}%` : "جاري المزامنة...") : "جاهز"}
                 </span>
-                <span className={`w-2 h-2 rounded-full ${syncing ? "bg-[#2F80FF] animate-ping" : "bg-emerald-400"}`}></span>
+                <span className={`w-2 h-2 rounded-full ${syncing ? "bg-[#6366f1] animate-ping" : "bg-emerald-400"}`}></span>
               </div>
             </div>
             
             {/* Real-time Progress Bar with Animated Gradient Pulse */}
-            <div className="w-full bg-[#12233A] rounded-full h-2 mt-1 overflow-hidden relative border border-[#20324A]/60 shadow-inner">
+            <div className="w-full bg-[#1c1c47] rounded-full h-2 mt-1 overflow-hidden relative border border-[#2a2a5c]/60 shadow-inner">
               <div 
                 className={`h-full rounded-full transition-all duration-300 ease-out relative overflow-hidden ${
                   syncing 
-                    ? "bg-gradient-to-r from-[#2F80FF] via-[#00DF89] to-[#00F0FF] animate-gradient-pulse shadow-[0_0_10px_rgba(0,223,137,0.5)]" 
+                    ? "bg-gradient-to-r from-[#6366f1] via-[#00DF89] to-[#00F0FF] animate-gradient-pulse shadow-[0_0_10px_rgba(0,223,137,0.5)]" 
                     : "bg-emerald-400"
                 }`}
                 style={{ width: `${syncing ? Math.max(10, syncProgress?.percentage || 15) : 100}%` }}
@@ -332,12 +332,12 @@ export default function TopHeader({
             disabled={syncing}
             className={`h-11 px-4 rounded-xl flex items-center gap-2 text-xs font-black cursor-pointer transition duration-200 ${
               syncing 
-                ? "bg-[#12233A] text-[#9FB0C5] border border-[#20324A] cursor-not-allowed" 
-                : "bg-[#2F80FF] text-white hover:bg-[#4A92FF] shadow-md shadow-[#2F80FF]/15 active:scale-95"
+                ? "bg-[#1c1c47] text-[#a5a5c8] border border-[#2a2a5c] cursor-not-allowed" 
+                : "bg-[#6366f1] text-white hover:bg-[#818cf8] shadow-md shadow-[#6366f1]/15 active:scale-95"
             }`}
             title={syncStatusDetails || "بدء فحص المخازن ومطابقة التغيرات الفورية"}
           >
-            <RefreshCw className={`w-4 h-4 ${syncing ? "animate-spin text-[#9FB0C5]" : "text-white"}`} />
+            <RefreshCw className={`w-4 h-4 ${syncing ? "animate-spin text-[#a5a5c8]" : "text-white"}`} />
             <span>
               {syncing ? syncStatus || "جارٍ التحديث..." : "مزامنة الآن"}
             </span>

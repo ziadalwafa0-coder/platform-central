@@ -49,29 +49,29 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
 
   return (
     <div className="space-y-3 pt-1">
-      <h4 className="text-xs font-extrabold text-[#F4F7FB] flex items-center gap-2">
+      <h4 className="text-xs font-extrabold text-[#f5f5fa] flex items-center gap-2">
         <PackageSearch className="w-4 h-4 text-[#E879F9]" />
         تحليل تسليم واسترجاع الشحنات
       </h4>
 
-      <div className="bg-[#07111F]/60 p-4 rounded-xl border border-[#20324A] text-xs">
+      <div className="bg-[#0a0a1a]/60 p-4 rounded-xl border border-[#2a2a5c] text-xs">
         <div className="flex justify-between items-center mb-4">
-          <div className="flex bg-[#0B1424] rounded-lg p-1 border border-[#20324A]">
+          <div className="flex bg-[#0f0f24] rounded-lg p-1 border border-[#2a2a5c]">
             <button 
               onClick={() => setActiveTab("summary")}
-              className={`px-3 py-1.5 rounded-md text-[10px] font-bold transition-all ${activeTab === "summary" ? "bg-[#20324A] text-white" : "text-[#9FB0C5]"}`}
+              className={`px-3 py-1.5 rounded-md text-[10px] font-bold transition-all ${activeTab === "summary" ? "bg-[#2a2a5c] text-white" : "text-[#a5a5c8]"}`}
             >
               ملخص التقرير
             </button>
             <button 
               onClick={() => setActiveTab("daily")}
-              className={`px-3 py-1.5 rounded-md text-[10px] font-bold transition-all ${activeTab === "daily" ? "bg-[#20324A] text-white" : "text-[#9FB0C5]"}`}
+              className={`px-3 py-1.5 rounded-md text-[10px] font-bold transition-all ${activeTab === "daily" ? "bg-[#2a2a5c] text-white" : "text-[#a5a5c8]"}`}
             >
               تحليل يومي
             </button>
             <button 
               onClick={() => setActiveTab("movements")}
-              className={`px-3 py-1.5 rounded-md text-[10px] font-bold transition-all ${activeTab === "movements" ? "bg-[#20324A] text-white" : "text-[#9FB0C5]"}`}
+              className={`px-3 py-1.5 rounded-md text-[10px] font-bold transition-all ${activeTab === "movements" ? "bg-[#2a2a5c] text-white" : "text-[#a5a5c8]"}`}
             >
               سجل الحركات
             </button>
@@ -87,7 +87,7 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
         </div>
 
         {loading ? (
-          <div className="text-center py-6 text-[#9FB0C5] flex items-center justify-center gap-2">
+          <div className="text-center py-6 text-[#a5a5c8] flex items-center justify-center gap-2">
             <Activity className="w-4 h-4 animate-spin" />
             جاري تحليل البيانات...
           </div>
@@ -98,8 +98,8 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
             {activeTab === "summary" && (
               <>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <div className="bg-[#0B1424] p-3 rounded-lg border border-[#20324A]">
-                    <div className="text-[10px] text-[#9FB0C5] flex items-center gap-1 mb-1">
+                  <div className="bg-[#0f0f24] p-3 rounded-lg border border-[#2a2a5c]">
+                    <div className="text-[10px] text-[#a5a5c8] flex items-center gap-1 mb-1">
                       <Percent className="w-3 h-3 text-[#24C78E]" />
                       نسبة التسليم
                     </div>
@@ -107,8 +107,8 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                       {report.totals.deliveryRate !== null ? `${report.totals.deliveryRate.toFixed(1)}%` : "-"}
                     </div>
                   </div>
-                  <div className="bg-[#0B1424] p-3 rounded-lg border border-[#20324A]">
-                    <div className="text-[10px] text-[#9FB0C5] flex items-center gap-1 mb-1">
+                  <div className="bg-[#0f0f24] p-3 rounded-lg border border-[#2a2a5c]">
+                    <div className="text-[10px] text-[#a5a5c8] flex items-center gap-1 mb-1">
                       <ArrowRightLeft className="w-3 h-3 text-red-400" />
                       نسبة المرتجعات
                     </div>
@@ -116,17 +116,17 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                       {report.totals.returnRate !== null ? `${report.totals.returnRate.toFixed(1)}%` : "-"}
                     </div>
                   </div>
-                  <div className="bg-[#0B1424] p-3 rounded-lg border border-[#20324A]">
-                    <div className="text-[10px] text-[#9FB0C5] flex items-center gap-1 mb-1">
-                      <ArrowDownLeft className="w-3 h-3 text-[#2F80FF]" />
+                  <div className="bg-[#0f0f24] p-3 rounded-lg border border-[#2a2a5c]">
+                    <div className="text-[10px] text-[#a5a5c8] flex items-center gap-1 mb-1">
+                      <ArrowDownLeft className="w-3 h-3 text-[#6366f1]" />
                       إجمالي السحوبات
                     </div>
                     <div className="text-white font-bold text-lg">
                       {report.totals.weeklyWithdrawals}
                     </div>
                   </div>
-                  <div className="bg-[#0B1424] p-3 rounded-lg border border-[#20324A]">
-                    <div className="text-[10px] text-[#9FB0C5] flex items-center gap-1 mb-1">
+                  <div className="bg-[#0f0f24] p-3 rounded-lg border border-[#2a2a5c]">
+                    <div className="text-[10px] text-[#a5a5c8] flex items-center gap-1 mb-1">
                       <Info className="w-3 h-3 text-yellow-400" />
                       مرتجعات متوقعة*
                     </div>
@@ -136,11 +136,11 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                   </div>
                 </div>
 
-                <div className="flex gap-4 items-center bg-[#20324A]/20 p-2 rounded-lg text-[10px] text-[#9FB0C5] flex-wrap">
-                  <div className="bg-[#07111F]/50 px-2 py-1 rounded">صافي مسلّم: <strong className="text-white">{report.totals.netDelivered}</strong></div>
-                  <div className="bg-[#07111F]/50 px-2 py-1 rounded">استوك/شحن مؤكد: <strong className="text-white">{report.totals.confirmedRestock}</strong></div>
-                  <div className="bg-[#07111F]/50 px-2 py-1 rounded">تزويد غير مصنف: <strong className="text-white">{report.totals.unclassifiedIncreases}</strong></div>
-                  <div className="bg-[#07111F]/50 px-2 py-1 rounded">رصيد قيد الانتظار: <strong className="text-white">{report.totals.pendingWithdrawalBalanceEnd}</strong></div>
+                <div className="flex gap-4 items-center bg-[#2a2a5c]/20 p-2 rounded-lg text-[10px] text-[#a5a5c8] flex-wrap">
+                  <div className="bg-[#0a0a1a]/50 px-2 py-1 rounded">صافي مسلّم: <strong className="text-white">{report.totals.netDelivered}</strong></div>
+                  <div className="bg-[#0a0a1a]/50 px-2 py-1 rounded">استوك/شحن مؤكد: <strong className="text-white">{report.totals.confirmedRestock}</strong></div>
+                  <div className="bg-[#0a0a1a]/50 px-2 py-1 rounded">تزويد غير مصنف: <strong className="text-white">{report.totals.unclassifiedIncreases}</strong></div>
+                  <div className="bg-[#0a0a1a]/50 px-2 py-1 rounded">رصيد قيد الانتظار: <strong className="text-white">{report.totals.pendingWithdrawalBalanceEnd}</strong></div>
                 </div>
 
                 {report.totals.confirmedRestock > 0 && (
@@ -158,7 +158,7 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
               <div className="overflow-x-auto">
                 <table className="w-full text-right text-[10px]">
                   <thead>
-                    <tr className="text-[#9FB0C5] border-b border-[#20324A] pb-2">
+                    <tr className="text-[#a5a5c8] border-b border-[#2a2a5c] pb-2">
                       <th className="font-medium p-2">التاريخ</th>
                       <th className="font-medium p-2">سحوبات</th>
                       <th className="font-medium p-2">مرتجعات*</th>
@@ -167,11 +167,11 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                       <th className="font-medium p-2">معدل التسليم</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#20324A]/50">
+                  <tbody className="divide-y divide-[#2a2a5c]/50">
                     {report.days.map((d: any) => (
-                      <tr key={d.date} className="hover:bg-[#20324A]/10 transition-colors">
+                      <tr key={d.date} className="hover:bg-[#2a2a5c]/10 transition-colors">
                         <td className="p-2 font-mono">{d.date}</td>
-                        <td className="p-2 text-[#2F80FF] font-bold">{d.withdrawals}</td>
+                        <td className="p-2 text-[#6366f1] font-bold">{d.withdrawals}</td>
                         <td className="p-2 text-yellow-400">{d.estimatedReturns}</td>
                         <td className="p-2 text-emerald-400">{d.confirmedRestock + d.unclassifiedIncreases}</td>
                         <td className="p-2 font-bold">{d.netDelivered}</td>
@@ -186,7 +186,7 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                     ))}
                     {report.days.length === 0 && (
                       <tr>
-                        <td colSpan={6} className="text-center p-4 text-[#9FB0C5]">لا توجد بيانات يومية في هذه الفترة</td>
+                        <td colSpan={6} className="text-center p-4 text-[#a5a5c8]">لا توجد بيانات يومية في هذه الفترة</td>
                       </tr>
                     )}
                   </tbody>
@@ -197,8 +197,8 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
             {activeTab === "movements" && (
               <div className="overflow-x-auto max-h-64 overflow-y-auto">
                 <table className="w-full text-right text-[10px]">
-                  <thead className="sticky top-0 bg-[#0B1424] z-10">
-                    <tr className="text-[#9FB0C5] border-b border-[#20324A] pb-2">
+                  <thead className="sticky top-0 bg-[#0f0f24] z-10">
+                    <tr className="text-[#a5a5c8] border-b border-[#2a2a5c] pb-2">
                       <th className="font-medium p-2">الوقت</th>
                       <th className="font-medium p-2">التغيير</th>
                       <th className="font-medium p-2">التصنيف</th>
@@ -206,9 +206,9 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                       <th className="font-medium p-2">الرصيد المعلق</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#20324A]/50">
+                  <tbody className="divide-y divide-[#2a2a5c]/50">
                     {report.movements.map((m: any, idx: number) => (
-                      <tr key={idx} className="hover:bg-[#20324A]/10 transition-colors">
+                      <tr key={idx} className="hover:bg-[#2a2a5c]/10 transition-colors">
                         <td className="p-2 font-mono whitespace-nowrap">{new Date(m.checkedAt).toLocaleString('ar-EG', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
                         <td className="p-2 font-mono" dir="ltr">
                           <span className={m.quantityChange > 0 ? "text-emerald-400" : "text-red-400"}>
@@ -231,7 +231,7 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
                     ))}
                     {report.movements.length === 0 && (
                       <tr>
-                        <td colSpan={5} className="text-center p-4 text-[#9FB0C5]">لا توجد حركات مخزون في هذه الفترة</td>
+                        <td colSpan={5} className="text-center p-4 text-[#a5a5c8]">لا توجد حركات مخزون في هذه الفترة</td>
                       </tr>
                     )}
                   </tbody>
@@ -239,7 +239,7 @@ export function DeliveryReturnsReport({ productId }: DeliveryReturnsReportProps)
               </div>
             )}
 
-            <div className="text-[9px] text-[#9FB0C5]/70 italic mt-2 border-t border-[#20324A]/50 pt-2 flex items-start gap-1">
+            <div className="text-[9px] text-[#a5a5c8]/70 italic mt-2 border-t border-[#2a2a5c]/50 pt-2 flex items-start gap-1">
               <Info className="w-3 h-3 shrink-0 mt-0.5" />
               <span>{report.note}</span>
             </div>

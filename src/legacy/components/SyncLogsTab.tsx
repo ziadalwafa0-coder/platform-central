@@ -352,13 +352,13 @@ export default function SyncLogsTab({
       <div className="space-y-6">
         
         {/* API Connectivity & Active Channels Status Indicator */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4">
             <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <Wifi className="w-4.5 h-4.5 text-[#2F80FF]" />
+              <Wifi className="w-4.5 h-4.5 text-[#6366f1]" />
               حالة اتصال قنوات تزويد الكتالوج والـ API (Settings Connectivity)
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-1">تتبع فوري لحالة واستقرار خطوط الاتصال بـ API الموردين وفحص الاستجابة واللقطات الفعلي</p>
+            <p className="text-[10px] text-[#a5a5c8] mt-1">تتبع فوري لحالة واستقرار خطوط الاتصال بـ API الموردين وفحص الاستجابة واللقطات الفعلي</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -371,11 +371,11 @@ export default function SyncLogsTab({
               const hasTestResult = testResult && testResult.platform === conn.platform;
               
               return (
-                <div key={conn.id} className="bg-[#07111F] border border-[#20324A]/50 p-5 rounded-2xl space-y-4">
-                  <div className="flex justify-between items-start border-b border-[#20324A]/30 pb-3">
+                <div key={conn.id} className="bg-[#0a0a1a] border border-[#2a2a5c]/50 p-5 rounded-2xl space-y-4">
+                  <div className="flex justify-between items-start border-b border-[#2a2a5c]/30 pb-3">
                     <div>
                       <span className="font-extrabold text-white text-xs block">{conn.displayName || (conn.platform === "safka" ? "منصة صفقة Safka" : "قناة مخصصة")}</span>
-                      <span className="text-[9px] text-[#9FB0C5] block font-mono mt-0.5">{conn.baseUrl}</span>
+                      <span className="text-[9px] text-[#a5a5c8] block font-mono mt-0.5">{conn.baseUrl}</span>
                     </div>
                     <div className="relative group flex items-center">
                       <span className={`text-[10px] px-2.5 py-1 rounded-full font-black flex items-center gap-1.5 border select-none transition-all ${
@@ -400,7 +400,7 @@ export default function SyncLogsTab({
                       </span>
                       
                       {!isSuccess && (
-                        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 bg-[#12233A] border border-[#F05252]/30 p-3.5 rounded-2xl shadow-2xl text-[11px] text-right text-red-100 min-w-[240px] pointer-events-none">
+                        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 bg-[#1c1c47] border border-[#F05252]/30 p-3.5 rounded-2xl shadow-2xl text-[11px] text-right text-red-100 min-w-[240px] pointer-events-none">
                           <div className="font-extrabold text-[#F05252] mb-1.5 flex items-center gap-1.5 justify-end">
                             <span>سبب انقطاع الـ API</span>
                             <AlertCircle className="w-3.5 h-3.5" />
@@ -408,7 +408,7 @@ export default function SyncLogsTab({
                           <p className="leading-relaxed font-sans text-[11px] text-[#F3F4F6]">
                             {conn.lastConnectionError || "فشل الاتصال: لم يقم النظام بفحص الاستجابة بنجاح أو مفتاح الـ API الخاص بالمنصة غير صالح أو معطل."}
                           </p>
-                          <div className="text-[9px] text-[#9FB0C5]/70 mt-2.5 pt-2 border-t border-[#20324A]/40 text-left font-mono">
+                          <div className="text-[9px] text-[#a5a5c8]/70 mt-2.5 pt-2 border-t border-[#2a2a5c]/40 text-left font-mono">
                             {conn.lastConnectionTestAt ? `آخر فحص: ${formatTimeArabic(conn.lastConnectionTestAt)}` : "لم يتم الفحص بعد"}
                           </div>
                         </div>
@@ -416,7 +416,7 @@ export default function SyncLogsTab({
                     </div>
                   </div>
 
-                  <div className="space-y-2 text-[11px] text-[#9FB0C5]">
+                  <div className="space-y-2 text-[11px] text-[#a5a5c8]">
                     <div className="flex justify-between">
                       <span>عنوان مسار الجلب:</span>
                       <strong className="text-white font-mono">{conn.productsEndpoint}</strong>
@@ -434,12 +434,12 @@ export default function SyncLogsTab({
                       type="button"
                       onClick={() => handleTestPlatformConnection(conn.platform as any)}
                       disabled={testingPlatform !== null}
-                      className="px-3 py-1.5 bg-[#12233A] hover:bg-[#20324A] text-[10px] font-bold text-white rounded-lg border border-[#20324A] transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+                      className="px-3 py-1.5 bg-[#1c1c47] hover:bg-[#2a2a5c] text-[10px] font-bold text-white rounded-lg border border-[#2a2a5c] transition flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
                     >
                       {isTestingThis ? (
-                        <RefreshCw className="w-3 h-3 animate-spin text-[#2F80FF]" />
+                        <RefreshCw className="w-3 h-3 animate-spin text-[#6366f1]" />
                       ) : (
-                        <Wifi className="w-3 h-3 text-[#2F80FF]" />
+                        <Wifi className="w-3 h-3 text-[#6366f1]" />
                       )}
                       <span>اختبار استجابة الـ API</span>
                     </button>
@@ -484,45 +484,45 @@ export default function SyncLogsTab({
         </div>
         
         {/* Core parameters settings */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4">
             <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <Sliders className="w-4.5 h-4.5 text-[#2F80FF]" />
+              <Sliders className="w-4.5 h-4.5 text-[#6366f1]" />
               التحكم في معايير الرصد الدوري وفترات التحقق
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-1">ضبط الفترات التكرارية لخوادم ستوك رادار والحدود الأمنية لإمدادات المخازن</p>
+            <p className="text-[10px] text-[#a5a5c8] mt-1">ضبط الفترات التكرارية لخوادم ستوك رادار والحدود الأمنية لإمدادات المخازن</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#9FB0C5]">الفترة الزمنية للمزامنة التلقائية لصفقة (دقيقة)</label>
+              <label className="text-xs font-bold text-[#a5a5c8]">الفترة الزمنية للمزامنة التلقائية لصفقة (دقيقة)</label>
               <input 
                 type="number" 
                 defaultValue={10} 
-                className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none"
+                className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#9FB0C5]">عتبة التحذير للمنتجات قريبة النفاد (قطعة)</label>
+              <label className="text-xs font-bold text-[#a5a5c8]">عتبة التحذير للمنتجات قريبة النفاد (قطعة)</label>
               <input 
                 type="number" 
                 defaultValue={20} 
-                className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none"
+                className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none"
               />
             </div>
           </div>
         </div>
 
         {/* Email Real-time Stock Alerts via SMTP / Server */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <Mail className="w-4.5 h-4.5 text-[#2F80FF]" />
+                <Mail className="w-4.5 h-4.5 text-[#6366f1]" />
                 نظام تنبيهات البريد الإلكتروني اللحظية (SMTP)
               </h3>
-              <p className="text-[10px] text-[#9FB0C5] mt-1">
+              <p className="text-[10px] text-[#a5a5c8] mt-1">
                 إرسال تنبيهات بريدية فورية مباشرة إلى بريدك الإلكتروني عند انخفاض مخزون أي منتج بنسبة تزيد عن 50% خلال ساعة واحدة.
               </p>
             </div>
@@ -535,7 +535,7 @@ export default function SyncLogsTab({
                 onChange={(e) => setEmailEnabled(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-[#07111F] border border-[#20324A] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#9FB0C5] after:border-[#20324A] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F80FF]/20 peer-checked:after:bg-[#2F80FF] peer-checked:border-[#2F80FF]/30"></div>
+              <div className="w-11 h-6 bg-[#0a0a1a] border border-[#2a2a5c] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#a5a5c8] after:border-[#2a2a5c] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6366f1]/20 peer-checked:after:bg-[#6366f1] peer-checked:border-[#6366f1]/30"></div>
               <span className="mr-3 text-xs font-bold text-white select-none">
                 {emailEnabled ? "نشط" : "معطل"}
               </span>
@@ -543,8 +543,8 @@ export default function SyncLogsTab({
           </div>
 
           {emailLoading ? (
-            <div className="py-6 text-center text-xs text-[#9FB0C5] flex items-center justify-center gap-2">
-              <RefreshCw className="w-4 h-4 animate-spin text-[#2F80FF]" />
+            <div className="py-6 text-center text-xs text-[#a5a5c8] flex items-center justify-center gap-2">
+              <RefreshCw className="w-4 h-4 animate-spin text-[#6366f1]" />
               <span>جاري تحميل إعدادات البريد الإلكتروني...</span>
             </div>
           ) : (
@@ -555,10 +555,10 @@ export default function SyncLogsTab({
                     <span>💡 دليل إعداد الإرسال الفعلي عبر بريد Gmail أو Outlook</span>
                     <HelpCircle className="w-3.5 h-3.5 text-blue-400" />
                   </h4>
-                  <p className="text-[10px] text-[#9FB0C5] leading-relaxed">
+                  <p className="text-[10px] text-[#a5a5c8] leading-relaxed">
                     إذا تركت الحقول أدناه فارغة، سيقوم التطبيق بـ <strong className="text-white">محاكاة إرسال التنبيه</strong> وتسجيله في لوحة المراقبة السفلية فقط بدون وصول بريد حقيقي لعلبتك. لتفعيل الإرسال الحقيقي بنسبة 100٪، اتبع الإعدادات التالية:
                   </p>
-                  <ul className="text-[10px] text-[#9FB0C5] space-y-1 list-disc list-inside">
+                  <ul className="text-[10px] text-[#a5a5c8] space-y-1 list-disc list-inside">
                     <li><strong>خادم SMTP لـ Gmail:</strong> <span className="font-mono text-white">smtp.gmail.com</span></li>
                     <li><strong>منفذ SMTP:</strong> <span className="font-mono text-white">587</span> (مع تعطيل خيار SSL الآمن) أو <span className="font-mono text-white">465</span> (مع تفعيل خيار SSL الآمن)</li>
                     <li><strong>اسم المستخدم:</strong> بريدك الإلكتروني كاملاً (مثال: <span className="font-mono text-white">example@gmail.com</span>)</li>
@@ -573,9 +573,9 @@ export default function SyncLogsTab({
                 
                 {/* Email Address Input */}
                 <div className="space-y-1.5 md:col-span-2">
-                  <label className="text-xs font-bold text-[#9FB0C5] flex items-center gap-1.5 justify-end">
+                  <label className="text-xs font-bold text-[#a5a5c8] flex items-center gap-1.5 justify-end">
                     <span>البريد الإلكتروني المستلم للتنبيهات</span>
-                    <Mail className="w-3.5 h-3.5 text-[#2F80FF]" />
+                    <Mail className="w-3.5 h-3.5 text-[#6366f1]" />
                   </label>
                   <input 
                     type="email" 
@@ -583,67 +583,67 @@ export default function SyncLogsTab({
                     onChange={(e) => setEmailAddress(e.target.value)}
                     placeholder="مثال: ziadalwafa0@gmail.com"
                     required={emailEnabled}
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
-                  <span className="text-[9px] text-[#9FB0C5]/70 block leading-tight">
+                  <span className="text-[9px] text-[#a5a5c8]/70 block leading-tight">
                     تلقائياً سيتم إرسال كافة التنبيهات اللحظية إلى هذا العنوان.
                   </span>
                 </div>
 
                 {/* SMTP Host */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#9FB0C5]">خادم SMTP (SMTP Host)</label>
+                  <label className="text-xs font-bold text-[#a5a5c8]">خادم SMTP (SMTP Host)</label>
                   <input 
                     type="text" 
                     value={smtpHost} 
                     onChange={(e) => setSmtpHost(e.target.value)}
                     placeholder="مثال: smtp.gmail.com"
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
-                  <span className="text-[9px] text-[#9FB0C5]/70 block leading-tight">
+                  <span className="text-[9px] text-[#a5a5c8]/70 block leading-tight">
                     اختياري. اتركه فارغاً للاعتماد على خادم المحاكاة التلقائي.
                   </span>
                 </div>
 
                 {/* SMTP Port */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#9FB0C5]">منفذ SMTP (Port)</label>
+                  <label className="text-xs font-bold text-[#a5a5c8]">منفذ SMTP (Port)</label>
                   <input 
                     type="number" 
                     value={smtpPort} 
                     onChange={(e) => setSmtpPort(Number(e.target.value))}
                     placeholder="مثال: 587 أو 465"
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
                 </div>
 
                 {/* SMTP User */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#9FB0C5]">اسم مستخدم SMTP (Username)</label>
+                  <label className="text-xs font-bold text-[#a5a5c8]">اسم مستخدم SMTP (Username)</label>
                   <input 
                     type="text" 
                     value={smtpUser} 
                     onChange={(e) => setSmtpUser(e.target.value)}
                     placeholder="مثال: user@gmail.com"
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
                 </div>
 
                 {/* SMTP Password */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#9FB0C5]">كلمة مرور SMTP (Password)</label>
+                  <label className="text-xs font-bold text-[#a5a5c8]">كلمة مرور SMTP (Password)</label>
                   <input 
                     type="password" 
                     value={smtpPass} 
                     onChange={(e) => setSmtpPass(e.target.value)}
                     placeholder="••••••••••••••••"
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
                 </div>
 
                 {/* Secure SSL/TLS */}
-                <div className="space-y-1.5 md:col-span-2 flex items-center justify-between bg-[#07111F] p-3 rounded-xl border border-[#20324A]/40">
-                  <span className="text-xs font-bold text-[#9FB0C5]">استخدام اتصال آمن ومحمي SSL/TLS</span>
+                <div className="space-y-1.5 md:col-span-2 flex items-center justify-between bg-[#0a0a1a] p-3 rounded-xl border border-[#2a2a5c]/40">
+                  <span className="text-xs font-bold text-[#a5a5c8]">استخدام اتصال آمن ومحمي SSL/TLS</span>
                   <label className="relative inline-flex items-center cursor-pointer select-none">
                     <input 
                       type="checkbox" 
@@ -651,7 +651,7 @@ export default function SyncLogsTab({
                       onChange={(e) => setSmtpSecure(e.target.checked)}
                       className="sr-only peer"
                     />
-                    <div className="w-9 h-5 bg-[#0D1B2D] border border-[#20324A] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#9FB0C5] after:border-[#20324A] after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#2F80FF]/20 peer-checked:after:bg-[#2F80FF] peer-checked:border-[#2F80FF]/30"></div>
+                    <div className="w-9 h-5 bg-[#141432] border border-[#2a2a5c] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#a5a5c8] after:border-[#2a2a5c] after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366f1]/20 peer-checked:after:bg-[#6366f1] peer-checked:border-[#6366f1]/30"></div>
                   </label>
                 </div>
               </div>
@@ -687,17 +687,17 @@ export default function SyncLogsTab({
               )}
 
               {/* Form buttons */}
-              <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-3 pt-3 border-t border-[#20324A]/40">
+              <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-3 pt-3 border-t border-[#2a2a5c]/40">
                 <button
                   type="button"
                   onClick={handleTestEmailMessage}
                   disabled={emailTesting || emailSaving}
-                  className="px-5 h-11 bg-[#12233A] hover:bg-[#20324A] text-xs font-bold text-[#9FB0C5] hover:text-white rounded-xl border border-[#20324A] transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+                  className="px-5 h-11 bg-[#1c1c47] hover:bg-[#2a2a5c] text-xs font-bold text-[#a5a5c8] hover:text-white rounded-xl border border-[#2a2a5c] transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                 >
                   {emailTesting ? (
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#2F80FF]" />
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#6366f1]" />
                   ) : (
-                    <Mail className="w-3.5 h-3.5 text-[#2F80FF]" />
+                    <Mail className="w-3.5 h-3.5 text-[#6366f1]" />
                   )}
                   <span>إرسال بريد تجريبي (Test Email)</span>
                 </button>
@@ -705,7 +705,7 @@ export default function SyncLogsTab({
                 <button
                   type="submit"
                   disabled={emailSaving || emailTesting}
-                  className="px-6 h-11 bg-[#2F80FF] hover:bg-[#1A68D9] text-xs font-black text-white rounded-xl transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-lg shadow-[#2F80FF]/10"
+                  className="px-6 h-11 bg-[#6366f1] hover:bg-[#1A68D9] text-xs font-black text-white rounded-xl transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-lg shadow-[#6366f1]/10"
                 >
                   {emailSaving ? (
                     <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" />
@@ -720,14 +720,14 @@ export default function SyncLogsTab({
         </div>
 
         {/* Supabase Cloud Connection & Sync Configuration */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h3 className="text-sm font-extrabold text-white flex items-center gap-2 justify-end">
-                <Database className="w-4.5 h-4.5 text-[#2F80FF]" />
+                <Database className="w-4.5 h-4.5 text-[#6366f1]" />
                 مزامنة واتصال قاعدة بيانات Supabase (السحابة)
               </h3>
-              <p className="text-[10px] text-[#9FB0C5] mt-1">
+              <p className="text-[10px] text-[#a5a5c8] mt-1">
                 اربط مشروعك بمشروع قاعدة بيانات Supabase الجديد لتخزين المنتجات، التنبيهات، والعمليات سحابياً بدلاً من التخزين المحلي.
               </p>
             </div>
@@ -740,7 +740,7 @@ export default function SyncLogsTab({
                 onChange={(e) => setSupabaseEnabled(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-[#07111F] border border-[#20324A] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#9FB0C5] after:border-[#20324A] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2F80FF]/20 peer-checked:after:bg-[#2F80FF] peer-checked:border-[#2F80FF]/30"></div>
+              <div className="w-11 h-6 bg-[#0a0a1a] border border-[#2a2a5c] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#a5a5c8] after:border-[#2a2a5c] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6366f1]/20 peer-checked:after:bg-[#6366f1] peer-checked:border-[#6366f1]/30"></div>
               <span className="mr-3 text-xs font-bold text-white select-none">
                 {supabaseEnabled ? "نشط ومفعل" : "غير مفعل (محلي)"}
               </span>
@@ -748,8 +748,8 @@ export default function SyncLogsTab({
           </div>
 
           {supabaseLoading ? (
-            <div className="py-6 text-center text-xs text-[#9FB0C5] flex items-center justify-center gap-2">
-              <RefreshCw className="w-4 h-4 animate-spin text-[#2F80FF]" />
+            <div className="py-6 text-center text-xs text-[#a5a5c8] flex items-center justify-center gap-2">
+              <RefreshCw className="w-4 h-4 animate-spin text-[#6366f1]" />
               <span>جاري تحميل إعدادات Supabase...</span>
             </div>
           ) : (
@@ -759,7 +759,7 @@ export default function SyncLogsTab({
                   <span>💡 تنبيه أمان هام بخصوص المفاتيح والجداول</span>
                   <HelpCircle className="w-3.5 h-3.5 text-yellow-400" />
                 </h4>
-                <p className="text-[10px] text-[#9FB0C5] leading-relaxed">
+                <p className="text-[10px] text-[#a5a5c8] leading-relaxed">
                   عند الانتقال لمشروع Supabase جديد، يرجى ملء الحقول أدناه وحفظ الإعدادات. تأكد من أن المشروع الجديد يحتوي على الجداول المحددة مسبقاً في المخطط (مثل <code className="text-white font-mono bg-white/5 px-1 rounded">products</code>, <code className="text-white font-mono bg-white/5 px-1 rounded">inventory_snapshots</code>, <code className="text-white font-mono bg-white/5 px-1 rounded">sync_runs</code>, و <code className="text-white font-mono bg-white/5 px-1 rounded">platform_connections</code>) ليعمل الرصد بنجاح.
                 </p>
                 <p className="text-[10px] text-yellow-400/90 leading-relaxed font-bold">
@@ -770,9 +770,9 @@ export default function SyncLogsTab({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Supabase URL Input */}
                 <div className="space-y-1.5 md:col-span-2">
-                  <label className="text-xs font-bold text-[#9FB0C5] flex items-center gap-1.5 justify-end">
+                  <label className="text-xs font-bold text-[#a5a5c8] flex items-center gap-1.5 justify-end">
                     <span>رابط مشروع Supabase الجديد (Supabase URL)</span>
-                    <Code className="w-3.5 h-3.5 text-[#2F80FF]" />
+                    <Code className="w-3.5 h-3.5 text-[#6366f1]" />
                   </label>
                   <input 
                     type="url" 
@@ -780,15 +780,15 @@ export default function SyncLogsTab({
                     onChange={(e) => setSupabaseUrl(e.target.value)}
                     placeholder="مثال: https://abcdefghijklm.supabase.co"
                     required={supabaseEnabled}
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
                 </div>
 
                 {/* Supabase Secret Key Input */}
                 <div className="space-y-1.5 md:col-span-2">
-                  <label className="text-xs font-bold text-[#9FB0C5] flex items-center gap-1.5 justify-end">
+                  <label className="text-xs font-bold text-[#a5a5c8] flex items-center gap-1.5 justify-end">
                     <span>مفتاح السر السري لـ Supabase (Service Role Secret Key)</span>
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#2F80FF]" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#6366f1]" />
                   </label>
                   <input 
                     type="password" 
@@ -796,7 +796,7 @@ export default function SyncLogsTab({
                     onChange={(e) => setSupabaseSecretKey(e.target.value)}
                     placeholder="أدخل مفتاح الخدمة السري الفائق الفعالية لربط السحابة"
                     required={supabaseEnabled}
-                    className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 transition-all text-left"
+                    className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl px-4 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 transition-all text-left"
                   />
                 </div>
               </div>
@@ -832,18 +832,18 @@ export default function SyncLogsTab({
               )}
 
               {/* Form buttons */}
-              <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-3 pt-3 border-t border-[#20324A]/40">
+              <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-3 pt-3 border-t border-[#2a2a5c]/40">
                 <div className="flex flex-row gap-3">
                   <button
                     type="button"
                     onClick={handleTestSupabaseConnection}
                     disabled={supabaseTesting || supabaseSaving}
-                    className="px-5 h-11 bg-[#12233A] hover:bg-[#20324A] text-xs font-bold text-[#9FB0C5] hover:text-white rounded-xl border border-[#20324A] transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+                    className="px-5 h-11 bg-[#1c1c47] hover:bg-[#2a2a5c] text-xs font-bold text-[#a5a5c8] hover:text-white rounded-xl border border-[#2a2a5c] transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                   >
                     {supabaseTesting ? (
-                      <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#2F80FF]" />
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#6366f1]" />
                     ) : (
-                      <Wifi className="w-3.5 h-3.5 text-[#2F80FF]" />
+                      <Wifi className="w-3.5 h-3.5 text-[#6366f1]" />
                     )}
                     <span>اختبار الاتصال (Test)</span>
                   </button>
@@ -862,7 +862,7 @@ export default function SyncLogsTab({
                 <button
                   type="submit"
                   disabled={supabaseSaving || supabaseTesting}
-                  className="px-6 h-11 bg-[#2F80FF] hover:bg-[#1A68D9] text-xs font-black text-white rounded-xl transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-lg shadow-[#2F80FF]/10"
+                  className="px-6 h-11 bg-[#6366f1] hover:bg-[#1A68D9] text-xs font-black text-white rounded-xl transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-lg shadow-[#6366f1]/10"
                 >
                   {supabaseSaving ? (
                     <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" />
@@ -878,36 +878,36 @@ export default function SyncLogsTab({
 
         {/* Email Logs Diagnostic Audit Board */}
         {emailLogs && emailLogs.length > 0 && (
-          <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-4 text-right">
+          <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-4 text-right">
             <div>
               <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
                 <History className="w-4.5 h-4.5 text-blue-400" />
                 سجل إرسال التنبيهات البريدية الفعلي والمحاكي
               </h3>
-              <p className="text-[10px] text-[#9FB0C5] mt-1">تتبع حالة تسليم التنبيهات للبريد الإلكتروني دقيقة بدقيقة مع التفاصيل الفنية للأعطال</p>
+              <p className="text-[10px] text-[#a5a5c8] mt-1">تتبع حالة تسليم التنبيهات للبريد الإلكتروني دقيقة بدقيقة مع التفاصيل الفنية للأعطال</p>
             </div>
 
-            <div className="bg-[#07111F] border border-[#20324A]/50 rounded-2xl overflow-hidden">
+            <div className="bg-[#0a0a1a] border border-[#2a2a5c]/50 rounded-2xl overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-right text-xs">
                   <thead>
-                    <tr className="bg-[#12233A]/80 border-b border-[#20324A] text-[#9FB0C5] font-bold">
+                    <tr className="bg-[#1c1c47]/80 border-b border-[#2a2a5c] text-[#a5a5c8] font-bold">
                       <th className="px-4 py-3 text-right">الوقت</th>
                       <th className="px-4 py-3 text-right">المستلم</th>
                       <th className="px-4 py-3 text-right">عنوان التنبيه</th>
                       <th className="px-4 py-3 text-center">الحالة</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#20324A]/40">
+                  <tbody className="divide-y divide-[#2a2a5c]/40">
                     {emailLogs.map((log) => (
-                      <tr key={log.id} className="hover:bg-[#12233A]/30 transition-colors">
-                        <td className="px-4 py-2.5 font-mono text-[10px] text-[#9FB0C5] whitespace-nowrap">
+                      <tr key={log.id} className="hover:bg-[#1c1c47]/30 transition-colors">
+                        <td className="px-4 py-2.5 font-mono text-[10px] text-[#a5a5c8] whitespace-nowrap">
                           {formatTimeArabic(log.sentAt)}
                         </td>
                         <td className="px-4 py-2.5 font-mono text-[11px] text-white">
                           {log.to}
                         </td>
-                        <td className="px-4 py-2.5 text-[#9FB0C5] max-w-[200px] truncate">
+                        <td className="px-4 py-2.5 text-[#a5a5c8] max-w-[200px] truncate">
                           {log.subject}
                         </td>
                         <td className="px-4 py-2.5 text-center">
@@ -949,30 +949,30 @@ export default function SyncLogsTab({
         )}
 
         {/* 24/7 Automated Sync Guide */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4">
             <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
               <Clock className="w-4.5 h-4.5 text-emerald-400" />
               تفعيل الرصد التلقائي 24/7 (حتى عند إغلاق اللاب توب أو المتصفح)
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-1">كيفية تفعيل الرصد وجلب البيانات بدقة 100٪ وبدون انقطاع</p>
+            <p className="text-[10px] text-[#a5a5c8] mt-1">كيفية تفعيل الرصد وجلب البيانات بدقة 100٪ وبدون انقطاع</p>
           </div>
 
-          <div className="bg-[#07111F] border border-[#20324A]/50 p-5 rounded-2xl space-y-4 text-right">
-            <p className="text-xs text-[#9FB0C5] leading-relaxed">
+          <div className="bg-[#0a0a1a] border border-[#2a2a5c]/50 p-5 rounded-2xl space-y-4 text-right">
+            <p className="text-xs text-[#a5a5c8] leading-relaxed">
               بما أن تطبيق <strong className="text-white">ستوك رادار</strong> يعمل بالكامل على خوادم سحابية (Cloud Server)، فإن الخادم يتوقف مؤقتاً لتوفير الطاقة وموارد التشغيل عندما لا يكون هناك زوار نشطين للموقع (مثال: عند إغلاق اللاب توب أو إغلاق المتصفح).
             </p>
-            <p className="text-xs text-[#9FB0C5] leading-relaxed">
+            <p className="text-xs text-[#a5a5c8] leading-relaxed">
               لضمان استمرار رصد المخزون وحساب سحب القطع بدقة <span className="text-[#24C78E] font-bold">100٪ على مدار الساعة دون توقف</span>، نوصي بربط رابط المزامنة بخدمة استدعاء مجانية (Cron Job) تقوم بتنشيط وفحص مخازن الموردين تلقائياً كل 20 دقيقة.
             </p>
 
-            <div className="bg-[#12233A] border border-[#20324A] p-4 rounded-xl space-y-3">
+            <div className="bg-[#1c1c47] border border-[#2a2a5c] p-4 rounded-xl space-y-3">
               <h4 className="text-xs font-black text-white">خطوات التفعيل البسيطة (مجانية تماماً):</h4>
-              <ol className="list-decimal list-inside text-[11px] text-[#9FB0C5] space-y-2 leading-relaxed">
-                <li>قم بزيارة موقع <a href="https://cron-job.org" target="_blank" rel="noreferrer" className="text-[#2F80FF] font-bold underline hover:text-[#24C78E]">Cron-Job.org</a> أو <a href="https://uptimerobot.com" target="_blank" rel="noreferrer" className="text-[#2F80FF] font-bold underline hover:text-[#24C78E]">UptimeRobot.com</a> وسجل حساباً مجانياً.</li>
+              <ol className="list-decimal list-inside text-[11px] text-[#a5a5c8] space-y-2 leading-relaxed">
+                <li>قم بزيارة موقع <a href="https://cron-job.org" target="_blank" rel="noreferrer" className="text-[#6366f1] font-bold underline hover:text-[#24C78E]">Cron-Job.org</a> أو <a href="https://uptimerobot.com" target="_blank" rel="noreferrer" className="text-[#6366f1] font-bold underline hover:text-[#24C78E]">UptimeRobot.com</a> وسجل حساباً مجانياً.</li>
                 <li>اضغط على إنشاء مهمة جديدة <strong className="text-white">(Create Cron Job / Monitor)</strong>.</li>
                 <li>انسخ الرابط التالي وضعه في خانة العنوان (URL):
-                  <div className="bg-[#07111F] border border-[#20324A] p-2.5 rounded-lg mt-1.5 font-mono text-[10px] text-[#24C78E] select-all break-all text-left">
+                  <div className="bg-[#0a0a1a] border border-[#2a2a5c] p-2.5 rounded-lg mt-1.5 font-mono text-[10px] text-[#24C78E] select-all break-all text-left">
                     {`${typeof window !== "undefined" ? window.location.origin : "https://ais-pre-u3proz3yka4qier5sdp6lw-624285787849.europe-west2.run.app"}/api/platforms/safka/sync?force=true`}
                   </div>
                 </li>
@@ -989,14 +989,14 @@ export default function SyncLogsTab({
         </div>
 
         {/* Recent Activity Logs section (Audit logs) */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <Activity className="w-4.5 h-4.5 text-[#2F80FF]" />
+                <Activity className="w-4.5 h-4.5 text-[#6366f1]" />
                 سجل الأنشطة الأخيرة وتدقيق النظام (Platform Audit Log)
               </h3>
-              <p className="text-[10px] text-[#9FB0C5] mt-1">تتبع ومراجعة عمليات المزامنة اليدوية، تغييرات التكوين، وتواريخ تسجيل دخول المشرفين</p>
+              <p className="text-[10px] text-[#a5a5c8] mt-1">تتبع ومراجعة عمليات المزامنة اليدوية، تغييرات التكوين، وتواريخ تسجيل دخول المشرفين</p>
             </div>
             
             <button
@@ -1011,7 +1011,7 @@ export default function SyncLogsTab({
               }}
               className="px-4 py-2 bg-[#1B2A3E] hover:bg-[#25374E] text-[11px] font-bold text-white rounded-xl transition flex items-center gap-1.5 self-start sm:self-center cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5 text-[#2F80FF]" />
+              <Download className="w-3.5 h-3.5 text-[#6366f1]" />
               <span>تصدير السجل الكامل (JSON)</span>
             </button>
           </div>
@@ -1025,20 +1025,20 @@ export default function SyncLogsTab({
                 placeholder="البحث في الأنشطة، الإجراءات، أو المستخدمين..."
                 value={activitySearchQuery}
                 onChange={(e) => setActivitySearchQuery(e.target.value)}
-                className="w-full h-11 bg-[#07111F] border border-[#20324A] rounded-xl pr-10 pl-4 text-xs text-white placeholder-[#5F758F] outline-none focus:border-[#2F80FF]/50 transition text-right"
+                className="w-full h-11 bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl pr-10 pl-4 text-xs text-white placeholder-[#5F758F] outline-none focus:border-[#6366f1]/50 transition text-right"
               />
               <Search className="absolute right-3.5 top-3.5 w-4 h-4 text-[#5F758F]" />
             </div>
 
             {/* Filter Buttons */}
-            <div className="flex bg-[#07111F] border border-[#20324A] rounded-xl p-1 gap-1 overflow-x-auto">
+            <div className="flex bg-[#0a0a1a] border border-[#2a2a5c] rounded-xl p-1 gap-1 overflow-x-auto">
               <button
                 type="button"
                 onClick={() => setActivityTypeFilter("all")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap cursor-pointer ${
                   activityTypeFilter === "all" 
-                    ? "bg-[#2F80FF] text-white" 
-                    : "text-[#9FB0C5] hover:text-white"
+                    ? "bg-[#6366f1] text-white" 
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 الكل ({activityLogs.length})
@@ -1048,8 +1048,8 @@ export default function SyncLogsTab({
                 onClick={() => setActivityTypeFilter("sync")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                   activityTypeFilter === "sync" 
-                    ? "bg-[#2F80FF] text-white" 
-                    : "text-[#9FB0C5] hover:text-white"
+                    ? "bg-[#6366f1] text-white" 
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -1060,8 +1060,8 @@ export default function SyncLogsTab({
                 onClick={() => setActivityTypeFilter("config")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                   activityTypeFilter === "config" 
-                    ? "bg-[#2F80FF] text-white" 
-                    : "text-[#9FB0C5] hover:text-white"
+                    ? "bg-[#6366f1] text-white" 
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 <Sliders className="w-3.5 h-3.5" />
@@ -1072,8 +1072,8 @@ export default function SyncLogsTab({
                 onClick={() => setActivityTypeFilter("login")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                   activityTypeFilter === "login" 
-                    ? "bg-[#2F80FF] text-white" 
-                    : "text-[#9FB0C5] hover:text-white"
+                    ? "bg-[#6366f1] text-white" 
+                    : "text-[#a5a5c8] hover:text-white"
                 }`}
               >
                 <User className="w-3.5 h-3.5" />
@@ -1083,7 +1083,7 @@ export default function SyncLogsTab({
           </div>
 
           {/* Activities List */}
-          <div className="bg-[#07111F] border border-[#20324A]/50 rounded-2xl overflow-hidden">
+          <div className="bg-[#0a0a1a] border border-[#2a2a5c]/50 rounded-2xl overflow-hidden">
             {activityLogs.filter(log => {
               const matchesSearch = 
                 log.action.toLowerCase().includes(activitySearchQuery.toLowerCase()) ||
@@ -1096,10 +1096,10 @@ export default function SyncLogsTab({
             }).length === 0 ? (
               <div className="p-12 text-center space-y-3">
                 <Activity className="w-10 h-10 text-[#5F758F] mx-auto opacity-40" />
-                <p className="text-xs text-[#9FB0C5]">لم يتم العثور على أي أنشطة مطابقة لمعايير البحث الحالية.</p>
+                <p className="text-xs text-[#a5a5c8]">لم يتم العثور على أي أنشطة مطابقة لمعايير البحث الحالية.</p>
               </div>
             ) : (
-              <div className="divide-y divide-[#20324A]/40 max-h-[320px] overflow-y-auto custom-scrollbar">
+              <div className="divide-y divide-[#2a2a5c]/40 max-h-[320px] overflow-y-auto custom-scrollbar">
                 {activityLogs.filter(log => {
                   const matchesSearch = 
                     log.action.toLowerCase().includes(activitySearchQuery.toLowerCase()) ||
@@ -1117,8 +1117,8 @@ export default function SyncLogsTab({
                   return (
                     <div 
                       key={log.id} 
-                      className={`p-4 hover:bg-[#0D1B2D]/40 transition flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
-                        selectedActivity?.id === log.id ? "bg-[#2F80FF]/5" : ""
+                      className={`p-4 hover:bg-[#141432]/40 transition flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
+                        selectedActivity?.id === log.id ? "bg-[#6366f1]/5" : ""
                       }`}
                     >
                       <div className="flex items-start gap-3">
@@ -1128,7 +1128,7 @@ export default function SyncLogsTab({
                             ? "bg-[#24C78E]/10 text-[#24C78E]" 
                             : log.type === "config"
                               ? "bg-[#FF9F43]/10 text-[#FF9F43]"
-                              : "bg-[#2F80FF]/10 text-[#2F80FF]"
+                              : "bg-[#6366f1]/10 text-[#6366f1]"
                         }`}>
                           {log.type === "sync" && <RefreshCw className="w-4.5 h-4.5" />}
                           {log.type === "config" && <Sliders className="w-4.5 h-4.5" />}
@@ -1139,16 +1139,16 @@ export default function SyncLogsTab({
                         <div className="space-y-1 text-right">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-extrabold text-white text-xs">{log.action}</span>
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1B2A3E] text-[#9FB0C5] font-mono">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1B2A3E] text-[#a5a5c8] font-mono">
                               {log.type === "sync" ? "مزامنة" : log.type === "config" ? "إعدادات" : "دخول"}
                             </span>
                           </div>
                           
-                          <p className="text-[11px] text-[#9FB0C5] leading-relaxed max-w-2xl">{log.details}</p>
+                          <p className="text-[11px] text-[#a5a5c8] leading-relaxed max-w-2xl">{log.details}</p>
                           
                           <div className="flex items-center gap-3 text-[10px] text-[#5F758F]">
                             <span className="flex items-center gap-1">
-                              <User className="w-3 h-3 text-[#2F80FF]/80" />
+                              <User className="w-3 h-3 text-[#6366f1]/80" />
                               <span>المسؤول: {log.user || "ziadalwafa0@gmail.com"}</span>
                             </span>
                           </div>
@@ -1156,7 +1156,7 @@ export default function SyncLogsTab({
                       </div>
 
                       {/* Date & Time / View button */}
-                      <div className="flex items-center justify-between md:justify-end w-full md:w-auto shrink-0 gap-4 border-t border-[#20324A]/30 md:border-t-0 pt-3 md:pt-0">
+                      <div className="flex items-center justify-between md:justify-end w-full md:w-auto shrink-0 gap-4 border-t border-[#2a2a5c]/30 md:border-t-0 pt-3 md:pt-0">
                         <div className="text-right">
                           <span className="text-[11px] font-bold text-white block font-mono">{formattedTime}</span>
                           <span className="text-[9px] text-[#5F758F] block font-mono mt-0.5">{formattedDate}</span>
@@ -1165,7 +1165,7 @@ export default function SyncLogsTab({
                         <button
                           type="button"
                           onClick={() => setSelectedActivity(selectedActivity?.id === log.id ? null : log)}
-                          className="p-1.5 bg-[#1B2A3E] hover:bg-[#2F80FF]/20 text-[#9FB0C5] hover:text-[#2F80FF] rounded-lg transition cursor-pointer"
+                          className="p-1.5 bg-[#1B2A3E] hover:bg-[#6366f1]/20 text-[#a5a5c8] hover:text-[#6366f1] rounded-lg transition cursor-pointer"
                           title="عرض تفاصيل المدخلة"
                         >
                           <Eye className="w-4 h-4" />
@@ -1180,10 +1180,10 @@ export default function SyncLogsTab({
 
           {/* Activity Detail Modal / Panel if selected */}
           {selectedActivity && (
-            <div className="bg-[#1B2A3E]/30 border border-[#2F80FF]/30 p-5 rounded-2xl space-y-4 text-right animate-fadeIn">
-              <div className="flex items-center justify-between border-b border-[#20324A] pb-3">
+            <div className="bg-[#1B2A3E]/30 border border-[#6366f1]/30 p-5 rounded-2xl space-y-4 text-right animate-fadeIn">
+              <div className="flex items-center justify-between border-b border-[#2a2a5c] pb-3">
                 <h4 className="text-xs font-black text-white flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-[#2F80FF]" />
+                  <Activity className="w-4 h-4 text-[#6366f1]" />
                   تفاصيل سجل الحركة المدقق #{selectedActivity.id}
                 </h4>
                 <button
@@ -1196,30 +1196,30 @@ export default function SyncLogsTab({
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div className="space-y-1 bg-[#07111F]/50 p-3 rounded-xl">
-                  <span className="text-[10px] text-[#9FB0C5] block font-extrabold">الإجراء المنفذ</span>
+                <div className="space-y-1 bg-[#0a0a1a]/50 p-3 rounded-xl">
+                  <span className="text-[10px] text-[#a5a5c8] block font-extrabold">الإجراء المنفذ</span>
                   <span className="text-white font-black">{selectedActivity.action}</span>
                 </div>
                 
-                <div className="space-y-1 bg-[#07111F]/50 p-3 rounded-xl">
-                  <span className="text-[10px] text-[#9FB0C5] block font-extrabold">نوع العملية</span>
-                  <span className="text-[#2F80FF] font-black">
+                <div className="space-y-1 bg-[#0a0a1a]/50 p-3 rounded-xl">
+                  <span className="text-[10px] text-[#a5a5c8] block font-extrabold">نوع العملية</span>
+                  <span className="text-[#6366f1] font-black">
                     {selectedActivity.type === "sync" ? "مزامنة الكتالوجات" : selectedActivity.type === "config" ? "تغيير معايير النظام" : "تسجيل المشرفين"}
                   </span>
                 </div>
 
-                <div className="space-y-1 bg-[#07111F]/50 p-3 rounded-xl">
-                  <span className="text-[10px] text-[#9FB0C5] block font-extrabold">المستخدم المنفذ</span>
+                <div className="space-y-1 bg-[#0a0a1a]/50 p-3 rounded-xl">
+                  <span className="text-[10px] text-[#a5a5c8] block font-extrabold">المستخدم المنفذ</span>
                   <span className="text-white font-mono">{selectedActivity.user || "ziadalwafa0@gmail.com"}</span>
                 </div>
 
-                <div className="space-y-1 bg-[#07111F]/50 p-3 rounded-xl">
-                  <span className="text-[10px] text-[#9FB0C5] block font-extrabold">تاريخ العملية</span>
+                <div className="space-y-1 bg-[#0a0a1a]/50 p-3 rounded-xl">
+                  <span className="text-[10px] text-[#a5a5c8] block font-extrabold">تاريخ العملية</span>
                   <span className="text-white font-mono">{new Date(selectedActivity.timestamp).toLocaleString("ar-EG")}</span>
                 </div>
 
-                <div className="space-y-1 bg-[#07111F]/50 p-3 rounded-xl md:col-span-2">
-                  <span className="text-[10px] text-[#9FB0C5] block font-extrabold">وصف التغيير التفصيلي والتدقيق</span>
+                <div className="space-y-1 bg-[#0a0a1a]/50 p-3 rounded-xl md:col-span-2">
+                  <span className="text-[10px] text-[#a5a5c8] block font-extrabold">وصف التغيير التفصيلي والتدقيق</span>
                   <p className="text-white leading-relaxed whitespace-pre-wrap">{selectedActivity.details}</p>
                 </div>
               </div>
@@ -1228,20 +1228,20 @@ export default function SyncLogsTab({
         </div>
 
         {/* Database parameters reset */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-6 rounded-3xl space-y-6 text-right">
-          <div className="border-b border-[#20324A]/60 pb-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-6 rounded-3xl space-y-6 text-right">
+          <div className="border-b border-[#2a2a5c]/60 pb-4">
             <h3 className="text-sm font-bold text-[#F05252] flex items-center gap-2">
               <Trash2 className="w-5 h-5 text-[#F05252]" />
               منطقة الصيانة وإعادة تعيين قواعد البيانات
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-1">مسح الكتالوج العام وسجلات الحركة بالكامل والبدء بمستندات فارغة</p>
+            <p className="text-[10px] text-[#a5a5c8] mt-1">مسح الكتالوج العام وسجلات الحركة بالكامل والبدء بمستندات فارغة</p>
           </div>
 
           <div className="bg-[#F05252]/5 border border-[#F05252]/20 p-4 rounded-xl flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-[#F05252] shrink-0 mt-0.5" />
             <div className="space-y-1">
               <h4 className="text-xs font-black text-[#F05252]">تحذير أمني خطير لا يمكن التراجع عنه!</h4>
-              <p className="text-[11px] text-[#9FB0C5] leading-relaxed">
+              <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
                 سيؤدي الضغط على الزر أدناه إلى تصفير كافة المنتجات المخزنة، حذف اللقطات، إزالة سجلات المزامنة التاريخية، وتعطيل بوابات الربط. ستحتاج إلى إعادة إدخال مفتاح الـ API والبدء في سحب الكتالوج من الصفر.
               </p>
             </div>

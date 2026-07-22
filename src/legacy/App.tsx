@@ -553,18 +553,18 @@ export default function App() {
 
   if (firebaseInitError || !auth) {
     return (
-      <div className="min-h-screen bg-[#07111F] text-[#F4F7FB] flex items-center justify-center p-4" dir="rtl">
-        <div className="max-w-md w-full bg-[#0D1B2D] border border-amber-500/30 rounded-[24px] p-8 text-center space-y-6 shadow-2xl">
+      <div className="min-h-screen bg-[#0a0a1a] text-[#f5f5fa] flex items-center justify-center p-4" dir="rtl">
+        <div className="max-w-md w-full bg-[#141432] border border-amber-500/30 rounded-[24px] p-8 text-center space-y-6 shadow-2xl">
           <div className="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
             <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
           </div>
           <h2 className="text-sm font-extrabold text-white">تم حظر الاتصال بالرادار (قيود المتصفح)</h2>
-          <p className="text-[11px] text-[#9FB0C5] leading-relaxed">
+          <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
             تم حظر الوصول إلى قاعدة البيانات والتحقق من الهوية من قبل المتصفح. يحدث هذا غالباً بسبب قيود ملفات تعريف الارتباط للطرف الثالث (Third-party Cookies) أو حظر التخزين المحلي داخل إطار المعاينة (iFrame).
           </p>
-          <div className="bg-[#07111F] p-4 rounded-xl text-left font-mono text-[10.5px] text-amber-400 border border-amber-500/10 overflow-x-auto">
+          <div className="bg-[#0a0a1a] p-4 rounded-xl text-left font-mono text-[10.5px] text-amber-400 border border-amber-500/10 overflow-x-auto">
             {firebaseInitError || "auth_service_not_initialized"}
           </div>
           <div className="pt-2">
@@ -572,7 +572,7 @@ export default function App() {
               href={window.location.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#2F80FF] hover:bg-[#2F80FF]/90 text-white font-bold text-xs rounded-xl shadow-lg shadow-[#2F80FF]/15 transition cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#6366f1] hover:bg-[#6366f1]/90 text-white font-bold text-xs rounded-xl shadow-lg shadow-[#6366f1]/15 transition cursor-pointer"
             >
               <span>فتح المنصة في نافذة جديدة</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -580,7 +580,7 @@ export default function App() {
               </svg>
             </a>
           </div>
-          <p className="text-[10px] text-[#9FB0C5]/50 leading-normal">
+          <p className="text-[10px] text-[#a5a5c8]/50 leading-normal">
             بعد فتحها في علامة تبويب جديدة، ستتمكن من تسجيل الدخول باستخدام حساب Google المعتمد ومزامنة البيانات بشكل طبيعي.
           </p>
         </div>
@@ -590,7 +590,7 @@ export default function App() {
 
   if (checkingSession) {
     return (
-      <div className="min-h-screen bg-[#07111F] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center">
         <div className="text-white">جاري التحقق من الجلسة...</div>
       </div>
     );
@@ -602,7 +602,7 @@ export default function App() {
 
   return (
     <div 
-      className="min-h-screen w-full bg-[#07111F] text-[#F4F7FB] flex font-sans antialiased overflow-x-hidden selection:bg-[#2F80FF] selection:text-white" 
+      className="min-h-screen w-full bg-[#0a0a1a] text-[#f5f5fa] flex font-sans antialiased overflow-x-hidden selection:bg-[#6366f1] selection:text-white" 
       dir="rtl"
     >
       {/* Right Collapsible Sidebar (RTL default layout) */}
@@ -650,13 +650,13 @@ export default function App() {
         <main className="flex-1 p-6 space-y-6 max-w-7xl w-full mx-auto">
           
           {/* Visual Date Selection Widget (Ads Manager style) */}
-          <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl flex flex-col lg:flex-row lg:items-center justify-between gap-6 text-right shadow-lg animate-fade-in">
+          <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl flex flex-col lg:flex-row lg:items-center justify-between gap-6 text-right shadow-lg animate-fade-in">
             <div>
-              <h3 className="text-sm font-black text-[#F4F7FB] flex items-center gap-2 justify-start">
-                <Clock className="w-4.5 h-4.5 text-[#2F80FF]" />
+              <h3 className="text-sm font-black text-[#f5f5fa] flex items-center gap-2 justify-start">
+                <Clock className="w-4.5 h-4.5 text-[#6366f1]" />
                 رصد البيانات للمدى الزمني المحدد
               </h3>
-              <p className="text-[11px] text-[#9FB0C5] mt-1">
+              <p className="text-[11px] text-[#a5a5c8] mt-1">
                 اختر تاريخ البدء وتاريخ الانتهاء لعرض كافة السحوبات والمؤشرات والنسب التراكمية في هذه الفترة.
               </p>
             </div>
@@ -693,8 +693,8 @@ export default function App() {
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center border cursor-pointer shrink-0 min-w-[70px] ${
                           isToday
-                            ? "bg-[#2F80FF] text-white border-[#2F80FF] shadow-lg shadow-[#2F80FF]/15"
-                            : "bg-[#07111F]/50 text-[#9FB0C5] border-[#20324A] hover:bg-[#12233A] hover:text-[#F4F7FB]"
+                            ? "bg-[#6366f1] text-white border-[#6366f1] shadow-lg shadow-[#6366f1]/15"
+                            : "bg-[#0a0a1a]/50 text-[#a5a5c8] border-[#2a2a5c] hover:bg-[#1c1c47] hover:text-[#f5f5fa]"
                         }`}
                       >
                         اليوم
@@ -707,8 +707,8 @@ export default function App() {
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center border cursor-pointer shrink-0 min-w-[70px] ${
                           isYesterday
-                            ? "bg-[#2F80FF] text-white border-[#2F80FF] shadow-lg shadow-[#2F80FF]/15"
-                            : "bg-[#07111F]/50 text-[#9FB0C5] border-[#20324A] hover:bg-[#12233A] hover:text-[#F4F7FB]"
+                            ? "bg-[#6366f1] text-white border-[#6366f1] shadow-lg shadow-[#6366f1]/15"
+                            : "bg-[#0a0a1a]/50 text-[#a5a5c8] border-[#2a2a5c] hover:bg-[#1c1c47] hover:text-[#f5f5fa]"
                         }`}
                       >
                         أمس
@@ -721,8 +721,8 @@ export default function App() {
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center border cursor-pointer shrink-0 min-w-[85px] ${
                           isLast7
-                            ? "bg-[#2F80FF] text-white border-[#2F80FF] shadow-lg shadow-[#2F80FF]/15"
-                            : "bg-[#07111F]/50 text-[#9FB0C5] border-[#20324A] hover:bg-[#12233A] hover:text-[#F4F7FB]"
+                            ? "bg-[#6366f1] text-white border-[#6366f1] shadow-lg shadow-[#6366f1]/15"
+                            : "bg-[#0a0a1a]/50 text-[#a5a5c8] border-[#2a2a5c] hover:bg-[#1c1c47] hover:text-[#f5f5fa]"
                         }`}
                       >
                         آخر 7 أيام
@@ -735,8 +735,8 @@ export default function App() {
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center border cursor-pointer shrink-0 min-w-[85px] ${
                           isThisMonth
-                            ? "bg-[#2F80FF] text-white border-[#2F80FF] shadow-lg shadow-[#2F80FF]/15"
-                            : "bg-[#07111F]/50 text-[#9FB0C5] border-[#20324A] hover:bg-[#12233A] hover:text-[#F4F7FB]"
+                            ? "bg-[#6366f1] text-white border-[#6366f1] shadow-lg shadow-[#6366f1]/15"
+                            : "bg-[#0a0a1a]/50 text-[#a5a5c8] border-[#2a2a5c] hover:bg-[#1c1c47] hover:text-[#f5f5fa]"
                         }`}
                       >
                         الشهر الحالي
@@ -780,9 +780,9 @@ export default function App() {
                 transition={{ duration: 0.15 }}
               >
                 <React.Suspense fallback={
-                  <div className="flex flex-col items-center justify-center p-12 space-y-4 text-center bg-[#0D1B2D] border border-[#20324A] rounded-3xl">
-                    <RefreshCw className="w-8 h-8 text-[#2F80FF] animate-spin" />
-                    <p className="text-xs text-[#9FB0C5]">جاري تحميل محتوى الصفحة...</p>
+                  <div className="flex flex-col items-center justify-center p-12 space-y-4 text-center bg-[#141432] border border-[#2a2a5c] rounded-3xl">
+                    <RefreshCw className="w-8 h-8 text-[#6366f1] animate-spin" />
+                    <p className="text-xs text-[#a5a5c8]">جاري تحميل محتوى الصفحة...</p>
                   </div>
                 }>
                   {/* 1. Overview Tab */}
@@ -898,7 +898,7 @@ export default function App() {
         </main>
 
         {/* Global Footer */}
-        <footer className="py-6 text-center text-[11px] text-[#9FB0C5]/40 border-t border-[#20324A]/40 bg-[#081525]/30">
+        <footer className="py-6 text-center text-[11px] text-[#a5a5c8]/40 border-t border-[#2a2a5c]/40 bg-[#0f0f24]/30">
           جميع حقوق مطابقة ورصد كتالوج صفقة لدروبشيبينغ مصر محفوظة © 2026
         </footer>
       </div>
@@ -930,13 +930,13 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-lg bg-[#0D1B2D] border border-[#20324A] rounded-[24px] p-6 z-55 text-right space-y-5 shadow-2xl"
+              className="relative w-full max-w-lg bg-[#141432] border border-[#2a2a5c] rounded-[24px] p-6 z-55 text-right space-y-5 shadow-2xl"
             >
-              <div className="flex justify-between items-center border-b border-[#20324A]/40 pb-3">
+              <div className="flex justify-between items-center border-b border-[#2a2a5c]/40 pb-3">
                 <h3 className="text-xs font-extrabold text-white">نتائج الاتصال الفعلي والاختبار البرمجي للـ API</h3>
                 <button 
                   onClick={() => setShowTestSheet(false)}
-                  className="px-3 py-1.5 bg-[#12233A] hover:bg-[#20324A] text-[10px] rounded-lg text-white transition cursor-pointer"
+                  className="px-3 py-1.5 bg-[#1c1c47] hover:bg-[#2a2a5c] text-[10px] rounded-lg text-white transition cursor-pointer"
                 >
                   إغلاق
                 </button>
@@ -944,8 +944,8 @@ export default function App() {
 
               {testing ? (
                 <div className="flex flex-col items-center justify-center py-12 space-y-3">
-                  <RefreshCw className="w-8 h-8 text-[#2F80FF] animate-spin" />
-                  <p className="text-xs text-[#9FB0C5]">جاري توقيع وبث الطلب المالي للخادم للتحقق من التراخيص...</p>
+                  <RefreshCw className="w-8 h-8 text-[#6366f1] animate-spin" />
+                  <p className="text-xs text-[#a5a5c8]">جاري توقيع وبث الطلب المالي للخادم للتحقق من التراخيص...</p>
                 </div>
               ) : (
                 <div className="space-y-4 text-xs text-right">
@@ -962,8 +962,8 @@ export default function App() {
                   )}
 
                   <div className="space-y-2">
-                    <h4 className="font-extrabold text-[#F4F7FB]">الاستجابة الفنية المستلمة:</h4>
-                    <div className="bg-[#07111F] p-4 rounded-xl space-y-1.5 font-mono text-[10.5px] text-[#9FB0C5] text-left border border-[#20324A]/40">
+                    <h4 className="font-extrabold text-[#f5f5fa]">الاستجابة الفنية المستلمة:</h4>
+                    <div className="bg-[#0a0a1a] p-4 rounded-xl space-y-1.5 font-mono text-[10.5px] text-[#a5a5c8] text-left border border-[#2a2a5c]/40">
                       <div>Platform: {testResult?.platform || selectedFormPlatform}</div>
                       <div>Status Code: {testResult?.success ? 200 : 401}</div>
                       <div>Response Time: {testResult?.responseTimeMs || 120}ms</div>
@@ -973,8 +973,8 @@ export default function App() {
 
                   {testResult?.sample && (
                     <div className="space-y-2">
-                      <h4 className="font-extrabold text-[#F4F7FB]">عينة سلعة تم استلامها وفك تشفير مسارها:</h4>
-                      <div className="bg-[#07111F] p-4 rounded-xl space-y-1.5 font-mono text-[10.5px] text-[#9FB0C5] text-right border border-[#20324A]/40 leading-relaxed">
+                      <h4 className="font-extrabold text-[#f5f5fa]">عينة سلعة تم استلامها وفك تشفير مسارها:</h4>
+                      <div className="bg-[#0a0a1a] p-4 rounded-xl space-y-1.5 font-mono text-[10.5px] text-[#a5a5c8] text-right border border-[#2a2a5c]/40 leading-relaxed">
                         <div>اسم السلعة: <strong className="text-white">{testResult.sample.name}</strong></div>
                         <div>الكمية المرصودة بالمستودع: <strong className="text-white">{testResult.sample.quantity} قطعة</strong></div>
                         <div>الـ SKU المعتمد: <strong className="text-white">{testResult.sample.sku}</strong></div>
@@ -995,7 +995,7 @@ export default function App() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-55 bg-[#0D1B2D] border border-[#20324A] text-white py-3.5 px-6 rounded-2xl shadow-2xl text-xs text-center font-bold font-sans"
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-55 bg-[#141432] border border-[#2a2a5c] text-white py-3.5 px-6 rounded-2xl shadow-2xl text-xs text-center font-bold font-sans"
           >
             {toast}
           </motion.div>

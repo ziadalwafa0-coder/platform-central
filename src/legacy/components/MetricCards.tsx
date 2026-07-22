@@ -62,9 +62,9 @@ export default function MetricCards({
       value: loading && !overviewData ? "..." : metrics.monitoredProducts,
       sub: "موزعة بالرادار",
       icon: Layers,
-      color: "text-[#2F80FF]",
-      border: "hover:border-[#2F80FF]/50",
-      bg: "bg-[#2F80FF]/5",
+      color: "text-[#6366f1]",
+      border: "hover:border-[#6366f1]/50",
+      bg: "bg-[#6366f1]/5",
       onClick: () => {
         setSelectedStatus("all");
         setActiveTab("products");
@@ -197,20 +197,20 @@ export default function MetricCards({
           <div
             key={card.id}
             onClick={card.onClick}
-            className={`bg-[#0D1B2D] border border-[#20324A] p-4.5 rounded-[18px] transition-all duration-200 cursor-pointer text-right group ${card.border}`}
+            className={`bg-[#141432] border border-[#2a2a5c] p-4.5 rounded-[18px] transition-all duration-200 cursor-pointer text-right group ${card.border}`}
           >
             <div className="flex justify-between items-start gap-2">
-              <span className="text-[11px] text-[#9FB0C5] font-bold line-clamp-1 leading-normal">{card.label}</span>
+              <span className="text-[11px] text-[#a5a5c8] font-bold line-clamp-1 leading-normal">{card.label}</span>
               <div className={`p-1.5 rounded-lg shrink-0 ${card.bg}`}>
                 <Icon className={`w-4 h-4 ${card.color}`} />
               </div>
             </div>
 
             <div className="mt-3">
-              <div className="text-xl md:text-2xl font-black text-[#F4F7FB] font-mono leading-none tracking-tight">
+              <div className="text-xl md:text-2xl font-black text-[#f5f5fa] font-mono leading-none tracking-tight">
                 {card.value}
               </div>
-              <div className="text-[9px] text-[#9FB0C5]/70 font-medium mt-1 leading-none">
+              <div className="text-[9px] text-[#a5a5c8]/70 font-medium mt-1 leading-none">
                 {card.sub}
               </div>
             </div>

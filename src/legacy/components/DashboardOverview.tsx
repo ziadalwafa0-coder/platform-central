@@ -54,13 +54,13 @@ const VolatilityTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="bg-[#12233A] border border-[#20324A] p-3 rounded-xl text-[11px] text-[#F4F7FB] shadow-xl text-right min-w-[150px]">
-        <div className="font-bold border-b border-[#20324A]/50 pb-1.5 text-[#3B82F6] flex items-center gap-1.5 justify-end">
+      <div className="bg-[#1c1c47] border border-[#2a2a5c] p-3 rounded-xl text-[11px] text-[#f5f5fa] shadow-xl text-right min-w-[150px]">
+        <div className="font-bold border-b border-[#2a2a5c]/50 pb-1.5 text-[#3B82F6] flex items-center gap-1.5 justify-end">
           <span>{label}:00</span>
         </div>
         <div className="space-y-1.5 mt-2">
           <div className="flex justify-between items-center gap-4">
-            <span className="text-[#9FB0C5]">القطع المسحوبة:</span>
+            <span className="text-[#a5a5c8]">القطع المسحوبة:</span>
             <strong className="text-[#3B82F6] font-mono">{data.displayWithdrawals}</strong>
           </div>
         </div>
@@ -79,22 +79,22 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="bg-[#12233A] border border-[#20324A] p-3.5 rounded-2xl text-[11px] text-[#F4F7FB] shadow-2xl text-right min-w-[190px]">
-        <div className="font-bold border-b border-[#20324A]/50 pb-2 text-[#2F80FF] flex items-center gap-1.5 justify-end">
+      <div className="bg-[#1c1c47] border border-[#2a2a5c] p-3.5 rounded-2xl text-[11px] text-[#f5f5fa] shadow-2xl text-right min-w-[190px]">
+        <div className="font-bold border-b border-[#2a2a5c]/50 pb-2 text-[#6366f1] flex items-center gap-1.5 justify-end">
           <Clock className="w-3.5 h-3.5" />
           <span>دورة رصد: {label}</span>
         </div>
         <div className="space-y-2 mt-2.5">
           <div className="flex justify-between items-center gap-4">
-            <span className="text-[#9FB0C5]">إجمالي السحب:</span>
+            <span className="text-[#a5a5c8]">إجمالي السحب:</span>
             <strong className="text-[#24C78E] font-mono">{data.quantityDecrease} قطعة</strong>
           </div>
           <div className="flex justify-between items-center gap-4">
-            <span className="text-[#9FB0C5]">شحن وتخزين:</span>
+            <span className="text-[#a5a5c8]">شحن وتخزين:</span>
             <strong className="text-[#F5A524] font-mono">+{data.restockAmount} قطعة</strong>
           </div>
           {data.startedAt && (
-            <div className="text-[9px] text-[#9FB0C5]/60 pt-1.5 border-t border-[#20324A]/30 mt-2 text-left font-mono">
+            <div className="text-[9px] text-[#a5a5c8]/60 pt-1.5 border-t border-[#2a2a5c]/30 mt-2 text-left font-mono">
               {new Date(data.startedAt).toLocaleString("ar-EG")}
             </div>
           )}
@@ -510,25 +510,25 @@ export default function DashboardOverview({
     <div className="space-y-6">
       
       {/* Disclaimer banner */}
-      <div className="bg-[#12233A] border border-[#20324A] p-4 rounded-2xl flex items-start gap-3 text-right">
-        <Info className="w-5 h-5 text-[#2F80FF] shrink-0 mt-0.5" />
+      <div className="bg-[#1c1c47] border border-[#2a2a5c] p-4 rounded-2xl flex items-start gap-3 text-right">
+        <Info className="w-5 h-5 text-[#6366f1] shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <h4 className="text-xs font-black text-[#F4F7FB]">إقرار إحصائي وأمني هام للمسوقين والتاجر</h4>
-          <p className="text-[11px] text-[#9FB0C5] leading-relaxed">
+          <h4 className="text-xs font-black text-[#f5f5fa]">إقرار إحصائي وأمني هام للمسوقين والتاجر</h4>
+          <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
             مؤشر نقص الكمية هو تقدير مبني بالكامل على رصد فترات المخازن التلقائية لكتالوج صفقة المباشر، ولا يُمثل بالضرورة دليلاً مؤكداً ومباشراً لعدد المبيعات الفعلية. الهدف الأساسي هو إخطارك بالكميات المتاحة حتى لا تهدر ميزانيتك الإعلانية على منتجات نافدة أو قريبة النفاذ.
           </p>
         </div>
       </div>
 
       {/* 🛡️ Data Accuracy Auditor Card */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-4">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-right">
           <div>
-            <h3 className="text-sm font-black text-[#F4F7FB] flex items-center gap-2">
-              <ShieldCheck className="w-4.5 h-4.5 text-[#2F80FF]" />
+            <h3 className="text-sm font-black text-[#f5f5fa] flex items-center gap-2">
+              <ShieldCheck className="w-4.5 h-4.5 text-[#6366f1]" />
               نظام التحقق من دقة ومطابقة البيانات
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-0.5">
+            <p className="text-[10px] text-[#a5a5c8] mt-0.5">
               مقارنة ذكية لحظية بين آخر طابع زمني لمزامنة الكتالوج وآخر عملية سحب أو توريد مسجلة بالمستودعات.
             </p>
           </div>
@@ -537,7 +537,7 @@ export default function DashboardOverview({
             <button
               onClick={() => performAccuracyCheck()}
               disabled={checkingAccuracy || syncingAccuracy}
-              className="px-3 py-1.5 bg-[#07111F] border border-[#20324A] hover:bg-[#12233A] text-[#9FB0C5] hover:text-[#F4F7FB] text-[10px] font-bold rounded-xl transition flex items-center gap-1 cursor-pointer disabled:opacity-50"
+              className="px-3 py-1.5 bg-[#0a0a1a] border border-[#2a2a5c] hover:bg-[#1c1c47] text-[#a5a5c8] hover:text-[#f5f5fa] text-[10px] font-bold rounded-xl transition flex items-center gap-1 cursor-pointer disabled:opacity-50"
               title="إعادة الفحص المباشر"
             >
               <RefreshCw className={`w-3 h-3 ${checkingAccuracy ? "animate-spin" : ""}`} />
@@ -547,7 +547,7 @@ export default function DashboardOverview({
             <button
               onClick={handleAccuracySync}
               disabled={checkingAccuracy || syncingAccuracy}
-              className="px-3 py-1.5 bg-[#2F80FF] hover:bg-[#1a6edb] text-white text-[10px] font-bold rounded-xl transition flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-md shadow-[#2F80FF]/10"
+              className="px-3 py-1.5 bg-[#6366f1] hover:bg-[#1a6edb] text-white text-[10px] font-bold rounded-xl transition flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-md shadow-[#6366f1]/10"
             >
               <RefreshCw className={`w-3 h-3 ${syncingAccuracy ? "animate-spin" : ""}`} />
               {syncingAccuracy ? "جاري المطابقة والمزامنة..." : "تحديث ومطابقة فورية"}
@@ -556,9 +556,9 @@ export default function DashboardOverview({
         </div>
 
         {checkingAccuracy ? (
-          <div className="bg-[#07111F]/30 border border-[#20324A]/40 rounded-2xl p-6 flex flex-col items-center justify-center space-y-3">
-            <div className="w-7 h-7 border-2 border-[#2F80FF] border-t-transparent rounded-full animate-spin" />
-            <span className="text-xs text-[#9FB0C5] font-bold animate-pulse">جاري تدقيق قنوات المزامنة ومطابقة حركات المخازن المباشرة...</span>
+          <div className="bg-[#0a0a1a]/30 border border-[#2a2a5c]/40 rounded-2xl p-6 flex flex-col items-center justify-center space-y-3">
+            <div className="w-7 h-7 border-2 border-[#6366f1] border-t-transparent rounded-full animate-spin" />
+            <span className="text-xs text-[#a5a5c8] font-bold animate-pulse">جاري تدقيق قنوات المزامنة ومطابقة حركات المخازن المباشرة...</span>
           </div>
         ) : accuracyError ? (
           <div className="bg-[#F05252]/10 border border-[#F05252]/20 p-4 rounded-2xl flex items-center gap-2.5 text-[#F05252] text-xs font-bold">
@@ -587,13 +587,13 @@ export default function DashboardOverview({
                   )}
                   <span className="text-xs font-black">حالة دقة الأرقام: {accuracy.statusText}</span>
                 </div>
-                <p className="text-[11px] text-[#9FB0C5] leading-relaxed">
+                <p className="text-[11px] text-[#a5a5c8] leading-relaxed">
                   {accuracy.reason}
                 </p>
               </div>
 
-              <div className="border-t border-[#20324A]/40 pt-3 flex items-center justify-between text-[10px]">
-                <span className="text-[#9FB0C5]">التطابق البرمجي:</span>
+              <div className="border-t border-[#2a2a5c]/40 pt-3 flex items-center justify-between text-[10px]">
+                <span className="text-[#a5a5c8]">التطابق البرمجي:</span>
                 <span className={`font-mono font-black ${accuracy.isInstantaneous ? "text-[#24C78E]" : "text-[#F5A524]"}`}>
                   {accuracy.isInstantaneous ? "100% (لحظي تماماً)" : "قد يحتاج لتحديث"}
                 </span>
@@ -601,11 +601,11 @@ export default function DashboardOverview({
             </div>
 
             {/* Time Comparison Timeline Visualizer */}
-            <div className="lg:col-span-7 bg-[#07111F]/50 border border-[#20324A]/40 rounded-2xl p-4 flex flex-col justify-between space-y-4">
+            <div className="lg:col-span-7 bg-[#0a0a1a]/50 border border-[#2a2a5c]/40 rounded-2xl p-4 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
-                <span className="text-[10px] text-[#9FB0C5] block font-bold">مقارنة زمنية لتدفق حركات المخازن (دقيقة بدقيقة):</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-bold">مقارنة زمنية لتدفق حركات المخازن (دقيقة بدقيقة):</span>
                 
-                <div className="relative border-r-2 border-[#20324A] pr-4 mr-2 py-1 space-y-4">
+                <div className="relative border-r-2 border-[#2a2a5c] pr-4 mr-2 py-1 space-y-4">
                   {/* Sync Event */}
                   <div className="relative z-50">
                   <DateRangePicker 
@@ -623,32 +623,32 @@ export default function DashboardOverview({
 
             {/* Dynamic Analytics Volatility Cards Row */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-right">
-              <div className="bg-[#07111F]/60 border border-[#20324A]/40 p-3.5 rounded-2xl flex flex-col justify-between">
-                <span className="text-[9px] text-[#9FB0C5] font-medium block">إجمالي قطع السحب اليومي</span>
-                <strong className="text-lg font-black font-mono text-[#F4F7FB] mt-1.5">
+              <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c]/40 p-3.5 rounded-2xl flex flex-col justify-between">
+                <span className="text-[9px] text-[#a5a5c8] font-medium block">إجمالي قطع السحب اليومي</span>
+                <strong className="text-lg font-black font-mono text-[#f5f5fa] mt-1.5">
                   {loadingHourly ? "..." : `${hourlyStats.total} قطعة`}
                 </strong>
               </div>
               
-              <div className="bg-[#07111F]/60 border border-[#20324A]/40 p-3.5 rounded-2xl flex flex-col justify-between">
-                <span className="text-[9px] text-[#9FB0C5] font-medium block">متوسط السحب بالساعة</span>
+              <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c]/40 p-3.5 rounded-2xl flex flex-col justify-between">
+                <span className="text-[9px] text-[#a5a5c8] font-medium block">متوسط السحب بالساعة</span>
                 <strong className="text-lg font-black font-mono text-[#24C78E] mt-1.5">
                   {loadingHourly ? "..." : `${hourlyStats.average} قطعة/س`}
                 </strong>
               </div>
 
-              <div className="bg-[#07111F]/60 border border-[#20324A]/40 p-3.5 rounded-2xl flex flex-col justify-between">
-                <span className="text-[9px] text-[#9FB0C5] font-medium block">ساعة الذروة القصوى</span>
+              <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c]/40 p-3.5 rounded-2xl flex flex-col justify-between">
+                <span className="text-[9px] text-[#a5a5c8] font-medium block">ساعة الذروة القصوى</span>
                 <div className="mt-1.5 flex flex-col">
                   <strong className="text-sm font-black text-[#F5A524]">
                     {loadingHourly ? "..." : formatHourLocal(hourlyStats.peakHour)}
                   </strong>
-                  <span className="text-[8px] text-[#9FB0C5]/70">({hourlyStats.peakVal} قطعة)</span>
+                  <span className="text-[8px] text-[#a5a5c8]/70">({hourlyStats.peakVal} قطعة)</span>
                 </div>
               </div>
 
-              <div className="bg-[#07111F]/60 border border-[#20324A]/40 p-3.5 rounded-2xl flex flex-col justify-between">
-                <span className="text-[9px] text-[#9FB0C5] font-medium block">مؤشر التقلب والاضطراب</span>
+              <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c]/40 p-3.5 rounded-2xl flex flex-col justify-between">
+                <span className="text-[9px] text-[#a5a5c8] font-medium block">مؤشر التقلب والاضطراب</span>
                 <div className="mt-1.5 flex flex-col">
                   <strong className="text-sm font-black text-red-400">
                     {loadingHourly ? "..." : `±${hourlyStats.volatility}`}
@@ -660,14 +660,14 @@ export default function DashboardOverview({
 
             {/* Main Chart Area */}
             {loadingHourly ? (
-              <div className="h-64 w-full bg-[#07111F]/30 border border-[#20324A]/40 rounded-2xl flex flex-col items-center justify-center space-y-3">
-                <div className="w-8 h-8 border-2 border-[#2F80FF] border-t-transparent rounded-full animate-spin" />
-                <span className="text-xs text-[#9FB0C5] font-bold animate-pulse">جاري تحميل تقلبات السحب وإحصائيات التذبذب...</span>
+              <div className="h-64 w-full bg-[#0a0a1a]/30 border border-[#2a2a5c]/40 rounded-2xl flex flex-col items-center justify-center space-y-3">
+                <div className="w-8 h-8 border-2 border-[#6366f1] border-t-transparent rounded-full animate-spin" />
+                <span className="text-xs text-[#a5a5c8] font-bold animate-pulse">جاري تحميل تقلبات السحب وإحصائيات التذبذب...</span>
               </div>
             ) : hourlyData.length === 0 ? (
-              <div className="h-64 w-full bg-[#07111F]/30 border border-[#20324A]/40 rounded-2xl flex flex-col items-center justify-center space-y-2 text-center">
-                <Info className="w-8 h-8 text-[#9FB0C5]/40" />
-                <p className="text-xs font-bold text-[#F4F7FB]">لا توجد بيانات حركة مستودع مرصودة لهذا اليوم</p>
+              <div className="h-64 w-full bg-[#0a0a1a]/30 border border-[#2a2a5c]/40 rounded-2xl flex flex-col items-center justify-center space-y-2 text-center">
+                <Info className="w-8 h-8 text-[#a5a5c8]/40" />
+                <p className="text-xs font-bold text-[#f5f5fa]">لا توجد بيانات حركة مستودع مرصودة لهذا اليوم</p>
                 <p className="text-[10px] text-gray-400">يرجى اختيار تاريخ نشط للرصد أو تحديث ومطابقة البيانات</p>
               </div>
             ) : (
@@ -687,10 +687,10 @@ export default function DashboardOverview({
                           <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.0}/>
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#20324A" opacity={0.3} vertical={false} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#2a2a5c" opacity={0.3} vertical={false} />
                       <XAxis 
                         dataKey="hour" 
-                        stroke="#9FB0C5" 
+                        stroke="#a5a5c8" 
                         fontSize={9}
                         tickLine={false}
                         axisLine={false}
@@ -698,7 +698,7 @@ export default function DashboardOverview({
                         tickFormatter={(val) => `${val}:00`}
                       />
                       <YAxis 
-                        stroke="#9FB0C5" 
+                        stroke="#a5a5c8" 
                         fontSize={9}
                         tickLine={false}
                         axisLine={false}
@@ -706,7 +706,7 @@ export default function DashboardOverview({
                       />
                       <Tooltip 
                         content={<VolatilityTooltip />} 
-                        cursor={{ stroke: '#20324A', strokeWidth: 1, strokeDasharray: '4 4' }}
+                        cursor={{ stroke: '#2a2a5c', strokeWidth: 1, strokeDasharray: '4 4' }}
                       />
                       <Line 
                         type="monotone"
@@ -714,7 +714,7 @@ export default function DashboardOverview({
                         dataKey="displayWithdrawals" 
                         stroke="#3B82F6" 
                         strokeWidth={3}
-                        dot={{ r: 3, fill: '#0D1B2D', stroke: '#3B82F6', strokeWidth: 2 }}
+                        dot={{ r: 3, fill: '#141432', stroke: '#3B82F6', strokeWidth: 2 }}
                         activeDot={{ r: 5, fill: '#3B82F6', stroke: '#FFFFFF', strokeWidth: 1.5 }}
                         connectNulls={true}
                       />
@@ -722,7 +722,7 @@ export default function DashboardOverview({
                   </ResponsiveContainer>
                 </div>
                 
-                <div className="flex items-center justify-between border-t border-[#20324A]/30 pt-3 text-[9px] text-[#9FB0C5]">
+                <div className="flex items-center justify-between border-t border-[#2a2a5c]/30 pt-3 text-[9px] text-[#a5a5c8]">
                   <span className="font-medium">المحور الأفقي: ساعات اليوم (00:00 إلى 23:00) | المحور الرأسي: إجمالي القطع المسحوبة</span>
                   <span className="text-[#3B82F6] font-bold">● منحنى تذبذب حركة المخازن</span>
                 </div>
@@ -733,14 +733,14 @@ export default function DashboardOverview({
         </>
       ) : null}
       {/* 📅 Weekly Siphons and Inventory Activity Report */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-5 text-right">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-5 text-right">
         <div className="flex justify-between items-center">
           <div>
-            <h3 className="text-sm font-bold text-[#F4F7FB] flex items-center gap-2">
+            <h3 className="text-sm font-bold text-[#f5f5fa] flex items-center gap-2">
               <TrendingDown className="w-4.5 h-4.5 text-[#24C78E]" />
               تقرير السحب والنشاط الأسبوعي المحفوظ
             </h3>
-            <p className="text-[10px] text-[#9FB0C5] mt-0.5">مقارنة حركة السحب اليومية والكميات المزودة على مدار السبعة أيام الماضية</p>
+            <p className="text-[10px] text-[#a5a5c8] mt-0.5">مقارنة حركة السحب اليومية والكميات المزودة على مدار السبعة أيام الماضية</p>
           </div>
           <span className="text-[10px] text-[#24C78E] bg-[#24C78E]/10 px-2.5 py-1 rounded-full font-bold border border-[#24C78E]/20">
             مُحدَّث ومحفوظ تلقائياً
@@ -749,11 +749,11 @@ export default function DashboardOverview({
 
         {/* Weekly Totals KPIs Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-[#07111F]/60 border border-[#20324A]/40 p-4 rounded-2xl flex items-center justify-between">
+          <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c]/40 p-4 rounded-2xl flex items-center justify-between">
             <div className="space-y-0.5">
-              <span className="text-[10px] text-[#9FB0C5] block font-medium">إجمالي السحب الأسبوعي</span>
+              <span className="text-[10px] text-[#a5a5c8] block font-medium">إجمالي السحب الأسبوعي</span>
               <strong className="text-2xl text-[#24C78E] font-black font-mono">
-                {weeklyHistory.reduce((sum, h) => sum + h.quantityDecrease, 0)} <span className="text-[10px] font-sans font-normal text-[#9FB0C5]">قطعة</span>
+                {weeklyHistory.reduce((sum, h) => sum + h.quantityDecrease, 0)} <span className="text-[10px] font-sans font-normal text-[#a5a5c8]">قطعة</span>
               </strong>
             </div>
             <div className="p-3 bg-[#24C78E]/10 rounded-xl border border-[#24C78E]/20 text-[#24C78E]">
@@ -761,11 +761,11 @@ export default function DashboardOverview({
             </div>
           </div>
 
-          <div className="bg-[#07111F]/60 border border-[#20324A]/40 p-4 rounded-2xl flex items-center justify-between">
+          <div className="bg-[#0a0a1a]/60 border border-[#2a2a5c]/40 p-4 rounded-2xl flex items-center justify-between">
             <div className="space-y-0.5">
-              <span className="text-[10px] text-[#9FB0C5] block font-medium">إجمالي التوريد والتخزين الأسبوعي</span>
+              <span className="text-[10px] text-[#a5a5c8] block font-medium">إجمالي التوريد والتخزين الأسبوعي</span>
               <strong className="text-2xl text-[#F5A524] font-black font-mono">
-                +{weeklyHistory.reduce((sum, h) => sum + h.restockAmount, 0)} <span className="text-[10px] font-sans font-normal text-[#9FB0C5]">قطعة</span>
+                +{weeklyHistory.reduce((sum, h) => sum + h.restockAmount, 0)} <span className="text-[10px] font-sans font-normal text-[#a5a5c8]">قطعة</span>
               </strong>
             </div>
             <div className="p-3 bg-[#F5A524]/10 rounded-xl border border-[#F5A524]/20 text-[#F5A524]">
@@ -802,13 +802,13 @@ export default function DashboardOverview({
                 className={`p-3.5 rounded-xl border transition duration-150 ${
                   isToday 
                     ? "bg-[#112F25]/40 border-[#24C78E]/30" 
-                    : "bg-[#07111F]/30 border-[#20324A]/30 hover:bg-[#0D1B2D]/40"
+                    : "bg-[#0a0a1a]/30 border-[#2a2a5c]/30 hover:bg-[#141432]/40"
                 }`}
               >
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
                   <div className="flex items-center gap-2">
-                    <strong className="text-xs text-[#F4F7FB]">{day.dayName}</strong>
-                    <span className="text-[10px] text-[#9FB0C5] font-mono">({dateArabic})</span>
+                    <strong className="text-xs text-[#f5f5fa]">{day.dayName}</strong>
+                    <span className="text-[10px] text-[#a5a5c8] font-mono">({dateArabic})</span>
                     {isToday && (
                       <span className="text-[8px] bg-[#24C78E] text-black px-1.5 py-0.5 rounded font-extrabold uppercase animate-pulse">
                         اليوم (مباشر)
@@ -816,7 +816,7 @@ export default function DashboardOverview({
                     )}
                   </div>
                   
-                  <div className="flex items-center gap-4 text-[10px] text-[#9FB0C5]">
+                  <div className="flex items-center gap-4 text-[10px] text-[#a5a5c8]">
                     <div className="flex items-center gap-1">
                       <span>السحب:</span>
                       <strong className="text-[#24C78E] font-mono">{day.quantityDecrease} قطعة</strong>
@@ -829,7 +829,7 @@ export default function DashboardOverview({
                 </div>
 
                 {/* Combined Progress bar */}
-                <div className="h-2 w-full bg-[#12233A] rounded-full overflow-hidden flex">
+                <div className="h-2 w-full bg-[#1c1c47] rounded-full overflow-hidden flex">
                   <div 
                     style={{ width: `${pct}%` }}
                     className="h-full bg-gradient-to-r from-[#24C78E]/40 to-[#24C78E] rounded-full transition-all duration-500"
@@ -846,9 +846,9 @@ export default function DashboardOverview({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {/* Alerts & Critical Stocks */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-4">
+        <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-4">
           <div className="flex justify-between items-center text-right">
-            <h3 className="text-sm font-bold text-[#F4F7FB] flex items-center gap-2">
+            <h3 className="text-sm font-bold text-[#f5f5fa] flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-[#F05252]" />
               السلع الحرجة ووشيكة النفاد بالمخازن
             </h3>
@@ -867,18 +867,18 @@ export default function DashboardOverview({
                   <div 
                     key={`${p.id}-${index}`}
                     onClick={() => onProductClick(p)}
-                    className="bg-[#07111F]/50 hover:bg-[#12233A] border border-[#20324A]/40 p-3 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition hover:border-[#20324A]"
+                    className="bg-[#0a0a1a]/50 hover:bg-[#1c1c47] border border-[#2a2a5c]/40 p-3 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition hover:border-[#2a2a5c]"
                   >
                     <div className="flex items-center gap-3">
                       <img 
                         src={p.imageUrl} 
-                        className="w-10 h-10 rounded-lg object-cover bg-[#0D1B2D] shrink-0 border border-[#20324A]/50" 
+                        className="w-10 h-10 rounded-lg object-cover bg-[#141432] shrink-0 border border-[#2a2a5c]/50" 
                         alt="" 
                         referrerPolicy="no-referrer"
                       />
                       <div className="text-right">
-                        <h4 className="text-xs font-bold text-[#F4F7FB] line-clamp-1">{p.name}</h4>
-                        <span className="text-[9px] text-[#9FB0C5] font-mono block mt-0.5">{p.sku}</span>
+                        <h4 className="text-xs font-bold text-[#f5f5fa] line-clamp-1">{p.name}</h4>
+                        <span className="text-[9px] text-[#a5a5c8] font-mono block mt-0.5">{p.sku}</span>
                       </div>
                     </div>
                     
@@ -894,7 +894,7 @@ export default function DashboardOverview({
               })}
 
             {products.filter(p => p.currentQuantity !== null && p.currentQuantity <= 20).length === 0 && (
-              <div className="text-center py-12 text-xs text-[#9FB0C5] bg-[#07111F]/30 rounded-xl border border-dashed border-[#20324A]/30">
+              <div className="text-center py-12 text-xs text-[#a5a5c8] bg-[#0a0a1a]/30 rounded-xl border border-dashed border-[#2a2a5c]/30">
                 لا توجد سلع بمستويات مخزون حرجة حالياً.
               </div>
             )}
@@ -902,26 +902,26 @@ export default function DashboardOverview({
         </div>
 
         {/* Sync runs & activities */}
-        <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-4">
-          <h3 className="text-sm font-bold text-[#F4F7FB] flex items-center gap-2 text-right">
-            <Database className="w-4 h-4 text-[#2F80FF]" />
+        <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-4">
+          <h3 className="text-sm font-bold text-[#f5f5fa] flex items-center gap-2 text-right">
+            <Database className="w-4 h-4 text-[#6366f1]" />
             سجلات المزامنة وحالات الرصد الأخيرة
           </h3>
 
           <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
             {syncRuns.slice(0, 5).map((run) => (
-              <div key={run.id} className="bg-[#07111F]/50 border border-[#20324A]/40 p-3 rounded-xl space-y-2 text-xs text-right">
-                <div className="flex justify-between items-center border-b border-[#20324A]/20 pb-1.5">
-                  <span className="font-mono text-[9px] text-[#9FB0C5]">{run.id}</span>
+              <div key={run.id} className="bg-[#0a0a1a]/50 border border-[#2a2a5c]/40 p-3 rounded-xl space-y-2 text-xs text-right">
+                <div className="flex justify-between items-center border-b border-[#2a2a5c]/20 pb-1.5">
+                  <span className="font-mono text-[9px] text-[#a5a5c8]">{run.id}</span>
                   <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${
                     run.status === "COMPLETED" ? "bg-[#24C78E]/10 text-[#24C78E]" : "bg-[#F05252]/10 text-[#F05252]"
                   }`}>
                     {run.status === "COMPLETED" ? "مكتملة بنجاح" : "فشلت المزامنة"}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[10px] text-[#9FB0C5]">
-                  <div>التوقيت: <strong className="text-[#F4F7FB] font-mono">{formatTimeArabic(run.startedAt)} ({getDayArabic(run.startedAt)})</strong></div>
-                  <div>المستلم: <strong className="text-[#F4F7FB]">{run.productsReceived} سلع</strong></div>
+                <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[10px] text-[#a5a5c8]">
+                  <div>التوقيت: <strong className="text-[#f5f5fa] font-mono">{formatTimeArabic(run.startedAt)} ({getDayArabic(run.startedAt)})</strong></div>
+                  <div>المستلم: <strong className="text-[#f5f5fa]">{run.productsReceived} سلع</strong></div>
                   <div className="text-[#F5A524]">سحوبات: <strong>{run.quantityDecreasesDetected} عمليات</strong></div>
                   <div className="text-[#8B5CF6]">شحنات مخازن: <strong>{run.restocksDetected} إمدادات</strong></div>
                 </div>
@@ -929,7 +929,7 @@ export default function DashboardOverview({
             ))}
 
             {syncRuns.length === 0 && (
-              <div className="text-center py-12 text-xs text-[#9FB0C5] bg-[#07111F]/30 rounded-xl border border-dashed border-[#20324A]/30">
+              <div className="text-center py-12 text-xs text-[#a5a5c8] bg-[#0a0a1a]/30 rounded-xl border border-dashed border-[#2a2a5c]/30">
                 لا توجد سجلات مزامنة مسجلة حالياً.
               </div>
             )}
@@ -939,21 +939,21 @@ export default function DashboardOverview({
       </div>
 
       {/* Stock risk prediction panel */}
-      <div className="bg-[#0D1B2D] border border-[#20324A] p-5 rounded-3xl space-y-4">
+      <div className="bg-[#141432] border border-[#2a2a5c] p-5 rounded-3xl space-y-4">
         <div>
-          <h3 className="text-sm font-bold text-[#F4F7FB] flex items-center gap-2 text-right">
+          <h3 className="text-sm font-bold text-[#f5f5fa] flex items-center gap-2 text-right">
             <Clock className="w-4.5 h-4.5 text-[#F5A524]" />
             توقعات النفاذ والتحليل التنبئي للـ 24 ساعة القادمة (Stockout Predictions)
           </h3>
-          <p className="text-[10px] text-[#9FB0C5] mt-1 text-right leading-relaxed">
-            تحليل ذكي يعتمد على الاتجاه الأسبوعي للطلب <strong className="text-[#2F80FF]">({weeklyHistory.length} أيام مسجلة)</strong> ومعدل السحب اليومي التراكمي لكل سلعة للتنبؤ بالكميات المتوقع استهلاكها والوقت المقدر لنفاذ المخزون.
+          <p className="text-[10px] text-[#a5a5c8] mt-1 text-right leading-relaxed">
+            تحليل ذكي يعتمد على الاتجاه الأسبوعي للطلب <strong className="text-[#6366f1]">({weeklyHistory.length} أيام مسجلة)</strong> ومعدل السحب اليومي التراكمي لكل سلعة للتنبؤ بالكميات المتوقع استهلاكها والوقت المقدر لنفاذ المخزون.
           </p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-right text-xs">
             <thead>
-              <tr className="border-b border-[#20324A] text-[#9FB0C5] pb-2 font-bold">
+              <tr className="border-b border-[#2a2a5c] text-[#a5a5c8] pb-2 font-bold">
                 <th className="py-2.5">السلعة</th>
                 <th className="py-2.5 text-center">المخزون الحالي</th>
                 <th className="py-2.5 text-center">الطلب المتوقع (24 ساعة)</th>
@@ -962,22 +962,22 @@ export default function DashboardOverview({
                 <th className="py-2.5 text-center">ثقة التوقع</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#20324A]/40 text-[#F4F7FB]">
+            <tbody className="divide-y divide-[#2a2a5c]/40 text-[#f5f5fa]">
               {predictedStockoutProducts.map((item, index) => {
                 const { product: p, hoursLeft, predicted24hDemand, riskLevel, badgeStyle, confidence } = item;
                 return (
-                  <tr key={`${p.id}-${index}`} className="hover:bg-[#12233A]/20 transition">
+                  <tr key={`${p.id}-${index}`} className="hover:bg-[#1c1c47]/20 transition">
                     <td className="py-3">
                       <div className="flex items-center gap-2">
                         <img 
                           src={p.imageUrl} 
-                          className="w-8 h-8 rounded-lg object-cover bg-[#07111F] border border-[#20324A]/40" 
+                          className="w-8 h-8 rounded-lg object-cover bg-[#0a0a1a] border border-[#2a2a5c]/40" 
                           alt="" 
                           referrerPolicy="no-referrer"
                         />
                         <div>
-                          <span className="font-bold block text-[11px] hover:text-[#2F80FF] transition cursor-pointer" onClick={() => onProductClick(p)}>{p.name}</span>
-                          <span className="text-[9px] text-[#9FB0C5] font-mono">{p.sku}</span>
+                          <span className="font-bold block text-[11px] hover:text-[#6366f1] transition cursor-pointer" onClick={() => onProductClick(p)}>{p.name}</span>
+                          <span className="text-[9px] text-[#a5a5c8] font-mono">{p.sku}</span>
                         </div>
                       </div>
                     </td>
@@ -1006,13 +1006,13 @@ export default function DashboardOverview({
                       </span>
 
                     </td>
-                    <td className="py-3 text-center font-bold text-[#9FB0C5]">{confidence}</td>
+                    <td className="py-3 text-center font-bold text-[#a5a5c8]">{confidence}</td>
                   </tr>
                 );
               })}
               {predictedStockoutProducts.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-xs text-[#9FB0C5]">
+                  <td colSpan={6} className="py-8 text-center text-xs text-[#a5a5c8]">
                     لا توجد منتجات منخفضة المخزون حالياً لتوليد توقعات النفاذ التنبئية.
                   </td>
                 </tr>

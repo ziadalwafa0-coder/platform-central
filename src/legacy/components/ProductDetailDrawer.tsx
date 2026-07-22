@@ -212,37 +212,37 @@ export default function ProductDetailDrawer({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-2xl bg-[#0D1B2D] border border-[#20324A] rounded-[28px] p-6 z-55 text-right space-y-5 overflow-y-auto max-h-[90vh] shadow-2xl scrollbar-none"
+          className="relative w-full max-w-2xl bg-[#141432] border border-[#2a2a5c] rounded-[28px] p-6 z-55 text-right space-y-5 overflow-y-auto max-h-[90vh] shadow-2xl scrollbar-none"
         >
           {/* Header Row */}
-          <div className="flex justify-between items-start gap-4 border-b border-[#20324A]/60 pb-4">
+          <div className="flex justify-between items-start gap-4 border-b border-[#2a2a5c]/60 pb-4">
             <div className="flex items-center gap-4">
               <img 
                 src={p.imageUrl} 
-                className="w-16 h-16 rounded-xl object-cover bg-[#07111F] border border-[#20324A]/40 shrink-0" 
+                className="w-16 h-16 rounded-xl object-cover bg-[#0a0a1a] border border-[#2a2a5c]/40 shrink-0" 
                 alt="" 
                 referrerPolicy="no-referrer"
               />
               <div className="space-y-1">
-                <h3 className="text-base font-extrabold text-[#F4F7FB]">{p.name}</h3>
-                <div className="flex flex-wrap gap-2 text-[10px] text-[#9FB0C5]">
-                  <span className="font-mono">رمز الـ SKU: <strong className="text-[#F4F7FB]">{p.sku}</strong></span>
+                <h3 className="text-base font-extrabold text-[#f5f5fa]">{p.name}</h3>
+                <div className="flex flex-wrap gap-2 text-[10px] text-[#a5a5c8]">
+                  <span className="font-mono">رمز الـ SKU: <strong className="text-[#f5f5fa]">{p.sku}</strong></span>
                   <span>•</span>
-                  <span>المعرف: <strong className="text-[#F4F7FB]">{p.externalProductId}</strong></span>
+                  <span>المعرف: <strong className="text-[#f5f5fa]">{p.externalProductId}</strong></span>
                 </div>
               </div>
             </div>
             
             <button 
               onClick={onClose}
-              className="p-1.5 bg-[#12233A] hover:bg-[#20324A] rounded-xl text-[#9FB0C5] hover:text-white transition cursor-pointer font-bold"
+              className="p-1.5 bg-[#1c1c47] hover:bg-[#2a2a5c] rounded-xl text-[#a5a5c8] hover:text-white transition cursor-pointer font-bold"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Warning disclaimer */}
-          <div className="bg-[#12233A] border border-[#20324A] px-3.5 py-2.5 rounded-xl flex items-start gap-2.5 text-[10px] text-[#9FB0C5] leading-relaxed">
+          <div className="bg-[#1c1c47] border border-[#2a2a5c] px-3.5 py-2.5 rounded-xl flex items-start gap-2.5 text-[10px] text-[#a5a5c8] leading-relaxed">
             <Info className="w-4 h-4 text-[#F5A524] shrink-0 mt-0.5" />
             <span>
               نقص الكميات أدناه يمثل فروق مستويات المخازن بين فترات الرصد التلقائي دورياً، وليس إثبات مبيعات مؤكدة بنسبة ١٠٠%.
@@ -252,8 +252,8 @@ export default function ProductDetailDrawer({
           {/* Quick Metrics Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             
-            <div className="bg-[#07111F]/50 p-4 rounded-xl border border-[#20324A]/40">
-              <span className="text-[11px] text-[#9FB0C5] block font-bold">المخزون المتوفر الكلي</span>
+            <div className="bg-[#0a0a1a]/50 p-4 rounded-xl border border-[#2a2a5c]/40">
+              <span className="text-[11px] text-[#a5a5c8] block font-bold">المخزون المتوفر الكلي</span>
               <strong className={`text-xl font-mono block mt-1 ${
                 isOutOfStock ? "text-[#F05252]" : isLowStock ? "text-[#F5A524]" : "text-[#24C78E]"
               }`}>
@@ -261,16 +261,16 @@ export default function ProductDetailDrawer({
               </strong>
             </div>
             
-            <div className="bg-[#07111F]/50 p-4 rounded-xl border border-[#20324A]/40">
-              <span className="text-[11px] text-[#9FB0C5] block font-bold">سعر بيع الجملة</span>
+            <div className="bg-[#0a0a1a]/50 p-4 rounded-xl border border-[#2a2a5c]/40">
+              <span className="text-[11px] text-[#a5a5c8] block font-bold">سعر بيع الجملة</span>
               <strong className="text-xl text-white font-mono block mt-1">
                 {p.price} ج.م
               </strong>
             </div>
 
-            <div className="bg-[#07111F]/50 p-4 rounded-xl border border-[#20324A]/40">
-              <span className="text-[11px] text-[#9FB0C5] block font-bold">التصنيف بالكتالوج</span>
-              <strong className="text-sm text-[#F4F7FB] block mt-2 truncate">
+            <div className="bg-[#0a0a1a]/50 p-4 rounded-xl border border-[#2a2a5c]/40">
+              <span className="text-[11px] text-[#a5a5c8] block font-bold">التصنيف بالكتالوج</span>
+              <strong className="text-sm text-[#f5f5fa] block mt-2 truncate">
                 {p.originalCategory || "عام"}
               </strong>
             </div>
@@ -279,9 +279,9 @@ export default function ProductDetailDrawer({
 
           {/* Hourly/Daily Decreases Tracker / Selected Date Tracker */}
           {p.withdrawnPieces !== undefined ? (
-            <div className="bg-[#07111F]/40 p-4 rounded-2xl border border-[#20324A]/40 flex justify-between items-center text-xs">
+            <div className="bg-[#0a0a1a]/40 p-4 rounded-2xl border border-[#2a2a5c]/40 flex justify-between items-center text-xs">
               <div>
-                <span className="text-[10px] text-[#9FB0C5] block font-medium">سحوبات يوم {selectedDate || "المحدد"}</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-medium">سحوبات يوم {selectedDate || "المحدد"}</span>
                 <strong className="text-[#24C78E] text-sm font-black block mt-1 flex items-center gap-1">
                   <ArrowDownLeft className="w-4 h-4" />
                   سحب {p.withdrawnPieces || 0} قطعة
@@ -289,7 +289,7 @@ export default function ProductDetailDrawer({
               </div>
 
               <div className="text-left">
-                <span className="text-[10px] text-[#9FB0C5] block font-medium">عمليات السحب بالتاريخ</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-medium">عمليات السحب بالتاريخ</span>
                 <strong className="text-[#24C78E] text-sm font-black block mt-1 flex items-center gap-1 justify-end">
                   <ArrowDownLeft className="w-4 h-4" />
                   {p.withdrawalEvents || 0} عمليات سحب
@@ -297,9 +297,9 @@ export default function ProductDetailDrawer({
               </div>
             </div>
           ) : (
-            <div className="bg-[#07111F]/40 p-4 rounded-2xl border border-[#20324A]/40 flex justify-between items-center text-xs">
+            <div className="bg-[#0a0a1a]/40 p-4 rounded-2xl border border-[#2a2a5c]/40 flex justify-between items-center text-xs">
               <div>
-                <span className="text-[10px] text-[#9FB0C5] block font-medium">سحوبات آخر ساعة</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-medium">سحوبات آخر ساعة</span>
                 <strong className="text-[#24C78E] text-sm font-black block mt-1 flex items-center gap-1">
                   <ArrowDownLeft className="w-4 h-4" />
                   سحب {p.quantityDecrease || 0} قطعة
@@ -307,7 +307,7 @@ export default function ProductDetailDrawer({
               </div>
 
               <div className="text-left">
-                <span className="text-[10px] text-[#9FB0C5] block font-medium">تراكم السحوبات اليومي</span>
+                <span className="text-[10px] text-[#a5a5c8] block font-medium">تراكم السحوبات اليومي</span>
                 <strong className="text-[#24C78E] text-sm font-black block mt-1 flex items-center gap-1 justify-end">
                   <ArrowDownLeft className="w-4 h-4" />
                   سحب {p.dailyQuantityDecrease || 0} قطعة اليوم
@@ -320,12 +320,12 @@ export default function ProductDetailDrawer({
           {userId && (
             <div className={`p-5 rounded-2xl border transition-all ${
               isStarred 
-                ? "bg-[#2F80FF]/5 border-[#2F80FF]/30 shadow-lg shadow-[#2F80FF]/5" 
-                : "bg-[#07111F]/30 border-[#20324A]/40"
+                ? "bg-[#6366f1]/5 border-[#6366f1]/30 shadow-lg shadow-[#6366f1]/5" 
+                : "bg-[#0a0a1a]/30 border-[#2a2a5c]/40"
             }`}>
               <div className="flex justify-between items-center mb-4">
-                <h4 className="text-xs font-extrabold text-[#F4F7FB] flex items-center gap-2">
-                  <Star className={`w-4 h-4 ${isStarred ? "text-yellow-400 fill-yellow-400" : "text-[#9FB0C5]"}`} />
+                <h4 className="text-xs font-extrabold text-[#f5f5fa] flex items-center gap-2">
+                  <Star className={`w-4 h-4 ${isStarred ? "text-yellow-400 fill-yellow-400" : "text-[#a5a5c8]"}`} />
                   مراقبة السلعة الخاصة والإنذارات (مزامنة Firestore)
                 </h4>
                 {isStarred && (
@@ -338,24 +338,24 @@ export default function ProductDetailDrawer({
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-[#9FB0C5] block font-bold">حد تنبيه المخزون (تنبيه ذكي)</label>
+                    <label className="text-[10px] text-[#a5a5c8] block font-bold">حد تنبيه المخزون (تنبيه ذكي)</label>
                     <input
                       type="number"
                       placeholder="مثال: 15 قطعة"
                       value={alertThreshold}
                       onChange={(e) => setAlertThreshold(e.target.value === "" ? "" : Number(e.target.value))}
-                      className="w-full h-10 bg-[#07111F]/50 border border-[#20324A] rounded-xl px-3 text-xs font-mono text-white outline-none focus:border-[#2F80FF]/50 text-right"
+                      className="w-full h-10 bg-[#0a0a1a]/50 border border-[#2a2a5c] rounded-xl px-3 text-xs font-mono text-white outline-none focus:border-[#6366f1]/50 text-right"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-[#9FB0C5] block font-bold">ملاحظات مسؤول المبيعات</label>
+                    <label className="text-[10px] text-[#a5a5c8] block font-bold">ملاحظات مسؤول المبيعات</label>
                     <textarea
                       placeholder="اكتب أي ملاحظات تسويقية أو تواصل مع الموردين هنا..."
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       rows={1}
-                      className="w-full min-h-[40px] max-h-[120px] bg-[#07111F]/50 border border-[#20324A] rounded-xl p-2.5 text-xs text-white outline-none focus:border-[#2F80FF]/50 text-right"
+                      className="w-full min-h-[40px] max-h-[120px] bg-[#0a0a1a]/50 border border-[#2a2a5c] rounded-xl p-2.5 text-xs text-white outline-none focus:border-[#6366f1]/50 text-right"
                     />
                   </div>
                 </div>
@@ -374,7 +374,7 @@ export default function ProductDetailDrawer({
                   <button
                     onClick={handleSaveWatchlist}
                     disabled={saving}
-                    className="px-4 h-9 bg-gradient-to-l from-[#2F80FF] to-[#1F62C4] hover:from-[#4090FF] hover:to-[#2B73DD] text-white text-[11px] font-black rounded-lg transition shadow-md flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 h-9 bg-gradient-to-l from-[#6366f1] to-[#1F62C4] hover:from-[#4090FF] hover:to-[#2B73DD] text-white text-[11px] font-black rounded-lg transition shadow-md flex items-center gap-1.5 cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5" />
                     {isStarred ? "تحديث التعديلات" : "إضافة للمراقبة"}
@@ -386,8 +386,8 @@ export default function ProductDetailDrawer({
 
           {/* Variants section (sizes, colors, custom attributes) */}
           <div className="space-y-3">
-            <h4 className="text-xs font-extrabold text-[#F4F7FB] flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-[#2F80FF]" />
+            <h4 className="text-xs font-extrabold text-[#f5f5fa] flex items-center gap-2">
+              <Sliders className="w-4 h-4 text-[#6366f1]" />
               كميات الخيارات الفرعية بالكتالوج (Variants)
             </h4>
             
@@ -397,11 +397,11 @@ export default function ProductDetailDrawer({
                 return (
                   <div 
                     key={v.externalVariantId} 
-                    className="bg-[#07111F]/40 p-3 rounded-xl flex justify-between items-center text-xs border border-[#20324A]/30 hover:border-[#20324A] transition"
+                    className="bg-[#0a0a1a]/40 p-3 rounded-xl flex justify-between items-center text-xs border border-[#2a2a5c]/30 hover:border-[#2a2a5c] transition"
                   >
-                    <span className="text-[#F4F7FB] font-bold">{v.name}</span>
+                    <span className="text-[#f5f5fa] font-bold">{v.name}</span>
                     <div className="flex gap-6 items-center">
-                      <span className="text-[#9FB0C5] font-mono">{v.price} ج.م</span>
+                      <span className="text-[#a5a5c8] font-mono">{v.price} ج.م</span>
                       <strong className={`font-mono ${vLow ? "text-[#F5A524]" : "text-[#24C78E]"}`}>
                         {v.currentQuantity !== null ? `${v.currentQuantity} قطعة متوفرة` : "غير متوفر"}
                       </strong>
@@ -411,7 +411,7 @@ export default function ProductDetailDrawer({
               })}
 
               {(!p.variants || p.variants.length === 0) && (
-                <div className="text-center py-6 text-xs text-[#9FB0C5]/60 bg-[#07111F]/20 rounded-xl border border-dashed border-[#20324A]/30">
+                <div className="text-center py-6 text-xs text-[#a5a5c8]/60 bg-[#0a0a1a]/20 rounded-xl border border-dashed border-[#2a2a5c]/30">
                   لا تتوفر فئات فرعية أو مقاسات خاصة بهذه السلعة بالكتالوج.
                 </div>
               )}
@@ -426,7 +426,7 @@ export default function ProductDetailDrawer({
 
           {/* Snapshots Logs timeline */}
           <div className="space-y-3 pt-1">
-            <h4 className="text-xs font-extrabold text-[#F4F7FB] flex items-center gap-2">
+            <h4 className="text-xs font-extrabold text-[#f5f5fa] flex items-center gap-2">
               <History className="w-4 h-4 text-[#8B5CF6]" />
               التسلسل الزمني للقطات الرصد وحركة التغير
             </h4>
@@ -435,7 +435,7 @@ export default function ProductDetailDrawer({
               {p.history && p.history.map((snap) => (
                 <div 
                   key={snap.id} 
-                  className="bg-[#07111F]/40 p-3 rounded-xl flex justify-between items-center text-xs text-[#9FB0C5] border border-[#20324A]/30 hover:border-[#20324A]"
+                  className="bg-[#0a0a1a]/40 p-3 rounded-xl flex justify-between items-center text-xs text-[#a5a5c8] border border-[#2a2a5c]/30 hover:border-[#2a2a5c]"
                 >
                   <span className="font-mono text-[10.5px]">{formatTimeArabic(snap.checkedAt)}</span>
                   <div className="flex gap-4 items-center font-mono">
@@ -457,7 +457,7 @@ export default function ProductDetailDrawer({
               ))}
 
               {(!p.history || p.history.length === 0) && (
-                <div className="text-center py-6 text-xs text-[#9FB0C5]/60 bg-[#07111F]/20 rounded-xl border border-dashed border-[#20324A]/30">
+                <div className="text-center py-6 text-xs text-[#a5a5c8]/60 bg-[#0a0a1a]/20 rounded-xl border border-dashed border-[#2a2a5c]/30">
                   لا تتوفر فترات رصد تاريخية مسجلة لهذه السلعة.
                 </div>
               )}

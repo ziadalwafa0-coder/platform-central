@@ -56,19 +56,19 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#07111F] flex flex-col items-center justify-center p-4 select-none text-right font-sans" dir="rtl">
-      <div className="w-full max-w-md bg-[#0D1B2D] border border-[#20324A] rounded-3xl p-8 space-y-8 shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center p-4 select-none text-right font-sans" dir="rtl">
+      <div className="w-full max-w-md bg-[#141432] border border-[#2a2a5c] rounded-3xl p-8 space-y-8 shadow-2xl relative overflow-hidden">
         {/* Glow Effects */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#2F80FF]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-[#6366f1]/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#24C78E]/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="text-center space-y-3">
-          <div className="inline-flex p-3.5 bg-[#12233A] rounded-2xl border border-[#20324A] text-[#2F80FF] mb-2 shadow-inner">
+          <div className="inline-flex p-3.5 bg-[#1c1c47] rounded-2xl border border-[#2a2a5c] text-[#6366f1] mb-2 shadow-inner">
             <LogIn className="w-8 h-8" />
           </div>
           <h1 className="text-2xl font-black text-white tracking-tight">بوابة دخول المسؤول والشركاء</h1>
-          <p className="text-xs text-[#9FB0C5] leading-relaxed">
-            لوحة تحكم <span className="text-[#2F80FF] font-bold">ستوك رادار</span> لتتبع ومطابقة مخزون الدروبشيبينغ في مصر. يرجى تسجيل الدخول باستخدام حساب Google المعتمد.
+          <p className="text-xs text-[#a5a5c8] leading-relaxed">
+            لوحة تحكم <span className="text-[#6366f1] font-bold">ستوك رادار</span> لتتبع ومطابقة مخزون الدروبشيبينغ في مصر. يرجى تسجيل الدخول باستخدام حساب Google المعتمد.
           </p>
         </div>
 
@@ -101,8 +101,8 @@ export default function Login({ onLoginSuccess }: LoginProps) {
           </button>
         </div>
 
-        <div className="text-center pt-2 border-t border-[#20324A]/40">
-          <p className="text-[10px] text-[#9FB0C5]/50 font-medium">
+        <div className="text-center pt-2 border-t border-[#2a2a5c]/40">
+          <p className="text-[10px] text-[#a5a5c8]/50 font-medium">
             تخضع لوحة التحكم لحماية أمنية مشددة مدعومة بـ Firebase Auth. يتم توثيق كافة العمليات تلقائياً.
           </p>
         </div>

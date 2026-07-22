@@ -201,10 +201,10 @@ export function DateRangePicker({ startDate, endDate, onChange, align = "right",
       <button
         id="date-range-picker-trigger"
         onClick={() => setIsOpen(!isOpen)}
-        className={className || "flex items-center gap-2 bg-[#0B1424] hover:bg-[#122038] text-white px-3 py-1.5 rounded-xl border border-[#20324A] text-xs font-semibold cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-[#2F80FF]"}
+        className={className || "flex items-center gap-2 bg-[#0f0f24] hover:bg-[#122038] text-white px-3 py-1.5 rounded-xl border border-[#2a2a5c] text-xs font-semibold cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-[#6366f1]"}
         dir="rtl"
       >
-        <CalendarIcon className="w-4 h-4 text-[#2F80FF]" />
+        <CalendarIcon className="w-4 h-4 text-[#6366f1]" />
         <span>من:</span>
         <span className="text-emerald-400 font-bold font-mono">{formatArabicFriendly(startDate)}</span>
         <span className="text-gray-500 mx-0.5">←</span>
@@ -216,53 +216,53 @@ export function DateRangePicker({ startDate, endDate, onChange, align = "right",
       {isOpen && (
         <div
           id="date-range-picker-popover"
-          className={`absolute top-full mt-2 w-[520px] bg-[#07111F] border border-[#20324A] shadow-2xl rounded-2xl p-4 z-50 flex gap-4 ${
+          className={`absolute top-full mt-2 w-[520px] bg-[#0a0a1a] border border-[#2a2a5c] shadow-2xl rounded-2xl p-4 z-50 flex gap-4 ${
             align === "right" ? "right-0" : "left-0"
           }`}
           dir="rtl"
         >
           {/* Preset Options Sidebar */}
-          <div className="w-[120px] border-l border-[#20324A]/70 pl-3 flex flex-col gap-1.5 text-[10px]">
-            <span className="text-[#9FB0C5] font-black text-[9px] mb-1.5 block">فترات سريعة</span>
+          <div className="w-[120px] border-l border-[#2a2a5c]/70 pl-3 flex flex-col gap-1.5 text-[10px]">
+            <span className="text-[#a5a5c8] font-black text-[9px] mb-1.5 block">فترات سريعة</span>
             <button
               onClick={() => applyPreset("today")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors"
             >
               اليوم
             </button>
             <button
               onClick={() => applyPreset("yesterday_today")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors"
             >
               أمس واليوم
             </button>
             <button
               onClick={() => applyPreset("last7")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors"
             >
               آخر 7 أيام
             </button>
             <button
               onClick={() => applyPreset("last14")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors"
             >
               آخر 14 يوم
             </button>
             <button
               onClick={() => applyPreset("last30")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors"
             >
               آخر 30 يوم
             </button>
             <button
               onClick={() => applyPreset("this_month")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors border-t border-[#20324A]/40 mt-1 pt-1.5"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors border-t border-[#2a2a5c]/40 mt-1 pt-1.5"
             >
               هذا الشهر
             </button>
             <button
               onClick={() => applyPreset("last_month")}
-              className="text-right py-1 px-2 hover:bg-[#20324A]/40 hover:text-white rounded text-gray-300 transition-colors"
+              className="text-right py-1 px-2 hover:bg-[#2a2a5c]/40 hover:text-white rounded text-gray-300 transition-colors"
             >
               الشهر الماضي
             </button>
@@ -274,7 +274,7 @@ export function DateRangePicker({ startDate, endDate, onChange, align = "right",
             <div className="flex justify-between items-center mb-3">
               <button
                 onClick={handleNextMonth}
-                className="p-1 hover:bg-[#20324A] text-[#9FB0C5] hover:text-white rounded transition-colors"
+                className="p-1 hover:bg-[#2a2a5c] text-[#a5a5c8] hover:text-white rounded transition-colors"
                 title="الشهر القادم"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -284,7 +284,7 @@ export function DateRangePicker({ startDate, endDate, onChange, align = "right",
               </span>
               <button
                 onClick={handlePrevMonth}
-                className="p-1 hover:bg-[#20324A] text-[#9FB0C5] hover:text-white rounded transition-colors"
+                className="p-1 hover:bg-[#2a2a5c] text-[#a5a5c8] hover:text-white rounded transition-colors"
                 title="الشهر السابق"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -315,12 +315,12 @@ export function DateRangePicker({ startDate, endDate, onChange, align = "right",
                     onMouseEnter={() => tempStart && setHoveredDate(cell.dateStr)}
                     className={`h-7 rounded-lg text-[10px] font-bold font-mono transition-all relative flex items-center justify-center cursor-pointer ${
                       selected
-                        ? "bg-[#2F80FF] text-white shadow-md z-10"
+                        ? "bg-[#6366f1] text-white shadow-md z-10"
                         : ranged
-                        ? "bg-[#2F80FF]/20 text-white"
+                        ? "bg-[#6366f1]/20 text-white"
                         : current
-                        ? "text-gray-200 hover:bg-[#20324A]/60"
-                        : "text-gray-600 hover:bg-[#20324A]/20"
+                        ? "text-gray-200 hover:bg-[#2a2a5c]/60"
+                        : "text-gray-600 hover:bg-[#2a2a5c]/20"
                     } ${today && !selected ? "ring-1 ring-[#E879F9]" : ""}`}
                   >
                     <span>{cell.dayNum}</span>
@@ -333,7 +333,7 @@ export function DateRangePicker({ startDate, endDate, onChange, align = "right",
             </div>
 
             {/* Helper Hint */}
-            <div className="text-[9px] text-[#9FB0C5]/70 text-left mt-3">
+            <div className="text-[9px] text-[#a5a5c8]/70 text-left mt-3">
               {tempStart ? (
                 <span className="text-[#E879F9] font-bold">
                   اختر تاريخ النهاية (تحديد المدى)...

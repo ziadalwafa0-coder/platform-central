@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDashboardRoute = ApiDashboardRouteImport.update({
+  id: '/api/dashboard',
+  path: '/api/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPlatformsPlatformSyncRoute =
@@ -26,27 +32,31 @@ const ApiPlatformsPlatformSyncRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/dashboard': typeof ApiDashboardRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/dashboard': typeof ApiDashboardRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/dashboard': typeof ApiDashboardRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/platforms/$platform/sync'
+  fullPaths: '/' | '/api/dashboard' | '/api/platforms/$platform/sync'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/platforms/$platform/sync'
-  id: '__root__' | '/' | '/api/platforms/$platform/sync'
+  to: '/' | '/api/dashboard' | '/api/platforms/$platform/sync'
+  id: '__root__' | '/' | '/api/dashboard' | '/api/platforms/$platform/sync'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiDashboardRoute: typeof ApiDashboardRoute
   ApiPlatformsPlatformSyncRoute: typeof ApiPlatformsPlatformSyncRoute
 }
 
@@ -57,6 +67,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/dashboard': {
+      id: '/api/dashboard'
+      path: '/api/dashboard'
+      fullPath: '/api/dashboard'
+      preLoaderRoute: typeof ApiDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/platforms/$platform/sync': {
@@ -71,8 +88,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiDashboardRoute: ApiDashboardRoute,
   ApiPlatformsPlatformSyncRoute: ApiPlatformsPlatformSyncRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

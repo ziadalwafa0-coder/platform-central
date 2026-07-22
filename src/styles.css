@@ -3,18 +3,21 @@
 @import "tw-animate-css";
 
 @theme {
-  --font-sans: "Cairo", "Inter", system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Cairo", sans-serif;
+  --font-sans: "Figtree", "Cairo", "Inter", system-ui, sans-serif;
+  --font-display: "Outfit", "Cairo", sans-serif;
+  --font-mono: "Outfit", ui-monospace, SFMono-Regular, monospace;
 
-  --color-bg-pulse: #07111f;
-  --color-sidebar-pulse: #081525;
-  --color-surface-pulse: #0d1b2d;
-  --color-elevated-pulse: #12233a;
-  --color-border-pulse: #20324a;
-  --color-primary-pulse: #2f80ff;
-  --color-primary-hover-pulse: #4a92ff;
-  --color-text-primary: #f4f7fb;
-  --color-text-secondary: #9fb0c5;
+  /* Midnight Indigo palette */
+  --color-bg-pulse: #0a0a1a;
+  --color-sidebar-pulse: #0f0f24;
+  --color-surface-pulse: #141432;
+  --color-elevated-pulse: #1c1c47;
+  --color-border-pulse: #2a2a5c;
+  --color-primary-pulse: #6366f1;
+  --color-primary-hover-pulse: #818cf8;
+  --color-primary-glow: #a78bfa;
+  --color-text-primary: #f5f5fa;
+  --color-text-secondary: #a5a5c8;
   --color-success-pulse: #24c78e;
   --color-warning-pulse: #f5a524;
   --color-danger-pulse: #f05252;
@@ -22,19 +25,67 @@
 }
 
 :root {
-  --background: #07111f;
-  --foreground: #f4f7fb;
-  --radius: 0.625rem;
+  --background: #0a0a1a;
+  --foreground: #f5f5fa;
+  --radius: 0.75rem;
 }
 
 html,
 body {
-  background-color: var(--color-bg-pulse);
+  background:
+    radial-gradient(1200px 600px at 90% -10%, rgba(99, 102, 241, 0.15), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(167, 139, 250, 0.10), transparent 60%),
+    var(--color-bg-pulse);
+  background-attachment: fixed;
   color: var(--color-text-primary);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 * {
   border-color: var(--color-border-pulse);
 }
+
+/* Elegant scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2a2a5c, #1c1c47);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4f46e5, #6366f1);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Subtle card shimmer for premium feel */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: shimmer 2.4s infinite;
+}
+
+@keyframes gradient-pulse {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-pulse { background-size: 200% 200%; animation: gradient-pulse 2.2s ease infinite; }
+
+/* Selection */
+::selection { background: rgba(99,102,241,0.35); color: #fff; }

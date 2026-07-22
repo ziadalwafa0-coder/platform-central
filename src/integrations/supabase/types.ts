@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      sr_products: {
+        Row: {
+          category: string | null
+          currency: string | null
+          current_quantity: number | null
+          external_product_id: string
+          first_seen_at: string
+          id: string
+          image_url: string | null
+          last_checked_at: string
+          name: string
+          platform: string
+          previous_quantity: number | null
+          price: number | null
+          product_url: string | null
+          sku: string | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          currency?: string | null
+          current_quantity?: number | null
+          external_product_id: string
+          first_seen_at?: string
+          id?: string
+          image_url?: string | null
+          last_checked_at?: string
+          name: string
+          platform?: string
+          previous_quantity?: number | null
+          price?: number | null
+          product_url?: string | null
+          sku?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          currency?: string | null
+          current_quantity?: number | null
+          external_product_id?: string
+          first_seen_at?: string
+          id?: string
+          image_url?: string | null
+          last_checked_at?: string
+          name?: string
+          platform?: string
+          previous_quantity?: number | null
+          price?: number | null
+          product_url?: string | null
+          sku?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sr_snapshots: {
+        Row: {
+          current_quantity: number | null
+          external_product_id: string
+          id: number
+          observed_at: string
+          platform: string
+          previous_quantity: number | null
+          quantity_decrease: number
+          restock_amount: number
+        }
+        Insert: {
+          current_quantity?: number | null
+          external_product_id: string
+          id?: number
+          observed_at?: string
+          platform?: string
+          previous_quantity?: number | null
+          quantity_decrease?: number
+          restock_amount?: number
+        }
+        Update: {
+          current_quantity?: number | null
+          external_product_id?: string
+          id?: number
+          observed_at?: string
+          platform?: string
+          previous_quantity?: number | null
+          quantity_decrease?: number
+          restock_amount?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

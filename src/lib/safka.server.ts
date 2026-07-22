@@ -64,7 +64,7 @@ function normalizeProduct(p: any): SafkaProduct {
   const variants = variantsRaw.map(normalizeVariant);
   const currentQuantity =
     num(p?.quantity ?? p?.stock ?? p?.available_quantity) ??
-    variants.reduce((acc, v) => acc + (v.currentQuantity ?? 0), 0);
+    variants.reduce((acc: number, v: SafkaVariant) => acc + (v.currentQuantity ?? 0), 0);
 
   return {
     externalProductId: str(p?._id ?? p?.id ?? ""),

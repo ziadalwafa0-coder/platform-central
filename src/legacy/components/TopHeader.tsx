@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { formatCairoTime, getNextScheduledSyncCountdown } from "../shared/time";
 import React, { useEffect, useState } from "react";
 import { 

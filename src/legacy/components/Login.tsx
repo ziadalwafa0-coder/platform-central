@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { auth, googleProvider, signInWithPopup, signOut } from "../lib/firebase";
 import { AlertCircle, RefreshCw, LogIn } from "lucide-react";

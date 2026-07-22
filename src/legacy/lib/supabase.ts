@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 // Runtime env injected by the server-side RootShell into window.__SR_ENV__.

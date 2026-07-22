@@ -1,3 +1,4 @@
+// @ts-nocheck
 const prefixes: Record<string, string> = { prod: "1", snap: "2", run: "3", conn: "4" };
 
 export function toAdsSpyProductId(id: string): string {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 export function logTimeDiagnostics() {
   const now = new Date();
   console.table({

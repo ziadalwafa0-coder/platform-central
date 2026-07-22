@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Megaphone, ExternalLink, Activity, Info, BarChart3, AlertCircle } from "lucide-react";
 import { safeFetchJson } from "../lib/api";

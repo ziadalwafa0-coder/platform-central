@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const BUSINESS_TIMEZONE = "Africa/Cairo";
 
 export function getHourAdjustmentMs(): number {

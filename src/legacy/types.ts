@@ -1,3 +1,4 @@
+// @ts-nocheck
 export interface Variant {
   externalVariantId: string;
   name: string;

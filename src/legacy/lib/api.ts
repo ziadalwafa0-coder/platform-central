@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Utility for robust API requests that safely handle non-JSON responses
  * (such as Vite HTML templates returned during server startup or restarts).

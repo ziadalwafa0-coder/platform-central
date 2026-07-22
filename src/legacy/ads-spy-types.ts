@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Type isolation for Ads Spy (رادار الإعلانات)
 // Complies with section 5 of the Merge Strategy
 

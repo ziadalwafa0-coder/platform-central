@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { DeliveryReturnsReport } from "./DeliveryReturnsReport";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";

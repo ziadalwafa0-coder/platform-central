@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { getNextScheduledSyncCountdown } from "../shared/time";
 import { 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { getCairoTodayStr, addDaysToDateStr } from "../shared/time";

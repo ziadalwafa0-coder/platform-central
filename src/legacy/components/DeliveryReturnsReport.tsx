@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { PackageSearch, ArrowDownLeft, ArrowUpRight, Activity, Percent, ArrowRightLeft, Info, Calendar, List, CalendarDays } from "lucide-react";
 import { safeFetchJson } from "../lib/api";

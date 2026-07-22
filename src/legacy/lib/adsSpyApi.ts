@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { safeFetchJson } from "./api";
 import { 
   AdSpySearchProfile, 

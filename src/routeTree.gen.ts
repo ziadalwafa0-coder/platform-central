@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
+import { Route as ApiPlatformsPlatformRouteImport } from './routes/api/platforms.$platform'
+import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,41 +25,74 @@ const ApiDashboardRoute = ApiDashboardRouteImport.update({
   path: '/api/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPlatformsPlatformRoute = ApiPlatformsPlatformRouteImport.update({
+  id: '/api/platforms/$platform',
+  path: '/api/platforms/$platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPlatformsPlatformTestRoute =
+  ApiPlatformsPlatformTestRouteImport.update({
+    id: '/test',
+    path: '/test',
+    getParentRoute: () => ApiPlatformsPlatformRoute,
+  } as any)
 const ApiPlatformsPlatformSyncRoute =
   ApiPlatformsPlatformSyncRouteImport.update({
-    id: '/api/platforms/$platform/sync',
-    path: '/api/platforms/$platform/sync',
-    getParentRoute: () => rootRouteImport,
+    id: '/sync',
+    path: '/sync',
+    getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/platforms/$platform': typeof ApiPlatformsPlatformRouteWithChildren
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
+  '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/platforms/$platform': typeof ApiPlatformsPlatformRouteWithChildren
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
+  '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/platforms/$platform': typeof ApiPlatformsPlatformRouteWithChildren
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
+  '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/dashboard' | '/api/platforms/$platform/sync'
+  fullPaths:
+    | '/'
+    | '/api/dashboard'
+    | '/api/platforms/$platform'
+    | '/api/platforms/$platform/sync'
+    | '/api/platforms/$platform/test'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/dashboard' | '/api/platforms/$platform/sync'
-  id: '__root__' | '/' | '/api/dashboard' | '/api/platforms/$platform/sync'
+  to:
+    | '/'
+    | '/api/dashboard'
+    | '/api/platforms/$platform'
+    | '/api/platforms/$platform/sync'
+    | '/api/platforms/$platform/test'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/dashboard'
+    | '/api/platforms/$platform'
+    | '/api/platforms/$platform/sync'
+    | '/api/platforms/$platform/test'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
-  ApiPlatformsPlatformSyncRoute: typeof ApiPlatformsPlatformSyncRoute
+  ApiPlatformsPlatformRoute: typeof ApiPlatformsPlatformRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -76,20 +111,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/platforms/$platform': {
+      id: '/api/platforms/$platform'
+      path: '/api/platforms/$platform'
+      fullPath: '/api/platforms/$platform'
+      preLoaderRoute: typeof ApiPlatformsPlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/platforms/$platform/test': {
+      id: '/api/platforms/$platform/test'
+      path: '/test'
+      fullPath: '/api/platforms/$platform/test'
+      preLoaderRoute: typeof ApiPlatformsPlatformTestRouteImport
+      parentRoute: typeof ApiPlatformsPlatformRoute
+    }
     '/api/platforms/$platform/sync': {
       id: '/api/platforms/$platform/sync'
-      path: '/api/platforms/$platform/sync'
+      path: '/sync'
       fullPath: '/api/platforms/$platform/sync'
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ApiPlatformsPlatformRoute
     }
   }
 }
 
+interface ApiPlatformsPlatformRouteChildren {
+  ApiPlatformsPlatformSyncRoute: typeof ApiPlatformsPlatformSyncRoute
+  ApiPlatformsPlatformTestRoute: typeof ApiPlatformsPlatformTestRoute
+}
+
+const ApiPlatformsPlatformRouteChildren: ApiPlatformsPlatformRouteChildren = {
+  ApiPlatformsPlatformSyncRoute: ApiPlatformsPlatformSyncRoute,
+  ApiPlatformsPlatformTestRoute: ApiPlatformsPlatformTestRoute,
+}
+
+const ApiPlatformsPlatformRouteWithChildren =
+  ApiPlatformsPlatformRoute._addFileChildren(ApiPlatformsPlatformRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDashboardRoute: ApiDashboardRoute,
-  ApiPlatformsPlatformSyncRoute: ApiPlatformsPlatformSyncRoute,
+  ApiPlatformsPlatformRoute: ApiPlatformsPlatformRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

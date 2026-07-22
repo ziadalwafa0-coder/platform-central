@@ -5,12 +5,13 @@ export const Route = createFileRoute("/api/sync/logs")({
   server: {
     handlers: {
       GET: async () => {
-        const { data } = await supabaseAdmin
+        const { data: snaps } = await supabaseAdmin
           .from("sr_snapshots")
           .select("*")
           .order("observed_at", { ascending: false })
           .limit(200);
-        const logs = (data ?? []).map((s: any) => ({
+
+        const logs = (snaps ?? []).map((s: any) => ({
           id: s.id,
           timestamp: s.observed_at,
           platform: s.platform ?? "safka",
@@ -27,7 +28,55 @@ export const Route = createFileRoute("/api/sync/logs")({
                 : "أول رصد",
           level: "info",
         }));
-        return Response.json({ success: true, logs });
+
+        const { count: productsCount } = await supabaseAdmin
+          .from("sr_products")
+          .select("*", { count: "exact", head: true });
+        const { count: snapsCount } = await supabaseAdmin
+          .from("sr_snapshots")
+          .select("*", { count: "exact", head: true });
+
+        const totalDecreases = logs.reduce((a, l) => a + (l.quantityDecrease || 0), 0);
+        const nowUtc = new Date();
+        const cairo = new Date(nowUtc.getTime() + 2 * 60 * 60 * 1000);
+
+        return Response.json({
+          success: true,
+          logs,
+          latencyStats30Days: [],
+          successfulRunsLatency30Days: [],
+          summary: {
+            totalRuns: logs.length,
+            successRuns: logs.length,
+            failedRuns: 0,
+            processingRuns: 0,
+            totalProductsReceived: productsCount ?? 0,
+            totalSnapshotsCreated: snapsCount ?? 0,
+            totalDecreasesDetected: totalDecreases,
+          },
+          diagnostics: {
+            activeSyncProgress: {
+              syncing: false,
+              processedCount: 0,
+              totalProducts: productsCount ?? 0,
+              statusText: "خامل",
+              lastError: null,
+              lastErrorPlatform: null,
+            },
+            isSupabaseConfigured: true,
+            dataBackend: "supabase",
+            nodeEnv: "production",
+            serverTimeUtc: nowUtc.toISOString(),
+            serverTimeCairo: {
+              dateStr: cairo.toISOString().slice(0, 10),
+              hour: cairo.getUTCHours(),
+              minute: cairo.getUTCMinutes(),
+            },
+            totalProductsInDb: productsCount ?? 0,
+            totalSnapshotsInDb: snapsCount ?? 0,
+            systemInsight: `${productsCount ?? 0} منتج و ${snapsCount ?? 0} snapshot في القاعدة.`,
+          },
+        });
       },
     },
   },

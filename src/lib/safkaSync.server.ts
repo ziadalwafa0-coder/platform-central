@@ -211,7 +211,7 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
       }
     }
 
-    // ---- Write (batched) ----
+    // ---- Write (batched) — failed batches go to DLQ item-by-item, not lost ----
     let productsFailed = 0;
     for (let i = 0; i < upserts.length; i += 500) {
       const chunk = upserts.slice(i, i + 500);
@@ -222,6 +222,19 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
         await log(runId, "error", "sync.upsert.failed", `فشل حفظ دفعة (${chunk.length}): ${error.message}`, {
           meta: { code: error.code, details: error.details },
         });
+        // Split into single items and DLQ the failures (avoid poisoning the whole batch)
+        for (const item of chunk) {
+          const { error: singleErr } = await supabaseAdmin
+            .from("sr_products").upsert(item, { onConflict: "external_product_id" });
+          if (singleErr) {
+            await pushDeadLetter({
+              platform: "safka", runId, kind: "product_upsert",
+              payload: item, error: singleErr,
+            });
+          } else {
+            productsFailed--;
+          }
+        }
       }
     }
     let snapshotsCreated = 0;
@@ -232,8 +245,19 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
         await log(runId, "error", "sync.snapshot.failed", `فشل حفظ لقطات (${chunk.length}): ${error.message}`, {
           meta: { code: error.code },
         });
+        // DLQ per-item so we do not lose withdrawal signals
+        for (const item of chunk) {
+          const { error: singleErr } = await supabaseAdmin.from("sr_snapshots").insert(item);
+          if (singleErr) {
+            await pushDeadLetter({
+              platform: "safka", runId, kind: "snapshot_insert",
+              payload: item, error: singleErr,
+            });
+          } else snapshotsCreated++;
+        }
       } else snapshotsCreated += chunk.length;
     }
+
 
     const durationMs = Date.now() - startedAt;
     await supabaseAdmin.from("sr_sync_runs").update({

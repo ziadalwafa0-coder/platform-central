@@ -1,8 +1,14 @@
-// Sync Safka products into sr_products + sr_snapshots with full run tracking.
+// Sync Safka products into sr_products + sr_snapshots with full run tracking,
+// distributed lock, circuit breaker, dead-letter queue, and metrics.
 // Server-only. Uses service-role admin client (bypasses RLS).
 
 import { fetchSafkaProducts, type SchemaDriftWarning } from "./safka.server";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import {
+  circuitAllows, circuitRecordFailure, circuitRecordSuccess,
+  pushDeadLetter, recordMetric,
+} from "./reliability.server";
+
 
 export interface SafkaSyncResult {
   runId: string;

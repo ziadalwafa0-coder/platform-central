@@ -65,6 +65,8 @@ export interface SyncOptions {
 }
 
 export async function createSyncRun(opts: SyncOptions = {}): Promise<string> {
+  // Distributed lock: unique partial index on (platform) WHERE status IN ('pending','running')
+  // guarantees at most one concurrent run per platform.
   const { data, error } = await supabaseAdmin
     .from("sr_sync_runs")
     .insert({
@@ -75,13 +77,26 @@ export async function createSyncRun(opts: SyncOptions = {}): Promise<string> {
     })
     .select("id")
     .single();
-  if (error) throw new Error(`createSyncRun failed: ${error.message}`);
+  if (error) {
+    // 23505 unique_violation → another sync active
+    const { data: existing } = await supabaseAdmin
+      .from("sr_sync_runs").select("id, status, started_at")
+      .eq("platform", "safka").in("status", ["pending", "running"])
+      .order("started_at", { ascending: false }).limit(1).maybeSingle();
+    const runningId = existing?.id ?? "unknown";
+    throw new Error(`sync_locked: another sync is already ${existing?.status ?? "active"} (run ${runningId})`);
+  }
   return data.id as string;
 }
 
 export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSyncResult> {
+  // Circuit breaker gate
+  const gate = await circuitAllows("safka");
+  if (!gate.allowed) throw new Error(`circuit_open: ${gate.reason ?? "safka circuit open"}`);
+
   const runId = opts.runId ?? (await createSyncRun(opts));
   const startedAt = Date.now();
+
 
   await supabaseAdmin.from("sr_sync_runs").update({ status: "running" }).eq("id", runId);
   await log(runId, "info", "sync.start", "بدء المزامنة");

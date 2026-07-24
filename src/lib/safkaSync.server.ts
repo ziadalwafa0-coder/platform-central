@@ -322,9 +322,14 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
       cancelled ? "sync.cancelled" : "sync.failed",
       cancelled ? "تم إلغاء المزامنة يدوياً" : `فشل المزامنة: ${err?.message ?? err}`,
       { meta: { stack: err?.stack } });
+    if (!cancelled) {
+      await circuitRecordFailure("safka", err);
+      await recordMetric("sync.duration_ms", Date.now() - startedAt, { platform: "safka", status: "failed" });
+    }
     throw err;
   }
 }
+
 
 export async function requestCancelSync(runId: string): Promise<boolean> {
   const { error } = await supabaseAdmin

@@ -157,26 +157,48 @@ export async function fetchSafkaProducts(opts: FetchOptions = {}): Promise<{
 
   while (page <= maxPages) {
     const url = `${SAFKA_BASE_URL}${SAFKA_PRODUCTS_PATH}?page=${page}&size=${pageSize}`;
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 45000);
-    if (opts.signal) opts.signal.addEventListener("abort", () => controller.abort(), { once: true });
 
-    const t0 = Date.now();
-    let res: Response;
-    try {
-      res = await fetch(url, {
-        method: "GET",
-        headers: { "Content-Type": "application/json", [SAFKA_API_KEY_HEADER]: apiKey },
-        signal: controller.signal,
-      });
-    } finally { clearTimeout(timeout); }
-    const dt = Date.now() - t0;
-    apiResponseTimeMs += dt;
-
-    if (!res.ok) {
-      const body = await res.text().catch(() => "");
-      throw new Error(`Safka API failed (page ${page}, status ${res.status}): ${body.slice(0, 300)}`);
+    // Retry with exponential backoff + jitter. Do NOT retry 4xx (except 408/429).
+    const maxAttempts = 4;
+    let attempt = 0;
+    let res: Response | null = null;
+    let dt = 0;
+    let lastErr: unknown = null;
+    while (attempt < maxAttempts) {
+      attempt++;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20000);
+      if (opts.signal) opts.signal.addEventListener("abort", () => controller.abort(), { once: true });
+      const t0 = Date.now();
+      try {
+        res = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json", [SAFKA_API_KEY_HEADER]: apiKey },
+          signal: controller.signal,
+        });
+        dt = Date.now() - t0;
+        if (res.ok) break;
+        // Non-2xx: decide if retryable
+        const status = res.status;
+        const retryable = status >= 500 || status === 408 || status === 429;
+        if (!retryable) {
+          const body = await res.text().catch(() => "");
+          throw new Error(`Safka API failed (page ${page}, status ${status}): ${body.slice(0, 300)}`);
+        }
+        lastErr = new Error(`Safka API ${status} on page ${page}`);
+      } catch (err) {
+        dt = Date.now() - t0;
+        lastErr = err;
+      } finally {
+        clearTimeout(timeout);
+      }
+      if (attempt >= maxAttempts) throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+      const backoff = Math.min(4000, 300 * Math.pow(2, attempt - 1));
+      const jitter = Math.floor(Math.random() * backoff * 0.3);
+      await new Promise((r) => setTimeout(r, backoff + jitter));
     }
+    apiResponseTimeMs += dt;
+    if (!res) throw new Error(`Safka fetch failed (page ${page})`);
 
     const json: any = await res.json();
     const list: any[] = Array.isArray(json?.data) ? json.data
@@ -197,6 +219,7 @@ export async function fetchSafkaProducts(opts: FetchOptions = {}): Promise<{
     if (list.length < pageSize) break;
     page++;
   }
+
 
   const driftWarnings = Array.from(drift.entries()).map(([fieldPath, sampleValue]) => ({
     fieldPath, sampleValue,

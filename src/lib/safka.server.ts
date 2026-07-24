@@ -45,34 +45,52 @@ function str(v: unknown, fallback = ""): string {
   return String(v);
 }
 
+// Handles BOTH schemas:
+//   - Legacy: variants[] with { _id, name, quantity, min_quantity, price, is_available }
+//   - New Safka: properties[] with { _id, key, value, min, sale_price, is_available }
 function normalizeVariant(v: any): SafkaVariant {
+  const qty = num(v?.quantity ?? v?.stock ?? v?.available ?? v?.value);
   return {
-    externalVariantId: str(v?._id ?? v?.id ?? ""),
-    name: str(v?.name ?? v?.title ?? ""),
-    currentQuantity: num(v?.quantity ?? v?.stock ?? v?.available),
-    minQuantity: num(v?.min_quantity ?? v?.minQuantity),
+    externalVariantId: str(v?._id ?? v?.id ?? v?.key ?? ""),
+    name: str(v?.name ?? v?.title ?? v?.key ?? ""),
+    currentQuantity: qty,
+    minQuantity: num(v?.min_quantity ?? v?.minQuantity ?? v?.min),
     price: num(v?.price ?? v?.sale_price),
     isAvailable:
       v?.is_available === true ||
       v?.isAvailable === true ||
-      (num(v?.quantity ?? v?.stock) ?? 0) > 0,
+      (qty ?? 0) > 0,
   };
 }
 
 function normalizeProduct(p: any): SafkaProduct {
-  const variantsRaw = Array.isArray(p?.variants) ? p.variants : [];
+  // Support both legacy `variants[]` and new Safka `properties[]`.
+  const variantsRaw = Array.isArray(p?.variants)
+    ? p.variants
+    : Array.isArray(p?.properties)
+      ? p.properties
+      : [];
   const variants = variantsRaw.map(normalizeVariant);
-  const currentQuantity =
-    num(p?.quantity ?? p?.stock ?? p?.available_quantity) ??
-    variants.reduce((acc: number, v: SafkaVariant) => acc + (v.currentQuantity ?? 0), 0);
+
+  const topQty = num(p?.quantity ?? p?.stock ?? p?.available_quantity);
+  const variantSum = variants.reduce(
+    (acc: number, v: SafkaVariant) => acc + (v.currentQuantity ?? 0),
+    0,
+  );
+  const currentQuantity = topQty ?? (variants.length > 0 ? variantSum : null);
+
+  const images = Array.isArray(p?.images) ? p.images : [];
 
   return {
     externalProductId: str(p?._id ?? p?.id ?? ""),
     name: str(p?.name ?? p?.title ?? "بدون اسم"),
-    sku: str(p?.sku ?? p?.code ?? ""),
+    // barcode is the new Safka SKU equivalent
+    sku: str(p?.sku ?? p?.code ?? p?.barcode ?? ""),
     price: num(p?.price ?? p?.sale_price),
     currency: str(p?.currency ?? "EGP"),
-    imageUrl: str(p?.image ?? p?.image_url ?? p?.thumbnail ?? ""),
+    imageUrl: str(
+      p?.image ?? p?.image_url ?? p?.thumbnail ?? images[0] ?? "",
+    ),
     productUrl: str(p?.url ?? p?.product_url ?? ""),
     originalCategory: str(
       p?.category?.name ?? p?.category ?? p?.category_name ?? "غير مصنف",

@@ -85,15 +85,12 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
     const fetchRes = await fetchSafkaProducts({
       onPage: async ({ page, count, durationMs }) => {
         await log(runId, "info", "sync.page", `تم جلب صفحة ${page} (${count} منتج) في ${durationMs}ms`, { page, meta: { count, durationMs } });
-        await supabaseAdmin.from("sr_sync_runs").update({
-          pages_fetched: page,
-          products_total: (await countKnown(page)) ?? null,
-        }).eq("id", runId).then(() => {}).catch(() => {});
+        try {
+          await supabaseAdmin.from("sr_sync_runs").update({ pages_fetched: page }).eq("id", runId);
+        } catch { /* non-fatal */ }
         if (await isCancelled(runId)) throw new Error("__cancelled__");
       },
     });
-
-    async function countKnown(_page: number) { return null; }
 
     const { products, pagesFetched, durationMs: fetchMs, apiResponseTimeMs, driftWarnings, schemaMix } = fetchRes;
     await log(runId, "info", "sync.fetched", `اكتمل الجلب: ${products.length} منتج عبر ${pagesFetched} صفحة`, {
@@ -105,8 +102,6 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
       await log(runId, "warn", "schema.drift", `حقل غير معروف: ${w.fieldPath}`, {
         meta: { sampleValue: w.sampleValue },
       });
-      await supabaseAdmin.rpc("noop").then(() => {}).catch(() => {});
-      // upsert into sr_schema_warnings
       const platform = "safka";
       const now = new Date().toISOString();
       const { data: existing } = await supabaseAdmin

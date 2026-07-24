@@ -280,6 +280,18 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
       `اكتملت المزامنة: ${inserts} إضافة، ${updates} تحديث، ${snapshotsCreated} لقطة، سحوبات ${totalDecrease}`,
       { meta: { durationMs } });
 
+    // Circuit breaker: success closes the circuit
+    await circuitRecordSuccess("safka");
+    // Metrics
+    await Promise.all([
+      recordMetric("sync.duration_ms", durationMs, { platform: "safka", status: "success" }),
+      recordMetric("sync.products_total", products.length, { platform: "safka" }),
+      recordMetric("sync.products_failed", productsFailed, { platform: "safka" }),
+      recordMetric("sync.withdrawal_delta", totalDecrease, { platform: "safka" }),
+      recordMetric("sync.api_latency_ms", apiResponseTimeMs, { platform: "safka" }),
+    ]);
+
+
     return {
       runId,
       productsFetched: products.length,

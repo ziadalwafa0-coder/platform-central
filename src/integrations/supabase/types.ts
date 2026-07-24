@@ -14,6 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
+      sr_circuit_state: {
+        Row: {
+          consecutive_failures: number
+          last_error: string | null
+          last_failure_at: string | null
+          next_probe_at: string | null
+          opened_at: string | null
+          platform: string
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          consecutive_failures?: number
+          last_error?: string | null
+          last_failure_at?: string | null
+          next_probe_at?: string | null
+          opened_at?: string | null
+          platform: string
+          state?: string
+          updated_at?: string
+        }
+        Update: {
+          consecutive_failures?: number
+          last_error?: string | null
+          last_failure_at?: string | null
+          next_probe_at?: string | null
+          opened_at?: string | null
+          platform?: string
+          state?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sr_dead_letter: {
+        Row: {
+          attempts: number
+          created_at: string
+          error_code: string | null
+          error_message: string | null
+          id: number
+          kind: string
+          last_attempt_at: string | null
+          payload: Json
+          platform: string
+          resolved_at: string | null
+          run_id: string | null
+        }
+        Insert: {
+          attempts?: number
+          created_at?: string
+          error_code?: string | null
+          error_message?: string | null
+          id?: number
+          kind: string
+          last_attempt_at?: string | null
+          payload: Json
+          platform?: string
+          resolved_at?: string | null
+          run_id?: string | null
+        }
+        Update: {
+          attempts?: number
+          created_at?: string
+          error_code?: string | null
+          error_message?: string | null
+          id?: number
+          kind?: string
+          last_attempt_at?: string | null
+          payload?: Json
+          platform?: string
+          resolved_at?: string | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      sr_health_metrics: {
+        Row: {
+          id: number
+          metric: string
+          observed_at: string
+          tags: Json | null
+          value: number
+        }
+        Insert: {
+          id?: number
+          metric: string
+          observed_at?: string
+          tags?: Json | null
+          value: number
+        }
+        Update: {
+          id?: number
+          metric?: string
+          observed_at?: string
+          tags?: Json | null
+          value?: number
+        }
+        Relationships: []
+      }
+      sr_idempotency_keys: {
+        Row: {
+          created_at: string
+          expires_at: string
+          key: string
+          result: Json | null
+          run_id: string | null
+          scope: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          key: string
+          result?: Json | null
+          run_id?: string | null
+          scope: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          key?: string
+          result?: Json | null
+          run_id?: string | null
+          scope?: string
+          status?: string
+        }
+        Relationships: []
+      }
       sr_products: {
         Row: {
           category: string | null
@@ -276,6 +405,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      reap_stuck_sync_runs: {
+        Args: { _older_than_minutes?: number }
+        Returns: number
       }
     }
     Enums: {

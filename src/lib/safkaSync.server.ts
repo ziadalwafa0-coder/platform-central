@@ -1,8 +1,14 @@
-// Sync Safka products into sr_products + sr_snapshots with full run tracking.
+// Sync Safka products into sr_products + sr_snapshots with full run tracking,
+// distributed lock, circuit breaker, dead-letter queue, and metrics.
 // Server-only. Uses service-role admin client (bypasses RLS).
 
 import { fetchSafkaProducts, type SchemaDriftWarning } from "./safka.server";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import {
+  circuitAllows, circuitRecordFailure, circuitRecordSuccess,
+  pushDeadLetter, recordMetric,
+} from "./reliability.server";
+
 
 export interface SafkaSyncResult {
   runId: string;
@@ -59,6 +65,8 @@ export interface SyncOptions {
 }
 
 export async function createSyncRun(opts: SyncOptions = {}): Promise<string> {
+  // Distributed lock: unique partial index on (platform) WHERE status IN ('pending','running')
+  // guarantees at most one concurrent run per platform.
   const { data, error } = await supabaseAdmin
     .from("sr_sync_runs")
     .insert({
@@ -69,13 +77,26 @@ export async function createSyncRun(opts: SyncOptions = {}): Promise<string> {
     })
     .select("id")
     .single();
-  if (error) throw new Error(`createSyncRun failed: ${error.message}`);
+  if (error) {
+    // 23505 unique_violation → another sync active
+    const { data: existing } = await supabaseAdmin
+      .from("sr_sync_runs").select("id, status, started_at")
+      .eq("platform", "safka").in("status", ["pending", "running"])
+      .order("started_at", { ascending: false }).limit(1).maybeSingle();
+    const runningId = existing?.id ?? "unknown";
+    throw new Error(`sync_locked: another sync is already ${existing?.status ?? "active"} (run ${runningId})`);
+  }
   return data.id as string;
 }
 
 export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSyncResult> {
+  // Circuit breaker gate
+  const gate = await circuitAllows("safka");
+  if (!gate.allowed) throw new Error(`circuit_open: ${gate.reason ?? "safka circuit open"}`);
+
   const runId = opts.runId ?? (await createSyncRun(opts));
   const startedAt = Date.now();
+
 
   await supabaseAdmin.from("sr_sync_runs").update({ status: "running" }).eq("id", runId);
   await log(runId, "info", "sync.start", "بدء المزامنة");
@@ -190,7 +211,7 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
       }
     }
 
-    // ---- Write (batched) ----
+    // ---- Write (batched) — failed batches go to DLQ item-by-item, not lost ----
     let productsFailed = 0;
     for (let i = 0; i < upserts.length; i += 500) {
       const chunk = upserts.slice(i, i + 500);
@@ -201,6 +222,19 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
         await log(runId, "error", "sync.upsert.failed", `فشل حفظ دفعة (${chunk.length}): ${error.message}`, {
           meta: { code: error.code, details: error.details },
         });
+        // Split into single items and DLQ the failures (avoid poisoning the whole batch)
+        for (const item of chunk) {
+          const { error: singleErr } = await supabaseAdmin
+            .from("sr_products").upsert(item, { onConflict: "external_product_id" });
+          if (singleErr) {
+            await pushDeadLetter({
+              platform: "safka", runId, kind: "product_upsert",
+              payload: item, error: singleErr,
+            });
+          } else {
+            productsFailed--;
+          }
+        }
       }
     }
     let snapshotsCreated = 0;
@@ -211,8 +245,19 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
         await log(runId, "error", "sync.snapshot.failed", `فشل حفظ لقطات (${chunk.length}): ${error.message}`, {
           meta: { code: error.code },
         });
+        // DLQ per-item so we do not lose withdrawal signals
+        for (const item of chunk) {
+          const { error: singleErr } = await supabaseAdmin.from("sr_snapshots").insert(item);
+          if (singleErr) {
+            await pushDeadLetter({
+              platform: "safka", runId, kind: "snapshot_insert",
+              payload: item, error: singleErr,
+            });
+          } else snapshotsCreated++;
+        }
       } else snapshotsCreated += chunk.length;
     }
+
 
     const durationMs = Date.now() - startedAt;
     await supabaseAdmin.from("sr_sync_runs").update({
@@ -234,6 +279,18 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
     await log(runId, "info", "sync.done",
       `اكتملت المزامنة: ${inserts} إضافة، ${updates} تحديث، ${snapshotsCreated} لقطة، سحوبات ${totalDecrease}`,
       { meta: { durationMs } });
+
+    // Circuit breaker: success closes the circuit
+    await circuitRecordSuccess("safka");
+    // Metrics
+    await Promise.all([
+      recordMetric("sync.duration_ms", durationMs, { platform: "safka", status: "success" }),
+      recordMetric("sync.products_total", products.length, { platform: "safka" }),
+      recordMetric("sync.products_failed", productsFailed, { platform: "safka" }),
+      recordMetric("sync.withdrawal_delta", totalDecrease, { platform: "safka" }),
+      recordMetric("sync.api_latency_ms", apiResponseTimeMs, { platform: "safka" }),
+    ]);
+
 
     return {
       runId,
@@ -265,9 +322,14 @@ export async function syncSafkaIntoDb(opts: SyncOptions = {}): Promise<SafkaSync
       cancelled ? "sync.cancelled" : "sync.failed",
       cancelled ? "تم إلغاء المزامنة يدوياً" : `فشل المزامنة: ${err?.message ?? err}`,
       { meta: { stack: err?.stack } });
+    if (!cancelled) {
+      await circuitRecordFailure("safka", err);
+      await recordMetric("sync.duration_ms", Date.now() - startedAt, { platform: "safka", status: "failed" });
+    }
     throw err;
   }
 }
+
 
 export async function requestCancelSync(runId: string): Promise<boolean> {
   const { error } = await supabaseAdmin

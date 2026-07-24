@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
+import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
+import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
 import { Route as ApiSyncRunsRouteImport } from './routes/api/sync.runs'
 import { Route as ApiSyncProgressRouteImport } from './routes/api/sync.progress'
@@ -27,6 +29,7 @@ import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/
 import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
 import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
+import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/hooks/reaper'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 
@@ -38,6 +41,16 @@ const IndexRoute = IndexRouteImport.update({
 const ApiResetRoute = ApiResetRouteImport.update({
   id: '/api/reset',
   path: '/api/reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMetricsRoute = ApiMetricsRouteImport.update({
+  id: '/api/metrics',
+  path: '/api/metrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHealthRoute = ApiHealthRouteImport.update({
+  id: '/api/health',
+  path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
@@ -123,6 +136,11 @@ const ApiSettingsEmailTestRoute = ApiSettingsEmailTestRouteImport.update({
   path: '/test',
   getParentRoute: () => ApiSettingsEmailRoute,
 } as any)
+const ApiPublicHooksReaperRoute = ApiPublicHooksReaperRouteImport.update({
+  id: '/api/public/hooks/reaper',
+  path: '/api/public/hooks/reaper',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPlatformsPlatformTestRoute =
   ApiPlatformsPlatformTestRouteImport.update({
     id: '/test',
@@ -139,6 +157,8 @@ const ApiPlatformsPlatformSyncRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
@@ -155,12 +175,15 @@ export interface FileRoutesByFullPath {
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
@@ -177,6 +200,7 @@ export interface FileRoutesByTo {
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
 }
@@ -184,6 +208,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
@@ -200,6 +226,7 @@ export interface FileRoutesById {
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
 }
@@ -208,6 +235,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api/dashboard'
+    | '/api/health'
+    | '/api/metrics'
     | '/api/reset'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
@@ -224,12 +253,15 @@ export interface FileRouteTypes {
     | '/api/sync/runs'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/api/dashboard'
+    | '/api/health'
+    | '/api/metrics'
     | '/api/reset'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
@@ -246,12 +278,15 @@ export interface FileRouteTypes {
     | '/api/sync/runs'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
   id:
     | '__root__'
     | '/'
     | '/api/dashboard'
+    | '/api/health'
+    | '/api/metrics'
     | '/api/reset'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
@@ -268,6 +303,7 @@ export interface FileRouteTypes {
     | '/api/sync/runs'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
   fileRoutesById: FileRoutesById
@@ -275,6 +311,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
+  ApiHealthRoute: typeof ApiHealthRoute
+  ApiMetricsRoute: typeof ApiMetricsRoute
   ApiResetRoute: typeof ApiResetRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
@@ -289,6 +327,7 @@ export interface RootRouteChildren {
   ApiSyncLogsRoute: typeof ApiSyncLogsRoute
   ApiSyncProgressRoute: typeof ApiSyncProgressRoute
   ApiSyncRunsRoute: typeof ApiSyncRunsRoute
+  ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -305,6 +344,20 @@ declare module '@tanstack/react-router' {
       path: '/api/reset'
       fullPath: '/api/reset'
       preLoaderRoute: typeof ApiResetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/metrics': {
+      id: '/api/metrics'
+      path: '/api/metrics'
+      fullPath: '/api/metrics'
+      preLoaderRoute: typeof ApiMetricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/health': {
+      id: '/api/health'
+      path: '/api/health'
+      fullPath: '/api/health'
+      preLoaderRoute: typeof ApiHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/dashboard': {
@@ -419,6 +472,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSettingsEmailTestRouteImport
       parentRoute: typeof ApiSettingsEmailRoute
     }
+    '/api/public/hooks/reaper': {
+      id: '/api/public/hooks/reaper'
+      path: '/api/public/hooks/reaper'
+      fullPath: '/api/public/hooks/reaper'
+      preLoaderRoute: typeof ApiPublicHooksReaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/platforms/$platform/test': {
       id: '/api/platforms/$platform/test'
       path: '/test'
@@ -474,6 +534,8 @@ const ApiSettingsSupabaseRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDashboardRoute: ApiDashboardRoute,
+  ApiHealthRoute: ApiHealthRoute,
+  ApiMetricsRoute: ApiMetricsRoute,
   ApiResetRoute: ApiResetRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
@@ -488,6 +550,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSyncLogsRoute: ApiSyncLogsRoute,
   ApiSyncProgressRoute: ApiSyncProgressRoute,
   ApiSyncRunsRoute: ApiSyncRunsRoute,
+  ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

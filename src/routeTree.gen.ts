@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
+import { Route as ApiSyncRunsRouteImport } from './routes/api/sync.runs'
 import { Route as ApiSyncProgressRouteImport } from './routes/api/sync.progress'
 import { Route as ApiSyncLogsRouteImport } from './routes/api/sync.logs'
 import { Route as ApiSettingsSupabaseRouteImport } from './routes/api/settings.supabase'
@@ -42,6 +43,11 @@ const ApiResetRoute = ApiResetRouteImport.update({
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
   id: '/api/dashboard',
   path: '/api/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSyncRunsRoute = ApiSyncRunsRouteImport.update({
+  id: '/api/sync/runs',
+  path: '/api/sync/runs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSyncProgressRoute = ApiSyncProgressRouteImport.update({
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/api/settings/supabase': typeof ApiSettingsSupabaseRouteWithChildren
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
+  '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/api/settings/supabase': typeof ApiSettingsSupabaseRouteWithChildren
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
+  '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/api/settings/supabase': typeof ApiSettingsSupabaseRouteWithChildren
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
+  '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
@@ -212,6 +221,7 @@ export interface FileRouteTypes {
     | '/api/settings/supabase'
     | '/api/sync/logs'
     | '/api/sync/progress'
+    | '/api/sync/runs'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/settings/email/test'
@@ -233,6 +243,7 @@ export interface FileRouteTypes {
     | '/api/settings/supabase'
     | '/api/sync/logs'
     | '/api/sync/progress'
+    | '/api/sync/runs'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/settings/email/test'
@@ -254,6 +265,7 @@ export interface FileRouteTypes {
     | '/api/settings/supabase'
     | '/api/sync/logs'
     | '/api/sync/progress'
+    | '/api/sync/runs'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/settings/email/test'
@@ -276,6 +288,7 @@ export interface RootRouteChildren {
   ApiSettingsSupabaseRoute: typeof ApiSettingsSupabaseRouteWithChildren
   ApiSyncLogsRoute: typeof ApiSyncLogsRoute
   ApiSyncProgressRoute: typeof ApiSyncProgressRoute
+  ApiSyncRunsRoute: typeof ApiSyncRunsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -299,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/api/dashboard'
       fullPath: '/api/dashboard'
       preLoaderRoute: typeof ApiDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sync/runs': {
+      id: '/api/sync/runs'
+      path: '/api/sync/runs'
+      fullPath: '/api/sync/runs'
+      preLoaderRoute: typeof ApiSyncRunsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/sync/progress': {
@@ -467,17 +487,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSettingsSupabaseRoute: ApiSettingsSupabaseRouteWithChildren,
   ApiSyncLogsRoute: ApiSyncLogsRoute,
   ApiSyncProgressRoute: ApiSyncProgressRoute,
+  ApiSyncRunsRoute: ApiSyncRunsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

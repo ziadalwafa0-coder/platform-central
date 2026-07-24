@@ -68,6 +68,36 @@ export type Database = {
         }
         Relationships: []
       }
+      sr_schema_warnings: {
+        Row: {
+          field_path: string
+          first_seen_at: string
+          id: number
+          last_seen_at: string
+          occurrences: number
+          platform: string
+          sample_value: Json | null
+        }
+        Insert: {
+          field_path: string
+          first_seen_at?: string
+          id?: number
+          last_seen_at?: string
+          occurrences?: number
+          platform?: string
+          sample_value?: Json | null
+        }
+        Update: {
+          field_path?: string
+          first_seen_at?: string
+          id?: number
+          last_seen_at?: string
+          occurrences?: number
+          platform?: string
+          sample_value?: Json | null
+        }
+        Relationships: []
+      }
       sr_snapshots: {
         Row: {
           current_quantity: number | null
@@ -101,15 +131,155 @@ export type Database = {
         }
         Relationships: []
       }
+      sr_sync_logs: {
+        Row: {
+          code: string | null
+          external_product_id: string | null
+          id: number
+          level: string
+          message: string
+          meta: Json | null
+          observed_at: string
+          page: number | null
+          run_id: string | null
+        }
+        Insert: {
+          code?: string | null
+          external_product_id?: string | null
+          id?: number
+          level?: string
+          message: string
+          meta?: Json | null
+          observed_at?: string
+          page?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          code?: string | null
+          external_product_id?: string | null
+          id?: number
+          level?: string
+          message?: string
+          meta?: Json | null
+          observed_at?: string
+          page?: number | null
+          run_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sr_sync_logs_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "sr_sync_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sr_sync_runs: {
+        Row: {
+          cancel_requested: boolean
+          duration_ms: number | null
+          error_message: string | null
+          finished_at: string | null
+          id: string
+          inventory_delta: number
+          manual_or_auto: string
+          pages_fetched: number
+          platform: string
+          products_failed: number
+          products_inserted: number
+          products_processed: number
+          products_total: number
+          products_updated: number
+          restock_delta: number
+          started_at: string
+          status: string
+          total_inventory: number
+          triggered_by: string | null
+          withdrawal_delta: number
+        }
+        Insert: {
+          cancel_requested?: boolean
+          duration_ms?: number | null
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          inventory_delta?: number
+          manual_or_auto?: string
+          pages_fetched?: number
+          platform?: string
+          products_failed?: number
+          products_inserted?: number
+          products_processed?: number
+          products_total?: number
+          products_updated?: number
+          restock_delta?: number
+          started_at?: string
+          status?: string
+          total_inventory?: number
+          triggered_by?: string | null
+          withdrawal_delta?: number
+        }
+        Update: {
+          cancel_requested?: boolean
+          duration_ms?: number | null
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          inventory_delta?: number
+          manual_or_auto?: string
+          pages_fetched?: number
+          platform?: string
+          products_failed?: number
+          products_inserted?: number
+          products_processed?: number
+          products_total?: number
+          products_updated?: number
+          restock_delta?: number
+          started_at?: string
+          status?: string
+          total_inventory?: number
+          triggered_by?: string | null
+          withdrawal_delta?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "manager" | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -236,6 +406,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "manager", "viewer"],
+    },
   },
 } as const

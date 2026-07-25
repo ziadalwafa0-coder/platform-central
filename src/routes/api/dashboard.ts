@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { syncSafkaIntoDb } from "@/lib/safkaSync.server";
+import { cairoOffsetMs as getCairoOffsetMs, cairoMidnightUtcIso } from "@/lib/cairo-time";
 
 const INTERVAL_MINUTES = 20;
 

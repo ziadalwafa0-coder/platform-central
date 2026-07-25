@@ -1,25 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { cairoOffsetMs as getCairoOffsetMs, cairoNow as getCairoNow, cairoMidnightUtcIso, cairoHourUtcMs } from "@/lib/cairo-time";
 
 export const Route = createFileRoute("/api/analytics/dashboard-overview")({
   server: {
     handlers: {
       GET: async () => {
-        const cairoOffsetMs = 2 * 60 * 60 * 1000;
-        const nowMs = Date.now();
-        const cairoNow = new Date(nowMs + cairoOffsetMs);
-        const cairoMidnightUtc = new Date(
-          Date.UTC(cairoNow.getUTCFullYear(), cairoNow.getUTCMonth(), cairoNow.getUTCDate()) - cairoOffsetMs,
-        ).toISOString();
+        const now = new Date();
+        const cairoNow = getCairoNow(now);
+        const cairoMidnightUtc = cairoMidnightUtcIso(now);
 
-        // Last completed Cairo hour range
+        // Last completed Cairo hour range (DST-aware)
         const cairoHour = cairoNow.getUTCHours();
-        const cairoHourStartUtc = new Date(
-          Date.UTC(cairoNow.getUTCFullYear(), cairoNow.getUTCMonth(), cairoNow.getUTCDate(), cairoHour - 1) - cairoOffsetMs,
-        ).toISOString();
-        const cairoHourEndUtc = new Date(
-          Date.UTC(cairoNow.getUTCFullYear(), cairoNow.getUTCMonth(), cairoNow.getUTCDate(), cairoHour) - cairoOffsetMs,
-        ).toISOString();
+        const cairoHourStartUtc = new Date(cairoHourUtcMs(cairoHour - 1, now)).toISOString();
+        const cairoHourEndUtc = new Date(cairoHourUtcMs(cairoHour, now)).toISOString();
+        void getCairoOffsetMs;
 
         const { count: monitored } = await supabaseAdmin
           .from("sr_products")

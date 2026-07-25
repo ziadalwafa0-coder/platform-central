@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { syncSafkaIntoDb } from "@/lib/safkaSync.server";
+import { cairoOffsetMs as getCairoOffsetMs, cairoMidnightUtcIso } from "@/lib/cairo-time";
 
 const INTERVAL_MINUTES = 20;
 
@@ -46,18 +47,11 @@ export const Route = createFileRoute("/api/dashboard")({
           );
         }
 
-        // Withdrawals in the last hour + today (Cairo timezone offset handled below)
+        // Withdrawals in the last hour + today (Africa/Cairo, DST-aware).
         const nowMs = Date.now();
         const hourAgoIso = new Date(nowMs - 60 * 60 * 1000).toISOString();
-        const cairoOffsetMs = 2 * 60 * 60 * 1000; // Africa/Cairo = UTC+2
-        const cairoNow = new Date(nowMs + cairoOffsetMs);
-        const cairoMidnightUtc = new Date(
-          Date.UTC(
-            cairoNow.getUTCFullYear(),
-            cairoNow.getUTCMonth(),
-            cairoNow.getUTCDate(),
-          ) - cairoOffsetMs,
-        ).toISOString();
+        const cairoOffsetMs = getCairoOffsetMs(new Date(nowMs));
+        const cairoMidnightUtc = cairoMidnightUtcIso(new Date(nowMs));
 
         const { data: hourSnaps } = await supabaseAdmin
           .from("sr_snapshots")

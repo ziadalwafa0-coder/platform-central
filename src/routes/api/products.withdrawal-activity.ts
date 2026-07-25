@@ -1,15 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { cairoMidnightUtcIso } from "@/lib/cairo-time";
 
 export const Route = createFileRoute("/api/products/withdrawal-activity")({
   server: {
     handlers: {
       GET: async () => {
-        const cairoOffsetMs = 2 * 60 * 60 * 1000;
-        const cairoNow = new Date(Date.now() + cairoOffsetMs);
-        const cairoMidnightUtc = new Date(
-          Date.UTC(cairoNow.getUTCFullYear(), cairoNow.getUTCMonth(), cairoNow.getUTCDate()) - cairoOffsetMs,
-        ).toISOString();
+        const cairoMidnightUtc = cairoMidnightUtcIso();
 
         const { data: snaps } = await supabaseAdmin
           .from("sr_snapshots")

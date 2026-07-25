@@ -13,14 +13,21 @@ export const Route = createFileRoute("/api/products/withdrawal-activity")({
 
         const { data: snaps } = await supabaseAdmin
           .from("sr_snapshots")
-          .select("external_product_id, quantity_decrease")
+          .select("external_product_id, quantity_decrease, observed_at")
           .gte("observed_at", cairoMidnightUtc)
           .gt("quantity_decrease", 0);
 
-        const perProduct = new Map<string, number>();
+        type Agg = { pieces: number; events: number; lastAt: string | null };
+        const perProduct = new Map<string, Agg>();
         for (const s of snaps ?? []) {
           const eid = (s as any).external_product_id as string;
-          perProduct.set(eid, (perProduct.get(eid) ?? 0) + ((s as any).quantity_decrease ?? 0));
+          const dec = Number((s as any).quantity_decrease ?? 0);
+          const at = (s as any).observed_at as string | null;
+          const cur = perProduct.get(eid) ?? { pieces: 0, events: 0, lastAt: null };
+          cur.pieces += dec;
+          cur.events += 1;
+          if (at && (!cur.lastAt || at > cur.lastAt)) cur.lastAt = at;
+          perProduct.set(eid, cur);
         }
         const ids = Array.from(perProduct.keys());
         if (ids.length === 0) return Response.json({ success: true, products: [] });
@@ -30,15 +37,26 @@ export const Route = createFileRoute("/api/products/withdrawal-activity")({
           .select("*")
           .in("external_product_id", ids);
 
-        const products = (prods ?? []).map((p: any) => ({
-          id: p.id,
-          externalProductId: p.external_product_id,
-          name: p.name,
-          sku: p.sku ?? "",
-          imageUrl: p.image_url ?? "",
-          currentQuantity: p.current_quantity,
-          withdrawnPieces: perProduct.get(p.external_product_id) ?? 0,
-        }));
+        const products = (prods ?? []).map((p: any) => {
+          const agg = perProduct.get(p.external_product_id) ?? { pieces: 0, events: 0, lastAt: null };
+          return {
+            id: p.id,
+            externalProductId: p.external_product_id,
+            name: p.name,
+            sku: p.sku ?? "",
+            imageUrl: p.image_url ?? "",
+            productUrl: p.product_url ?? "",
+            category: p.category ?? "",
+            price: p.price,
+            currency: p.currency ?? "EGP",
+            currentQuantity: p.current_quantity,
+            previousQuantity: p.previous_quantity,
+            lastCheckedAt: p.last_checked_at,
+            withdrawnPieces: agg.pieces,
+            withdrawalEvents: agg.events,
+            lastWithdrawalAt: agg.lastAt,
+          };
+        });
 
         return Response.json({ success: true, products });
       },

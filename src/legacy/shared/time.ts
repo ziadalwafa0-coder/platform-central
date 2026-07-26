@@ -1,27 +1,30 @@
 // @ts-nocheck
+import { cairoOffsetMs } from "@/lib/cairo-time";
+
 export const BUSINESS_TIMEZONE = "Africa/Cairo";
 
+// Cairo time is derived entirely from the IANA tz database via Intl
+// (see src/lib/cairo-time.ts). No manual hour correction is applied — a
+// non-zero value here would be a second, divergent definition of "now in Cairo".
 export function getHourAdjustmentMs(): number {
   if (typeof window !== "undefined") {
-    let saved = localStorage.getItem("cairo_clock_offset");
-    if (saved === null) {
-      saved = "-1";
-      localStorage.setItem("cairo_clock_offset", "-1");
+    const saved = localStorage.getItem("cairo_clock_offset");
+    if (saved !== null) {
+      const offset = parseInt(saved, 10);
+      return (Number.isNaN(offset) ? 0 : offset) * 60 * 60 * 1000;
     }
-    const offset = parseInt(saved, 10);
-    return (Number.isNaN(offset) ? -1 : offset) * 60 * 60 * 1000;
   }
-  return -1 * 60 * 60 * 1000;
+  return 0;
 }
 
 export function getBrowserClockOffset(): number {
-  if (typeof window === "undefined") return -1;
+  if (typeof window === "undefined") return 0;
   const saved = localStorage.getItem("cairo_clock_offset");
   if (saved !== null) {
     const val = parseInt(saved, 10);
-    return Number.isNaN(val) ? -1 : val;
+    return Number.isNaN(val) ? 0 : val;
   }
-  return -1;
+  return 0;
 }
 
 export function setBrowserClockOffset(offset: number): void {
@@ -176,23 +179,8 @@ export const cairoFormatter = {
 };
 
 export function getCairoOffset(date: Date = new Date()): number {
-  const adjustedDate = new Date(date.getTime() + getHourAdjustmentMs());
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: BUSINESS_TIMEZONE,
-    hour: "numeric",
-    hour12: false,
-  }).formatToParts(adjustedDate);
-  const cairoHour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
-  const utcParts = new Intl.DateTimeFormat("en-US", {
-    timeZone: "UTC",
-    hour: "numeric",
-    hour12: false,
-  }).formatToParts(adjustedDate);
-  const utcHour = Number(utcParts.find((p) => p.type === "hour")?.value ?? 0);
-  let offset = cairoHour - utcHour;
-  if (offset < -12) offset += 24;
-  if (offset > 12) offset -= 24;
-  return offset;
+  // Single source of truth: src/lib/cairo-time.ts
+  return cairoOffsetMs(new Date(date.getTime() + getHourAdjustmentMs())) / (60 * 60 * 1000);
 }
 
 export function formatCairoHourArabic(hour: number): string {

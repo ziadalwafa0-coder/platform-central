@@ -78,7 +78,7 @@ export default function AnalyticsTabs({
     if (!isoString) return "--";
     try {
       const d = new Date(isoString);
-      const adjustedDate = new Date(d.getTime() - 60 * 60 * 1000);
+      const adjustedDate = d; // Cairo offset handled by Intl timeZone (DST-aware)
       return adjustedDate.toLocaleTimeString("ar-EG", {
         timeZone: "Africa/Cairo",
         hour: "2-digit",

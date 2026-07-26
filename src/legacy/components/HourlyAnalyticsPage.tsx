@@ -498,7 +498,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
             <h2 className="text-xl font-black text-white font-display">لوحة التحليل الفوري للمخازن بالساعات</h2>
           </div>
           <p className="text-xs text-[#a5a5c8] leading-relaxed">
-            رصد ومطابقة تحركات المخازن، سحوبات القطع، ومبيعات الكتالوج لكل ساعة بالتوقيت المحلي لجمهورية مصر العربية (توقيت القاهرة — UTC+2).
+            رصد ومطابقة تحركات المخازن، سحوبات القطع، ومبيعات الكتالوج لكل ساعة بالتوقيت المحلي لجمهورية مصر العربية (توقيت القاهرة).
           </p>
         </div>
         
@@ -506,7 +506,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
         <div className="bg-[#1c1c47] border border-[#2a2a5c] px-4 py-2.5 rounded-2xl flex items-center gap-3 shrink-0 self-stretch md:self-auto shadow-inner">
           <Clock className="w-5 h-5 text-[#24C78E] animate-pulse" />
           <div className="text-right">
-            <span className="text-[10px] text-[#a5a5c8] block font-semibold">توقيت القاهرة الفعلي (توقيت القاهرة — UTC+2)</span>
+            <span className="text-[10px] text-[#a5a5c8] block font-semibold">توقيت القاهرة الفعلي (توقيت القاهرة)</span>
             <span className="text-sm font-black text-[#f5f5fa] font-mono tracking-wide">{cairoTimeStr || "جاري المزامنة..."}</span>
           </div>
         </div>
@@ -1099,7 +1099,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                           <div className="flex justify-between font-mono">
                             <span>أول حدث سحب:</span>
                             <span className="text-white font-bold">
-                              {new Date(new Date(interval.firstEventAt).getTime() - 60 * 60 * 1000).toLocaleString("en-US", {
+                              {new Date(interval.firstEventAt).toLocaleString("en-US", {
                                 timeZone: "Africa/Cairo",
                                 hour: "2-digit",
                                 minute: "2-digit",
@@ -1113,7 +1113,7 @@ export default function HourlyAnalyticsPage(props: HourlyAnalyticsPageProps) {
                           <div className="flex justify-between font-mono">
                             <span>آخر حدث سحب:</span>
                             <span className="text-white font-bold">
-                              {new Date(new Date(interval.lastEventAt).getTime() - 60 * 60 * 1000).toLocaleString("en-US", {
+                              {new Date(interval.lastEventAt).toLocaleString("en-US", {
                                 timeZone: "Africa/Cairo",
                                 hour: "2-digit",
                                 minute: "2-digit",

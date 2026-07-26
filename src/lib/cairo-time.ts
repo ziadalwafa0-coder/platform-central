@@ -23,16 +23,30 @@ export function cairoNow(at: Date = new Date()): Date {
   return new Date(at.getTime() + cairoOffsetMs(at));
 }
 
+/**
+ * Convert a Cairo wall-clock instant (expressed as a UTC-shifted Date) back to
+ * the real UTC instant. The offset at the target may differ from the offset at
+ * the reference time (DST transition days), so we re-resolve it once.
+ */
+function cairoWallToUtcMs(wallUtcMs: number, refOffset: number): number {
+  let utcMs = wallUtcMs - refOffset;
+  const settled = cairoOffsetMs(new Date(utcMs));
+  if (settled !== refOffset) utcMs = wallUtcMs - settled;
+  return utcMs;
+}
+
 /** UTC ISO string for the most recent Cairo local midnight. */
 export function cairoMidnightUtcIso(at: Date = new Date()): string {
   const off = cairoOffsetMs(at);
   const c = new Date(at.getTime() + off);
-  return new Date(Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), c.getUTCDate()) - off).toISOString();
+  const wall = Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), c.getUTCDate());
+  return new Date(cairoWallToUtcMs(wall, off)).toISOString();
 }
 
 /** UTC ms for a given Cairo local hour today. */
 export function cairoHourUtcMs(hour: number, at: Date = new Date()): number {
   const off = cairoOffsetMs(at);
   const c = new Date(at.getTime() + off);
-  return Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), c.getUTCDate(), hour) - off;
+  const wall = Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), c.getUTCDate(), hour);
+  return cairoWallToUtcMs(wall, off);
 }

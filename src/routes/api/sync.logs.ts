@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { cairoNow } from "@/lib/cairo-time";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export const Route = createFileRoute("/api/sync/logs")({
@@ -38,7 +39,7 @@ export const Route = createFileRoute("/api/sync/logs")({
 
         const totalDecreases = logs.reduce((a, l) => a + (l.quantityDecrease || 0), 0);
         const nowUtc = new Date();
-        const cairo = new Date(nowUtc.getTime() + 2 * 60 * 60 * 1000);
+        const cairo = cairoNow(nowUtc);
 
         return Response.json({
           success: true,

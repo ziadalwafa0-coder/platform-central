@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { cairoOffsetMs as getCairoOffsetMs, cairoNow as getCairoNow, cairoMidnightUtcIso, cairoHourUtcMs } from "@/lib/cairo-time";
+import { fetchAllRows } from "@/lib/fetchAllRows.server";
 
 export const Route = createFileRoute("/api/analytics/dashboard-overview")({
   server: {
@@ -20,16 +21,21 @@ export const Route = createFileRoute("/api/analytics/dashboard-overview")({
           .from("sr_products")
           .select("id", { count: "exact", head: true });
 
-        const { data: hourSnaps } = await supabaseAdmin
-          .from("sr_snapshots")
-          .select("external_product_id, quantity_decrease")
-          .gte("observed_at", cairoHourStartUtc)
-          .lt("observed_at", cairoHourEndUtc);
+        const hourSnaps = await fetchAllRows<any>(
+          supabaseAdmin as any,
+          "sr_snapshots",
+          "external_product_id, quantity_decrease",
+          1000,
+          (q) => q.gte("observed_at", cairoHourStartUtc).lt("observed_at", cairoHourEndUtc),
+        );
 
-        const { data: daySnaps } = await supabaseAdmin
-          .from("sr_snapshots")
-          .select("external_product_id, quantity_decrease")
-          .gte("observed_at", cairoMidnightUtc);
+        const daySnaps = await fetchAllRows<any>(
+          supabaseAdmin as any,
+          "sr_snapshots",
+          "external_product_id, quantity_decrease",
+          1000,
+          (q) => q.gte("observed_at", cairoMidnightUtc),
+        );
 
         let withdrawnPiecesLastCompletedHour = 0;
         for (const s of hourSnaps ?? []) withdrawnPiecesLastCompletedHour += (s as any).quantity_decrease ?? 0;

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { cairoMidnightUtcIso } from "@/lib/cairo-time";
+import { fetchAllRows } from "@/lib/fetchAllRows.server";
 
 export const Route = createFileRoute("/api/products/withdrawal-activity")({
   server: {
@@ -8,11 +9,13 @@ export const Route = createFileRoute("/api/products/withdrawal-activity")({
       GET: async () => {
         const cairoMidnightUtc = cairoMidnightUtcIso();
 
-        const { data: snaps } = await supabaseAdmin
-          .from("sr_snapshots")
-          .select("external_product_id, quantity_decrease, observed_at")
-          .gte("observed_at", cairoMidnightUtc)
-          .gt("quantity_decrease", 0);
+        const snaps = await fetchAllRows<any>(
+          supabaseAdmin as any,
+          "sr_snapshots",
+          "external_product_id, quantity_decrease, observed_at",
+          1000,
+          (q) => q.gte("observed_at", cairoMidnightUtc).gt("quantity_decrease", 0),
+        );
 
         type Agg = { pieces: number; events: number; lastAt: string | null };
         const perProduct = new Map<string, Agg>();

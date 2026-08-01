@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { syncSafkaIntoDb } from "@/lib/safkaSync.server";
 import { cairoOffsetMs as getCairoOffsetMs, cairoMidnightUtcIso } from "@/lib/cairo-time";
+import { fetchAllRows } from "@/lib/fetchAllRows.server";
 
 const INTERVAL_MINUTES = 20;
 
@@ -53,15 +54,21 @@ export const Route = createFileRoute("/api/dashboard")({
         const cairoOffsetMs = getCairoOffsetMs(new Date(nowMs));
         const cairoMidnightUtc = cairoMidnightUtcIso(new Date(nowMs));
 
-        const { data: hourSnaps } = await supabaseAdmin
-          .from("sr_snapshots")
-          .select("external_product_id, quantity_decrease, restock_amount, observed_at")
-          .gte("observed_at", hourAgoIso);
+        const hourSnaps = await fetchAllRows<any>(
+          supabaseAdmin as any,
+          "sr_snapshots",
+          "external_product_id, quantity_decrease, restock_amount, observed_at",
+          1000,
+          (q) => q.gte("observed_at", hourAgoIso),
+        );
 
-        const { data: daySnaps } = await supabaseAdmin
-          .from("sr_snapshots")
-          .select("external_product_id, quantity_decrease, restock_amount, observed_at")
-          .gte("observed_at", cairoMidnightUtc);
+        const daySnaps = await fetchAllRows<any>(
+          supabaseAdmin as any,
+          "sr_snapshots",
+          "external_product_id, quantity_decrease, restock_amount, observed_at",
+          1000,
+          (q) => q.gte("observed_at", cairoMidnightUtc),
+        );
 
         const hourDecMap = new Map<string, number>();
         const hourResMap = new Map<string, number>();
@@ -197,10 +204,13 @@ export const Route = createFileRoute("/api/dashboard")({
         const twelveHoursAgo = new Date(
           nowMs - 12 * 60 * 60 * 1000,
         ).toISOString();
-        const { data: chartSnaps } = await supabaseAdmin
-          .from("sr_snapshots")
-          .select("quantity_decrease, restock_amount, observed_at")
-          .gte("observed_at", twelveHoursAgo);
+        const chartSnaps = await fetchAllRows<any>(
+          supabaseAdmin as any,
+          "sr_snapshots",
+          "quantity_decrease, restock_amount, observed_at",
+          1000,
+          (q) => q.gte("observed_at", twelveHoursAgo),
+        );
         for (const s of chartSnaps ?? []) {
           const bucket = Math.floor(
             new Date((s as any).observed_at).getTime() / (60 * 60 * 1000),

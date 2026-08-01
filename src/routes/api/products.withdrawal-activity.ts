@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { cairoMidnightUtcIso } from "@/lib/cairo-time";
 import { fetchAllRows } from "@/lib/fetchAllRows.server";
+import { requireApiAuth } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/products/withdrawal-activity")({
   server: {
+    middleware: [requireApiAuth],
     handlers: {
       GET: async () => {
         const cairoMidnightUtc = cairoMidnightUtcIso();

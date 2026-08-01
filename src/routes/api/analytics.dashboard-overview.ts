@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { cairoOffsetMs as getCairoOffsetMs, cairoNow as getCairoNow, cairoMidnightUtcIso, cairoHourUtcMs } from "@/lib/cairo-time";
 import { fetchAllRows } from "@/lib/fetchAllRows.server";
+import { requireApiAuth } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/analytics/dashboard-overview")({
   server: {
+    middleware: [requireApiAuth],
     handlers: {
       GET: async () => {
         const now = new Date();

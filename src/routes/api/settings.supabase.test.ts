@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { requireApiAdmin } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/settings/supabase/test")({
   server: {
+    middleware: [requireApiAdmin],
     handlers: {
       POST: async () => {
         try {

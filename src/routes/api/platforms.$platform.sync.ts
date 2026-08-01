@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireApiAdmin } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/platforms/$platform/sync")({
   server: {
+    middleware: [requireApiAdmin],
     handlers: {
       POST: async ({ params, request }) => {
         if (params.platform !== "safka") {

@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireApiAuth } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/diagnostics/error")({
   server: {
+    middleware: [requireApiAuth],
     handlers: {
       POST: async ({ request }) => {
         try {

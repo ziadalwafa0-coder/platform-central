@@ -559,8 +559,16 @@ export default function App() {
   };
 
   const handleResetDatabase = async () => {
+    if (typeof window !== "undefined" && !window.confirm("سيتم حذف كل المنتجات والسحوبات نهائياً. هل أنت متأكد؟")) {
+      return;
+    }
     try {
-      const data = await safeFetchJson<any>("/api/reset", { method: "POST" });
+      const data = await safeFetchJson<any>("/api/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirm: "RESET" }),
+      });
+
       if (data.success) {
         showToastMessage("تم تهيئة وقص قواعد البيانات وبدء رصد نظيف كلياً!");
         fetchDashboardData();

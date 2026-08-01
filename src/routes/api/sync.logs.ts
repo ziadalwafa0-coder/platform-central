@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { cairoNow } from "@/lib/cairo-time";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { requireApiAuth } from "@/lib/api-auth.server";
 
 export const Route = createFileRoute("/api/sync/logs")({
   server: {
+    middleware: [requireApiAuth],
     handlers: {
       GET: async () => {
         const { data: snaps } = await supabaseAdmin

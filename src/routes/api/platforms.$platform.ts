@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireApiAdmin } from "@/lib/api-auth.server";
 
 // Config is currently sourced from server-side env vars (SAFKA_API_KEY).
 // The UI still POSTs/PUTs values; we accept and echo them back without persisting.
 export const Route = createFileRoute("/api/platforms/$platform")({
   server: {
+    middleware: [requireApiAdmin],
     handlers: {
       GET: async ({ params }) => {
         return Response.json({

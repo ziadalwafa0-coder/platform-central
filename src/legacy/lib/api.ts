@@ -24,12 +24,13 @@ export async function safeFetchJson<T = any>(url: string, options?: RequestInit)
       console.warn("Could not retrieve auth token for request:", err);
     }
 
-    let offset = localStorage.getItem("cairo_clock_offset");
-    if (offset === null) {
-      offset = "-1"; // Default to -1 hour offset to match Cairo standard clock
-      localStorage.setItem("cairo_clock_offset", "-1");
+    // Only forward an offset the user explicitly set (debug adjuster in TopHeader).
+    // Never default or write to localStorage here — Cairo time comes from the IANA tz database.
+    const offset = localStorage.getItem("cairo_clock_offset");
+    if (offset !== null) {
+      headers.set("x-cairo-clock-offset", offset);
     }
-    headers.set("x-cairo-clock-offset", offset);
+
     finalOptions = {
       ...options,
       headers,

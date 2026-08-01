@@ -3,11 +3,13 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { syncSafkaIntoDb } from "@/lib/safkaSync.server";
 import { cairoOffsetMs as getCairoOffsetMs, cairoMidnightUtcIso } from "@/lib/cairo-time";
 import { fetchAllRows } from "@/lib/fetchAllRows.server";
+import { requireApiAuth } from "@/lib/api-auth.server";
 
 const INTERVAL_MINUTES = 20;
 
 export const Route = createFileRoute("/api/dashboard")({
   server: {
+    middleware: [requireApiAuth],
     handlers: {
       GET: async ({ request }) => {
         const url = new URL(request.url);

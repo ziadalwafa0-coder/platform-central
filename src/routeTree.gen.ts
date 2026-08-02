@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiWeekdayPatternsRouteImport } from './routes/api/weekday-patterns'
+import { Route as ApiStockoutRiskRouteImport } from './routes/api/stockout-risk'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
 const ApiWeekdayPatternsRoute = ApiWeekdayPatternsRouteImport.update({
   id: '/api/weekday-patterns',
   path: '/api/weekday-patterns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStockoutRiskRoute = ApiStockoutRiskRouteImport.update({
+  id: '/api/stockout-risk',
+  path: '/api/stockout-risk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiResetRoute = ApiResetRouteImport.update({
@@ -194,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
@@ -255,6 +263,7 @@ export interface FileRoutesById {
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
@@ -287,6 +296,7 @@ export interface FileRouteTypes {
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
+    | '/api/stockout-risk'
     | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
@@ -317,6 +327,7 @@ export interface FileRouteTypes {
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
+    | '/api/stockout-risk'
     | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
@@ -347,6 +358,7 @@ export interface FileRouteTypes {
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
+    | '/api/stockout-risk'
     | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
@@ -378,6 +390,7 @@ export interface RootRouteChildren {
   ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
   ApiResetRoute: typeof ApiResetRoute
+  ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
   ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
@@ -411,6 +424,13 @@ declare module '@tanstack/react-router' {
       path: '/api/weekday-patterns'
       fullPath: '/api/weekday-patterns'
       preLoaderRoute: typeof ApiWeekdayPatternsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stockout-risk': {
+      id: '/api/stockout-risk'
+      path: '/api/stockout-risk'
+      fullPath: '/api/stockout-risk'
+      preLoaderRoute: typeof ApiStockoutRiskRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/reset': {
@@ -655,6 +675,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,
   ApiResetRoute: ApiResetRoute,
+  ApiStockoutRiskRoute: ApiStockoutRiskRoute,
   ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,

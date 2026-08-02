@@ -10,10 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiWeekdayPatternsRouteImport } from './routes/api/weekday-patterns'
+import { Route as ApiStockoutRiskRouteImport } from './routes/api/stockout-risk'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
+import { Route as ApiMultiHourLeadersRouteImport } from './routes/api/multi-hour-leaders'
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
+import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
+import { Route as ApiCategoryLeadersRouteImport } from './routes/api/category-leaders'
+import { Route as ApiWithdrawalsHourBreakdownRouteImport } from './routes/api/withdrawals.hour-breakdown'
 import { Route as ApiSyncRunsRouteImport } from './routes/api/sync.runs'
 import { Route as ApiSyncProgressRouteImport } from './routes/api/sync.progress'
 import { Route as ApiSyncLogsRouteImport } from './routes/api/sync.logs'
@@ -25,6 +31,7 @@ import { Route as ApiPlatformsPlatformRouteImport } from './routes/api/platforms
 import { Route as ApiDiagnosticsErrorRouteImport } from './routes/api/diagnostics.error'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth.login'
 import { Route as ApiAnalyticsRevisionRouteImport } from './routes/api/analytics.revision'
+import { Route as ApiAnalyticsHourlyWithdrawalsRouteImport } from './routes/api/analytics.hourly-withdrawals'
 import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/analytics.dashboard-overview'
 import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
@@ -32,10 +39,21 @@ import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.
 import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/hooks/reaper'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
+import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWeekdayPatternsRoute = ApiWeekdayPatternsRouteImport.update({
+  id: '/api/weekday-patterns',
+  path: '/api/weekday-patterns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStockoutRiskRoute = ApiStockoutRiskRouteImport.update({
+  id: '/api/stockout-risk',
+  path: '/api/stockout-risk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiResetRoute = ApiResetRouteImport.update({
@@ -43,9 +61,19 @@ const ApiResetRoute = ApiResetRouteImport.update({
   path: '/api/reset',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiMultiHourLeadersRoute = ApiMultiHourLeadersRouteImport.update({
+  id: '/api/multi-hour-leaders',
+  path: '/api/multi-hour-leaders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiMetricsRoute = ApiMetricsRouteImport.update({
   id: '/api/metrics',
   path: '/api/metrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHourlyPeakAnalysisRoute = ApiHourlyPeakAnalysisRouteImport.update({
+  id: '/api/hourly-peak-analysis',
+  path: '/api/hourly-peak-analysis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
@@ -58,6 +86,17 @@ const ApiDashboardRoute = ApiDashboardRouteImport.update({
   path: '/api/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCategoryLeadersRoute = ApiCategoryLeadersRouteImport.update({
+  id: '/api/category-leaders',
+  path: '/api/category-leaders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWithdrawalsHourBreakdownRoute =
+  ApiWithdrawalsHourBreakdownRouteImport.update({
+    id: '/api/withdrawals/hour-breakdown',
+    path: '/api/withdrawals/hour-breakdown',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiSyncRunsRoute = ApiSyncRunsRouteImport.update({
   id: '/api/sync/runs',
   path: '/api/sync/runs',
@@ -114,6 +153,12 @@ const ApiAnalyticsRevisionRoute = ApiAnalyticsRevisionRouteImport.update({
   path: '/api/analytics/revision',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAnalyticsHourlyWithdrawalsRoute =
+  ApiAnalyticsHourlyWithdrawalsRouteImport.update({
+    id: '/api/analytics/hourly-withdrawals',
+    path: '/api/analytics/hourly-withdrawals',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAnalyticsDashboardOverviewRoute =
   ApiAnalyticsDashboardOverviewRouteImport.update({
     id: '/api/analytics/dashboard-overview',
@@ -153,15 +198,27 @@ const ApiPlatformsPlatformSyncRoute =
     path: '/sync',
     getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
+const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
+  ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport.update({
+    id: '/$hour/products',
+    path: '/$hour/products',
+    getParentRoute: () => ApiAnalyticsHourlyWithdrawalsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
+  '/api/multi-hour-leaders': typeof ApiMultiHourLeadersRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/stockout-risk': typeof ApiStockoutRiskRoute
+  '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -173,20 +230,28 @@ export interface FileRoutesByFullPath {
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
+  '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
+  '/api/multi-hour-leaders': typeof ApiMultiHourLeadersRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/stockout-risk': typeof ApiStockoutRiskRoute
+  '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -198,21 +263,29 @@ export interface FileRoutesByTo {
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
+  '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
+  '/api/multi-hour-leaders': typeof ApiMultiHourLeadersRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/stockout-risk': typeof ApiStockoutRiskRoute
+  '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -224,22 +297,30 @@ export interface FileRoutesById {
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
+  '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/api/category-leaders'
     | '/api/dashboard'
     | '/api/health'
+    | '/api/hourly-peak-analysis'
     | '/api/metrics'
+    | '/api/multi-hour-leaders'
     | '/api/reset'
+    | '/api/stockout-risk'
+    | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
+    | '/api/analytics/hourly-withdrawals'
     | '/api/analytics/revision'
     | '/api/auth/login'
     | '/api/diagnostics/error'
@@ -251,20 +332,28 @@ export interface FileRouteTypes {
     | '/api/sync/logs'
     | '/api/sync/progress'
     | '/api/sync/runs'
+    | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/api/category-leaders'
     | '/api/dashboard'
     | '/api/health'
+    | '/api/hourly-peak-analysis'
     | '/api/metrics'
+    | '/api/multi-hour-leaders'
     | '/api/reset'
+    | '/api/stockout-risk'
+    | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
+    | '/api/analytics/hourly-withdrawals'
     | '/api/analytics/revision'
     | '/api/auth/login'
     | '/api/diagnostics/error'
@@ -276,20 +365,28 @@ export interface FileRouteTypes {
     | '/api/sync/logs'
     | '/api/sync/progress'
     | '/api/sync/runs'
+    | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/analytics/hourly-withdrawals/$hour/products'
   id:
     | '__root__'
     | '/'
+    | '/api/category-leaders'
     | '/api/dashboard'
     | '/api/health'
+    | '/api/hourly-peak-analysis'
     | '/api/metrics'
+    | '/api/multi-hour-leaders'
     | '/api/reset'
+    | '/api/stockout-risk'
+    | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
+    | '/api/analytics/hourly-withdrawals'
     | '/api/analytics/revision'
     | '/api/auth/login'
     | '/api/diagnostics/error'
@@ -301,21 +398,29 @@ export interface FileRouteTypes {
     | '/api/sync/logs'
     | '/api/sync/progress'
     | '/api/sync/runs'
+    | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiCategoryLeadersRoute: typeof ApiCategoryLeadersRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
   ApiHealthRoute: typeof ApiHealthRoute
+  ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
+  ApiMultiHourLeadersRoute: typeof ApiMultiHourLeadersRoute
   ApiResetRoute: typeof ApiResetRoute
+  ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
+  ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
+  ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   ApiAnalyticsRevisionRoute: typeof ApiAnalyticsRevisionRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiDiagnosticsErrorRoute: typeof ApiDiagnosticsErrorRoute
@@ -327,6 +432,7 @@ export interface RootRouteChildren {
   ApiSyncLogsRoute: typeof ApiSyncLogsRoute
   ApiSyncProgressRoute: typeof ApiSyncProgressRoute
   ApiSyncRunsRoute: typeof ApiSyncRunsRoute
+  ApiWithdrawalsHourBreakdownRoute: typeof ApiWithdrawalsHourBreakdownRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
 }
 
@@ -339,6 +445,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/weekday-patterns': {
+      id: '/api/weekday-patterns'
+      path: '/api/weekday-patterns'
+      fullPath: '/api/weekday-patterns'
+      preLoaderRoute: typeof ApiWeekdayPatternsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stockout-risk': {
+      id: '/api/stockout-risk'
+      path: '/api/stockout-risk'
+      fullPath: '/api/stockout-risk'
+      preLoaderRoute: typeof ApiStockoutRiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/reset': {
       id: '/api/reset'
       path: '/api/reset'
@@ -346,11 +466,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiResetRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/multi-hour-leaders': {
+      id: '/api/multi-hour-leaders'
+      path: '/api/multi-hour-leaders'
+      fullPath: '/api/multi-hour-leaders'
+      preLoaderRoute: typeof ApiMultiHourLeadersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/metrics': {
       id: '/api/metrics'
       path: '/api/metrics'
       fullPath: '/api/metrics'
       preLoaderRoute: typeof ApiMetricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/hourly-peak-analysis': {
+      id: '/api/hourly-peak-analysis'
+      path: '/api/hourly-peak-analysis'
+      fullPath: '/api/hourly-peak-analysis'
+      preLoaderRoute: typeof ApiHourlyPeakAnalysisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/health': {
@@ -365,6 +499,20 @@ declare module '@tanstack/react-router' {
       path: '/api/dashboard'
       fullPath: '/api/dashboard'
       preLoaderRoute: typeof ApiDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/category-leaders': {
+      id: '/api/category-leaders'
+      path: '/api/category-leaders'
+      fullPath: '/api/category-leaders'
+      preLoaderRoute: typeof ApiCategoryLeadersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/withdrawals/hour-breakdown': {
+      id: '/api/withdrawals/hour-breakdown'
+      path: '/api/withdrawals/hour-breakdown'
+      fullPath: '/api/withdrawals/hour-breakdown'
+      preLoaderRoute: typeof ApiWithdrawalsHourBreakdownRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/sync/runs': {
@@ -444,6 +592,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsRevisionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/analytics/hourly-withdrawals': {
+      id: '/api/analytics/hourly-withdrawals'
+      path: '/api/analytics/hourly-withdrawals'
+      fullPath: '/api/analytics/hourly-withdrawals'
+      preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/analytics/dashboard-overview': {
       id: '/api/analytics/dashboard-overview'
       path: '/api/analytics/dashboard-overview'
@@ -493,8 +648,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
       parentRoute: typeof ApiPlatformsPlatformRoute
     }
+    '/api/analytics/hourly-withdrawals/$hour/products': {
+      id: '/api/analytics/hourly-withdrawals/$hour/products'
+      path: '/$hour/products'
+      fullPath: '/api/analytics/hourly-withdrawals/$hour/products'
+      preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport
+      parentRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
+    }
   }
 }
+
+interface ApiAnalyticsHourlyWithdrawalsRouteChildren {
+  ApiAnalyticsHourlyWithdrawalsHourProductsRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
+}
+
+const ApiAnalyticsHourlyWithdrawalsRouteChildren: ApiAnalyticsHourlyWithdrawalsRouteChildren =
+  {
+    ApiAnalyticsHourlyWithdrawalsHourProductsRoute:
+      ApiAnalyticsHourlyWithdrawalsHourProductsRoute,
+  }
+
+const ApiAnalyticsHourlyWithdrawalsRouteWithChildren =
+  ApiAnalyticsHourlyWithdrawalsRoute._addFileChildren(
+    ApiAnalyticsHourlyWithdrawalsRouteChildren,
+  )
 
 interface ApiPlatformsPlatformRouteChildren {
   ApiPlatformsPlatformSyncRoute: typeof ApiPlatformsPlatformSyncRoute
@@ -533,12 +710,19 @@ const ApiSettingsSupabaseRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiCategoryLeadersRoute: ApiCategoryLeadersRoute,
   ApiDashboardRoute: ApiDashboardRoute,
   ApiHealthRoute: ApiHealthRoute,
+  ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,
+  ApiMultiHourLeadersRoute: ApiMultiHourLeadersRoute,
   ApiResetRoute: ApiResetRoute,
+  ApiStockoutRiskRoute: ApiStockoutRiskRoute,
+  ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
+  ApiAnalyticsHourlyWithdrawalsRoute:
+    ApiAnalyticsHourlyWithdrawalsRouteWithChildren,
   ApiAnalyticsRevisionRoute: ApiAnalyticsRevisionRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiDiagnosticsErrorRoute: ApiDiagnosticsErrorRoute,
@@ -550,6 +734,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSyncLogsRoute: ApiSyncLogsRoute,
   ApiSyncProgressRoute: ApiSyncProgressRoute,
   ApiSyncRunsRoute: ApiSyncRunsRoute,
+  ApiWithdrawalsHourBreakdownRoute: ApiWithdrawalsHourBreakdownRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
 }
 export const routeTree = rootRouteImport

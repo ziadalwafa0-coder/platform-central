@@ -50,3 +50,38 @@ export function cairoHourUtcMs(hour: number, at: Date = new Date()): number {
   const wall = Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), c.getUTCDate(), hour);
   return cairoWallToUtcMs(wall, off);
 }
+
+/**
+ * UTC ms for a Cairo local wall-clock instant on an explicit calendar date
+ * ("YYYY-MM-DD") plus an hour/minute offset inside that day.
+ * Hours >= 24 roll into the following day (used for exclusive day-end bounds).
+ */
+export function cairoDateHourUtcMs(dateStr: string, hour = 0, minute = 0): number {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const wall = Date.UTC(y, (m ?? 1) - 1, d ?? 1, hour, minute);
+  const guess = cairoOffsetMs(new Date(wall));
+  return cairoWallToUtcMs(wall, guess);
+}
+
+/** Cairo local calendar date ("YYYY-MM-DD") for an instant. */
+export function cairoDateStr(at: Date = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Africa/Cairo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(at);
+}
+
+/** Cairo local hour (0-23) for an instant. */
+export function cairoHourOf(at: Date = new Date()): number {
+  return Number(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Africa/Cairo",
+      hour: "2-digit",
+      hour12: false,
+      hourCycle: "h23",
+    }).format(at),
+  );
+}
+

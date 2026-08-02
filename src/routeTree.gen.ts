@@ -17,6 +17,7 @@ import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
+import { Route as ApiCategoryLeadersRouteImport } from './routes/api/category-leaders'
 import { Route as ApiWithdrawalsHourBreakdownRouteImport } from './routes/api/withdrawals.hour-breakdown'
 import { Route as ApiSyncRunsRouteImport } from './routes/api/sync.runs'
 import { Route as ApiSyncProgressRouteImport } from './routes/api/sync.progress'
@@ -77,6 +78,11 @@ const ApiHealthRoute = ApiHealthRouteImport.update({
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
   id: '/api/dashboard',
   path: '/api/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCategoryLeadersRoute = ApiCategoryLeadersRouteImport.update({
+  id: '/api/category-leaders',
+  path: '/api/category-leaders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiWithdrawalsHourBreakdownRoute =
@@ -195,6 +201,7 @@ const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
@@ -226,6 +233,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
@@ -258,6 +266,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
@@ -291,6 +300,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/api/category-leaders'
     | '/api/dashboard'
     | '/api/health'
     | '/api/hourly-peak-analysis'
@@ -322,6 +332,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/api/category-leaders'
     | '/api/dashboard'
     | '/api/health'
     | '/api/hourly-peak-analysis'
@@ -353,6 +364,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/api/category-leaders'
     | '/api/dashboard'
     | '/api/health'
     | '/api/hourly-peak-analysis'
@@ -385,6 +397,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiCategoryLeadersRoute: typeof ApiCategoryLeadersRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
   ApiHealthRoute: typeof ApiHealthRoute
   ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
@@ -466,6 +479,13 @@ declare module '@tanstack/react-router' {
       path: '/api/dashboard'
       fullPath: '/api/dashboard'
       preLoaderRoute: typeof ApiDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/category-leaders': {
+      id: '/api/category-leaders'
+      path: '/api/category-leaders'
+      fullPath: '/api/category-leaders'
+      preLoaderRoute: typeof ApiCategoryLeadersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/withdrawals/hour-breakdown': {
@@ -670,6 +690,7 @@ const ApiSettingsSupabaseRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiCategoryLeadersRoute: ApiCategoryLeadersRoute,
   ApiDashboardRoute: ApiDashboardRoute,
   ApiHealthRoute: ApiHealthRoute,
   ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,

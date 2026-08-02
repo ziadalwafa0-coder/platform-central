@@ -25,6 +25,7 @@ import { Route as ApiPlatformsPlatformRouteImport } from './routes/api/platforms
 import { Route as ApiDiagnosticsErrorRouteImport } from './routes/api/diagnostics.error'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth.login'
 import { Route as ApiAnalyticsRevisionRouteImport } from './routes/api/analytics.revision'
+import { Route as ApiAnalyticsHourlyWithdrawalsRouteImport } from './routes/api/analytics.hourly-withdrawals'
 import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/analytics.dashboard-overview'
 import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
@@ -114,6 +115,12 @@ const ApiAnalyticsRevisionRoute = ApiAnalyticsRevisionRouteImport.update({
   path: '/api/analytics/revision',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAnalyticsHourlyWithdrawalsRoute =
+  ApiAnalyticsHourlyWithdrawalsRouteImport.update({
+    id: '/api/analytics/hourly-withdrawals',
+    path: '/api/analytics/hourly-withdrawals',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAnalyticsDashboardOverviewRoute =
   ApiAnalyticsDashboardOverviewRouteImport.update({
     id: '/api/analytics/dashboard-overview',
@@ -162,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRoute
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -187,6 +195,7 @@ export interface FileRoutesByTo {
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRoute
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -213,6 +222,7 @@ export interface FileRoutesById {
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRoute
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -240,6 +250,7 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
+    | '/api/analytics/hourly-withdrawals'
     | '/api/analytics/revision'
     | '/api/auth/login'
     | '/api/diagnostics/error'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
+    | '/api/analytics/hourly-withdrawals'
     | '/api/analytics/revision'
     | '/api/auth/login'
     | '/api/diagnostics/error'
@@ -290,6 +302,7 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
+    | '/api/analytics/hourly-withdrawals'
     | '/api/analytics/revision'
     | '/api/auth/login'
     | '/api/diagnostics/error'
@@ -316,6 +329,7 @@ export interface RootRouteChildren {
   ApiResetRoute: typeof ApiResetRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
+  ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
   ApiAnalyticsRevisionRoute: typeof ApiAnalyticsRevisionRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiDiagnosticsErrorRoute: typeof ApiDiagnosticsErrorRoute
@@ -444,6 +458,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsRevisionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/analytics/hourly-withdrawals': {
+      id: '/api/analytics/hourly-withdrawals'
+      path: '/api/analytics/hourly-withdrawals'
+      fullPath: '/api/analytics/hourly-withdrawals'
+      preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/analytics/dashboard-overview': {
       id: '/api/analytics/dashboard-overview'
       path: '/api/analytics/dashboard-overview'
@@ -539,6 +560,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiResetRoute: ApiResetRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
+  ApiAnalyticsHourlyWithdrawalsRoute: ApiAnalyticsHourlyWithdrawalsRoute,
   ApiAnalyticsRevisionRoute: ApiAnalyticsRevisionRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiDiagnosticsErrorRoute: ApiDiagnosticsErrorRoute,

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiWeekdayPatternsRouteImport } from './routes/api/weekday-patterns'
 import { Route as ApiStockoutRiskRouteImport } from './routes/api/stockout-risk'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
+import { Route as ApiMultiHourLeadersRouteImport } from './routes/api/multi-hour-leaders'
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
@@ -58,6 +59,11 @@ const ApiStockoutRiskRoute = ApiStockoutRiskRouteImport.update({
 const ApiResetRoute = ApiResetRouteImport.update({
   id: '/api/reset',
   path: '/api/reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMultiHourLeadersRoute = ApiMultiHourLeadersRouteImport.update({
+  id: '/api/multi-hour-leaders',
+  path: '/api/multi-hour-leaders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiMetricsRoute = ApiMetricsRouteImport.update({
@@ -206,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
+  '/api/multi-hour-leaders': typeof ApiMultiHourLeadersRoute
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
@@ -238,6 +245,7 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
+  '/api/multi-hour-leaders': typeof ApiMultiHourLeadersRoute
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
@@ -271,6 +279,7 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
+  '/api/multi-hour-leaders': typeof ApiMultiHourLeadersRoute
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
@@ -305,6 +314,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
+    | '/api/multi-hour-leaders'
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
@@ -337,6 +347,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
+    | '/api/multi-hour-leaders'
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
@@ -369,6 +380,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
+    | '/api/multi-hour-leaders'
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
@@ -402,6 +414,7 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
+  ApiMultiHourLeadersRoute: typeof ApiMultiHourLeadersRoute
   ApiResetRoute: typeof ApiResetRoute
   ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
   ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
@@ -451,6 +464,13 @@ declare module '@tanstack/react-router' {
       path: '/api/reset'
       fullPath: '/api/reset'
       preLoaderRoute: typeof ApiResetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/multi-hour-leaders': {
+      id: '/api/multi-hour-leaders'
+      path: '/api/multi-hour-leaders'
+      fullPath: '/api/multi-hour-leaders'
+      preLoaderRoute: typeof ApiMultiHourLeadersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/metrics': {
@@ -695,6 +715,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,
+  ApiMultiHourLeadersRoute: ApiMultiHourLeadersRoute,
   ApiResetRoute: ApiResetRoute,
   ApiStockoutRiskRoute: ApiStockoutRiskRoute,
   ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,

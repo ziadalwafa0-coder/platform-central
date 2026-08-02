@@ -14,7 +14,9 @@ export const Route = createFileRoute("/api/analytics/hourly-withdrawals")({
     handlers: {
       GET: async ({ request }) => {
         const url = new URL(request.url);
-        const date = url.searchParams.get("date") || cairoDateStr();
+        // DashboardOverview passes startDate/endDate; HourlyAnalyticsPage passes date.
+        const date =
+          url.searchParams.get("date") || url.searchParams.get("startDate") || cairoDateStr();
         const platform = url.searchParams.get("platform") || "all";
         const category = url.searchParams.get("category") || "all";
 

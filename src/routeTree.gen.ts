@@ -34,6 +34,7 @@ import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.
 import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/hooks/reaper'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
+import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -167,6 +168,12 @@ const ApiPlatformsPlatformSyncRoute =
     path: '/sync',
     getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
+const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
+  ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport.update({
+    id: '/$hour/products',
+    path: '/$hour/products',
+    getParentRoute: () => ApiAnalyticsHourlyWithdrawalsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -176,7 +183,7 @@ export interface FileRoutesByFullPath {
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
-  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -194,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -203,7 +211,7 @@ export interface FileRoutesByTo {
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
-  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -221,6 +229,7 @@ export interface FileRoutesByTo {
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -231,7 +240,7 @@ export interface FileRoutesById {
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
-  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRoute
+  '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   '/api/analytics/revision': typeof ApiAnalyticsRevisionRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/diagnostics/error': typeof ApiDiagnosticsErrorRoute
@@ -249,6 +258,7 @@ export interface FileRoutesById {
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -278,6 +288,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -305,6 +316,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/analytics/hourly-withdrawals/$hour/products'
   id:
     | '__root__'
     | '/'
@@ -332,6 +344,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/reaper'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -342,7 +355,7 @@ export interface RootRouteChildren {
   ApiResetRoute: typeof ApiResetRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
-  ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
+  ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
   ApiAnalyticsRevisionRoute: typeof ApiAnalyticsRevisionRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiDiagnosticsErrorRoute: typeof ApiDiagnosticsErrorRoute
@@ -535,8 +548,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
       parentRoute: typeof ApiPlatformsPlatformRoute
     }
+    '/api/analytics/hourly-withdrawals/$hour/products': {
+      id: '/api/analytics/hourly-withdrawals/$hour/products'
+      path: '/$hour/products'
+      fullPath: '/api/analytics/hourly-withdrawals/$hour/products'
+      preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport
+      parentRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
+    }
   }
 }
+
+interface ApiAnalyticsHourlyWithdrawalsRouteChildren {
+  ApiAnalyticsHourlyWithdrawalsHourProductsRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
+}
+
+const ApiAnalyticsHourlyWithdrawalsRouteChildren: ApiAnalyticsHourlyWithdrawalsRouteChildren =
+  {
+    ApiAnalyticsHourlyWithdrawalsHourProductsRoute:
+      ApiAnalyticsHourlyWithdrawalsHourProductsRoute,
+  }
+
+const ApiAnalyticsHourlyWithdrawalsRouteWithChildren =
+  ApiAnalyticsHourlyWithdrawalsRoute._addFileChildren(
+    ApiAnalyticsHourlyWithdrawalsRouteChildren,
+  )
 
 interface ApiPlatformsPlatformRouteChildren {
   ApiPlatformsPlatformSyncRoute: typeof ApiPlatformsPlatformSyncRoute
@@ -581,7 +616,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiResetRoute: ApiResetRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
-  ApiAnalyticsHourlyWithdrawalsRoute: ApiAnalyticsHourlyWithdrawalsRoute,
+  ApiAnalyticsHourlyWithdrawalsRoute:
+    ApiAnalyticsHourlyWithdrawalsRouteWithChildren,
   ApiAnalyticsRevisionRoute: ApiAnalyticsRevisionRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiDiagnosticsErrorRoute: ApiDiagnosticsErrorRoute,

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiWeekdayPatternsRouteImport } from './routes/api/weekday-patterns'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
@@ -40,6 +41,11 @@ import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from '.
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWeekdayPatternsRoute = ApiWeekdayPatternsRouteImport.update({
+  id: '/api/weekday-patterns',
+  path: '/api/weekday-patterns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiResetRoute = ApiResetRouteImport.update({
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
+  '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -278,6 +287,7 @@ export interface FileRouteTypes {
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
+    | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -307,6 +317,7 @@ export interface FileRouteTypes {
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
+    | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -336,6 +347,7 @@ export interface FileRouteTypes {
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
+    | '/api/weekday-patterns'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -366,6 +378,7 @@ export interface RootRouteChildren {
   ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
   ApiResetRoute: typeof ApiResetRoute
+  ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
   ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -391,6 +404,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/weekday-patterns': {
+      id: '/api/weekday-patterns'
+      path: '/api/weekday-patterns'
+      fullPath: '/api/weekday-patterns'
+      preLoaderRoute: typeof ApiWeekdayPatternsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/reset': {
@@ -635,6 +655,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,
   ApiResetRoute: ApiResetRoute,
+  ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
   ApiAnalyticsHourlyWithdrawalsRoute:

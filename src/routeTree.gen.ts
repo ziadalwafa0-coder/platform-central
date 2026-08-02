@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiResetRouteImport } from './routes/api/reset'
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
+import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
 import { Route as ApiWithdrawalsHourBreakdownRouteImport } from './routes/api/withdrawals.hour-breakdown'
@@ -49,6 +50,11 @@ const ApiResetRoute = ApiResetRouteImport.update({
 const ApiMetricsRoute = ApiMetricsRouteImport.update({
   id: '/api/metrics',
   path: '/api/metrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHourlyPeakAnalysisRoute = ApiHourlyPeakAnalysisRouteImport.update({
+  id: '/api/hourly-peak-analysis',
+  path: '/api/hourly-peak-analysis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
@@ -207,6 +214,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
@@ -236,6 +244,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
   '/api/reset': typeof ApiResetRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/dashboard'
     | '/api/health'
+    | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
     | '/api/analytics/accuracy-check'
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/dashboard'
     | '/api/health'
+    | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
     | '/api/analytics/accuracy-check'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/dashboard'
     | '/api/health'
+    | '/api/hourly-peak-analysis'
     | '/api/metrics'
     | '/api/reset'
     | '/api/analytics/accuracy-check'
@@ -351,6 +363,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
   ApiHealthRoute: typeof ApiHealthRoute
+  ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
   ApiResetRoute: typeof ApiResetRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
@@ -392,6 +405,13 @@ declare module '@tanstack/react-router' {
       path: '/api/metrics'
       fullPath: '/api/metrics'
       preLoaderRoute: typeof ApiMetricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/hourly-peak-analysis': {
+      id: '/api/hourly-peak-analysis'
+      path: '/api/hourly-peak-analysis'
+      fullPath: '/api/hourly-peak-analysis'
+      preLoaderRoute: typeof ApiHourlyPeakAnalysisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/health': {
@@ -612,6 +632,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDashboardRoute: ApiDashboardRoute,
   ApiHealthRoute: ApiHealthRoute,
+  ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,
   ApiResetRoute: ApiResetRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,

@@ -14,6 +14,7 @@ import { Route as ApiResetRouteImport } from './routes/api/reset'
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
+import { Route as ApiWithdrawalsHourBreakdownRouteImport } from './routes/api/withdrawals.hour-breakdown'
 import { Route as ApiSyncRunsRouteImport } from './routes/api/sync.runs'
 import { Route as ApiSyncProgressRouteImport } from './routes/api/sync.progress'
 import { Route as ApiSyncLogsRouteImport } from './routes/api/sync.logs'
@@ -59,6 +60,12 @@ const ApiDashboardRoute = ApiDashboardRouteImport.update({
   path: '/api/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWithdrawalsHourBreakdownRoute =
+  ApiWithdrawalsHourBreakdownRouteImport.update({
+    id: '/api/withdrawals/hour-breakdown',
+    path: '/api/withdrawals/hour-breakdown',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiSyncRunsRoute = ApiSyncRunsRouteImport.update({
   id: '/api/sync/runs',
   path: '/api/sync/runs',
@@ -181,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
+  '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
@@ -207,6 +215,7 @@ export interface FileRoutesByTo {
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
+  '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
@@ -234,6 +243,7 @@ export interface FileRoutesById {
   '/api/sync/logs': typeof ApiSyncLogsRoute
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
+  '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/api/sync/logs'
     | '/api/sync/progress'
     | '/api/sync/runs'
+    | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/public/hooks/reaper'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/api/sync/logs'
     | '/api/sync/progress'
     | '/api/sync/runs'
+    | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/public/hooks/reaper'
@@ -314,6 +326,7 @@ export interface FileRouteTypes {
     | '/api/sync/logs'
     | '/api/sync/progress'
     | '/api/sync/runs'
+    | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/public/hooks/reaper'
@@ -341,6 +354,7 @@ export interface RootRouteChildren {
   ApiSyncLogsRoute: typeof ApiSyncLogsRoute
   ApiSyncProgressRoute: typeof ApiSyncProgressRoute
   ApiSyncRunsRoute: typeof ApiSyncRunsRoute
+  ApiWithdrawalsHourBreakdownRoute: typeof ApiWithdrawalsHourBreakdownRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
 }
 
@@ -379,6 +393,13 @@ declare module '@tanstack/react-router' {
       path: '/api/dashboard'
       fullPath: '/api/dashboard'
       preLoaderRoute: typeof ApiDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/withdrawals/hour-breakdown': {
+      id: '/api/withdrawals/hour-breakdown'
+      path: '/api/withdrawals/hour-breakdown'
+      fullPath: '/api/withdrawals/hour-breakdown'
+      preLoaderRoute: typeof ApiWithdrawalsHourBreakdownRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/sync/runs': {
@@ -572,6 +593,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSyncLogsRoute: ApiSyncLogsRoute,
   ApiSyncProgressRoute: ApiSyncProgressRoute,
   ApiSyncRunsRoute: ApiSyncRunsRoute,
+  ApiWithdrawalsHourBreakdownRoute: ApiWithdrawalsHourBreakdownRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
 }
 export const routeTree = rootRouteImport

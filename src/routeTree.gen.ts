@@ -35,6 +35,7 @@ import { Route as ApiAnalyticsRevisionRouteImport } from './routes/api/analytics
 import { Route as ApiAnalyticsHourlyWithdrawalsRouteImport } from './routes/api/analytics.hourly-withdrawals'
 import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/analytics.dashboard-overview'
 import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
+import { Route as ApiAdsSpyJobsRouteImport } from './routes/api/ads-spy.jobs'
 import { Route as ApiAdsSpyHealthRouteImport } from './routes/api/ads-spy.health'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
 import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
@@ -180,6 +181,11 @@ const ApiAnalyticsAccuracyCheckRoute =
     path: '/api/analytics/accuracy-check',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiAdsSpyJobsRoute = ApiAdsSpyJobsRouteImport.update({
+  id: '/api/ads-spy/jobs',
+  path: '/api/ads-spy/jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdsSpyHealthRoute = ApiAdsSpyHealthRouteImport.update({
   id: '/api/ads-spy/health',
   path: '/api/ads-spy/health',
@@ -244,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -281,6 +288,7 @@ export interface FileRoutesByTo {
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -319,6 +327,7 @@ export interface FileRoutesById {
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -358,6 +367,7 @@ export interface FileRouteTypes {
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
     | '/api/ads-spy/health'
+    | '/api/ads-spy/jobs'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -395,6 +405,7 @@ export interface FileRouteTypes {
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
     | '/api/ads-spy/health'
+    | '/api/ads-spy/jobs'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
     | '/api/ads-spy/health'
+    | '/api/ads-spy/jobs'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -470,6 +482,7 @@ export interface RootRouteChildren {
   ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
   ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
   ApiAdsSpyHealthRoute: typeof ApiAdsSpyHealthRoute
+  ApiAdsSpyJobsRoute: typeof ApiAdsSpyJobsRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
   ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -674,6 +687,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsAccuracyCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ads-spy/jobs': {
+      id: '/api/ads-spy/jobs'
+      path: '/api/ads-spy/jobs'
+      fullPath: '/api/ads-spy/jobs'
+      preLoaderRoute: typeof ApiAdsSpyJobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ads-spy/health': {
       id: '/api/ads-spy/health'
       path: '/api/ads-spy/health'
@@ -803,6 +823,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiStockoutRiskRoute: ApiStockoutRiskRoute,
   ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
   ApiAdsSpyHealthRoute: ApiAdsSpyHealthRoute,
+  ApiAdsSpyJobsRoute: ApiAdsSpyJobsRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
   ApiAnalyticsHourlyWithdrawalsRoute:

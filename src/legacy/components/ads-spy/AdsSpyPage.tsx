@@ -195,7 +195,7 @@ export default function AdsSpyPage({
   const loadLiveUpdates = async () => {
     if (!selectedProductId) return;
     try {
-      setJobs(await adsSpyApi.getJobs(selectedProductId));
+      { const r = await adsSpyApi.getJobs(selectedProductId); setJobs(Array.isArray(r) ? r : []); }
       
       const newMatches = await adsSpyApi.getProductAds(selectedProductId);
       const newSummary = await adsSpyApi.getProductSummary(selectedProductId);
@@ -269,7 +269,7 @@ export default function AdsSpyPage({
       }
 
       // 2. Fetch Jobs
-      setJobs(await adsSpyApi.getJobs(productId));
+      { const r = await adsSpyApi.getJobs(productId); setJobs(Array.isArray(r) ? r : []); }
 
       // 3. Fetch Matches
       const matchedAds = await adsSpyApi.getProductAds(productId);

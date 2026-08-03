@@ -46,6 +46,7 @@ import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platf
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
 import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
+import { Route as ApiAdsSpyProductsProductIdProfileRouteImport } from './routes/api/ads-spy.products.$productId.profile'
 import { Route as ApiAdsSpyJobsJobIdRetryRouteImport } from './routes/api/ads-spy.jobs.$jobId.retry'
 import { Route as ApiAdsSpyJobsJobIdLogsRouteImport } from './routes/api/ads-spy.jobs.$jobId.logs'
 import { Route as ApiAdsSpyJobsJobIdCancelRouteImport } from './routes/api/ads-spy.jobs.$jobId.cancel'
@@ -245,6 +246,12 @@ const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
     path: '/$hour/products',
     getParentRoute: () => ApiAnalyticsHourlyWithdrawalsRoute,
   } as any)
+const ApiAdsSpyProductsProductIdProfileRoute =
+  ApiAdsSpyProductsProductIdProfileRouteImport.update({
+    id: '/api/ads-spy/products/$productId/profile',
+    path: '/api/ads-spy/products/$productId/profile',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAdsSpyJobsJobIdRetryRoute = ApiAdsSpyJobsJobIdRetryRouteImport.update({
   id: '/retry',
   path: '/retry',
@@ -302,6 +309,7 @@ export interface FileRoutesByFullPath {
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
   '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
   '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
+  '/api/ads-spy/products/$productId/profile': typeof ApiAdsSpyProductsProductIdProfileRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesByTo {
@@ -344,6 +352,7 @@ export interface FileRoutesByTo {
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
   '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
   '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
+  '/api/ads-spy/products/$productId/profile': typeof ApiAdsSpyProductsProductIdProfileRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesById {
@@ -387,6 +396,7 @@ export interface FileRoutesById {
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
   '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
   '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
+  '/api/ads-spy/products/$productId/profile': typeof ApiAdsSpyProductsProductIdProfileRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRouteTypes {
@@ -431,6 +441,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/jobs/$jobId/cancel'
     | '/api/ads-spy/jobs/$jobId/logs'
     | '/api/ads-spy/jobs/$jobId/retry'
+    | '/api/ads-spy/products/$productId/profile'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -473,6 +484,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/jobs/$jobId/cancel'
     | '/api/ads-spy/jobs/$jobId/logs'
     | '/api/ads-spy/jobs/$jobId/retry'
+    | '/api/ads-spy/products/$productId/profile'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   id:
     | '__root__'
@@ -515,6 +527,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/jobs/$jobId/cancel'
     | '/api/ads-spy/jobs/$jobId/logs'
     | '/api/ads-spy/jobs/$jobId/retry'
+    | '/api/ads-spy/products/$productId/profile'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesById: FileRoutesById
 }
@@ -550,6 +563,7 @@ export interface RootRouteChildren {
   ApiProductsProductIdDeliveryReturnsReportRoute: typeof ApiProductsProductIdDeliveryReturnsReportRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
   ApiPublicHooksSyncTriggerRoute: typeof ApiPublicHooksSyncTriggerRoute
+  ApiAdsSpyProductsProductIdProfileRoute: typeof ApiAdsSpyProductsProductIdProfileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -813,6 +827,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport
       parentRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
     }
+    '/api/ads-spy/products/$productId/profile': {
+      id: '/api/ads-spy/products/$productId/profile'
+      path: '/api/ads-spy/products/$productId/profile'
+      fullPath: '/api/ads-spy/products/$productId/profile'
+      preLoaderRoute: typeof ApiAdsSpyProductsProductIdProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ads-spy/jobs/$jobId/retry': {
       id: '/api/ads-spy/jobs/$jobId/retry'
       path: '/retry'
@@ -948,6 +969,8 @@ const rootRouteChildren: RootRouteChildren = {
     ApiProductsProductIdDeliveryReturnsReportRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
   ApiPublicHooksSyncTriggerRoute: ApiPublicHooksSyncTriggerRoute,
+  ApiAdsSpyProductsProductIdProfileRoute:
+    ApiAdsSpyProductsProductIdProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

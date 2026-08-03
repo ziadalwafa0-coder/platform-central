@@ -11,8 +11,8 @@ export const Route = createFileRoute("/api/ads-spy/matches/$matchId/reject")({
         const { data, error } = await supabaseAdmin
           .from("sr_ads_spy_matches")
           .update({
-            match_status: "REJECTD",
-            user_decision: "REJECTD",
+            match_status: "REJECTED",
+            user_decision: "REJECTED",
             reviewed_by_user: (context as any)?.userId ?? null,
             updated_at: new Date().toISOString(),
           })

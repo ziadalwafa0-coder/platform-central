@@ -145,7 +145,7 @@ function tokens(text: string): string[] {
 }
 
 /** Deterministic keyword planner over the product's own fields (no external calls). */
-export function buildKeywordPlan(product: { name?: string; sku?: string; category?: string }) {
+export function buildKeywordPlan(product: { name?: string | null; sku?: string | null; category?: string | null }) {
   const nameTokens = tokens(product.name ?? "");
   const category = (product.category ?? "").trim();
   const base = nameTokens.slice(0, 6);

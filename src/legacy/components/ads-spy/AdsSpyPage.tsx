@@ -1655,7 +1655,7 @@ export default function AdsSpyPage({
                       {/* Job Header */}
                       <div className="flex items-center justify-between flex-wrap gap-2 text-xs">
                         <div className="flex items-center gap-2">
-                          <span className="text-[#a5a5c8] font-mono font-bold">مُعرّف المهمة: {job.id.substring(0, 8)}</span>
+                          <span className="text-[#a5a5c8] font-mono font-bold">مُعرّف المهمة: {String(job?.id ?? "").substring(0, 8)}</span>
                           <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-black ${
                             job.status === "COMPLETED" 
                               ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"

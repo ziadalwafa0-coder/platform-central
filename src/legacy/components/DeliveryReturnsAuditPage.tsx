@@ -395,7 +395,7 @@ export function DeliveryReturnsAuditPage({ onProductClick }: DeliveryReturnsAudi
                             )}
                             <div>
                               <span className="font-semibold text-white block">{p.productName}</span>
-                              <span className="text-[10px] text-[#a5a5c8] block mt-0.5">{p.productId.substring(0, 8)}</span>
+                              <span className="text-[10px] text-[#a5a5c8] block mt-0.5">{String(p?.productId ?? "").substring(0, 8)}</span>
                             </div>
                           </div>
                         </td>

@@ -76,7 +76,7 @@ const LatencyTooltip = ({ active, payload, label }: any) => {
         <div className="bg-[#1c1c47] border border-[#2a2a5c] p-3.5 rounded-2xl text-[11px] text-[#f5f5fa] shadow-2xl text-right min-w-[220px] space-y-2">
           <div className="font-bold border-b border-[#2a2a5c]/50 pb-2 text-[#24C78E] flex justify-between items-center gap-2">
             <span>دورة مزامنة {item.indexLabel}</span>
-            <span className="text-[9px] text-[#a5a5c8] font-mono">{item.id.substring(0, 8)}</span>
+            <span className="text-[9px] text-[#a5a5c8] font-mono">{String(item?.id ?? "").substring(0, 8)}</span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-[#a5a5c8]">المنصة:</span>
@@ -491,7 +491,7 @@ export default function DiagnosticLogsViewer() {
                   {latestRun && (
                     <div className="bg-[#0a0a1a] border border-[#2a2a5c]/40 p-5 rounded-2xl space-y-4">
                       <div className="flex justify-between items-center border-b border-[#2a2a5c]/30 pb-3">
-                        <span className="font-extrabold text-white text-xs block">مقارنة وتدقيق الدورة الأخيرة (#{latestRun.id.substring(0, 8)})</span>
+                        <span className="font-extrabold text-white text-xs block">مقارنة وتدقيق الدورة الأخيرة (#{String(latestRun?.id ?? "").substring(0, 8)})</span>
                         <span className="text-[10px] text-[#a5a5c8] font-mono">{formatTimeArabic(latestRun.completedAt || latestRun.startedAt)}</span>
                       </div>
 
@@ -991,7 +991,7 @@ export default function DiagnosticLogsViewer() {
                             <span className={`w-2 h-2 rounded-full ${
                               isSuccess ? "bg-emerald-400" : isProcessing ? "bg-amber-400 animate-pulse" : "bg-red-400"
                             }`}></span>
-                            {log.id.substring(0, 8)}...
+                            {String(log?.id ?? "").substring(0, 8)}...
                           </td>
                           <td className="p-4 text-center">
                             <span className="px-2 py-0.5 bg-[#1c1c47] rounded-md font-bold text-[10px] text-[#a5a5c8]">

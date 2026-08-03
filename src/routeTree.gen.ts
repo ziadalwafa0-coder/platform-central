@@ -44,6 +44,7 @@ import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/ho
 import { Route as ApiProductsProductIdDeliveryReturnsReportRouteImport } from './routes/api/products.$productId.delivery-returns-report'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
+import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
 import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
 
 const IndexRoute = IndexRouteImport.update({
@@ -230,6 +231,11 @@ const ApiPlatformsPlatformSyncRoute =
     path: '/sync',
     getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
+const ApiAdsSpyJobsJobIdRoute = ApiAdsSpyJobsJobIdRouteImport.update({
+  id: '/$jobId',
+  path: '/$jobId',
+  getParentRoute: () => ApiAdsSpyJobsRoute,
+} as any)
 const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
   ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport.update({
     id: '/$hour/products',
@@ -250,7 +256,7 @@ export interface FileRoutesByFullPath {
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
-  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRouteWithChildren
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -266,6 +272,7 @@ export interface FileRoutesByFullPath {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -288,7 +295,7 @@ export interface FileRoutesByTo {
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
-  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRouteWithChildren
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -304,6 +311,7 @@ export interface FileRoutesByTo {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -327,7 +335,7 @@ export interface FileRoutesById {
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
   '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
-  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRouteWithChildren
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -343,6 +351,7 @@ export interface FileRoutesById {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -383,6 +392,7 @@ export interface FileRouteTypes {
     | '/api/sync/progress'
     | '/api/sync/runs'
     | '/api/withdrawals/hour-breakdown'
+    | '/api/ads-spy/jobs/$jobId'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -421,6 +431,7 @@ export interface FileRouteTypes {
     | '/api/sync/progress'
     | '/api/sync/runs'
     | '/api/withdrawals/hour-breakdown'
+    | '/api/ads-spy/jobs/$jobId'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -459,6 +470,7 @@ export interface FileRouteTypes {
     | '/api/sync/progress'
     | '/api/sync/runs'
     | '/api/withdrawals/hour-breakdown'
+    | '/api/ads-spy/jobs/$jobId'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -482,7 +494,7 @@ export interface RootRouteChildren {
   ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
   ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
   ApiAdsSpyHealthRoute: typeof ApiAdsSpyHealthRoute
-  ApiAdsSpyJobsRoute: typeof ApiAdsSpyJobsRoute
+  ApiAdsSpyJobsRoute: typeof ApiAdsSpyJobsRouteWithChildren
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
   ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -750,6 +762,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
       parentRoute: typeof ApiPlatformsPlatformRoute
     }
+    '/api/ads-spy/jobs/$jobId': {
+      id: '/api/ads-spy/jobs/$jobId'
+      path: '/$jobId'
+      fullPath: '/api/ads-spy/jobs/$jobId'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdRouteImport
+      parentRoute: typeof ApiAdsSpyJobsRoute
+    }
     '/api/analytics/hourly-withdrawals/$hour/products': {
       id: '/api/analytics/hourly-withdrawals/$hour/products'
       path: '/$hour/products'
@@ -759,6 +778,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface ApiAdsSpyJobsRouteChildren {
+  ApiAdsSpyJobsJobIdRoute: typeof ApiAdsSpyJobsJobIdRoute
+}
+
+const ApiAdsSpyJobsRouteChildren: ApiAdsSpyJobsRouteChildren = {
+  ApiAdsSpyJobsJobIdRoute: ApiAdsSpyJobsJobIdRoute,
+}
+
+const ApiAdsSpyJobsRouteWithChildren = ApiAdsSpyJobsRoute._addFileChildren(
+  ApiAdsSpyJobsRouteChildren,
+)
 
 interface ApiAnalyticsHourlyWithdrawalsRouteChildren {
   ApiAnalyticsHourlyWithdrawalsHourProductsRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
@@ -823,7 +854,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiStockoutRiskRoute: ApiStockoutRiskRoute,
   ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
   ApiAdsSpyHealthRoute: ApiAdsSpyHealthRoute,
-  ApiAdsSpyJobsRoute: ApiAdsSpyJobsRoute,
+  ApiAdsSpyJobsRoute: ApiAdsSpyJobsRouteWithChildren,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
   ApiAnalyticsHourlyWithdrawalsRoute:

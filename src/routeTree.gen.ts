@@ -47,6 +47,7 @@ import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platf
 import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
 import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
 import { Route as ApiAdsSpyJobsJobIdRetryRouteImport } from './routes/api/ads-spy.jobs.$jobId.retry'
+import { Route as ApiAdsSpyJobsJobIdLogsRouteImport } from './routes/api/ads-spy.jobs.$jobId.logs'
 import { Route as ApiAdsSpyJobsJobIdCancelRouteImport } from './routes/api/ads-spy.jobs.$jobId.cancel'
 
 const IndexRoute = IndexRouteImport.update({
@@ -249,6 +250,11 @@ const ApiAdsSpyJobsJobIdRetryRoute = ApiAdsSpyJobsJobIdRetryRouteImport.update({
   path: '/retry',
   getParentRoute: () => ApiAdsSpyJobsJobIdRoute,
 } as any)
+const ApiAdsSpyJobsJobIdLogsRoute = ApiAdsSpyJobsJobIdLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => ApiAdsSpyJobsJobIdRoute,
+} as any)
 const ApiAdsSpyJobsJobIdCancelRoute =
   ApiAdsSpyJobsJobIdCancelRouteImport.update({
     id: '/cancel',
@@ -294,6 +300,7 @@ export interface FileRoutesByFullPath {
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
+  '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
   '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
@@ -335,6 +342,7 @@ export interface FileRoutesByTo {
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
+  '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
   '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
@@ -377,6 +385,7 @@ export interface FileRoutesById {
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
+  '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
   '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
@@ -420,6 +429,7 @@ export interface FileRouteTypes {
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
     | '/api/ads-spy/jobs/$jobId/cancel'
+    | '/api/ads-spy/jobs/$jobId/logs'
     | '/api/ads-spy/jobs/$jobId/retry'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesByTo: FileRoutesByTo
@@ -461,6 +471,7 @@ export interface FileRouteTypes {
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
     | '/api/ads-spy/jobs/$jobId/cancel'
+    | '/api/ads-spy/jobs/$jobId/logs'
     | '/api/ads-spy/jobs/$jobId/retry'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   id:
@@ -502,6 +513,7 @@ export interface FileRouteTypes {
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
     | '/api/ads-spy/jobs/$jobId/cancel'
+    | '/api/ads-spy/jobs/$jobId/logs'
     | '/api/ads-spy/jobs/$jobId/retry'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesById: FileRoutesById
@@ -808,6 +820,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdsSpyJobsJobIdRetryRouteImport
       parentRoute: typeof ApiAdsSpyJobsJobIdRoute
     }
+    '/api/ads-spy/jobs/$jobId/logs': {
+      id: '/api/ads-spy/jobs/$jobId/logs'
+      path: '/logs'
+      fullPath: '/api/ads-spy/jobs/$jobId/logs'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdLogsRouteImport
+      parentRoute: typeof ApiAdsSpyJobsJobIdRoute
+    }
     '/api/ads-spy/jobs/$jobId/cancel': {
       id: '/api/ads-spy/jobs/$jobId/cancel'
       path: '/cancel'
@@ -820,11 +839,13 @@ declare module '@tanstack/react-router' {
 
 interface ApiAdsSpyJobsJobIdRouteChildren {
   ApiAdsSpyJobsJobIdCancelRoute: typeof ApiAdsSpyJobsJobIdCancelRoute
+  ApiAdsSpyJobsJobIdLogsRoute: typeof ApiAdsSpyJobsJobIdLogsRoute
   ApiAdsSpyJobsJobIdRetryRoute: typeof ApiAdsSpyJobsJobIdRetryRoute
 }
 
 const ApiAdsSpyJobsJobIdRouteChildren: ApiAdsSpyJobsJobIdRouteChildren = {
   ApiAdsSpyJobsJobIdCancelRoute: ApiAdsSpyJobsJobIdCancelRoute,
+  ApiAdsSpyJobsJobIdLogsRoute: ApiAdsSpyJobsJobIdLogsRoute,
   ApiAdsSpyJobsJobIdRetryRoute: ApiAdsSpyJobsJobIdRetryRoute,
 }
 

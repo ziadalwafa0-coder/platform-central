@@ -17,6 +17,7 @@ import { Route as ApiMultiHourLeadersRouteImport } from './routes/api/multi-hour
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as ApiDeliveryReturnsAuditRouteImport } from './routes/api/delivery-returns-audit'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
 import { Route as ApiCategoryLeadersRouteImport } from './routes/api/category-leaders'
 import { Route as ApiWithdrawalsHourBreakdownRouteImport } from './routes/api/withdrawals.hour-breakdown'
@@ -34,12 +35,30 @@ import { Route as ApiAnalyticsRevisionRouteImport } from './routes/api/analytics
 import { Route as ApiAnalyticsHourlyWithdrawalsRouteImport } from './routes/api/analytics.hourly-withdrawals'
 import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/analytics.dashboard-overview'
 import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
+import { Route as ApiAdsSpyJobsRouteImport } from './routes/api/ads-spy.jobs'
+import { Route as ApiAdsSpyHealthRouteImport } from './routes/api/ads-spy.health'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
 import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
+import { Route as ApiPublicHooksSyncTriggerRouteImport } from './routes/api/public/hooks/sync-trigger'
 import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/hooks/reaper'
+import { Route as ApiProductsProductIdDeliveryReturnsReportRouteImport } from './routes/api/products.$productId.delivery-returns-report'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
+import { Route as ApiAdsSpyWorkerRunOnceRouteImport } from './routes/api/ads-spy.worker.run-once'
+import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
+import { Route as ApiAdsSpyDiagnosticsJobIdRouteImport } from './routes/api/ads-spy.diagnostics.$jobId'
+import { Route as ApiAdsSpyAutomationRunRouteImport } from './routes/api/ads-spy.automation.run'
 import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
+import { Route as ApiAdsSpyProductsProductIdSummaryRouteImport } from './routes/api/ads-spy.products.$productId.summary'
+import { Route as ApiAdsSpyProductsProductIdProfileRouteImport } from './routes/api/ads-spy.products.$productId.profile'
+import { Route as ApiAdsSpyProductsProductIdAdsRouteImport } from './routes/api/ads-spy.products.$productId.ads'
+import { Route as ApiAdsSpyMatchesMatchIdRejectRouteImport } from './routes/api/ads-spy.matches.$matchId.reject'
+import { Route as ApiAdsSpyMatchesMatchIdApproveRouteImport } from './routes/api/ads-spy.matches.$matchId.approve'
+import { Route as ApiAdsSpyJobsJobIdRetryRouteImport } from './routes/api/ads-spy.jobs.$jobId.retry'
+import { Route as ApiAdsSpyJobsJobIdLogsRouteImport } from './routes/api/ads-spy.jobs.$jobId.logs'
+import { Route as ApiAdsSpyJobsJobIdCancelRouteImport } from './routes/api/ads-spy.jobs.$jobId.cancel'
+import { Route as ApiAdsSpyProductsBySkuSkuAdsRouteImport } from './routes/api/ads-spy.products.by-sku.$sku.ads'
+import { Route as ApiAdsSpyProductsProductIdKeywordsPlanRouteImport } from './routes/api/ads-spy.products.$productId.keywords.plan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -79,6 +98,11 @@ const ApiHourlyPeakAnalysisRoute = ApiHourlyPeakAnalysisRouteImport.update({
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
   path: '/api/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDeliveryReturnsAuditRoute = ApiDeliveryReturnsAuditRouteImport.update({
+  id: '/api/delivery-returns-audit',
+  path: '/api/delivery-returns-audit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
@@ -171,6 +195,16 @@ const ApiAnalyticsAccuracyCheckRoute =
     path: '/api/analytics/accuracy-check',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiAdsSpyJobsRoute = ApiAdsSpyJobsRouteImport.update({
+  id: '/api/ads-spy/jobs',
+  path: '/api/ads-spy/jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdsSpyHealthRoute = ApiAdsSpyHealthRouteImport.update({
+  id: '/api/ads-spy/health',
+  path: '/api/ads-spy/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiSettingsSupabaseTestRoute = ApiSettingsSupabaseTestRouteImport.update({
   id: '/test',
   path: '/test',
@@ -181,11 +215,23 @@ const ApiSettingsEmailTestRoute = ApiSettingsEmailTestRouteImport.update({
   path: '/test',
   getParentRoute: () => ApiSettingsEmailRoute,
 } as any)
+const ApiPublicHooksSyncTriggerRoute =
+  ApiPublicHooksSyncTriggerRouteImport.update({
+    id: '/api/public/hooks/sync-trigger',
+    path: '/api/public/hooks/sync-trigger',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksReaperRoute = ApiPublicHooksReaperRouteImport.update({
   id: '/api/public/hooks/reaper',
   path: '/api/public/hooks/reaper',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiProductsProductIdDeliveryReturnsReportRoute =
+  ApiProductsProductIdDeliveryReturnsReportRouteImport.update({
+    id: '/api/products/$productId/delivery-returns-report',
+    path: '/api/products/$productId/delivery-returns-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPlatformsPlatformTestRoute =
   ApiPlatformsPlatformTestRouteImport.update({
     id: '/test',
@@ -198,17 +244,97 @@ const ApiPlatformsPlatformSyncRoute =
     path: '/sync',
     getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
+const ApiAdsSpyWorkerRunOnceRoute = ApiAdsSpyWorkerRunOnceRouteImport.update({
+  id: '/api/ads-spy/worker/run-once',
+  path: '/api/ads-spy/worker/run-once',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdsSpyJobsJobIdRoute = ApiAdsSpyJobsJobIdRouteImport.update({
+  id: '/$jobId',
+  path: '/$jobId',
+  getParentRoute: () => ApiAdsSpyJobsRoute,
+} as any)
+const ApiAdsSpyDiagnosticsJobIdRoute =
+  ApiAdsSpyDiagnosticsJobIdRouteImport.update({
+    id: '/api/ads-spy/diagnostics/$jobId',
+    path: '/api/ads-spy/diagnostics/$jobId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyAutomationRunRoute = ApiAdsSpyAutomationRunRouteImport.update({
+  id: '/api/ads-spy/automation/run',
+  path: '/api/ads-spy/automation/run',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
   ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport.update({
     id: '/$hour/products',
     path: '/$hour/products',
     getParentRoute: () => ApiAnalyticsHourlyWithdrawalsRoute,
   } as any)
+const ApiAdsSpyProductsProductIdSummaryRoute =
+  ApiAdsSpyProductsProductIdSummaryRouteImport.update({
+    id: '/api/ads-spy/products/$productId/summary',
+    path: '/api/ads-spy/products/$productId/summary',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyProductsProductIdProfileRoute =
+  ApiAdsSpyProductsProductIdProfileRouteImport.update({
+    id: '/api/ads-spy/products/$productId/profile',
+    path: '/api/ads-spy/products/$productId/profile',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyProductsProductIdAdsRoute =
+  ApiAdsSpyProductsProductIdAdsRouteImport.update({
+    id: '/api/ads-spy/products/$productId/ads',
+    path: '/api/ads-spy/products/$productId/ads',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyMatchesMatchIdRejectRoute =
+  ApiAdsSpyMatchesMatchIdRejectRouteImport.update({
+    id: '/api/ads-spy/matches/$matchId/reject',
+    path: '/api/ads-spy/matches/$matchId/reject',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyMatchesMatchIdApproveRoute =
+  ApiAdsSpyMatchesMatchIdApproveRouteImport.update({
+    id: '/api/ads-spy/matches/$matchId/approve',
+    path: '/api/ads-spy/matches/$matchId/approve',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyJobsJobIdRetryRoute = ApiAdsSpyJobsJobIdRetryRouteImport.update({
+  id: '/retry',
+  path: '/retry',
+  getParentRoute: () => ApiAdsSpyJobsJobIdRoute,
+} as any)
+const ApiAdsSpyJobsJobIdLogsRoute = ApiAdsSpyJobsJobIdLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => ApiAdsSpyJobsJobIdRoute,
+} as any)
+const ApiAdsSpyJobsJobIdCancelRoute =
+  ApiAdsSpyJobsJobIdCancelRouteImport.update({
+    id: '/cancel',
+    path: '/cancel',
+    getParentRoute: () => ApiAdsSpyJobsJobIdRoute,
+  } as any)
+const ApiAdsSpyProductsBySkuSkuAdsRoute =
+  ApiAdsSpyProductsBySkuSkuAdsRouteImport.update({
+    id: '/api/ads-spy/products/by-sku/$sku/ads',
+    path: '/api/ads-spy/products/by-sku/$sku/ads',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdsSpyProductsProductIdKeywordsPlanRoute =
+  ApiAdsSpyProductsProductIdKeywordsPlanRouteImport.update({
+    id: '/api/ads-spy/products/$productId/keywords/plan',
+    path: '/api/ads-spy/products/$productId/keywords/plan',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/delivery-returns-audit': typeof ApiDeliveryReturnsAuditRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
@@ -216,6 +342,8 @@ export interface FileRoutesByFullPath {
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
+  '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRouteWithChildren
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -231,17 +359,34 @@ export interface FileRoutesByFullPath {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
+  '/api/ads-spy/automation/run': typeof ApiAdsSpyAutomationRunRoute
+  '/api/ads-spy/diagnostics/$jobId': typeof ApiAdsSpyDiagnosticsJobIdRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
+  '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
+  '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
+  '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
+  '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
+  '/api/ads-spy/matches/$matchId/approve': typeof ApiAdsSpyMatchesMatchIdApproveRoute
+  '/api/ads-spy/matches/$matchId/reject': typeof ApiAdsSpyMatchesMatchIdRejectRoute
+  '/api/ads-spy/products/$productId/ads': typeof ApiAdsSpyProductsProductIdAdsRoute
+  '/api/ads-spy/products/$productId/profile': typeof ApiAdsSpyProductsProductIdProfileRoute
+  '/api/ads-spy/products/$productId/summary': typeof ApiAdsSpyProductsProductIdSummaryRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
+  '/api/ads-spy/products/$productId/keywords/plan': typeof ApiAdsSpyProductsProductIdKeywordsPlanRoute
+  '/api/ads-spy/products/by-sku/$sku/ads': typeof ApiAdsSpyProductsBySkuSkuAdsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/delivery-returns-audit': typeof ApiDeliveryReturnsAuditRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
@@ -249,6 +394,8 @@ export interface FileRoutesByTo {
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
+  '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRouteWithChildren
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -264,18 +411,35 @@ export interface FileRoutesByTo {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
+  '/api/ads-spy/automation/run': typeof ApiAdsSpyAutomationRunRoute
+  '/api/ads-spy/diagnostics/$jobId': typeof ApiAdsSpyDiagnosticsJobIdRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
+  '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
+  '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
+  '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
+  '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
+  '/api/ads-spy/matches/$matchId/approve': typeof ApiAdsSpyMatchesMatchIdApproveRoute
+  '/api/ads-spy/matches/$matchId/reject': typeof ApiAdsSpyMatchesMatchIdRejectRoute
+  '/api/ads-spy/products/$productId/ads': typeof ApiAdsSpyProductsProductIdAdsRoute
+  '/api/ads-spy/products/$productId/profile': typeof ApiAdsSpyProductsProductIdProfileRoute
+  '/api/ads-spy/products/$productId/summary': typeof ApiAdsSpyProductsProductIdSummaryRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
+  '/api/ads-spy/products/$productId/keywords/plan': typeof ApiAdsSpyProductsProductIdKeywordsPlanRoute
+  '/api/ads-spy/products/by-sku/$sku/ads': typeof ApiAdsSpyProductsBySkuSkuAdsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/delivery-returns-audit': typeof ApiDeliveryReturnsAuditRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
@@ -283,6 +447,8 @@ export interface FileRoutesById {
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
+  '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
+  '/api/ads-spy/jobs': typeof ApiAdsSpyJobsRouteWithChildren
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -298,12 +464,28 @@ export interface FileRoutesById {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
+  '/api/ads-spy/automation/run': typeof ApiAdsSpyAutomationRunRoute
+  '/api/ads-spy/diagnostics/$jobId': typeof ApiAdsSpyDiagnosticsJobIdRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
+  '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
+  '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
+  '/api/ads-spy/jobs/$jobId/logs': typeof ApiAdsSpyJobsJobIdLogsRoute
+  '/api/ads-spy/jobs/$jobId/retry': typeof ApiAdsSpyJobsJobIdRetryRoute
+  '/api/ads-spy/matches/$matchId/approve': typeof ApiAdsSpyMatchesMatchIdApproveRoute
+  '/api/ads-spy/matches/$matchId/reject': typeof ApiAdsSpyMatchesMatchIdRejectRoute
+  '/api/ads-spy/products/$productId/ads': typeof ApiAdsSpyProductsProductIdAdsRoute
+  '/api/ads-spy/products/$productId/profile': typeof ApiAdsSpyProductsProductIdProfileRoute
+  '/api/ads-spy/products/$productId/summary': typeof ApiAdsSpyProductsProductIdSummaryRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
+  '/api/ads-spy/products/$productId/keywords/plan': typeof ApiAdsSpyProductsProductIdKeywordsPlanRoute
+  '/api/ads-spy/products/by-sku/$sku/ads': typeof ApiAdsSpyProductsBySkuSkuAdsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -311,6 +493,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/category-leaders'
     | '/api/dashboard'
+    | '/api/delivery-returns-audit'
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
@@ -318,6 +501,8 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
+    | '/api/ads-spy/health'
+    | '/api/ads-spy/jobs'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -333,17 +518,34 @@ export interface FileRouteTypes {
     | '/api/sync/progress'
     | '/api/sync/runs'
     | '/api/withdrawals/hour-breakdown'
+    | '/api/ads-spy/automation/run'
+    | '/api/ads-spy/diagnostics/$jobId'
+    | '/api/ads-spy/jobs/$jobId'
+    | '/api/ads-spy/worker/run-once'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
+    | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/ads-spy/jobs/$jobId/cancel'
+    | '/api/ads-spy/jobs/$jobId/logs'
+    | '/api/ads-spy/jobs/$jobId/retry'
+    | '/api/ads-spy/matches/$matchId/approve'
+    | '/api/ads-spy/matches/$matchId/reject'
+    | '/api/ads-spy/products/$productId/ads'
+    | '/api/ads-spy/products/$productId/profile'
+    | '/api/ads-spy/products/$productId/summary'
     | '/api/analytics/hourly-withdrawals/$hour/products'
+    | '/api/ads-spy/products/$productId/keywords/plan'
+    | '/api/ads-spy/products/by-sku/$sku/ads'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/api/category-leaders'
     | '/api/dashboard'
+    | '/api/delivery-returns-audit'
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
@@ -351,6 +553,8 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
+    | '/api/ads-spy/health'
+    | '/api/ads-spy/jobs'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -366,17 +570,34 @@ export interface FileRouteTypes {
     | '/api/sync/progress'
     | '/api/sync/runs'
     | '/api/withdrawals/hour-breakdown'
+    | '/api/ads-spy/automation/run'
+    | '/api/ads-spy/diagnostics/$jobId'
+    | '/api/ads-spy/jobs/$jobId'
+    | '/api/ads-spy/worker/run-once'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
+    | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/ads-spy/jobs/$jobId/cancel'
+    | '/api/ads-spy/jobs/$jobId/logs'
+    | '/api/ads-spy/jobs/$jobId/retry'
+    | '/api/ads-spy/matches/$matchId/approve'
+    | '/api/ads-spy/matches/$matchId/reject'
+    | '/api/ads-spy/products/$productId/ads'
+    | '/api/ads-spy/products/$productId/profile'
+    | '/api/ads-spy/products/$productId/summary'
     | '/api/analytics/hourly-withdrawals/$hour/products'
+    | '/api/ads-spy/products/$productId/keywords/plan'
+    | '/api/ads-spy/products/by-sku/$sku/ads'
   id:
     | '__root__'
     | '/'
     | '/api/category-leaders'
     | '/api/dashboard'
+    | '/api/delivery-returns-audit'
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
@@ -384,6 +605,8 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
+    | '/api/ads-spy/health'
+    | '/api/ads-spy/jobs'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -399,18 +622,35 @@ export interface FileRouteTypes {
     | '/api/sync/progress'
     | '/api/sync/runs'
     | '/api/withdrawals/hour-breakdown'
+    | '/api/ads-spy/automation/run'
+    | '/api/ads-spy/diagnostics/$jobId'
+    | '/api/ads-spy/jobs/$jobId'
+    | '/api/ads-spy/worker/run-once'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
+    | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/ads-spy/jobs/$jobId/cancel'
+    | '/api/ads-spy/jobs/$jobId/logs'
+    | '/api/ads-spy/jobs/$jobId/retry'
+    | '/api/ads-spy/matches/$matchId/approve'
+    | '/api/ads-spy/matches/$matchId/reject'
+    | '/api/ads-spy/products/$productId/ads'
+    | '/api/ads-spy/products/$productId/profile'
+    | '/api/ads-spy/products/$productId/summary'
     | '/api/analytics/hourly-withdrawals/$hour/products'
+    | '/api/ads-spy/products/$productId/keywords/plan'
+    | '/api/ads-spy/products/by-sku/$sku/ads'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiCategoryLeadersRoute: typeof ApiCategoryLeadersRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
+  ApiDeliveryReturnsAuditRoute: typeof ApiDeliveryReturnsAuditRoute
   ApiHealthRoute: typeof ApiHealthRoute
   ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
@@ -418,6 +658,8 @@ export interface RootRouteChildren {
   ApiResetRoute: typeof ApiResetRoute
   ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
   ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
+  ApiAdsSpyHealthRoute: typeof ApiAdsSpyHealthRoute
+  ApiAdsSpyJobsRoute: typeof ApiAdsSpyJobsRouteWithChildren
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
   ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -433,7 +675,19 @@ export interface RootRouteChildren {
   ApiSyncProgressRoute: typeof ApiSyncProgressRoute
   ApiSyncRunsRoute: typeof ApiSyncRunsRoute
   ApiWithdrawalsHourBreakdownRoute: typeof ApiWithdrawalsHourBreakdownRoute
+  ApiAdsSpyAutomationRunRoute: typeof ApiAdsSpyAutomationRunRoute
+  ApiAdsSpyDiagnosticsJobIdRoute: typeof ApiAdsSpyDiagnosticsJobIdRoute
+  ApiAdsSpyWorkerRunOnceRoute: typeof ApiAdsSpyWorkerRunOnceRoute
+  ApiProductsProductIdDeliveryReturnsReportRoute: typeof ApiProductsProductIdDeliveryReturnsReportRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
+  ApiPublicHooksSyncTriggerRoute: typeof ApiPublicHooksSyncTriggerRoute
+  ApiAdsSpyMatchesMatchIdApproveRoute: typeof ApiAdsSpyMatchesMatchIdApproveRoute
+  ApiAdsSpyMatchesMatchIdRejectRoute: typeof ApiAdsSpyMatchesMatchIdRejectRoute
+  ApiAdsSpyProductsProductIdAdsRoute: typeof ApiAdsSpyProductsProductIdAdsRoute
+  ApiAdsSpyProductsProductIdProfileRoute: typeof ApiAdsSpyProductsProductIdProfileRoute
+  ApiAdsSpyProductsProductIdSummaryRoute: typeof ApiAdsSpyProductsProductIdSummaryRoute
+  ApiAdsSpyProductsProductIdKeywordsPlanRoute: typeof ApiAdsSpyProductsProductIdKeywordsPlanRoute
+  ApiAdsSpyProductsBySkuSkuAdsRoute: typeof ApiAdsSpyProductsBySkuSkuAdsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -492,6 +746,13 @@ declare module '@tanstack/react-router' {
       path: '/api/health'
       fullPath: '/api/health'
       preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/delivery-returns-audit': {
+      id: '/api/delivery-returns-audit'
+      path: '/api/delivery-returns-audit'
+      fullPath: '/api/delivery-returns-audit'
+      preLoaderRoute: typeof ApiDeliveryReturnsAuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/dashboard': {
@@ -613,6 +874,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsAccuracyCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ads-spy/jobs': {
+      id: '/api/ads-spy/jobs'
+      path: '/api/ads-spy/jobs'
+      fullPath: '/api/ads-spy/jobs'
+      preLoaderRoute: typeof ApiAdsSpyJobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/health': {
+      id: '/api/ads-spy/health'
+      path: '/api/ads-spy/health'
+      fullPath: '/api/ads-spy/health'
+      preLoaderRoute: typeof ApiAdsSpyHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/settings/supabase/test': {
       id: '/api/settings/supabase/test'
       path: '/test'
@@ -627,11 +902,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSettingsEmailTestRouteImport
       parentRoute: typeof ApiSettingsEmailRoute
     }
+    '/api/public/hooks/sync-trigger': {
+      id: '/api/public/hooks/sync-trigger'
+      path: '/api/public/hooks/sync-trigger'
+      fullPath: '/api/public/hooks/sync-trigger'
+      preLoaderRoute: typeof ApiPublicHooksSyncTriggerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/reaper': {
       id: '/api/public/hooks/reaper'
       path: '/api/public/hooks/reaper'
       fullPath: '/api/public/hooks/reaper'
       preLoaderRoute: typeof ApiPublicHooksReaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/products/$productId/delivery-returns-report': {
+      id: '/api/products/$productId/delivery-returns-report'
+      path: '/api/products/$productId/delivery-returns-report'
+      fullPath: '/api/products/$productId/delivery-returns-report'
+      preLoaderRoute: typeof ApiProductsProductIdDeliveryReturnsReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/platforms/$platform/test': {
@@ -648,6 +937,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
       parentRoute: typeof ApiPlatformsPlatformRoute
     }
+    '/api/ads-spy/worker/run-once': {
+      id: '/api/ads-spy/worker/run-once'
+      path: '/api/ads-spy/worker/run-once'
+      fullPath: '/api/ads-spy/worker/run-once'
+      preLoaderRoute: typeof ApiAdsSpyWorkerRunOnceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/jobs/$jobId': {
+      id: '/api/ads-spy/jobs/$jobId'
+      path: '/$jobId'
+      fullPath: '/api/ads-spy/jobs/$jobId'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdRouteImport
+      parentRoute: typeof ApiAdsSpyJobsRoute
+    }
+    '/api/ads-spy/diagnostics/$jobId': {
+      id: '/api/ads-spy/diagnostics/$jobId'
+      path: '/api/ads-spy/diagnostics/$jobId'
+      fullPath: '/api/ads-spy/diagnostics/$jobId'
+      preLoaderRoute: typeof ApiAdsSpyDiagnosticsJobIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/automation/run': {
+      id: '/api/ads-spy/automation/run'
+      path: '/api/ads-spy/automation/run'
+      fullPath: '/api/ads-spy/automation/run'
+      preLoaderRoute: typeof ApiAdsSpyAutomationRunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/analytics/hourly-withdrawals/$hour/products': {
       id: '/api/analytics/hourly-withdrawals/$hour/products'
       path: '/$hour/products'
@@ -655,8 +972,105 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport
       parentRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
     }
+    '/api/ads-spy/products/$productId/summary': {
+      id: '/api/ads-spy/products/$productId/summary'
+      path: '/api/ads-spy/products/$productId/summary'
+      fullPath: '/api/ads-spy/products/$productId/summary'
+      preLoaderRoute: typeof ApiAdsSpyProductsProductIdSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/products/$productId/profile': {
+      id: '/api/ads-spy/products/$productId/profile'
+      path: '/api/ads-spy/products/$productId/profile'
+      fullPath: '/api/ads-spy/products/$productId/profile'
+      preLoaderRoute: typeof ApiAdsSpyProductsProductIdProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/products/$productId/ads': {
+      id: '/api/ads-spy/products/$productId/ads'
+      path: '/api/ads-spy/products/$productId/ads'
+      fullPath: '/api/ads-spy/products/$productId/ads'
+      preLoaderRoute: typeof ApiAdsSpyProductsProductIdAdsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/matches/$matchId/reject': {
+      id: '/api/ads-spy/matches/$matchId/reject'
+      path: '/api/ads-spy/matches/$matchId/reject'
+      fullPath: '/api/ads-spy/matches/$matchId/reject'
+      preLoaderRoute: typeof ApiAdsSpyMatchesMatchIdRejectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/matches/$matchId/approve': {
+      id: '/api/ads-spy/matches/$matchId/approve'
+      path: '/api/ads-spy/matches/$matchId/approve'
+      fullPath: '/api/ads-spy/matches/$matchId/approve'
+      preLoaderRoute: typeof ApiAdsSpyMatchesMatchIdApproveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/jobs/$jobId/retry': {
+      id: '/api/ads-spy/jobs/$jobId/retry'
+      path: '/retry'
+      fullPath: '/api/ads-spy/jobs/$jobId/retry'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdRetryRouteImport
+      parentRoute: typeof ApiAdsSpyJobsJobIdRoute
+    }
+    '/api/ads-spy/jobs/$jobId/logs': {
+      id: '/api/ads-spy/jobs/$jobId/logs'
+      path: '/logs'
+      fullPath: '/api/ads-spy/jobs/$jobId/logs'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdLogsRouteImport
+      parentRoute: typeof ApiAdsSpyJobsJobIdRoute
+    }
+    '/api/ads-spy/jobs/$jobId/cancel': {
+      id: '/api/ads-spy/jobs/$jobId/cancel'
+      path: '/cancel'
+      fullPath: '/api/ads-spy/jobs/$jobId/cancel'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdCancelRouteImport
+      parentRoute: typeof ApiAdsSpyJobsJobIdRoute
+    }
+    '/api/ads-spy/products/by-sku/$sku/ads': {
+      id: '/api/ads-spy/products/by-sku/$sku/ads'
+      path: '/api/ads-spy/products/by-sku/$sku/ads'
+      fullPath: '/api/ads-spy/products/by-sku/$sku/ads'
+      preLoaderRoute: typeof ApiAdsSpyProductsBySkuSkuAdsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ads-spy/products/$productId/keywords/plan': {
+      id: '/api/ads-spy/products/$productId/keywords/plan'
+      path: '/api/ads-spy/products/$productId/keywords/plan'
+      fullPath: '/api/ads-spy/products/$productId/keywords/plan'
+      preLoaderRoute: typeof ApiAdsSpyProductsProductIdKeywordsPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface ApiAdsSpyJobsJobIdRouteChildren {
+  ApiAdsSpyJobsJobIdCancelRoute: typeof ApiAdsSpyJobsJobIdCancelRoute
+  ApiAdsSpyJobsJobIdLogsRoute: typeof ApiAdsSpyJobsJobIdLogsRoute
+  ApiAdsSpyJobsJobIdRetryRoute: typeof ApiAdsSpyJobsJobIdRetryRoute
+}
+
+const ApiAdsSpyJobsJobIdRouteChildren: ApiAdsSpyJobsJobIdRouteChildren = {
+  ApiAdsSpyJobsJobIdCancelRoute: ApiAdsSpyJobsJobIdCancelRoute,
+  ApiAdsSpyJobsJobIdLogsRoute: ApiAdsSpyJobsJobIdLogsRoute,
+  ApiAdsSpyJobsJobIdRetryRoute: ApiAdsSpyJobsJobIdRetryRoute,
+}
+
+const ApiAdsSpyJobsJobIdRouteWithChildren =
+  ApiAdsSpyJobsJobIdRoute._addFileChildren(ApiAdsSpyJobsJobIdRouteChildren)
+
+interface ApiAdsSpyJobsRouteChildren {
+  ApiAdsSpyJobsJobIdRoute: typeof ApiAdsSpyJobsJobIdRouteWithChildren
+}
+
+const ApiAdsSpyJobsRouteChildren: ApiAdsSpyJobsRouteChildren = {
+  ApiAdsSpyJobsJobIdRoute: ApiAdsSpyJobsJobIdRouteWithChildren,
+}
+
+const ApiAdsSpyJobsRouteWithChildren = ApiAdsSpyJobsRoute._addFileChildren(
+  ApiAdsSpyJobsRouteChildren,
+)
 
 interface ApiAnalyticsHourlyWithdrawalsRouteChildren {
   ApiAnalyticsHourlyWithdrawalsHourProductsRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
@@ -712,6 +1126,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiCategoryLeadersRoute: ApiCategoryLeadersRoute,
   ApiDashboardRoute: ApiDashboardRoute,
+  ApiDeliveryReturnsAuditRoute: ApiDeliveryReturnsAuditRoute,
   ApiHealthRoute: ApiHealthRoute,
   ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,
@@ -719,6 +1134,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiResetRoute: ApiResetRoute,
   ApiStockoutRiskRoute: ApiStockoutRiskRoute,
   ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
+  ApiAdsSpyHealthRoute: ApiAdsSpyHealthRoute,
+  ApiAdsSpyJobsRoute: ApiAdsSpyJobsRouteWithChildren,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
   ApiAnalyticsHourlyWithdrawalsRoute:
@@ -735,7 +1152,23 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSyncProgressRoute: ApiSyncProgressRoute,
   ApiSyncRunsRoute: ApiSyncRunsRoute,
   ApiWithdrawalsHourBreakdownRoute: ApiWithdrawalsHourBreakdownRoute,
+  ApiAdsSpyAutomationRunRoute: ApiAdsSpyAutomationRunRoute,
+  ApiAdsSpyDiagnosticsJobIdRoute: ApiAdsSpyDiagnosticsJobIdRoute,
+  ApiAdsSpyWorkerRunOnceRoute: ApiAdsSpyWorkerRunOnceRoute,
+  ApiProductsProductIdDeliveryReturnsReportRoute:
+    ApiProductsProductIdDeliveryReturnsReportRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
+  ApiPublicHooksSyncTriggerRoute: ApiPublicHooksSyncTriggerRoute,
+  ApiAdsSpyMatchesMatchIdApproveRoute: ApiAdsSpyMatchesMatchIdApproveRoute,
+  ApiAdsSpyMatchesMatchIdRejectRoute: ApiAdsSpyMatchesMatchIdRejectRoute,
+  ApiAdsSpyProductsProductIdAdsRoute: ApiAdsSpyProductsProductIdAdsRoute,
+  ApiAdsSpyProductsProductIdProfileRoute:
+    ApiAdsSpyProductsProductIdProfileRoute,
+  ApiAdsSpyProductsProductIdSummaryRoute:
+    ApiAdsSpyProductsProductIdSummaryRoute,
+  ApiAdsSpyProductsProductIdKeywordsPlanRoute:
+    ApiAdsSpyProductsProductIdKeywordsPlanRoute,
+  ApiAdsSpyProductsBySkuSkuAdsRoute: ApiAdsSpyProductsBySkuSkuAdsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

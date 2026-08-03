@@ -195,9 +195,10 @@ export default function AdsSpyPage({
   const loadLiveUpdates = async () => {
     if (!selectedProductId) return;
     try {
-      setJobs(await adsSpyApi.getJobs(selectedProductId));
+      { const r = await adsSpyApi.getJobs(selectedProductId); setJobs(Array.isArray(r) ? r : []); }
       
-      const newMatches = await adsSpyApi.getProductAds(selectedProductId);
+      const newMatchesRaw = await adsSpyApi.getProductAds(selectedProductId);
+      const newMatches = Array.isArray(newMatchesRaw) ? newMatchesRaw : [];
       const newSummary = await adsSpyApi.getProductSummary(selectedProductId);
       
       if (newMatches.length > currentMatchesLengthRef.current) {
@@ -269,7 +270,7 @@ export default function AdsSpyPage({
       }
 
       // 2. Fetch Jobs
-      setJobs(await adsSpyApi.getJobs(productId));
+      { const r = await adsSpyApi.getJobs(productId); setJobs(Array.isArray(r) ? r : []); }
 
       // 3. Fetch Matches
       const matchedAds = await adsSpyApi.getProductAds(productId);
@@ -1655,7 +1656,7 @@ export default function AdsSpyPage({
                       {/* Job Header */}
                       <div className="flex items-center justify-between flex-wrap gap-2 text-xs">
                         <div className="flex items-center gap-2">
-                          <span className="text-[#a5a5c8] font-mono font-bold">مُعرّف المهمة: {job.id.substring(0, 8)}</span>
+                          <span className="text-[#a5a5c8] font-mono font-bold">مُعرّف المهمة: {String(job?.id ?? "").substring(0, 8)}</span>
                           <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-black ${
                             job.status === "COMPLETED" 
                               ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"

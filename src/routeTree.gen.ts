@@ -17,6 +17,7 @@ import { Route as ApiMultiHourLeadersRouteImport } from './routes/api/multi-hour
 import { Route as ApiMetricsRouteImport } from './routes/api/metrics'
 import { Route as ApiHourlyPeakAnalysisRouteImport } from './routes/api/hourly-peak-analysis'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as ApiDeliveryReturnsAuditRouteImport } from './routes/api/delivery-returns-audit'
 import { Route as ApiDashboardRouteImport } from './routes/api/dashboard'
 import { Route as ApiCategoryLeadersRouteImport } from './routes/api/category-leaders'
 import { Route as ApiWithdrawalsHourBreakdownRouteImport } from './routes/api/withdrawals.hour-breakdown'
@@ -80,6 +81,11 @@ const ApiHourlyPeakAnalysisRoute = ApiHourlyPeakAnalysisRouteImport.update({
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
   path: '/api/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDeliveryReturnsAuditRoute = ApiDeliveryReturnsAuditRouteImport.update({
+  id: '/api/delivery-returns-audit',
+  path: '/api/delivery-returns-audit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
@@ -216,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/delivery-returns-audit': typeof ApiDeliveryReturnsAuditRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
@@ -250,6 +257,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/delivery-returns-audit': typeof ApiDeliveryReturnsAuditRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
@@ -285,6 +293,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/api/category-leaders': typeof ApiCategoryLeadersRoute
   '/api/dashboard': typeof ApiDashboardRoute
+  '/api/delivery-returns-audit': typeof ApiDeliveryReturnsAuditRoute
   '/api/health': typeof ApiHealthRoute
   '/api/hourly-peak-analysis': typeof ApiHourlyPeakAnalysisRoute
   '/api/metrics': typeof ApiMetricsRoute
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/category-leaders'
     | '/api/dashboard'
+    | '/api/delivery-returns-audit'
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/category-leaders'
     | '/api/dashboard'
+    | '/api/delivery-returns-audit'
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api/category-leaders'
     | '/api/dashboard'
+    | '/api/delivery-returns-audit'
     | '/api/health'
     | '/api/hourly-peak-analysis'
     | '/api/metrics'
@@ -424,6 +436,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiCategoryLeadersRoute: typeof ApiCategoryLeadersRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
+  ApiDeliveryReturnsAuditRoute: typeof ApiDeliveryReturnsAuditRoute
   ApiHealthRoute: typeof ApiHealthRoute
   ApiHourlyPeakAnalysisRoute: typeof ApiHourlyPeakAnalysisRoute
   ApiMetricsRoute: typeof ApiMetricsRoute
@@ -506,6 +519,13 @@ declare module '@tanstack/react-router' {
       path: '/api/health'
       fullPath: '/api/health'
       preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/delivery-returns-audit': {
+      id: '/api/delivery-returns-audit'
+      path: '/api/delivery-returns-audit'
+      fullPath: '/api/delivery-returns-audit'
+      preLoaderRoute: typeof ApiDeliveryReturnsAuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/dashboard': {
@@ -733,6 +753,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiCategoryLeadersRoute: ApiCategoryLeadersRoute,
   ApiDashboardRoute: ApiDashboardRoute,
+  ApiDeliveryReturnsAuditRoute: ApiDeliveryReturnsAuditRoute,
   ApiHealthRoute: ApiHealthRoute,
   ApiHourlyPeakAnalysisRoute: ApiHourlyPeakAnalysisRoute,
   ApiMetricsRoute: ApiMetricsRoute,

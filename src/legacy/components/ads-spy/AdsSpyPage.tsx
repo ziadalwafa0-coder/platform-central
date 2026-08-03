@@ -197,7 +197,8 @@ export default function AdsSpyPage({
     try {
       { const r = await adsSpyApi.getJobs(selectedProductId); setJobs(Array.isArray(r) ? r : []); }
       
-      const newMatches = await adsSpyApi.getProductAds(selectedProductId);
+      const newMatchesRaw = await adsSpyApi.getProductAds(selectedProductId);
+      const newMatches = Array.isArray(newMatchesRaw) ? newMatchesRaw : [];
       const newSummary = await adsSpyApi.getProductSummary(selectedProductId);
       
       if (newMatches.length > currentMatchesLengthRef.current) {

@@ -46,6 +46,7 @@ import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platf
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
 import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
+import { Route as ApiAdsSpyJobsJobIdCancelRouteImport } from './routes/api/ads-spy.jobs.$jobId.cancel'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -242,6 +243,12 @@ const ApiAnalyticsHourlyWithdrawalsHourProductsRoute =
     path: '/$hour/products',
     getParentRoute: () => ApiAnalyticsHourlyWithdrawalsRoute,
   } as any)
+const ApiAdsSpyJobsJobIdCancelRoute =
+  ApiAdsSpyJobsJobIdCancelRouteImport.update({
+    id: '/cancel',
+    path: '/cancel',
+    getParentRoute: () => ApiAdsSpyJobsJobIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -272,7 +279,7 @@ export interface FileRoutesByFullPath {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
-  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -280,6 +287,7 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesByTo {
@@ -311,7 +319,7 @@ export interface FileRoutesByTo {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
-  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -319,6 +327,7 @@ export interface FileRoutesByTo {
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRoutesById {
@@ -351,7 +360,7 @@ export interface FileRoutesById {
   '/api/sync/progress': typeof ApiSyncProgressRoute
   '/api/sync/runs': typeof ApiSyncRunsRoute
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
-  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRoute
+  '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -359,6 +368,7 @@ export interface FileRoutesById {
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
+  '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
   '/api/analytics/hourly-withdrawals/$hour/products': typeof ApiAnalyticsHourlyWithdrawalsHourProductsRoute
 }
 export interface FileRouteTypes {
@@ -400,6 +410,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/ads-spy/jobs/$jobId/cancel'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -439,6 +450,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/ads-spy/jobs/$jobId/cancel'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   id:
     | '__root__'
@@ -478,6 +490,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
+    | '/api/ads-spy/jobs/$jobId/cancel'
     | '/api/analytics/hourly-withdrawals/$hour/products'
   fileRoutesById: FileRoutesById
 }
@@ -776,15 +789,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport
       parentRoute: typeof ApiAnalyticsHourlyWithdrawalsRoute
     }
+    '/api/ads-spy/jobs/$jobId/cancel': {
+      id: '/api/ads-spy/jobs/$jobId/cancel'
+      path: '/cancel'
+      fullPath: '/api/ads-spy/jobs/$jobId/cancel'
+      preLoaderRoute: typeof ApiAdsSpyJobsJobIdCancelRouteImport
+      parentRoute: typeof ApiAdsSpyJobsJobIdRoute
+    }
   }
 }
 
+interface ApiAdsSpyJobsJobIdRouteChildren {
+  ApiAdsSpyJobsJobIdCancelRoute: typeof ApiAdsSpyJobsJobIdCancelRoute
+}
+
+const ApiAdsSpyJobsJobIdRouteChildren: ApiAdsSpyJobsJobIdRouteChildren = {
+  ApiAdsSpyJobsJobIdCancelRoute: ApiAdsSpyJobsJobIdCancelRoute,
+}
+
+const ApiAdsSpyJobsJobIdRouteWithChildren =
+  ApiAdsSpyJobsJobIdRoute._addFileChildren(ApiAdsSpyJobsJobIdRouteChildren)
+
 interface ApiAdsSpyJobsRouteChildren {
-  ApiAdsSpyJobsJobIdRoute: typeof ApiAdsSpyJobsJobIdRoute
+  ApiAdsSpyJobsJobIdRoute: typeof ApiAdsSpyJobsJobIdRouteWithChildren
 }
 
 const ApiAdsSpyJobsRouteChildren: ApiAdsSpyJobsRouteChildren = {
-  ApiAdsSpyJobsJobIdRoute: ApiAdsSpyJobsJobIdRoute,
+  ApiAdsSpyJobsJobIdRoute: ApiAdsSpyJobsJobIdRouteWithChildren,
 }
 
 const ApiAdsSpyJobsRouteWithChildren = ApiAdsSpyJobsRoute._addFileChildren(

@@ -14,6 +14,330 @@ export type Database = {
   }
   public: {
     Tables: {
+      sr_ads_spy_ads: {
+        Row: {
+          ad_url: string | null
+          advertiser_id: string | null
+          advertiser_name: string
+          body_text: string | null
+          created_at: string
+          cta_label: string | null
+          external_ad_id: string
+          headline: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          published_at: string | null
+          raw_scraped_data: Json | null
+          source_platform: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          ad_url?: string | null
+          advertiser_id?: string | null
+          advertiser_name?: string
+          body_text?: string | null
+          created_at?: string
+          cta_label?: string | null
+          external_ad_id: string
+          headline?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          published_at?: string | null
+          raw_scraped_data?: Json | null
+          source_platform: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          ad_url?: string | null
+          advertiser_id?: string | null
+          advertiser_name?: string
+          body_text?: string | null
+          created_at?: string
+          cta_label?: string | null
+          external_ad_id?: string
+          headline?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          published_at?: string | null
+          raw_scraped_data?: Json | null
+          source_platform?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      sr_ads_spy_analyses: {
+        Row: {
+          created_at: string
+          id: string
+          model_name: string | null
+          payload: Json
+          product_match_id: string
+          prompt_version: string | null
+          raw_output: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          model_name?: string | null
+          payload?: Json
+          product_match_id: string
+          prompt_version?: string | null
+          raw_output?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          model_name?: string | null
+          payload?: Json
+          product_match_id?: string
+          prompt_version?: string | null
+          raw_output?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sr_ads_spy_analyses_product_match_id_fkey"
+            columns: ["product_match_id"]
+            isOneToOne: true
+            referencedRelation: "sr_ads_spy_matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sr_ads_spy_jobs: {
+        Row: {
+          attempt_count: number
+          business_date: string | null
+          completed_at: string | null
+          country_codes: string[]
+          created_at: string
+          error_message: string | null
+          heartbeat_at: string | null
+          id: string
+          keywords: string[]
+          max_results_per_query: number
+          product_id: string
+          progress_percentage: number
+          providers: string[]
+          queries_attempted: number
+          relevant_ads_discovered: number
+          search_profile_id: string | null
+          started_at: string | null
+          status: string
+          trigger_reason: string
+          updated_at: string
+          withdrawal_events_count: number
+          worker_id: string | null
+        }
+        Insert: {
+          attempt_count?: number
+          business_date?: string | null
+          completed_at?: string | null
+          country_codes?: string[]
+          created_at?: string
+          error_message?: string | null
+          heartbeat_at?: string | null
+          id?: string
+          keywords?: string[]
+          max_results_per_query?: number
+          product_id: string
+          progress_percentage?: number
+          providers?: string[]
+          queries_attempted?: number
+          relevant_ads_discovered?: number
+          search_profile_id?: string | null
+          started_at?: string | null
+          status?: string
+          trigger_reason?: string
+          updated_at?: string
+          withdrawal_events_count?: number
+          worker_id?: string | null
+        }
+        Update: {
+          attempt_count?: number
+          business_date?: string | null
+          completed_at?: string | null
+          country_codes?: string[]
+          created_at?: string
+          error_message?: string | null
+          heartbeat_at?: string | null
+          id?: string
+          keywords?: string[]
+          max_results_per_query?: number
+          product_id?: string
+          progress_percentage?: number
+          providers?: string[]
+          queries_attempted?: number
+          relevant_ads_discovered?: number
+          search_profile_id?: string | null
+          started_at?: string | null
+          status?: string
+          trigger_reason?: string
+          updated_at?: string
+          withdrawal_events_count?: number
+          worker_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sr_ads_spy_jobs_search_profile_id_fkey"
+            columns: ["search_profile_id"]
+            isOneToOne: false
+            referencedRelation: "sr_ads_spy_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sr_ads_spy_logs: {
+        Row: {
+          created_at: string
+          id: number
+          job_id: string | null
+          message: string
+          page_url: string | null
+          provider: string
+          screenshot_url: string | null
+          status: string
+          step: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          job_id?: string | null
+          message: string
+          page_url?: string | null
+          provider?: string
+          screenshot_url?: string | null
+          status?: string
+          step: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          job_id?: string | null
+          message?: string
+          page_url?: string | null
+          provider?: string
+          screenshot_url?: string | null
+          status?: string
+          step?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sr_ads_spy_logs_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "sr_ads_spy_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sr_ads_spy_matches: {
+        Row: {
+          ad_id: string
+          created_at: string
+          id: string
+          job_id: string | null
+          match_score: number
+          match_status: string
+          product_id: string
+          reviewed_by_user: string | null
+          updated_at: string
+          user_decision: string | null
+        }
+        Insert: {
+          ad_id: string
+          created_at?: string
+          id?: string
+          job_id?: string | null
+          match_score?: number
+          match_status?: string
+          product_id: string
+          reviewed_by_user?: string | null
+          updated_at?: string
+          user_decision?: string | null
+        }
+        Update: {
+          ad_id?: string
+          created_at?: string
+          id?: string
+          job_id?: string | null
+          match_score?: number
+          match_status?: string
+          product_id?: string
+          reviewed_by_user?: string | null
+          updated_at?: string
+          user_decision?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sr_ads_spy_matches_ad_id_fkey"
+            columns: ["ad_id"]
+            isOneToOne: false
+            referencedRelation: "sr_ads_spy_ads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sr_ads_spy_matches_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "sr_ads_spy_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sr_ads_spy_profiles: {
+        Row: {
+          country_codes: string[]
+          created_at: string
+          id: string
+          is_active: boolean
+          keywords: string[]
+          last_synced_at: string | null
+          max_results_per_query: number
+          next_sync_at: string | null
+          product_id: string
+          providers: string[]
+          sync_interval_hours: number
+          updated_at: string
+        }
+        Insert: {
+          country_codes?: string[]
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          keywords?: string[]
+          last_synced_at?: string | null
+          max_results_per_query?: number
+          next_sync_at?: string | null
+          product_id: string
+          providers?: string[]
+          sync_interval_hours?: number
+          updated_at?: string
+        }
+        Update: {
+          country_codes?: string[]
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          keywords?: string[]
+          last_synced_at?: string | null
+          max_results_per_query?: number
+          next_sync_at?: string | null
+          product_id?: string
+          providers?: string[]
+          sync_interval_hours?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       sr_circuit_state: {
         Row: {
           consecutive_failures: number
@@ -224,6 +548,24 @@ export type Database = {
           occurrences?: number
           platform?: string
           sample_value?: Json | null
+        }
+        Relationships: []
+      }
+      sr_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value: Json
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: Json
         }
         Relationships: []
       }

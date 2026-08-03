@@ -35,6 +35,7 @@ import { Route as ApiAnalyticsRevisionRouteImport } from './routes/api/analytics
 import { Route as ApiAnalyticsHourlyWithdrawalsRouteImport } from './routes/api/analytics.hourly-withdrawals'
 import { Route as ApiAnalyticsDashboardOverviewRouteImport } from './routes/api/analytics.dashboard-overview'
 import { Route as ApiAnalyticsAccuracyCheckRouteImport } from './routes/api/analytics.accuracy-check'
+import { Route as ApiAdsSpyHealthRouteImport } from './routes/api/ads-spy.health'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
 import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
 import { Route as ApiPublicHooksSyncTriggerRouteImport } from './routes/api/public/hooks/sync-trigger'
@@ -179,6 +180,11 @@ const ApiAnalyticsAccuracyCheckRoute =
     path: '/api/analytics/accuracy-check',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiAdsSpyHealthRoute = ApiAdsSpyHealthRouteImport.update({
+  id: '/api/ads-spy/health',
+  path: '/api/ads-spy/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiSettingsSupabaseTestRoute = ApiSettingsSupabaseTestRouteImport.update({
   id: '/test',
   path: '/test',
@@ -237,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
+  '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -273,6 +280,7 @@ export interface FileRoutesByTo {
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
+  '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -310,6 +318,7 @@ export interface FileRoutesById {
   '/api/reset': typeof ApiResetRoute
   '/api/stockout-risk': typeof ApiStockoutRiskRoute
   '/api/weekday-patterns': typeof ApiWeekdayPatternsRoute
+  '/api/ads-spy/health': typeof ApiAdsSpyHealthRoute
   '/api/analytics/accuracy-check': typeof ApiAnalyticsAccuracyCheckRoute
   '/api/analytics/dashboard-overview': typeof ApiAnalyticsDashboardOverviewRoute
   '/api/analytics/hourly-withdrawals': typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
+    | '/api/ads-spy/health'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -384,6 +394,7 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
+    | '/api/ads-spy/health'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -420,6 +431,7 @@ export interface FileRouteTypes {
     | '/api/reset'
     | '/api/stockout-risk'
     | '/api/weekday-patterns'
+    | '/api/ads-spy/health'
     | '/api/analytics/accuracy-check'
     | '/api/analytics/dashboard-overview'
     | '/api/analytics/hourly-withdrawals'
@@ -457,6 +469,7 @@ export interface RootRouteChildren {
   ApiResetRoute: typeof ApiResetRoute
   ApiStockoutRiskRoute: typeof ApiStockoutRiskRoute
   ApiWeekdayPatternsRoute: typeof ApiWeekdayPatternsRoute
+  ApiAdsSpyHealthRoute: typeof ApiAdsSpyHealthRoute
   ApiAnalyticsAccuracyCheckRoute: typeof ApiAnalyticsAccuracyCheckRoute
   ApiAnalyticsDashboardOverviewRoute: typeof ApiAnalyticsDashboardOverviewRoute
   ApiAnalyticsHourlyWithdrawalsRoute: typeof ApiAnalyticsHourlyWithdrawalsRouteWithChildren
@@ -661,6 +674,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyticsAccuracyCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ads-spy/health': {
+      id: '/api/ads-spy/health'
+      path: '/api/ads-spy/health'
+      fullPath: '/api/ads-spy/health'
+      preLoaderRoute: typeof ApiAdsSpyHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/settings/supabase/test': {
       id: '/api/settings/supabase/test'
       path: '/test'
@@ -782,6 +802,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiResetRoute: ApiResetRoute,
   ApiStockoutRiskRoute: ApiStockoutRiskRoute,
   ApiWeekdayPatternsRoute: ApiWeekdayPatternsRoute,
+  ApiAdsSpyHealthRoute: ApiAdsSpyHealthRoute,
   ApiAnalyticsAccuracyCheckRoute: ApiAnalyticsAccuracyCheckRoute,
   ApiAnalyticsDashboardOverviewRoute: ApiAnalyticsDashboardOverviewRoute,
   ApiAnalyticsHourlyWithdrawalsRoute:

@@ -39,6 +39,7 @@ import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settin
 import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
 import { Route as ApiPublicHooksSyncTriggerRouteImport } from './routes/api/public/hooks/sync-trigger'
 import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/hooks/reaper'
+import { Route as ApiProductsProductIdDeliveryReturnsReportRouteImport } from './routes/api/products.$productId.delivery-returns-report'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
 import { Route as ApiAnalyticsHourlyWithdrawalsHourProductsRouteImport } from './routes/api/analytics.hourly-withdrawals.$hour.products'
@@ -199,6 +200,12 @@ const ApiPublicHooksReaperRoute = ApiPublicHooksReaperRouteImport.update({
   path: '/api/public/hooks/reaper',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiProductsProductIdDeliveryReturnsReportRoute =
+  ApiProductsProductIdDeliveryReturnsReportRouteImport.update({
+    id: '/api/products/$productId/delivery-returns-report',
+    path: '/api/products/$productId/delivery-returns-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPlatformsPlatformTestRoute =
   ApiPlatformsPlatformTestRouteImport.update({
     id: '/test',
@@ -247,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
@@ -282,6 +290,7 @@ export interface FileRoutesByTo {
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
@@ -318,6 +327,7 @@ export interface FileRoutesById {
   '/api/withdrawals/hour-breakdown': typeof ApiWithdrawalsHourBreakdownRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
+  '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
     | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
@@ -390,6 +401,7 @@ export interface FileRouteTypes {
     | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
     | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
@@ -425,6 +437,7 @@ export interface FileRouteTypes {
     | '/api/withdrawals/hour-breakdown'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
+    | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
     | '/api/public/hooks/sync-trigger'
     | '/api/settings/email/test'
@@ -459,6 +472,7 @@ export interface RootRouteChildren {
   ApiSyncProgressRoute: typeof ApiSyncProgressRoute
   ApiSyncRunsRoute: typeof ApiSyncRunsRoute
   ApiWithdrawalsHourBreakdownRoute: typeof ApiWithdrawalsHourBreakdownRoute
+  ApiProductsProductIdDeliveryReturnsReportRoute: typeof ApiProductsProductIdDeliveryReturnsReportRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
   ApiPublicHooksSyncTriggerRoute: typeof ApiPublicHooksSyncTriggerRoute
 }
@@ -675,6 +689,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksReaperRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/products/$productId/delivery-returns-report': {
+      id: '/api/products/$productId/delivery-returns-report'
+      path: '/api/products/$productId/delivery-returns-report'
+      fullPath: '/api/products/$productId/delivery-returns-report'
+      preLoaderRoute: typeof ApiProductsProductIdDeliveryReturnsReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/platforms/$platform/test': {
       id: '/api/platforms/$platform/test'
       path: '/test'
@@ -777,6 +798,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSyncProgressRoute: ApiSyncProgressRoute,
   ApiSyncRunsRoute: ApiSyncRunsRoute,
   ApiWithdrawalsHourBreakdownRoute: ApiWithdrawalsHourBreakdownRoute,
+  ApiProductsProductIdDeliveryReturnsReportRoute:
+    ApiProductsProductIdDeliveryReturnsReportRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
   ApiPublicHooksSyncTriggerRoute: ApiPublicHooksSyncTriggerRoute,
 }

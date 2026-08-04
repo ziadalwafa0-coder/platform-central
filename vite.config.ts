@@ -12,4 +12,11 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-});
+  vite: {
+    test: {
+      // API routes such as settings.supabase.test.ts are routes, not test suites.
+      include: ["src/**/*.{test,spec}.{ts,tsx}"],
+      exclude: ["src/routes/**", "node_modules/**", "dist/**"],
+    },
+  },
+} as any);

@@ -29,10 +29,15 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { fetchAllRows } from "./fetchAllRows.server";
 import { cairoDateHourUtcMs } from "./cairo-time";
 import { cairoDateStr } from "./hourly-analytics.server";
+import { DEFAULT_RETURN_WINDOW_DAYS, DEFAULT_RETURN_WINDOW_MS } from "./deliveryReturns";
+
+export { DEFAULT_RETURN_WINDOW_DAYS, DEFAULT_RETURN_WINDOW_MS };
+
 
 export const ALGORITHM = {
   name: "Stock-cycle balance verification (cross-restock + per-batch)",
-  version: "2.0",
+  version: "3.0",
+  returnWindowDays: DEFAULT_RETURN_WINDOW_DAYS,
   limitations: [
     "المرتجعات تقديرية: لا يوفر مصدر البيانات تصنيفاً صريحاً لكل زيادة مخزون، والتصنيف مستنتج من حركة الكميات فقط.",
     "أي زيادة تتجاوز رصيد السحب المعلق تُعتبر توريداً مؤكداً وليست مرتجعاً.",
@@ -108,7 +113,10 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
     { withdrawals: number; returns: number; restock: number; unclassified: number }
   >();
 
-  let pending = 0; // cross-restock pending balance
+  const pendingQueue: { amount: number; observedAt: number }[] = [];
+  const pendingSum = () => pendingQueue.reduce((a, q) => a + q.amount, 0);
+  let pending = 0; // cross-restock pending balance (windowed FIFO)
+
   let pendingBatch = 0; // per-batch pending balance
   let cycleId = 1;
 
@@ -127,7 +135,9 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
     const inc = Number(s.restock_amount ?? 0);
 
     if (dec > 0) {
-      pending += dec;
+      pendingQueue.push({ amount: dec, observedAt: new Date(s.observed_at).getTime() });
+      pending = pendingSum();
+
       pendingBatch += dec;
       acc.weeklyWithdrawals += dec;
       accBatch.weeklyWithdrawals += dec;
@@ -144,12 +154,26 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
     }
 
     if (inc > 0) {
-      const returnPart = Math.min(inc, pending);
-      const restockPart = inc - returnPart;
+      // FIFO match, oldest-first, only against pending withdrawals still inside
+      // the return window (DEFAULT_RETURN_WINDOW_DAYS).
+      const t = new Date(s.observed_at).getTime();
+      let remaining = inc;
+      let returnPart = 0;
+      while (remaining > 0 && pendingQueue.length > 0) {
+        const head = pendingQueue[0]!;
+        if (t - head.observedAt > DEFAULT_RETURN_WINDOW_MS) break;
+        const take = Math.min(remaining, head.amount);
+        head.amount -= take;
+        remaining -= take;
+        returnPart += take;
+        if (head.amount === 0) pendingQueue.shift();
+      }
+      const restockPart = remaining;
 
       if (returnPart > 0) {
-        pending -= returnPart;
+        pending = pendingSum();
         acc.estimatedReturns += returnPart;
+
         bump(day, "returns", returnPart);
         movements.push({
           checkedAt: s.observed_at,
@@ -222,9 +246,17 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
       return { date, withdrawals: d.withdrawals, ...t };
     });
 
+  // Withdrawals that aged out of the return window are presumed delivered, so they
+  // no longer count as an open pending balance at the end of the period.
+  const lastTs = ordered.length ? new Date(ordered[ordered.length - 1]!.observed_at).getTime() : 0;
+  const pendingEnd = pendingQueue
+    .filter((q) => lastTs - q.observedAt <= DEFAULT_RETURN_WINDOW_MS)
+    .reduce((a, q) => a + q.amount, 0);
+
   return {
     movements,
-    totals: rates({ ...acc, pendingWithdrawalBalanceEnd: pending }),
+    totals: rates({ ...acc, pendingWithdrawalBalanceEnd: pendingEnd }),
+
     perBatchTotals: rates({ ...accBatch, pendingWithdrawalBalanceEnd: pendingBatch }),
     days,
     snapshotCount: ordered.length,

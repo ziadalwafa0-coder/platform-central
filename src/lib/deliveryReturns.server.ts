@@ -245,9 +245,17 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
       return { date, withdrawals: d.withdrawals, ...t };
     });
 
+  // Withdrawals that aged out of the return window are presumed delivered, so they
+  // no longer count as an open pending balance at the end of the period.
+  const lastTs = ordered.length ? new Date(ordered[ordered.length - 1]!.observed_at).getTime() : 0;
+  const pendingEnd = pendingQueue
+    .filter((q) => lastTs - q.observedAt <= DEFAULT_RETURN_WINDOW_MS)
+    .reduce((a, q) => a + q.amount, 0);
+
   return {
     movements,
-    totals: rates({ ...acc, pendingWithdrawalBalanceEnd: pending }),
+    totals: rates({ ...acc, pendingWithdrawalBalanceEnd: pendingEnd }),
+
     perBatchTotals: rates({ ...accBatch, pendingWithdrawalBalanceEnd: pendingBatch }),
     days,
     snapshotCount: ordered.length,

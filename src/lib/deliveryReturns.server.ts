@@ -144,12 +144,26 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
     }
 
     if (inc > 0) {
-      const returnPart = Math.min(inc, pending);
-      const restockPart = inc - returnPart;
+      // FIFO match, oldest-first, only against pending withdrawals still inside
+      // the return window (DEFAULT_RETURN_WINDOW_DAYS).
+      const t = new Date(s.observed_at).getTime();
+      let remaining = inc;
+      let returnPart = 0;
+      while (remaining > 0 && pendingQueue.length > 0) {
+        const head = pendingQueue[0]!;
+        if (t - head.observedAt > DEFAULT_RETURN_WINDOW_MS) break;
+        const take = Math.min(remaining, head.amount);
+        head.amount -= take;
+        remaining -= take;
+        returnPart += take;
+        if (head.amount === 0) pendingQueue.shift();
+      }
+      const restockPart = remaining;
 
       if (returnPart > 0) {
-        pending -= returnPart;
+        pending = pendingSum();
         acc.estimatedReturns += returnPart;
+
         bump(day, "returns", returnPart);
         movements.push({
           checkedAt: s.observed_at,

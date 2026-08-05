@@ -36,7 +36,8 @@ export { DEFAULT_RETURN_WINDOW_DAYS, DEFAULT_RETURN_WINDOW_MS };
 
 export const ALGORITHM = {
   name: "Stock-cycle balance verification (cross-restock + per-batch)",
-  version: "2.0",
+  version: "3.0",
+  returnWindowDays: DEFAULT_RETURN_WINDOW_DAYS,
   limitations: [
     "المرتجعات تقديرية: لا يوفر مصدر البيانات تصنيفاً صريحاً لكل زيادة مخزون، والتصنيف مستنتج من حركة الكميات فقط.",
     "أي زيادة تتجاوز رصيد السحب المعلق تُعتبر توريداً مؤكداً وليست مرتجعاً.",

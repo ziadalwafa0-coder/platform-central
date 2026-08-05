@@ -255,7 +255,7 @@ export default function DiagnosticLogsViewer() {
     const groups: { [dateStr: string]: { totalMs: number; count: number } } = {};
     for (const r of data.successfulRunsLatency30Days) {
       try {
-        const dateStr = r.startedAt.substring(0, 10);
+        const dateStr = String(r?.startedAt ?? "").substring(0, 10);
         if (!groups[dateStr]) {
           groups[dateStr] = { totalMs: 0, count: 0 };
         }

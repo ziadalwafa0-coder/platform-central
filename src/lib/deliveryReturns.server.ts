@@ -108,7 +108,10 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
     { withdrawals: number; returns: number; restock: number; unclassified: number }
   >();
 
-  let pending = 0; // cross-restock pending balance
+  const pendingQueue: { amount: number; observedAt: number }[] = [];
+  const pendingSum = () => pendingQueue.reduce((a, q) => a + q.amount, 0);
+  let pending = 0; // cross-restock pending balance (windowed FIFO)
+
   let pendingBatch = 0; // per-batch pending balance
   let cycleId = 1;
 

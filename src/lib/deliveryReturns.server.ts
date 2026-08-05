@@ -29,6 +29,10 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { fetchAllRows } from "./fetchAllRows.server";
 import { cairoDateHourUtcMs } from "./cairo-time";
 import { cairoDateStr } from "./hourly-analytics.server";
+import { DEFAULT_RETURN_WINDOW_DAYS, DEFAULT_RETURN_WINDOW_MS } from "./deliveryReturns";
+
+export { DEFAULT_RETURN_WINDOW_DAYS, DEFAULT_RETURN_WINDOW_MS };
+
 
 export const ALGORITHM = {
   name: "Stock-cycle balance verification (cross-restock + per-batch)",

@@ -134,7 +134,9 @@ export function classifyProduct(snaps: SnapshotRow[]): ProductClassification {
     const inc = Number(s.restock_amount ?? 0);
 
     if (dec > 0) {
-      pending += dec;
+      pendingQueue.push({ amount: dec, observedAt: new Date(s.observed_at).getTime() });
+      pending = pendingSum();
+
       pendingBatch += dec;
       acc.weeklyWithdrawals += dec;
       accBatch.weeklyWithdrawals += dec;

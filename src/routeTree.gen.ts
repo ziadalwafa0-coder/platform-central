@@ -44,6 +44,7 @@ import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/ho
 import { Route as ApiProductsProductIdDeliveryReturnsReportRouteImport } from './routes/api/products.$productId.delivery-returns-report'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
+import { Route as ApiIntegrationsTagerConnectionRouteImport } from './routes/api/integrations.tager.connection'
 import { Route as ApiAdsSpyWorkerRunOnceRouteImport } from './routes/api/ads-spy.worker.run-once'
 import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
 import { Route as ApiAdsSpyDiagnosticsJobIdRouteImport } from './routes/api/ads-spy.diagnostics.$jobId'
@@ -244,6 +245,12 @@ const ApiPlatformsPlatformSyncRoute =
     path: '/sync',
     getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
+const ApiIntegrationsTagerConnectionRoute =
+  ApiIntegrationsTagerConnectionRouteImport.update({
+    id: '/api/integrations/tager/connection',
+    path: '/api/integrations/tager/connection',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAdsSpyWorkerRunOnceRoute = ApiAdsSpyWorkerRunOnceRouteImport.update({
   id: '/api/ads-spy/worker/run-once',
   path: '/api/ads-spy/worker/run-once',
@@ -363,6 +370,7 @@ export interface FileRoutesByFullPath {
   '/api/ads-spy/diagnostics/$jobId': typeof ApiAdsSpyDiagnosticsJobIdRoute
   '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
+  '/api/integrations/tager/connection': typeof ApiIntegrationsTagerConnectionRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -415,6 +423,7 @@ export interface FileRoutesByTo {
   '/api/ads-spy/diagnostics/$jobId': typeof ApiAdsSpyDiagnosticsJobIdRoute
   '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
+  '/api/integrations/tager/connection': typeof ApiIntegrationsTagerConnectionRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -468,6 +477,7 @@ export interface FileRoutesById {
   '/api/ads-spy/diagnostics/$jobId': typeof ApiAdsSpyDiagnosticsJobIdRoute
   '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
+  '/api/integrations/tager/connection': typeof ApiIntegrationsTagerConnectionRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -522,6 +532,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/diagnostics/$jobId'
     | '/api/ads-spy/jobs/$jobId'
     | '/api/ads-spy/worker/run-once'
+    | '/api/integrations/tager/connection'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -574,6 +585,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/diagnostics/$jobId'
     | '/api/ads-spy/jobs/$jobId'
     | '/api/ads-spy/worker/run-once'
+    | '/api/integrations/tager/connection'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -626,6 +638,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/diagnostics/$jobId'
     | '/api/ads-spy/jobs/$jobId'
     | '/api/ads-spy/worker/run-once'
+    | '/api/integrations/tager/connection'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -678,6 +691,7 @@ export interface RootRouteChildren {
   ApiAdsSpyAutomationRunRoute: typeof ApiAdsSpyAutomationRunRoute
   ApiAdsSpyDiagnosticsJobIdRoute: typeof ApiAdsSpyDiagnosticsJobIdRoute
   ApiAdsSpyWorkerRunOnceRoute: typeof ApiAdsSpyWorkerRunOnceRoute
+  ApiIntegrationsTagerConnectionRoute: typeof ApiIntegrationsTagerConnectionRoute
   ApiProductsProductIdDeliveryReturnsReportRoute: typeof ApiProductsProductIdDeliveryReturnsReportRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
   ApiPublicHooksSyncTriggerRoute: typeof ApiPublicHooksSyncTriggerRoute
@@ -937,6 +951,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
       parentRoute: typeof ApiPlatformsPlatformRoute
     }
+    '/api/integrations/tager/connection': {
+      id: '/api/integrations/tager/connection'
+      path: '/api/integrations/tager/connection'
+      fullPath: '/api/integrations/tager/connection'
+      preLoaderRoute: typeof ApiIntegrationsTagerConnectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ads-spy/worker/run-once': {
       id: '/api/ads-spy/worker/run-once'
       path: '/api/ads-spy/worker/run-once'
@@ -1155,6 +1176,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdsSpyAutomationRunRoute: ApiAdsSpyAutomationRunRoute,
   ApiAdsSpyDiagnosticsJobIdRoute: ApiAdsSpyDiagnosticsJobIdRoute,
   ApiAdsSpyWorkerRunOnceRoute: ApiAdsSpyWorkerRunOnceRoute,
+  ApiIntegrationsTagerConnectionRoute: ApiIntegrationsTagerConnectionRoute,
   ApiProductsProductIdDeliveryReturnsReportRoute:
     ApiProductsProductIdDeliveryReturnsReportRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
@@ -1173,13 +1195,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

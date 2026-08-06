@@ -44,6 +44,7 @@ import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/ho
 import { Route as ApiProductsProductIdDeliveryReturnsReportRouteImport } from './routes/api/products.$productId.delivery-returns-report'
 import { Route as ApiPlatformsPlatformTestRouteImport } from './routes/api/platforms.$platform.test'
 import { Route as ApiPlatformsPlatformSyncRouteImport } from './routes/api/platforms.$platform.sync'
+import { Route as ApiIntegrationsTagerSyncRouteImport } from './routes/api/integrations.tager.sync'
 import { Route as ApiIntegrationsTagerConnectionRouteImport } from './routes/api/integrations.tager.connection'
 import { Route as ApiAdsSpyWorkerRunOnceRouteImport } from './routes/api/ads-spy.worker.run-once'
 import { Route as ApiAdsSpyJobsJobIdRouteImport } from './routes/api/ads-spy.jobs.$jobId'
@@ -245,6 +246,12 @@ const ApiPlatformsPlatformSyncRoute =
     path: '/sync',
     getParentRoute: () => ApiPlatformsPlatformRoute,
   } as any)
+const ApiIntegrationsTagerSyncRoute =
+  ApiIntegrationsTagerSyncRouteImport.update({
+    id: '/api/integrations/tager/sync',
+    path: '/api/integrations/tager/sync',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiIntegrationsTagerConnectionRoute =
   ApiIntegrationsTagerConnectionRouteImport.update({
     id: '/api/integrations/tager/connection',
@@ -371,6 +378,7 @@ export interface FileRoutesByFullPath {
   '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
   '/api/integrations/tager/connection': typeof ApiIntegrationsTagerConnectionRoute
+  '/api/integrations/tager/sync': typeof ApiIntegrationsTagerSyncRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -424,6 +432,7 @@ export interface FileRoutesByTo {
   '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
   '/api/integrations/tager/connection': typeof ApiIntegrationsTagerConnectionRoute
+  '/api/integrations/tager/sync': typeof ApiIntegrationsTagerSyncRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -478,6 +487,7 @@ export interface FileRoutesById {
   '/api/ads-spy/jobs/$jobId': typeof ApiAdsSpyJobsJobIdRouteWithChildren
   '/api/ads-spy/worker/run-once': typeof ApiAdsSpyWorkerRunOnceRoute
   '/api/integrations/tager/connection': typeof ApiIntegrationsTagerConnectionRoute
+  '/api/integrations/tager/sync': typeof ApiIntegrationsTagerSyncRoute
   '/api/platforms/$platform/sync': typeof ApiPlatformsPlatformSyncRoute
   '/api/platforms/$platform/test': typeof ApiPlatformsPlatformTestRoute
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
@@ -533,6 +543,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/jobs/$jobId'
     | '/api/ads-spy/worker/run-once'
     | '/api/integrations/tager/connection'
+    | '/api/integrations/tager/sync'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/jobs/$jobId'
     | '/api/ads-spy/worker/run-once'
     | '/api/integrations/tager/connection'
+    | '/api/integrations/tager/sync'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -639,6 +651,7 @@ export interface FileRouteTypes {
     | '/api/ads-spy/jobs/$jobId'
     | '/api/ads-spy/worker/run-once'
     | '/api/integrations/tager/connection'
+    | '/api/integrations/tager/sync'
     | '/api/platforms/$platform/sync'
     | '/api/platforms/$platform/test'
     | '/api/products/$productId/delivery-returns-report'
@@ -692,6 +705,7 @@ export interface RootRouteChildren {
   ApiAdsSpyDiagnosticsJobIdRoute: typeof ApiAdsSpyDiagnosticsJobIdRoute
   ApiAdsSpyWorkerRunOnceRoute: typeof ApiAdsSpyWorkerRunOnceRoute
   ApiIntegrationsTagerConnectionRoute: typeof ApiIntegrationsTagerConnectionRoute
+  ApiIntegrationsTagerSyncRoute: typeof ApiIntegrationsTagerSyncRoute
   ApiProductsProductIdDeliveryReturnsReportRoute: typeof ApiProductsProductIdDeliveryReturnsReportRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
   ApiPublicHooksSyncTriggerRoute: typeof ApiPublicHooksSyncTriggerRoute
@@ -951,6 +965,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPlatformsPlatformSyncRouteImport
       parentRoute: typeof ApiPlatformsPlatformRoute
     }
+    '/api/integrations/tager/sync': {
+      id: '/api/integrations/tager/sync'
+      path: '/api/integrations/tager/sync'
+      fullPath: '/api/integrations/tager/sync'
+      preLoaderRoute: typeof ApiIntegrationsTagerSyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/integrations/tager/connection': {
       id: '/api/integrations/tager/connection'
       path: '/api/integrations/tager/connection'
@@ -1177,6 +1198,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdsSpyDiagnosticsJobIdRoute: ApiAdsSpyDiagnosticsJobIdRoute,
   ApiAdsSpyWorkerRunOnceRoute: ApiAdsSpyWorkerRunOnceRoute,
   ApiIntegrationsTagerConnectionRoute: ApiIntegrationsTagerConnectionRoute,
+  ApiIntegrationsTagerSyncRoute: ApiIntegrationsTagerSyncRoute,
   ApiProductsProductIdDeliveryReturnsReportRoute:
     ApiProductsProductIdDeliveryReturnsReportRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,

@@ -8,12 +8,15 @@ export const Route = createFileRoute("/api/public/hooks/tager-sync")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const anonKey = process.env["SUPABASE_ANON_KEY"] ?? process.env["SUPABASE_PUBLISHABLE_KEY"];
+        const accepted = [
+          process.env["SUPABASE_ANON_KEY"],
+          process.env["SUPABASE_PUBLISHABLE_KEY"],
+        ].filter((k): k is string => !!k);
         const provided =
           request.headers.get("apikey") ??
           request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ??
           "";
-        if (!anonKey || provided !== anonKey) {
+        if (accepted.length === 0 || !accepted.includes(provided)) {
           return new Response(JSON.stringify({ success: false, error: "Unauthorized" }), {
             status: 401,
             headers: { "Content-Type": "application/json" },

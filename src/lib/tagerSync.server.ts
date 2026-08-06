@@ -110,7 +110,15 @@ export async function syncTagerConnection(params: {
     let updated = 0;
     const now = new Date().toISOString();
     const snapshots: Array<{ product_id: string; stock: number | null; captured_at: string }> = [];
-    const events: Array<Record<string, unknown>> = [];
+    const events: Array<{
+      product_id: string;
+      event_type: string;
+      previous_stock: number | null;
+      current_stock: number | null;
+      difference: number;
+      run_id: string | null;
+      created_at: string;
+    }> = [];
 
     const CHUNK = 200;
     for (let i = 0; i < products.length; i += CHUNK) {

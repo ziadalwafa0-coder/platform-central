@@ -715,6 +715,218 @@ export type Database = {
         }
         Relationships: []
       }
+      tager_connections: {
+        Row: {
+          created_at: string
+          encrypted_token: string
+          id: string
+          last_error: string | null
+          last_sync: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          encrypted_token: string
+          id?: string
+          last_error?: string | null
+          last_sync?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          encrypted_token?: string
+          id?: string
+          last_error?: string | null
+          last_sync?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tager_errors: {
+        Row: {
+          code: string | null
+          connection_id: string | null
+          context: Json | null
+          created_at: string
+          id: number
+          message: string
+          run_id: string | null
+          status_code: number | null
+        }
+        Insert: {
+          code?: string | null
+          connection_id?: string | null
+          context?: Json | null
+          created_at?: string
+          id?: number
+          message: string
+          run_id?: string | null
+          status_code?: number | null
+        }
+        Update: {
+          code?: string | null
+          connection_id?: string | null
+          context?: Json | null
+          created_at?: string
+          id?: number
+          message?: string
+          run_id?: string | null
+          status_code?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tager_errors_connection_id_fkey"
+            columns: ["connection_id"]
+            isOneToOne: false
+            referencedRelation: "tager_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tager_events: {
+        Row: {
+          created_at: string
+          current_stock: number | null
+          difference: number
+          event_type: string
+          id: number
+          previous_stock: number | null
+          product_id: string
+          run_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          current_stock?: number | null
+          difference?: number
+          event_type: string
+          id?: number
+          previous_stock?: number | null
+          product_id: string
+          run_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          current_stock?: number | null
+          difference?: number
+          event_type?: string
+          id?: number
+          previous_stock?: number | null
+          product_id?: string
+          run_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tager_events_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "tager_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tager_products: {
+        Row: {
+          brand: string | null
+          category: string | null
+          connection_id: string
+          created_at: string
+          currency: string | null
+          external_product_id: string
+          id: string
+          image: string | null
+          last_seen: string
+          metadata: Json | null
+          name: string
+          previous_stock: number | null
+          price: number | null
+          sku: string | null
+          status: string | null
+          stock: number | null
+          updated_at: string
+        }
+        Insert: {
+          brand?: string | null
+          category?: string | null
+          connection_id: string
+          created_at?: string
+          currency?: string | null
+          external_product_id: string
+          id?: string
+          image?: string | null
+          last_seen?: string
+          metadata?: Json | null
+          name?: string
+          previous_stock?: number | null
+          price?: number | null
+          sku?: string | null
+          status?: string | null
+          stock?: number | null
+          updated_at?: string
+        }
+        Update: {
+          brand?: string | null
+          category?: string | null
+          connection_id?: string
+          created_at?: string
+          currency?: string | null
+          external_product_id?: string
+          id?: string
+          image?: string | null
+          last_seen?: string
+          metadata?: Json | null
+          name?: string
+          previous_stock?: number | null
+          price?: number | null
+          sku?: string | null
+          status?: string | null
+          stock?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tager_products_connection_id_fkey"
+            columns: ["connection_id"]
+            isOneToOne: false
+            referencedRelation: "tager_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tager_snapshots: {
+        Row: {
+          captured_at: string
+          id: number
+          product_id: string
+          stock: number | null
+        }
+        Insert: {
+          captured_at?: string
+          id?: number
+          product_id: string
+          stock?: number | null
+        }
+        Update: {
+          captured_at?: string
+          id?: number
+          product_id?: string
+          stock?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tager_snapshots_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "tager_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string

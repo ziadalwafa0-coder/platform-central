@@ -252,8 +252,7 @@ export async function syncTagerConnection(params: {
       runId: runId ?? undefined,
       kind: "tager.sync",
       payload: { connectionId: connection.id },
-      errorCode: e?.code ?? "unknown",
-      errorMessage: message,
+      error: err,
     });
 
     throw err;

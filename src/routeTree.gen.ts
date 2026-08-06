@@ -39,6 +39,7 @@ import { Route as ApiAdsSpyJobsRouteImport } from './routes/api/ads-spy.jobs'
 import { Route as ApiAdsSpyHealthRouteImport } from './routes/api/ads-spy.health'
 import { Route as ApiSettingsSupabaseTestRouteImport } from './routes/api/settings.supabase.test'
 import { Route as ApiSettingsEmailTestRouteImport } from './routes/api/settings.email.test'
+import { Route as ApiPublicHooksTagerSyncRouteImport } from './routes/api/public/hooks/tager-sync'
 import { Route as ApiPublicHooksSyncTriggerRouteImport } from './routes/api/public/hooks/sync-trigger'
 import { Route as ApiPublicHooksReaperRouteImport } from './routes/api/public/hooks/reaper'
 import { Route as ApiProductsProductIdDeliveryReturnsReportRouteImport } from './routes/api/products.$productId.delivery-returns-report'
@@ -218,6 +219,11 @@ const ApiSettingsEmailTestRoute = ApiSettingsEmailTestRouteImport.update({
   id: '/test',
   path: '/test',
   getParentRoute: () => ApiSettingsEmailRoute,
+} as any)
+const ApiPublicHooksTagerSyncRoute = ApiPublicHooksTagerSyncRouteImport.update({
+  id: '/api/public/hooks/tager-sync',
+  path: '/api/public/hooks/tager-sync',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicHooksSyncTriggerRoute =
   ApiPublicHooksSyncTriggerRouteImport.update({
@@ -400,6 +406,7 @@ export interface FileRoutesByFullPath {
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
+  '/api/public/hooks/tager-sync': typeof ApiPublicHooksTagerSyncRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
@@ -456,6 +463,7 @@ export interface FileRoutesByTo {
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
+  '/api/public/hooks/tager-sync': typeof ApiPublicHooksTagerSyncRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
@@ -513,6 +521,7 @@ export interface FileRoutesById {
   '/api/products/$productId/delivery-returns-report': typeof ApiProductsProductIdDeliveryReturnsReportRoute
   '/api/public/hooks/reaper': typeof ApiPublicHooksReaperRoute
   '/api/public/hooks/sync-trigger': typeof ApiPublicHooksSyncTriggerRoute
+  '/api/public/hooks/tager-sync': typeof ApiPublicHooksTagerSyncRoute
   '/api/settings/email/test': typeof ApiSettingsEmailTestRoute
   '/api/settings/supabase/test': typeof ApiSettingsSupabaseTestRoute
   '/api/ads-spy/jobs/$jobId/cancel': typeof ApiAdsSpyJobsJobIdCancelRoute
@@ -571,6 +580,7 @@ export interface FileRouteTypes {
     | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
     | '/api/public/hooks/sync-trigger'
+    | '/api/public/hooks/tager-sync'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
     | '/api/ads-spy/jobs/$jobId/cancel'
@@ -627,6 +637,7 @@ export interface FileRouteTypes {
     | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
     | '/api/public/hooks/sync-trigger'
+    | '/api/public/hooks/tager-sync'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
     | '/api/ads-spy/jobs/$jobId/cancel'
@@ -683,6 +694,7 @@ export interface FileRouteTypes {
     | '/api/products/$productId/delivery-returns-report'
     | '/api/public/hooks/reaper'
     | '/api/public/hooks/sync-trigger'
+    | '/api/public/hooks/tager-sync'
     | '/api/settings/email/test'
     | '/api/settings/supabase/test'
     | '/api/ads-spy/jobs/$jobId/cancel'
@@ -737,6 +749,7 @@ export interface RootRouteChildren {
   ApiProductsProductIdDeliveryReturnsReportRoute: typeof ApiProductsProductIdDeliveryReturnsReportRoute
   ApiPublicHooksReaperRoute: typeof ApiPublicHooksReaperRoute
   ApiPublicHooksSyncTriggerRoute: typeof ApiPublicHooksSyncTriggerRoute
+  ApiPublicHooksTagerSyncRoute: typeof ApiPublicHooksTagerSyncRoute
   ApiAdsSpyMatchesMatchIdApproveRoute: typeof ApiAdsSpyMatchesMatchIdApproveRoute
   ApiAdsSpyMatchesMatchIdRejectRoute: typeof ApiAdsSpyMatchesMatchIdRejectRoute
   ApiAdsSpyProductsProductIdAdsRoute: typeof ApiAdsSpyProductsProductIdAdsRoute
@@ -957,6 +970,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/settings/email/test'
       preLoaderRoute: typeof ApiSettingsEmailTestRouteImport
       parentRoute: typeof ApiSettingsEmailRoute
+    }
+    '/api/public/hooks/tager-sync': {
+      id: '/api/public/hooks/tager-sync'
+      path: '/api/public/hooks/tager-sync'
+      fullPath: '/api/public/hooks/tager-sync'
+      preLoaderRoute: typeof ApiPublicHooksTagerSyncRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/sync-trigger': {
       id: '/api/public/hooks/sync-trigger'
@@ -1247,6 +1267,7 @@ const rootRouteChildren: RootRouteChildren = {
     ApiProductsProductIdDeliveryReturnsReportRoute,
   ApiPublicHooksReaperRoute: ApiPublicHooksReaperRoute,
   ApiPublicHooksSyncTriggerRoute: ApiPublicHooksSyncTriggerRoute,
+  ApiPublicHooksTagerSyncRoute: ApiPublicHooksTagerSyncRoute,
   ApiAdsSpyMatchesMatchIdApproveRoute: ApiAdsSpyMatchesMatchIdApproveRoute,
   ApiAdsSpyMatchesMatchIdRejectRoute: ApiAdsSpyMatchesMatchIdRejectRoute,
   ApiAdsSpyProductsProductIdAdsRoute: ApiAdsSpyProductsProductIdAdsRoute,
